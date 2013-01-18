@@ -5,6 +5,9 @@ package tp.pr3;
  */
 import java.util.Scanner;
 
+import tp.pr3.items.Item;
+import tp.pr3.items.ItemContainer;
+
 public class RobotEngine {
 	public RobotEngine(City cityMap, Place initialPlace, Direction dir) {
 

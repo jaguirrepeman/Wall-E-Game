@@ -20,12 +20,4 @@ public class City{
 	
 }
 
-/* Apuntes de Marco
- *  bool escribe (String a){
- * 		System.out.println(a);
- * 		return true;
- * 	}
- *  if (escribe("p") || escribe ("y")){
- * 
- *  }
- */
+ 
