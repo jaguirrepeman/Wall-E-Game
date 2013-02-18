@@ -1,14 +1,13 @@
 package tp.pr3;
 
-/**Versión gluglu
- * gluglu
- */
+
 import java.util.Scanner;
 
 import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
 public class RobotEngine {
+	
 	public RobotEngine(City cityMap, Place initialPlace, Direction dir) {
 
 		this.cityMap = cityMap;
@@ -19,7 +18,7 @@ public class RobotEngine {
 		this.recycledMaterial = 0;
 	}
 
-	void startEngine() {
+	public void startEngine() {
 		Instruction instruccion = new Instruction();
 		String command = new String();
 		System.out.println(this.place.toString());
@@ -155,6 +154,18 @@ public class RobotEngine {
 		this.recycledMaterial += weight;
 	}
 
+	public void	communicateRobot(Instruction c) {
+		
+	}
+	
+	public void	printRobotState() {
+		
+	}
+	
+	public void	requestQuit() {
+		
+	}
+		
 	public int getFuel() {
 		return this.fuel;
 	}

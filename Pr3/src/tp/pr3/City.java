@@ -8,6 +8,11 @@ public class City{
 		this.cityMap  = cityMap;
 		
 	}
+	
+	public void	addStreet(Street street){
+		
+	}
+	
 	public Street lookForStreet(Place currentPlace, Direction currentHeading){
 		if (!(this.cityMap == null)){
 			for (int i = 0; i < cityMap.length; i++){
