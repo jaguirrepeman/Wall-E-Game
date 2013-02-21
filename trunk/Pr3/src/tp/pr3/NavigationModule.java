@@ -42,7 +42,7 @@ public class NavigationModule {
 	}
 
 	public void initHeading(Direction heading) {
-
+		this.direction = heading;
 	}
 
 	public void move() throws InstructionExecutionException {
