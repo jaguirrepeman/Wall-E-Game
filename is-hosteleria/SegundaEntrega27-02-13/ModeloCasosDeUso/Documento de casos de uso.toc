@@ -1,9 +1,0 @@
-\select@language {spanish}
-\contentsline {part}{I\hspace {1em}Extracto}{4}
-\contentsline {part}{II\hspace {1em}Casos de uso}{6}
-\contentsline {section}{\numberline {0.1}Cat\IeC {\'a}logo de casos de uso}{7}
-\contentsline {subsection}{\numberline {0.1.1}Primarios}{7}
-\contentsline {subsection}{\numberline {0.1.2}Secundarios}{8}
-\contentsline {section}{\numberline {0.2}Especificaci\IeC {\'o}n de casos de uso}{9}
-\contentsline {subsection}{\numberline {0.2.1}Primarios}{9}
-\contentsline {subsection}{\numberline {0.2.2}Secundarios}{31}
