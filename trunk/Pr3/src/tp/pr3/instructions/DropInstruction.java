@@ -23,7 +23,7 @@ public class DropInstruction implements Instruction {
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException{
 		String[] comando = cad.split(" ");
-		if((comando[0].equalsIgnoreCase("PICK")) && (comando.length > 1))
+		if((comando[0].equalsIgnoreCase("DROP")) && (comando.length > 1))
 			return this;
 		else throw new WrongInstructionFormatException();	
 		
