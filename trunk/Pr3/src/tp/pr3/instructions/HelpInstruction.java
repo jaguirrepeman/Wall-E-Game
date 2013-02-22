@@ -15,9 +15,9 @@ public class HelpInstruction implements Instruction{
 		
 	}
 	public void execute() throws InstructionExecutionException{
-		Interpreter interprete = new Interpreter();
-		System.out.println(interprete.interpreterHelp()); //no se que leches dice del metodo estatico
 		
+		System.out.println(Interpreter.interpreterHelp()); 
+
 	}
 	public String getHelp(){
 		return "HELP";

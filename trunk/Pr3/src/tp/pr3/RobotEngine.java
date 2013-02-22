@@ -19,7 +19,7 @@ public class RobotEngine {
 	}
 
 	public void startEngine() {
-		Instruction instruccion = new Instruction();
+		KikeInstruction instruccion = new KikeInstruction();
 		String command = new String();
 		System.out.println(this.place.toString());
 		printStatus();
@@ -154,7 +154,7 @@ public class RobotEngine {
 		this.recycledMaterial += weight;
 	}
 
-	public void	communicateRobot(Instruction c) {
+	public void	communicateRobot(KikeInstruction c) {
 		
 	}
 	

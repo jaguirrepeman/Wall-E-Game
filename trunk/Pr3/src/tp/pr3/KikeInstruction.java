@@ -1,28 +1,28 @@
 package tp.pr3;
 
 
-public class Instruction {
+public class KikeInstruction {
 	
 	
-	public Instruction (){
+	public KikeInstruction (){
 		this.action = Action.UNKNOWN;
 		this.rotation = Rotation.UNKNOWN;
 		this.id = null;
 	}
 	
-	public Instruction (Action action){
+	public KikeInstruction (Action action){
 		this.action = action;
 		this.rotation = Rotation.UNKNOWN;
 		this.id = null;
 	}
 
-	public Instruction (Action action, Rotation rotation){
+	public KikeInstruction (Action action, Rotation rotation){
 		this.action = action;
 		this.rotation = rotation;
 		this.id = null;
 	}
 	
-	public Instruction(Action action, String id){
+	public KikeInstruction(Action action, String id){
 		this.action = action;
 		this.rotation = Rotation.UNKNOWN;
 		this.id = id;
