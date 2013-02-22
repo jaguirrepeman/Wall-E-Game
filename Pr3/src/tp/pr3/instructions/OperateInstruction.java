@@ -16,16 +16,21 @@ public class OperateInstruction implements Instruction{
 	
 	public void execute() throws InstructionExecutionException{
 		
+		
 	}
 	
-	public java.lang.String getHelp(){
+	public String getHelp(){
 		
 		return "OPERATE|OPERAR <ID>";
 	}
 	
 	public Instruction parse (java.lang.String cad) throws WrongInstructionFormatException{
-		return null;
-		
+		String[] comando = cad.split(" ");
+		if((comando[0].equalsIgnoreCase("OPERATE")) && (comando.length > 1)) {
+			return this;
+		}
+		else throw new WrongInstructionFormatException();
+	
 	}
 	
 	private RobotEngine engine;
