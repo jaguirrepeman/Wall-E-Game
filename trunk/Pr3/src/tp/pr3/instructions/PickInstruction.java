@@ -8,6 +8,11 @@ import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
+/**
+ * En todos los <>Instruction hay que hacer en los execute un try catch y esas cosas nazis
+ * @author usuario_local
+ *
+ */
 public class PickInstruction implements Instruction{
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;
