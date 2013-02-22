@@ -34,7 +34,10 @@ public class Place {
 					+ "The place is empty. There are no objects to pick"
 					+ LINE_SEPARATOR;
 	}
-
+	public boolean existItem(String id){
+		return (this.items.searchItem(id) >= 0) ;
+		
+	}
 	public Item pickItem(String id) {
 
 		if (this.equals(null))
@@ -49,6 +52,9 @@ public class Place {
 	public boolean addItem(Item it) {
 
 		return this.items.addItem(it);
+	}
+	public boolean dropItem(Item it){
+		return false;
 	}
 
 	private static final String LINE_SEPARATOR = System
