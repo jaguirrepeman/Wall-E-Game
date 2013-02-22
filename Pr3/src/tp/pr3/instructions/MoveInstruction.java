@@ -1,6 +1,5 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Action;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
@@ -16,16 +15,14 @@ public class MoveInstruction implements Instruction{
 	public void execute() throws InstructionExecutionException{
 		// si existe una calle en la dirección actual del
 		// robot...System.out.println("WALL·E > " + mensaje);
-		if (!(this.cityMap.lookForStreet(this.place, this.direction) == null)) {
+		if (!(this.navigation.getCurrentHeading()== null)) {
 			//
-			if (this.cityMap.lookForStreet(this.place, this.direction)
-					.isOpen()) {
-				this.navigation.getCurrentPlace() = this.cityMap.lookForStreet(this.place,
-						direction).nextPlace(place);
-				say("Moving in direction " + this.direction.toString()
-						+ LINE_SEPARATOR + this.place.toString());
-				this.fuel -= 5;
-				printStatus();
+			if (this.navigation.getHeadingStreet().isOpen()) {
+				this.navigation.move();
+				this.navigation.say("Moving in direction " + this.navigation.getCurrentHeading().toString()
+						+ LINE_SEPARATOR + this.navigation.getCurrentPlace().toString());
+				this.engine.addFuel(-5);//fuel -= 5;
+				this.engine.printStatus();
 				System.out.println("WALL·E is looking at direction "
 						+ this.navigation.getCurrentHeading().toString());
 			} else{
@@ -39,7 +36,7 @@ public class MoveInstruction implements Instruction{
 			this.engine.say("There is no street in direction "
 					+ this.navigation.getCurrentHeading().toString());
 			throw new InstructionExecutionException("There is no street in direction "
-					+ this.direction.toString());
+					+ this.navigation.getCurrentHeading().toString());
 		}
 	}
 		
@@ -48,11 +45,13 @@ public class MoveInstruction implements Instruction{
 		return "MOVE|MOVER";
 		
 	}
-	public Instruction parse(java.lang.String cad)throws WrongInstructionFormatException{
-		if (!((cad.equalsIgnoreCase("MOVE"))||(cad.equalsIgnoreCase("MOVER"))) throw new WrongInstructionFormatException();
-		else return new Instruction();
-		return null;
-		
+	public Instruction parse(String cad) throws WrongInstructionFormatException{
+		String[] comando = cad.split(" ");
+		if((comando[0].equalsIgnoreCase("MOVE") ||(cad.equalsIgnoreCase("MOVER")))  && comando.length == 1) {
+			return this;
+		}
+		else throw new WrongInstructionFormatException();
+				
 	}
 	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	private RobotEngine engine;

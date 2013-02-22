@@ -3,16 +3,16 @@ package tp.pr3.instructions;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.items.ItemContainer;
-import tp.pr3.Interpreter;
 
 public class TurnInstruction {
-	void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
+	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;
 		this.navigation = navigation;
 		this.robotContainer = robotContainer;
 	}
-	void execute(){
-		/*else if (instruccion.getAction().equals(Action.TURN)
+	public void execute(){
+		/**
+		 * else if (instruccion.getAction().equals(Action.TURN)
 				&& !(instruccion.getRotation().equals(Rotation.UNKNOWN))) {
 			this.direction = direction.nextDirection(instruccion
 					.getRotation());
@@ -22,13 +22,14 @@ public class TurnInstruction {
 					+ this.direction.toString());
 */
 	}
-	String	getHelp(){
-		return null;
+	public String getHelp(){
+		
+		return "TURN | GRITAR < LEFT|RIGHT >";
 		
 	}
-	Instruction2	parse(java.lang.String cad){
+	public Instruction parse (String cad){
 		
-		
+		String[] comando = cad.split(" ");
 		
 		
 		return null;
