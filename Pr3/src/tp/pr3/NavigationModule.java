@@ -21,9 +21,8 @@ public class NavigationModule {
 
 	}
 
-	public boolean findItemAtCurrentPlace(java.lang.String id) {
-		return false;
-
+	public boolean findItemAtCurrentPlace(String id) {
+		return  place.
 	}
 
 	public Direction getCurrentHeading() {

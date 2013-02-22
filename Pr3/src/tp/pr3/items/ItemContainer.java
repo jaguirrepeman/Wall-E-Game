@@ -43,7 +43,7 @@ public class ItemContainer {
 
 	}
 
-	int searchItem(String id) {
+	public int searchItem(String id) {
 		int posicion = -1;
 		if (! (this.counter == 0)){
 			int ini = 0, fin = counter - 1, mitad = 0;
