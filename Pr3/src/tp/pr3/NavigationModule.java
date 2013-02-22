@@ -18,7 +18,7 @@ public class NavigationModule {
 	}
 
 	public void dropItemAtCurrentPlace(Item it) {
-
+		
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
