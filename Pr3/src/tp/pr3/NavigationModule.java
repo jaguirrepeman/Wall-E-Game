@@ -22,7 +22,7 @@ public class NavigationModule {
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
-		return  place.
+		return  place
 	}
 
 	public Direction getCurrentHeading() {
