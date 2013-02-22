@@ -2,21 +2,37 @@ package tp.pr3.instructions;
 
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
+import tp.pr3.instructions.exceptions.InstructionExecutionException;
+import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr3.items.ItemContainer;
 
-public class ScanInstruction {
-	void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
-		
+public class ScanInstruction implements Instruction {
+	public void configureContext(RobotEngine engine,
+			NavigationModule navigation, ItemContainer robotContainer) {
+		this.engine = engine;
+		this.navigation = navigation;
+		this.robotContainer = robotContainer;
 	}
-	void execute(){
-		
+
+	public void execute() throws InstructionExecutionException {
+
 	}
-	String getHelp(){
-		return null;
-		
+
+	public String getHelp() {
+		return "SCAN|ESCANEAR <id>";
+
 	}
-	Instruction2	parse(java.lang.String cad){
-		return null;
-		
+
+	public Instruction parse(String cad) throws WrongInstructionFormatException {
+		String[] comando = cad.split(" ");
+		if (((comando[0].equalsIgnoreCase("SCAN")) || (comando[0]
+				.equalsIgnoreCase("ESCANEAR"))) && (comando.length > 1)) {
+			return this;
+		} else
+			throw new WrongInstructionFormatException();
 	}
+
+	private RobotEngine engine;
+	private NavigationModule navigation;
+	private ItemContainer robotContainer;
 }
