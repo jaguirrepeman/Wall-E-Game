@@ -1,5 +1,6 @@
 package tp.pr3;
 
+import tp.pr3.cityLoader.CityLoaderFromTxtFile;
 import tp.pr3.items.CodeCard;
 import tp.pr3.items.Fuel;
 import tp.pr3.items.Garbage;
@@ -135,7 +136,7 @@ public class Main {
 	 * starts the simulation
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void mainAntiguo(String[] args) {
 		// create the different places
 		Place[] places = createPlaces();
 		// create the different Streets generating the map
@@ -145,6 +146,20 @@ public class Main {
 				new RobotEngine(new City(streets), places[0], Direction.NORTH);
 		// plays
 		engine.startEngine();
+		
+	}
+	public static void main(String[] args){
+		if (args.length == 0 || args.length > 1){
+			System.err.println("Bad params." + Interpreter.LINE_SEPARATOR + 
+			"Usage: java tp.pr3.Main <mapfile>" + Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR + 
+			"<mapfile> : file with the description of the city.");
+			System.exit(1);
+		}
+		else if (args.length == 1){
+			CityLoaderFromTxtFile cityloader = new CityLoaderFromTxtFile();
+			cityloader.
+			
+		}
 		
 	}
 	
