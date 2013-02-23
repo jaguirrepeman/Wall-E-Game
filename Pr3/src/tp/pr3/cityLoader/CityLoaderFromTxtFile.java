@@ -13,12 +13,12 @@ public class CityLoaderFromTxtFile {
     public CityLoaderFromTxtFile(){
         
     }
-    String forceString()throws IOException{
+   private String forceString()throws IOException{
     	if ((stk.nextToken() != StreamTokenizer.TT_WORD)) return stk.sval;
     	else throw new IOException();
         
     }
-    int forceNumber()throws IOException{
+    private int forceNumber()throws IOException{
     	if ((stk.nextToken() != StreamTokenizer.TT_WORD)) return (int) stk.nval;
     	else throw new IOException();
         
@@ -39,19 +39,19 @@ public class CityLoaderFromTxtFile {
 		 
 		
 	}
-    boolean forceString (String ex1, String ex2) throws IOException{
+    private boolean forceString (String ex1, String ex2) throws IOException{
     	String ex;
     	ex = stk.sval;
     	if (ex.compareTo(ex1) == 1) return false;
     	else if (ex.compareTo(ex2) == 1) return true;
     	else throw new IOException();
     }
-    void forceString(String expected) throws IOException{
+    private void forceString(String expected) throws IOException{
         if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!stk.sval.equals(expected))){
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
     }
-    void forceNumber(int expected) throws IOException{
+    private void forceNumber(int expected) throws IOException{
         if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!stk.sval.equals(expected))){
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
@@ -63,7 +63,7 @@ public class CityLoaderFromTxtFile {
 		
 		
 	}
-    Place parsePlace(int num) throws IOException{
+    private Place parsePlace(int num) throws IOException{
         boolean spaceship;
         forceString("place");
         forceNumber (num);
@@ -75,7 +75,7 @@ public class CityLoaderFromTxtFile {
         
 
     }
-    Street parseStreet(int num) throws IOException{
+    private Street parseStreet(int num) throws IOException{
         boolean open = true;
         String key = null;
         Place initPlace, targetPlace;
@@ -95,7 +95,7 @@ public class CityLoaderFromTxtFile {
 
     }
 
-	Item parseItem(int num) throws IOException{
+	private Item parseItem(int num) throws IOException{
 		Item ret;
         forceString("item");
         forceNumber (num);
@@ -142,7 +142,7 @@ public class CityLoaderFromTxtFile {
 		return new Fuel(id, description, power, times);
 		
 	}
-	public void parsePlaces() throws IOException{
+	private void parsePlaces() throws IOException{
         int i = 0;
         boolean ok = true;
         forceString("BeginPlaces");
@@ -158,7 +158,7 @@ public class CityLoaderFromTxtFile {
         }    
         forceString ("EndPlaces");
     }
-    public void parseStreets() throws IOException{
+    private void parseStreets() throws IOException{
         int i = 0;
         boolean ok = true;
         forceString("BeginStreets");
@@ -174,7 +174,7 @@ public class CityLoaderFromTxtFile {
         }    
         forceString ("EndStreets");
     }
-    public void parseItems() throws IOException{
+    private void parseItems() throws IOException{
     	int i = 0;
         boolean ok = true;
         forceString("BeginItems");
