@@ -157,7 +157,12 @@ public class Main {
 		}
 		else if (args.length == 1){
 			CityLoaderFromTxtFile cityloader = new CityLoaderFromTxtFile();
-			cityloader.
+			try{
+				cityloader.loadCity(args[0]);
+			}catch (IOException e){
+				
+				return 
+			}
 			
 		}
 		
