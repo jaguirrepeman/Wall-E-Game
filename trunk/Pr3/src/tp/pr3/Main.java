@@ -1,5 +1,7 @@
 package tp.pr3;
 
+import java.io.IOException;
+
 import tp.pr3.cityLoader.CityLoaderFromTxtFile;
 import tp.pr3.items.CodeCard;
 import tp.pr3.items.Fuel;
@@ -161,7 +163,7 @@ public class Main {
 				cityloader.loadCity(args[0]);
 			}catch (IOException e){
 				
-				return 
+				 
 			}
 			
 		}
