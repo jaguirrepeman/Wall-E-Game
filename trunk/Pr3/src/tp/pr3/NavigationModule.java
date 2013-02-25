@@ -18,11 +18,11 @@ public class NavigationModule {
 	}
 
 	public void dropItemAtCurrentPlace(Item it) {
-		
+		this.place.addItem(it);
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
-		return  false;
+		return  this.place.existItem(id);
 	}
 
 	public Direction getCurrentHeading() {

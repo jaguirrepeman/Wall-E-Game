@@ -15,7 +15,10 @@ public class DropInstruction implements Instruction {
 	}
 	public void execute() throws InstructionExecutionException{
 		
+		if(!navigation.findItemAtCurrentPlace(id))
+			navigation;
 	}
+	
 	public String getHelp(){
 		return "DROP <id>";
 		
