@@ -37,7 +37,8 @@ public class TurnInstruction implements Instruction{
 			//Rotation rotation;
 			
 			if (comando[1].equalsIgnoreCase("RIGHT")) this.rotation = Rotation.RIGHT;
-			else this.rotation = Rotation.LEFT;
+			else if (comando[1].equalsIgnoreCase("LEFT")) this.rotation = Rotation.LEFT;
+			else throw new WrongInstructionFormatException();
 			return this;
 		}
 			
