@@ -3,7 +3,8 @@ package tp.pr3;
 
 import java.util.Scanner;
 
-import tp.pr3.instructions.Instruction;
+import tp.pr3.instructions.*;
+import tp.pr3.instructions.exceptions.*;
 import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
@@ -18,6 +19,7 @@ public class RobotEngine {
 		this.items = new ItemContainer();
 		this.recycledMaterial = 0;
 		this.navigation = new NavigationModule (cityMap, initialPlace);
+		this.quit = false;
 	}
 
 	public void startEngine() {
@@ -149,7 +151,7 @@ public class RobotEngine {
 			say("I have communication problems. Bye bye");
 		*/
 		//NavigationModule navigation = new NavigationModule(cityMap, place);
-		Instruction instruccion;
+		Instruction instruccion = null;
 		String command = new String();
 		System.out.println(this.place.toString());
 		printStatus();
@@ -160,11 +162,34 @@ public class RobotEngine {
 		Scanner comando = new Scanner(System.in);
 
 		command = comando.nextLine();
-		instruccion = Interpreter.generateInstruction(command);
-		while (!(instruccion.getAction().equals(Action.QUIT)
-				|| this.place.isSpaceship() || this.fuel == 0)) {
-			
+		
+		while (!(quit|| this.place.isSpaceship() || this.fuel == 0)) {
+			try{
+				instruccion = Interpreter.generateInstruction(command);
+			}
+			catch (WrongInstructionFormatException exc){
+					
+			}
+			communicateRobot(instruccion);
+			if (!this.place.isSpaceship() && (this.fuel != 0)) {
+				// System.out.print(LINE_SEPARATOR);
+				prompt();
+				command = comando.nextLine();
+				try{
+					instruccion = Interpreter.generateInstruction(command);
+				}
+				catch (WrongInstructionFormatException exc){
+						
+				}
+			}
 		}
+		comando.close();
+		if (this.place.isSpaceship())
+			say("I am at my space ship. Bye Bye");
+		else if (this.fuel == 0)
+			say("I run out of fuel. I cannot move. Shutting down...");
+		else
+			say("I have communication problems. Bye bye");
 	}
 
 	public void addFuel(int fuel) {
@@ -181,15 +206,23 @@ public class RobotEngine {
 	
 	public void	communicateRobot(Instruction c) {
 		c.configureContext(this, navigation, items);
-		c.execute();
+		try{
+			c.execute();
+		} catch(InstructionExecutionException exc){
+			
+		}
 	}
 	
 	public void	printRobotState() {
-		
+		if (this.fuel < 0)
+			this.fuel = 0;
+		System.out.println("   * My power is " + this.fuel);
+		System.out.println("   * My recycled material is: "
+				+ this.recycledMaterial);
 	}
 	
 	public void	requestQuit() {
-		
+		quit = true;
 	}
 		
 	public int getFuel() {
@@ -233,4 +266,5 @@ public class RobotEngine {
 	private ItemContainer items;
 	private int recycledMaterial;
 	private NavigationModule navigation;
+	private boolean quit;
 }
