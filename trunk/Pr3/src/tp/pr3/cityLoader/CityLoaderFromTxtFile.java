@@ -54,11 +54,12 @@ public class CityLoaderFromTxtFile {
         }
     }
     private void forceNumber(int expected) throws IOException{
-        if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!stk.sval.equals(expected))){
+        if ((stk.nextToken() != StreamTokenizer.TT_NUMBER) || (!stk.nval.equals(expected))){
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
     }
-    private int checkNumber() { //FALTA IMPLEMENTAR
+    private int checkNumber() throws IOException{ //FALTA IMPLEMENTAR
+    	if (num >= places.size()) throw new IOException();
 		//el numero siguiente debe ser el numero de un place
     	return 0;
 		// TODO Auto-generated method stub
