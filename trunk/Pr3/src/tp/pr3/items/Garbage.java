@@ -8,11 +8,12 @@ public class Garbage extends Item {
 	public Garbage(String id, String description, int recycledMaterial) {
 		super(id, description);
 		this.recycledMaterial = recycledMaterial;
+		this.hasBeenUsed = false;
 	}
 
 	@Override
 	public boolean canBeUsed() {
-		return this.recycledMaterial != 0;
+		return this.hasBeenUsed;
 
 	}
 
@@ -21,6 +22,7 @@ public class Garbage extends Item {
 		if (this.canBeUsed()) {
 			r.addRecycledMaterial(recycledMaterial);
 			this.recycledMaterial = 0;
+			this.hasBeenUsed = true;
 			return true;
 		} else
 			return false;
@@ -33,4 +35,5 @@ public class Garbage extends Item {
 	}
 
 	private int recycledMaterial;
+	private boolean hasBeenUsed;
 }
