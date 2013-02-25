@@ -40,6 +40,7 @@ public class ScanInstruction implements Instruction {
 		String[] comando = cad.split(" ");
 		if (((comando[0].equalsIgnoreCase("SCAN")) || (comando[0]
 				.equalsIgnoreCase("ESCANEAR"))) && (comando.length > 1)) {
+			comando[1] = id;
 			return this;
 		} else
 			throw new WrongInstructionFormatException();
