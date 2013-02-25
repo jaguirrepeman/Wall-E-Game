@@ -8,9 +8,7 @@ import tp.pr3.items.ItemContainer;
 
 public class RadarInstruction implements Instruction{
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
-		this.engine = engine;
 		this.navigation = navigation;
-		this.robotContainer = robotContainer;
 	}
 	public void execute() throws InstructionExecutionException{
 		System.out.println(this.navigation.getCurrentPlace().toString());
@@ -26,7 +24,5 @@ public class RadarInstruction implements Instruction{
 			return this;
 		else throw new WrongInstructionFormatException(); 
 	}
-	private RobotEngine engine;
 	private NavigationModule navigation;
-	private ItemContainer robotContainer;
 }
