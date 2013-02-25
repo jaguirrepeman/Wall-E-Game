@@ -1,7 +1,8 @@
 package tp.pr3;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import tp.pr3.cityLoader.CityLoaderFromTxtFile;
 import tp.pr3.items.CodeCard;
 import tp.pr3.items.Fuel;
@@ -158,17 +159,50 @@ public class Main {
 			System.exit(1);
 		}
 		else if (args.length == 1){
-			CityLoaderFromTxtFile cityloader = new CityLoaderFromTxtFile();
 			try{
-				cityloader.loadCity(args[0]);
-			}catch (IOException e){
+				FileInputStream file = new FileInputStream(args[0]);
+				CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
+				City city = cityLoader.loadCity(file);
+				RobotEngine engine = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
+				engine.startEngine();
+			}catch (FileNotFoundException e){
 				
-				 
+				System.exit(2);
+			}catch (IOException e) {
+				//ESCRIBIR QUE EL MAPA ES INCORRECTO
 			}
 			
 		}
 		
 	}
+	//CO QUE HAY QUE QUITAR ESTA FUNCION CO
+	 public static void mainKiker(String[] args) {
+         if (args.length == 0){
+                // Escribe.llamadaIncorrecta();
+                 System.exit(1);
+         }
+         FileInputStream input = null;
+         try {
+                 input = new FileInputStream(args[0]);
+         } catch (FileNotFoundException e) {
+               //  Escribe.noExisteFichero(args[0]);
+        	 System.err.println("Error reading the map file:" +  args[0] + "(No existe el fichero o el directorio)");
+                 System.exit(2);
+         }
+         CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
+         City city = null;
+         try {
+                 city = cityLoader.loadCity(input);
+         } catch (IOException e) {
+                // Escribe.mapaIncorrecto(e.getMessage());
+                 System.exit(2);
+         }
+         RobotEngine engine = 
+                         new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
+         // plays
+         engine.startEngine();
+         
+ }
 	
 
 }

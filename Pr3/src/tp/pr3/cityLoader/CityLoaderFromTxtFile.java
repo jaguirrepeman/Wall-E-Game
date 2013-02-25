@@ -54,16 +54,15 @@ public class CityLoaderFromTxtFile {
         }
     }
     private void forceNumber(int expected) throws IOException{
-        if ((stk.nextToken() != StreamTokenizer.TT_NUMBER) || (!stk.nval.equals(expected))){
+        if ((stk.nextToken() != StreamTokenizer.TT_NUMBER) || (stk.nval != expected)){
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
     }
     private int checkNumber() throws IOException{ //FALTA IMPLEMENTAR
+    	int num = (int) stk.nval;
     	if (num >= places.size()) throw new IOException();
 		//el numero siguiente debe ser el numero de un place
-    	return 0;
-		// TODO Auto-generated method stub
-		
+    	return num;
 		
 	}
     private Place parsePlace(int num) throws IOException{
@@ -209,16 +208,15 @@ public class CityLoaderFromTxtFile {
         parseStreets();
         parseItems();        
         forceString("EndMap");
-        
-        
-        return null;
+        return aCity;
         
     }
     public Place getInitialPlace(){
         return this.initialPlace;
     }
-    private Place initialPlace;
+    private Place initialPlace; // hay que ponerlo en los bucles!!!
     private StreamTokenizer stk;
     private City aCity;
     private ArrayList<Place> places;
+    //private String filename;
 }
