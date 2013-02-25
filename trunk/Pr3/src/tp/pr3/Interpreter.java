@@ -7,19 +7,18 @@ import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
 public class Interpreter {
 	
-	
-	public static Instruction generateInstruction (String line)throws WrongInstructionFormatException {
-		String[] comando = line.split(" ");
-		Instruction instruction = null;
-		boolean b = true;
-		while(b){
-			instruction = new MoveInstruction();
-			instruction.parse(line);
-			instruction = new QuitInstruction();
-			instruction.parse(line);
-			
-		}
-		return instruction;
+	public static Instruction generateInstruction (String line) throws WrongInstructionFormatException {
+
+		for (int i= 0; i< instructions.length; i++){
+			try {
+
+				return instructions[i].parse(line);
+				
+			}catch (WrongInstructionFormatException exc) {
+				
+			}
+		}throw new WrongInstructionFormatException("jfefjie");
+		
 	}
 	
 	public static String interpreterHelp (){
@@ -41,4 +40,16 @@ public class Interpreter {
 				+LINE_SEPARATOR;
 	}
 	static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	private static Instruction[] instructions = {
+			new MoveInstruction(),
+			new DropInstruction(),
+			new HelpInstruction(),
+			new OperateInstruction(),
+			new PickInstruction(),
+			new QuitInstruction(),
+			new RadarInstruction(),
+			new ScanInstruction(),
+			new TurnInstruction()
+
+	};
 }

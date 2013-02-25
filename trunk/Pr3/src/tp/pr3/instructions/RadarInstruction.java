@@ -11,7 +11,7 @@ public class RadarInstruction implements Instruction{
 		this.navigation = navigation;
 	}
 	public void execute() throws InstructionExecutionException{
-		System.out.println(this.navigation.getCurrentPlace().toString());
+		navigation.scanCurrentPlace();
 	}
 	public String getHelp(){
 		return "RADAR";
