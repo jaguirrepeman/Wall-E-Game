@@ -13,7 +13,7 @@ public class RadarInstruction implements Instruction{
 		this.robotContainer = robotContainer;
 	}
 	public void execute() throws InstructionExecutionException{
-		
+		System.out.println(this.navigation.getCurrentPlace().toString());
 	}
 	public String getHelp(){
 		return "RADAR";
