@@ -17,9 +17,11 @@ public class RobotEngine {
 		this.fuel = 50;
 		this.items = new ItemContainer();
 		this.recycledMaterial = 0;
+		this.navigation = new NavigationModule (cityMap, initialPlace);
 	}
 
 	public void startEngine() {
+	/*	
 		Instruction instruccion = new Instruction();
 		String command = new String();
 		System.out.println(this.place.toString());
@@ -145,6 +147,24 @@ public class RobotEngine {
 			say("I run out of fuel. I cannot move. Shutting down...");
 		else
 			say("I have communication problems. Bye bye");
+		*/
+		//NavigationModule navigation = new NavigationModule(cityMap, place);
+		Instruction instruccion;
+		String command = new String();
+		System.out.println(this.place.toString());
+		printStatus();
+		System.out.println("WALL·E is looking at direction "
+				+ this.direction.toString());
+
+		prompt();
+		Scanner comando = new Scanner(System.in);
+
+		command = comando.nextLine();
+		instruccion = Interpreter.generateInstruction(command);
+		while (!(instruccion.getAction().equals(Action.QUIT)
+				|| this.place.isSpaceship() || this.fuel == 0)) {
+			
+		}
 	}
 
 	public void addFuel(int fuel) {
@@ -155,8 +175,13 @@ public class RobotEngine {
 		this.recycledMaterial += weight;
 	}
 
-	public void	communicateRobot(KikeInstruction c) {
-		
+	public void requestHelp(){
+		System.out.println(Interpreter.interpreterHelp());
+	}
+	
+	public void	communicateRobot(Instruction c) {
+		c.configureContext(this, navigation, items);
+		c.execute();
 	}
 	
 	public void	printRobotState() {
@@ -207,4 +232,5 @@ public class RobotEngine {
 	private int fuel;
 	private ItemContainer items;
 	private int recycledMaterial;
+	private NavigationModule navigation;
 }
