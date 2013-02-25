@@ -1,6 +1,5 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Action;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.Rotation;
@@ -13,7 +12,6 @@ public class TurnInstruction implements Instruction{
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.engine = engine;
 		this.navigation = navigation;
-		this.robotContainer = robotContainer;
 	}
 
 	public String getHelp() {
@@ -23,7 +21,11 @@ public class TurnInstruction implements Instruction{
 	}
 	
 	public void execute() throws InstructionExecutionException {
-		
+			this.navigation.rotate(rotation);
+			this.engine.addFuel(-1);
+			this.engine.printStatus();
+			System.out.println("WALL·E is looking at direction "
+					+ this.navigation.getCurrentHeading().toString());
 	}
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
@@ -31,12 +33,18 @@ public class TurnInstruction implements Instruction{
 		String[] comando = cad.split(" ");
 		if ((comando.length == 2)
 				&& ((comando[0].equalsIgnoreCase("TURN")) || (comando[0].equalsIgnoreCase("GIRAR"))
-						&& ((comando[1].equalsIgnoreCase("LEFT")) || (comando[1].equalsIgnoreCase("RIGHT")))))
+						&& ((comando[1].equalsIgnoreCase("LEFT")) || (comando[1].equalsIgnoreCase("RIGHT"))))){
+			//Rotation rotation;
+			
+			if (comando[1].equalsIgnoreCase("RIGHT")) this.rotation = Rotation.LEFT;
+			else this.rotation = Rotation.LEFT;
 			return this;
+		}
+			
 		else throw new WrongInstructionFormatException();	
 	}
 
 	private RobotEngine engine;
 	private NavigationModule navigation;
-	private ItemContainer robotContainer;
+	private Rotation rotation;
 }

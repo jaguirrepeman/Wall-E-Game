@@ -38,7 +38,7 @@ public class ScanInstruction implements Instruction {
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 		String[] comando = cad.split(" ");
 		if (((comando[0].equalsIgnoreCase("SCAN")) || (comando[0]
-				.equalsIgnoreCase("ESCANEAR"))) && (comando.length > 1)) {
+				.equalsIgnoreCase("ESCANEAR"))) && ((comando.length == 1)|| (comando.length == 2))) {
 			comando[1] = id;
 			return this;
 		} else
