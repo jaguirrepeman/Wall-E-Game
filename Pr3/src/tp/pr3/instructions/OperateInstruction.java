@@ -1,6 +1,5 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Action;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
@@ -22,29 +21,27 @@ public class OperateInstruction implements Instruction{
 			int initialRecMat = this.engine.getRecycledMaterial();
 
 			if (!(this.items.getItem(id) == null)) {
-				if (!this.items.getItem(id).use(this, this.navigation.getCurrentPlace())) { // si no se puede usar aqui
-					if (!this.items.getItem(instruccion.getId())
-							.canBeUsed()) { // si ya no se puede usar
-						say("What a pity! I have no more "
-								+ instruccion.getId() + " in my inventory");
-						this.items.pickItem(instruccion.getId());
+				if (!this.items.getItem(id).use(this.engine, this.navigation)) { // si no se puede usar aqui
+					if (!this.items.getItem(id).canBeUsed()) { // si ya no se puede usar
+						engine.say("What a pity! I have no more "
+								+ id + " in my inventory");
+						this.items.pickItem(id);
 					} else
-						say("I have problems using the object "
-								+ instruccion.getId());
+						engine.say("I have problems using the object "
+								+ id);
 				} else {
-					if ((initialFuel != this.fuel)
-							|| (initialRecMat != this.recycledMaterial))
-						printStatus();
-					if (!this.items.getItem(instruccion.getId())
-							.canBeUsed()) {
-						say("What a pity! I have no more "
-								+ instruccion.getId() + " in my inventory");
-						this.items.pickItem(instruccion.getId());
+					if ((initialFuel != this.engine.getFuel())
+							|| (initialRecMat != this.engine.getRecycledMaterial()))
+						this.engine.printStatus();
+					if (!this.items.getItem(id).canBeUsed()) {
+						engine.say("What a pity! I have no more "
+								+ id + " in my inventory");
+						this.items.pickItem(id);
 					}
 				}
 			} else
-				say("I have problems using the object "
-						+ instruccion.getId());
+				engine.say("I have problems using the object "
+						+ id);
 	}
 	
 	public String getHelp(){

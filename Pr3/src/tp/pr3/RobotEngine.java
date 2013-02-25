@@ -3,6 +3,7 @@ package tp.pr3;
 
 import java.util.Scanner;
 
+import tp.pr3.instructions.Instruction;
 import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
@@ -19,7 +20,7 @@ public class RobotEngine {
 	}
 
 	public void startEngine() {
-		KikeInstruction instruccion = new KikeInstruction();
+		Instruction instruccion = new Instruction();
 		String command = new String();
 		System.out.println(this.place.toString());
 		printStatus();

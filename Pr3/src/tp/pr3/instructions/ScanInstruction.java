@@ -48,4 +48,5 @@ public class ScanInstruction implements Instruction {
 	private RobotEngine engine;
 	private NavigationModule navigation;
 	private ItemContainer robotContainer;
+	private String id;
 }
