@@ -36,7 +36,7 @@ public class NavigationModule {
 	}
 
 	public Street getHeadingStreet() {
-		return null;
+		return this.city.lookForStreet(place, direction);
 
 	}
 
@@ -71,6 +71,7 @@ public class NavigationModule {
 	}
 
 	public void scanCurrentPlace() {
+		this.place.toString();
 
 	}
 	
