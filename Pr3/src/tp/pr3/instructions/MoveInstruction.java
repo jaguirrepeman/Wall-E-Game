@@ -69,7 +69,7 @@ public class MoveInstruction implements Instruction{
 		else throw new WrongInstructionFormatException();
 				
 	}
-	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	
 	private RobotEngine engine;
 	private NavigationModule navigation;
 }
