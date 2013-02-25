@@ -1,6 +1,6 @@
 package tp.pr3.items;
 
-import tp.pr3.Place;
+import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 
 public class CodeCard extends Item {
@@ -17,7 +17,7 @@ public class CodeCard extends Item {
 	}
 
 	@Override
-	public boolean use(RobotEngine r, Place p) {
+	public boolean use(RobotEngine r, NavigationModule nav) {
 		if(!(r.getHeadingStreet() == null)){
 			if (r.getHeadingStreet().isOpen()) return r.getHeadingStreet().close(this);
 			else return r.getHeadingStreet().open(this);
