@@ -9,14 +9,14 @@ import tp.pr3.items.ItemContainer;
 public class DropInstruction implements Instruction {
 
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
-		this.engine = engine;
 		this.navigation = navigation;
 		this.robotContainer = robotContainer;
 	}
 	public void execute() throws InstructionExecutionException{
 		
 		if(!navigation.findItemAtCurrentPlace(id))
-			navigation;
+			navigation.dropItemAtCurrentPlace(this.robotContainer.getItem(id));
+		else throw new InstructionExecutionException();
 	}
 	
 	public String getHelp(){
@@ -33,7 +33,6 @@ public class DropInstruction implements Instruction {
 		else throw new WrongInstructionFormatException();	
 		
 	}
-	private RobotEngine engine;
 	private NavigationModule navigation;
 	private ItemContainer robotContainer;
 	private String id;
