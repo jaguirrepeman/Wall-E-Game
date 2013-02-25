@@ -8,6 +8,9 @@ public class ItemContainer {
 		counter = 0;
 
 	}
+	public boolean containsItem(String id){
+		return (searchItem(id) != -1);
+	}
 
 	public int numberOfItems() {
 		return counter;
@@ -93,7 +96,9 @@ public class ItemContainer {
 		}
 		return string;
 	}
-
+	public void useItem(Item item){
+		
+}
 	private static final String LINE_SEPARATOR = System
 			.getProperty("line.separator");
 	private Item[] container;
