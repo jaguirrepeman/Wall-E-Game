@@ -1,7 +1,6 @@
 package tp.pr3.items;
 
 import tp.pr3.NavigationModule;
-import tp.pr3.Place;
 import tp.pr3.RobotEngine;
 
 public abstract class Item {

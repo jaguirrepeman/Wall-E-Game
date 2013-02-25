@@ -4,6 +4,8 @@ import java.io.IOException;
 
 public class WrongCityFormatException extends IOException {
 
+	private static final long serialVersionUID = 1L;
+
 	public WrongCityFormatException() {
 		// TODO Auto-generated constructor stub
 	}

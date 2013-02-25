@@ -2,6 +2,8 @@ package tp.pr3.instructions.exceptions;
 
 public class InstructionExecutionException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	public InstructionExecutionException() {
 		// TODO Auto-generated constructor stub
 	}
