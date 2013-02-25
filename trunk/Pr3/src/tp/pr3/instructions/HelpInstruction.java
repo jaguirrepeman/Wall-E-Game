@@ -9,9 +9,6 @@ import tp.pr3.items.ItemContainer;
 
 public class HelpInstruction implements Instruction{
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
-		this.engine = engine;
-		this.navigation = navigation;
-		this.robotContainer = robotContainer;
 		
 	}
 	public void execute() throws InstructionExecutionException{
@@ -29,7 +26,4 @@ public class HelpInstruction implements Instruction{
 		else return new HelpInstruction();
 		
 	}
-	private RobotEngine engine;
-	private NavigationModule navigation;
-	private ItemContainer robotContainer;
 }
