@@ -17,9 +17,9 @@ public class CodeCard extends Item {
 
 	@Override
 	public boolean use(RobotEngine r, NavigationModule nav) {
-		if(!(r.getHeadingStreet() == null)){
-			if (r.getHeadingStreet().isOpen()) return r.getHeadingStreet().close(this);
-			else return r.getHeadingStreet().open(this);
+		if(!(r.getHeadingStreet() == null)){ //si la calle existe..
+			if (r.getHeadingStreet().isOpen()) return r.getHeadingStreet().close(this); //si la calle esta abierta, la cierra
+			else return r.getHeadingStreet().open(this);	//si la calle esta cerrada, la abre
 		}
 		else return false;
 	}
