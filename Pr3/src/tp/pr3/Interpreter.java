@@ -1,48 +1,25 @@
 package tp.pr3;
 
+import tp.pr3.instructions.Instruction;
+import tp.pr3.instructions.*;
+import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+
 
 public class Interpreter {
 	
 	
-	public static KikeInstruction generateInstruction (String line) {
+	public static Instruction generateInstruction (String line)throws WrongInstructionFormatException {
 		String[] comando = line.split(" ");
-		KikeInstruction instruction;
-		if(comando[0].equalsIgnoreCase("TURN")){
-			if (comando.length == 2){
-				if (comando[1].equalsIgnoreCase("RIGHT")){
-					instruction = new KikeInstruction(Action.TURN,Rotation.RIGHT );
-				}
-				else if (comando[1].equalsIgnoreCase("LEFT")){
-					instruction = new KikeInstruction(Action.TURN,Rotation.LEFT );
-				}
-				else{
-					instruction = new KikeInstruction(Action.TURN, Rotation.UNKNOWN);
-				}
-			}else instruction = new KikeInstruction(Action.TURN, Rotation.UNKNOWN);
+		Instruction instruction = null;
+		boolean b = true;
+		while(b){
+			instruction = new MoveInstruction();
+			instruction.parse(line);
+			instruction = new QuitInstruction();
+			instruction.parse(line);
+			
 		}
-		else if(comando[0].equalsIgnoreCase("QUIT")){
-			instruction = new KikeInstruction(Action.QUIT);
-		}
-		else if(comando[0].equalsIgnoreCase("MOVE")  && comando.length == 1) {
-			instruction = new KikeInstruction(Action.MOVE);
-		}
-		else if(comando[0].equalsIgnoreCase("HELP")) {
-			instruction = new KikeInstruction(Action.HELP);
-		}
-		else if(comando[0].equalsIgnoreCase("SCAN")) {
-			if (comando.length > 1)
-				instruction = new KikeInstruction(Action.SCAN, comando[1]);
-			else instruction = new KikeInstruction(Action.SCAN);
-		}
-		else if((comando[0].equalsIgnoreCase("OPERATE")) && (comando.length > 1)) {
-			instruction = new KikeInstruction(Action.OPERATE, comando[1]);
-		}
-		else if((comando[0].equalsIgnoreCase("PICK")) && (comando.length > 1)){
-			instruction = new KikeInstruction(Action.PICK, comando[1]);
-			}
-		else instruction = new KikeInstruction();
-	return instruction;
-
+		return instruction;
 	}
 	
 	public static String interpreterHelp (){
