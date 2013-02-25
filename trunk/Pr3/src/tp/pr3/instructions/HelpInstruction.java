@@ -12,8 +12,8 @@ public class HelpInstruction implements Instruction{
 		
 	}
 	public void execute() throws InstructionExecutionException{
+		engine.requestHelp();
 		
-		System.out.println(Interpreter.interpreterHelp()); 
 
 	}
 	public String getHelp(){
@@ -27,4 +27,7 @@ public class HelpInstruction implements Instruction{
 		else throw new WrongInstructionFormatException();
 		
 	}
+	private RobotEngine engine;
+	private NavigationModule navigation;
+	private ItemContainer items;
 }

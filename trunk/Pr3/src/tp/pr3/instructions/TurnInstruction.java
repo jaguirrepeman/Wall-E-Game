@@ -16,7 +16,7 @@ public class TurnInstruction implements Instruction{
 
 	public String getHelp() {
 
-		return "TURN | GRITAR < LEFT|RIGHT >";
+		return "TURN | GIRAR < LEFT|RIGHT >";
 
 	}
 	
@@ -36,7 +36,7 @@ public class TurnInstruction implements Instruction{
 						&& ((comando[1].equalsIgnoreCase("LEFT")) || (comando[1].equalsIgnoreCase("RIGHT"))))){
 			//Rotation rotation;
 			
-			if (comando[1].equalsIgnoreCase("RIGHT")) this.rotation = Rotation.LEFT;
+			if (comando[1].equalsIgnoreCase("RIGHT")) this.rotation = Rotation.RIGHT;
 			else this.rotation = Rotation.LEFT;
 			return this;
 		}
