@@ -54,7 +54,11 @@ public class Place {
 		return this.items.addItem(it);
 	}
 	public boolean dropItem(Item it){
-		return false;
+		 if(this.items.searchItem(it.getId()) != -1) return false;
+		 else{
+			this.addItem(it);
+			return true;
+		 }
 	}
 
 	private static final String LINE_SEPARATOR = System
