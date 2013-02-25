@@ -15,7 +15,7 @@ public class RobotEngine {
 		this.cityMap = cityMap;
 		this.direction = dir;
 		this.place = initialPlace;
-		this.fuel = 50;
+		this.fuel = 100;
 		this.items = new ItemContainer();
 		this.recycledMaterial = 0;
 		this.navigation = new NavigationModule (cityMap, initialPlace);

@@ -17,13 +17,14 @@ public class HelpInstruction implements Instruction{
 
 	}
 	public String getHelp(){
-		return "HELP";
+		return "HELP|AYUDA";
 		
 	}
 	public Instruction parse(String cad) throws WrongInstructionFormatException{
-		
-		if (!((cad.compareToIgnoreCase("HELP") == 1) || (cad.compareToIgnoreCase("AYUDA") == 1))) throw new WrongInstructionFormatException();
-		else return new HelpInstruction();
+		String[] comando = cad.split(" ");
+		if((comando[0].equalsIgnoreCase("HELP") ||(cad.equalsIgnoreCase("AYUDA")))  && comando.length == 1)
+			return this;
+		else throw new WrongInstructionFormatException();
 		
 	}
 }
