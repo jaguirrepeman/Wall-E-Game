@@ -15,12 +15,7 @@ public class QuitInstruction implements Instruction{
 		this.navigation = navigation;
 	}
 	public void execute() throws InstructionExecutionException{
-		if (this.navigation.getCurrentPlace().isSpaceship())
-			engine.say("I am at my space ship. Bye Bye");
-		else if (this.engine.getFuel() == 0)
-			engine.say("I run out of fuel. I cannot move. Shutting down...");
-		else
-			engine.say("I have communication problems. Bye bye");
+		engine.requestQuit();
 	}
 	public String getHelp(){
 		return "QUIT|SALIR";
