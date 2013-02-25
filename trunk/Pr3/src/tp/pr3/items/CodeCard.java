@@ -7,8 +7,7 @@ public class CodeCard extends Item {
 
 	public CodeCard(String id, String description, String code) {
 		super(id, description);
-		// TODO Auto-generated constructor stub
-	this.code = code;
+		this.code = code;
 	}
 
 	@Override
