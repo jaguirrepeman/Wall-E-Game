@@ -24,7 +24,7 @@ public class DropInstruction implements Instruction {
 	}
 	
 	public String getHelp(){
-		return "DROP <id>";
+		return "DROP|SOLTAR <id>";
 		
 	}
 
