@@ -11,7 +11,6 @@ public class ScanInstruction implements Instruction {
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.engine = engine;
-		this.navigation = navigation;
 		this.robotContainer = robotContainer;
 	}
 
@@ -46,7 +45,6 @@ public class ScanInstruction implements Instruction {
 	}
 
 	private RobotEngine engine;
-	private NavigationModule navigation;
 	private ItemContainer robotContainer;
 	private String id;
 }
