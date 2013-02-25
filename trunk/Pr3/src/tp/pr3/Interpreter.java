@@ -11,9 +11,7 @@ public class Interpreter {
 
 		for (int i= 0; i< instructions.length; i++){
 			try {
-
-				return instructions[i].parse(line);
-				
+				return instructions[i].parse(line);			
 			}catch (WrongInstructionFormatException exc) {
 				
 			}
@@ -22,22 +20,10 @@ public class Interpreter {
 	}
 	
 	public static String interpreterHelp (){
-		return "The valid instructions for WALL-E are:"
-				+LINE_SEPARATOR+
-				"     MOVE"
-				+LINE_SEPARATOR+
-				"     TURN <LEFT | RIGHT>"
-				+LINE_SEPARATOR+
-				"     PICK <id>"
-				+LINE_SEPARATOR+
-				"     SCAN [ <id> ]"
-				+LINE_SEPARATOR+
-				"     OPERATE <id>"
-				+LINE_SEPARATOR+
-				"     HELP"
-				+LINE_SEPARATOR+
-				"     QUIT"
-				+LINE_SEPARATOR;
+		String help = "The valid instructions for Wall·E are: " + LINE_SEPARATOR;
+		for (int i= 0; i< instructions.length; i++)
+			help = help + instructions[i].getHelp() + LINE_SEPARATOR;
+		return help;
 	}
 	static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	private static Instruction[] instructions = {
