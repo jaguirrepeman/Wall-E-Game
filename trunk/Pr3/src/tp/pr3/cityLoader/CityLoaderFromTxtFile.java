@@ -3,6 +3,8 @@ package tp.pr3.cityLoader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StreamTokenizer;
+import java.util.ArrayList;
+
 import tp.pr3.City;
 import tp.pr3.Direction;
 import tp.pr3.Place;
@@ -56,9 +58,9 @@ public class CityLoaderFromTxtFile {
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
     }
-    private Place checkNumber() { //FALTA IMPLEMENTAR
+    private int checkNumber() { //FALTA IMPLEMENTAR
 		//el numero siguiente debe ser el numero de un place
-    	return null;
+    	return 0;
 		// TODO Auto-generated method stub
 		
 		
@@ -78,7 +80,7 @@ public class CityLoaderFromTxtFile {
     private Street parseStreet(int num) throws IOException{
         boolean open = true;
         String key = null;
-        Place initPlace, targetPlace;
+        int initPlace, targetPlace;
         Direction dir;
         forceString("street");
         forceNumber (num);
@@ -89,7 +91,7 @@ public class CityLoaderFromTxtFile {
         targetPlace = checkNumber();
         open = forceString ("open", "closed");
         if (!open) key = forceString();
-        Street ret = new Street(initPlace, dir, targetPlace, open, key);
+        Street ret = new Street(places.get(initPlace), dir, places.get(targetPlace), open, key);
         return ret;
         
 
@@ -97,6 +99,7 @@ public class CityLoaderFromTxtFile {
 
 	private Item parseItem(int num) throws IOException{
 		Item ret;
+		int number;
         forceString("item");
         forceNumber (num);
         
@@ -111,7 +114,11 @@ public class CityLoaderFromTxtFile {
         else if (desc.equals("Codecard")){
         	ret = leerCodecard(num);
         }
+      
         else throw new IOException();
+        forceString();
+        number = checkNumber();
+        this.places.get(number).addItem(ret);
         return ret;                  
    
 	}
@@ -148,13 +155,13 @@ public class CityLoaderFromTxtFile {
         forceString("BeginPlaces");
         while (ok){
         	try{
-            Place p = parsePlace(i);
-            i++;
+	            Place p = parsePlace(i);
+	            places.add(p);
+	            i++;
         	}catch (IOException e){
         		ok = false;
         	}
-            
-            //FALTA EL add en el array        
+                      
         }    
         forceString ("EndPlaces");
     }
@@ -164,9 +171,9 @@ public class CityLoaderFromTxtFile {
         forceString("BeginStreets");
         while (ok){
         	try{
-            Street str = parseStreet(i);
-            this.aCity.addStreet(str);
-            i++;
+	            Street str = parseStreet(i);
+	            this.aCity.addStreet(str);
+	            i++;
         	}catch(IOException e){
         		ok = false;
         	}
@@ -180,8 +187,8 @@ public class CityLoaderFromTxtFile {
         forceString("BeginItems");
         while (ok){
         	try{
-            Item p = parseItem(i);
-            i++;
+	            parseItem(i);	            
+	            i++;
         	}catch (IOException e){
         		ok = false;
         	}
@@ -212,4 +219,5 @@ public class CityLoaderFromTxtFile {
     private Place initialPlace;
     private StreamTokenizer stk;
     private City aCity;
+    private ArrayList<Place> places;
 }
