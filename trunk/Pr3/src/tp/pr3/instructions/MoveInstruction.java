@@ -10,12 +10,11 @@ public class MoveInstruction implements Instruction{
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;
 		this.navigation = navigation;
-		this.robotContainer = robotContainer;
 	}
 	public void execute() throws InstructionExecutionException{
 		// si existe una calle en la dirección actual del
 		// robot...System.out.println("WALL·E > " + mensaje);
-		if (!(this.navigation.getCurrentHeading()== null)) {
+		/*if (!(this.navigation.getCurrentHeading()== null)) {
 			//
 			if (this.navigation.getHeadingStreet().isOpen()) {
 				this.navigation.move();
@@ -37,7 +36,24 @@ public class MoveInstruction implements Instruction{
 					+ this.navigation.getCurrentHeading().toString());
 			throw new InstructionExecutionException("There is no street in direction "
 					+ this.navigation.getCurrentHeading().toString());
+		}*/
+		try {
+			this.navigation.move();
 		}
+		catch (InstructionExecutionException e){
+			if (this.navigation.getCurrentHeading() == null){
+				throw new InstructionExecutionException("There is no street in direction " + this.navigation.getCurrentHeading().toString());
+			}
+			else if (this.navigation.getHeadingStreet().isOpen()){
+				throw new InstructionExecutionException("Arrggg, there is a street but it is closed!");
+			}
+		}
+		this.navigation.say("Moving in direction " + this.navigation.getCurrentHeading().toString()
+				+ LINE_SEPARATOR + this.navigation.getCurrentPlace().toString());
+		this.engine.addFuel(-5);//fuel -= 5;
+		this.engine.printStatus();
+		System.out.println("WALL·E is looking at direction "
+				+ this.navigation.getCurrentHeading().toString());
 	}
 		
 	
@@ -56,5 +72,4 @@ public class MoveInstruction implements Instruction{
 	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	private RobotEngine engine;
 	private NavigationModule navigation;
-	private ItemContainer robotContainer;
 }
