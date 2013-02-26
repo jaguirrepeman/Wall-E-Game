@@ -40,7 +40,7 @@ public class OperateInstruction implements Instruction{
 					}
 				}
 			} else
-				engine.say("I have problems using the object "
+				throw new InstructionExecutionException("I have problems using the object "
 						+ id);
 	}
 	

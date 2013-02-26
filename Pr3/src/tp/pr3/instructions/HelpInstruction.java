@@ -12,8 +12,8 @@ public class HelpInstruction implements Instruction{
 		
 	}
 	public void execute() throws InstructionExecutionException{
-		engine.requestHelp();
 		
+		engine.requestHelp();
 
 	}
 	public String getHelp(){
