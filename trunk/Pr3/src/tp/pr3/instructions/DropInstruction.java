@@ -16,6 +16,8 @@ public class DropInstruction implements Instruction {
 	public void execute() throws InstructionExecutionException{
 
 		Item item = robotContainer.pickItem(id);
+		if (item == null) throw new InstructionExecutionException("This item does not exist in the item container");
+		if (navigation.findItemAtCurrentPlace(id)) throw new InstructionExecutionException("This item already exists in this place");			
 		if (!((item == null) || (navigation.findItemAtCurrentPlace(id)))){
 			navigation.dropItemAtCurrentPlace(item);
 		}
@@ -30,7 +32,7 @@ public class DropInstruction implements Instruction {
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException{
 		String[] comando = cad.split(" ");
-		if((comando[0].equalsIgnoreCase("DROP")) && (comando.length == 2)){
+		if((comando[0].equalsIgnoreCase("DROP") || comando[0].equalsIgnoreCase("SOLTAR")) && (comando.length == 2)){
 			id = comando[1];
 			return this;
 		}	

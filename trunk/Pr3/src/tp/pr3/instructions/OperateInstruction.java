@@ -27,8 +27,7 @@ public class OperateInstruction implements Instruction{
 								+ id + " in my inventory");
 						this.items.pickItem(id);
 					} else
-						engine.say("I have problems using the object "
-								+ id);
+						engine.say("I have problems using the object " + id);
 				} else {
 					if ((initialFuel != this.engine.getFuel())
 							|| (initialRecMat != this.engine.getRecycledMaterial()))
