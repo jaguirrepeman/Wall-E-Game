@@ -27,9 +27,10 @@ public class PickInstruction implements Instruction {
 			if (item != null) {
 				if (this.robotContainer.addItem(item))
 					engine.say("I am happy! Now I have  " + id);
-				else
-					engine.say("I am stupid! I had already the object "
-							+ id);
+				else{
+					//engine.say("I am stupid! I had already the object " + id);
+					throw new InstructionExecutionException("I am stupid! I had already the object " + id);
+				}
 			} else{
 				
 			

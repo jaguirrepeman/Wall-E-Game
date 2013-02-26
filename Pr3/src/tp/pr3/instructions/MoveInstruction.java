@@ -44,7 +44,7 @@ public class MoveInstruction implements Instruction{
 			if (this.navigation.getHeadingStreet() == null){
 				throw new InstructionExecutionException("There is no street in direction " + this.navigation.getCurrentHeading().toString());
 			}
-			else if (this.navigation.getHeadingStreet().isOpen()){
+			else if (!this.navigation.getHeadingStreet().isOpen()){
 				throw new InstructionExecutionException("Arrggg, there is a street but it is closed!");
 			}
 		}
