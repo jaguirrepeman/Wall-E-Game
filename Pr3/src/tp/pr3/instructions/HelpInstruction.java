@@ -22,7 +22,7 @@ public class HelpInstruction implements Instruction{
 	}
 	public Instruction parse(String cad) throws WrongInstructionFormatException{
 		String[] comando = cad.split(" ");
-		if((comando[0].equalsIgnoreCase("HELP") ||(cad.equalsIgnoreCase("AYUDA")))  && comando.length == 1)
+		if((comando[0].equalsIgnoreCase("HELP") ||(comando[0].equalsIgnoreCase("AYUDA")))  && comando.length == 1)
 			return this;
 		else throw new WrongInstructionFormatException();
 		
