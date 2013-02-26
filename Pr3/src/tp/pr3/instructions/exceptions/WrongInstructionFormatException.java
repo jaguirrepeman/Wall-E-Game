@@ -10,6 +10,7 @@ public class WrongInstructionFormatException extends Exception {
 
 	public WrongInstructionFormatException(String message) {
 		super(message);
+		System.out.println(message);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -167,11 +167,12 @@ public class RobotEngine {
 		while (!(quit|| this.place.isSpaceship() || this.fuel == 0)) {
 			try{
 				instruccion = Interpreter.generateInstruction(command);
+				communicateRobot(instruccion);//esto donde va? aquí o abajo?
 			}
 			catch (WrongInstructionFormatException exc){
 					
 			}
-			communicateRobot(instruccion);
+			//communicateRobot(instruccion);
 			if (!this.place.isSpaceship() && (this.fuel != 0) && !quit) {
 				// System.out.print(LINE_SEPARATOR);
 				prompt();
