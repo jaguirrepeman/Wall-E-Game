@@ -9,7 +9,9 @@ import tp.pr3.items.ItemContainer;
 
 public class HelpInstruction implements Instruction{
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
-		
+		this.engine = engine;
+		//this.navigation = navigation;
+		//this.items = robotContainer;
 	}
 	public void execute() throws InstructionExecutionException{
 		engine.requestHelp();
@@ -26,6 +28,6 @@ public class HelpInstruction implements Instruction{
 		
 	}
 	private RobotEngine engine;
-	private NavigationModule navigation;
-	private ItemContainer items;
+	//private NavigationModule navigation;
+	//private ItemContainer items;
 }
