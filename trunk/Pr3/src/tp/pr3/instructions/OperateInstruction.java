@@ -51,7 +51,7 @@ public class OperateInstruction implements Instruction{
 	
 	public Instruction parse (String cad) throws WrongInstructionFormatException{
 		String[] comando = cad.split(" ");
-		if((comando[0].equalsIgnoreCase("OPERATE")) && (comando.length == 2)) {
+		if((comando[0].equalsIgnoreCase("OPERATE") || comando[0].equalsIgnoreCase("OPERAR")) && (comando.length == 2)) {
 			this.id = comando[1];
 			return this;
 		}
