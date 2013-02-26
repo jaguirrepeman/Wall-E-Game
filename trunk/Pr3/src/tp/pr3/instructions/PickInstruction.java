@@ -30,9 +30,12 @@ public class PickInstruction implements Instruction {
 				else
 					engine.say("I am stupid! I had already the object "
 							+ id);
-			} else
-				engine.say("Ooops, this place has not the object "
-						+ id);	
+			} else{
+				
+			
+				engine.say("Ooops, this place has not the object " + id);	
+				throw new InstructionExecutionException();
+			}
 	}
 
 	public String getHelp() {
