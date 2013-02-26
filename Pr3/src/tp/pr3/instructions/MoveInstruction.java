@@ -42,9 +42,11 @@ public class MoveInstruction implements Instruction{
 		}
 		catch (InstructionExecutionException e){
 			if (this.navigation.getHeadingStreet() == null){
+				navigation.say("There is no street in direction " + this.navigation.getCurrentHeading().toString());
 				throw new InstructionExecutionException("There is no street in direction " + this.navigation.getCurrentHeading().toString());
 			}
 			else if (!this.navigation.getHeadingStreet().isOpen()){
+				navigation.say("Arrggg, there is a street but it is closed!");
 				throw new InstructionExecutionException("Arrggg, there is a street but it is closed!");
 			}
 		}

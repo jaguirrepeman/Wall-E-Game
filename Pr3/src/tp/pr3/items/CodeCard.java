@@ -16,7 +16,7 @@ public class CodeCard extends Item {
 	}
 
 	@Override
-	public boolean use(RobotEngine r, NavigationModule nav) {
+	public boolean use (RobotEngine r, NavigationModule nav) {
 		if(!(nav.getHeadingStreet() == null)){ //si la calle existe..
 			if (nav.getHeadingStreet().isOpen()) return nav.getHeadingStreet().close(this); //si la calle esta abierta, la cierra
 			else return nav.getHeadingStreet().open(this);	//si la calle esta cerrada, la abre

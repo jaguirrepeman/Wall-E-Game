@@ -151,6 +151,7 @@ public class RobotEngine {
 			say("I have communication problems. Bye bye");
 		*/
 		//NavigationModule navigation = new NavigationModule(cityMap, place);
+		navigation.initHeading(direction);
 		Instruction instruccion = null;
 		String command = new String();
 		System.out.println(this.place.toString());
@@ -171,7 +172,7 @@ public class RobotEngine {
 					
 			}
 			communicateRobot(instruccion);
-			if (!this.place.isSpaceship() && (this.fuel != 0)) {
+			if (!this.place.isSpaceship() && (this.fuel != 0) && !quit) {
 				// System.out.print(LINE_SEPARATOR);
 				prompt();
 				command = comando.nextLine();
