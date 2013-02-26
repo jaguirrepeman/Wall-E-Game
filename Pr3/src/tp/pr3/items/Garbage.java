@@ -13,7 +13,7 @@ public class Garbage extends Item {
 
 	@Override
 	public boolean canBeUsed() {
-		return this.hasBeenUsed;
+		return !this.hasBeenUsed;
 
 	}
 

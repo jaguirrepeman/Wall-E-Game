@@ -154,7 +154,7 @@ public class RobotEngine {
 		Instruction instruccion = null;
 		String command = new String();
 		System.out.println(this.place.toString());
-		printStatus();
+		printRobotState();
 		System.out.println("WALL·E is looking at direction "
 				+ this.direction.toString());
 
@@ -249,13 +249,6 @@ public class RobotEngine {
 		System.out.print("WALL·E > ");
 	}
 
-	public void printStatus() {
-		if (this.fuel < 0)
-			this.fuel = 0;
-		System.out.println("   * My power is " + this.fuel);
-		System.out.println("   * My recycled material is: "
-				+ this.recycledMaterial);
-	}
 
 	private static final String LINE_SEPARATOR = System
 			.getProperty("line.separator");

@@ -31,7 +31,7 @@ public class OperateInstruction implements Instruction{
 				} else {
 					if ((initialFuel != this.engine.getFuel())
 							|| (initialRecMat != this.engine.getRecycledMaterial()))
-						this.engine.printStatus();
+						this.engine.printRobotState();
 					if (!this.items.getItem(id).canBeUsed()) {
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");

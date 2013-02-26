@@ -23,7 +23,7 @@ public class TurnInstruction implements Instruction{
 	public void execute() throws InstructionExecutionException {
 			this.navigation.rotate(rotation);
 			this.engine.addFuel(-1);
-			this.engine.printStatus();
+			this.engine.printRobotState();
 			System.out.println("WALL·E is looking at direction "
 					+ this.navigation.getCurrentHeading().toString());
 	}

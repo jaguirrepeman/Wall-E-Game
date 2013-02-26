@@ -42,28 +42,26 @@ public class Street {
 	}
 
 	public boolean open(CodeCard card) {
-		if (!(this.code == null)) {
+	//	if (!(this.code == null)) {
 			if (this.code.equals(card.getCode())) {
 				if (!this.isOpen())
 					this.isOpen = true;
 				return true;
 			} else
 				return false;
-		} else
-			return false;
+	//	} else return false;
 
 	}
 
 	public boolean close(CodeCard card) {
-		if (!(this.code == null)) {
+	//	if (!(this.code == null)) {
 			if (this.code.equals(card.getCode())) {
 				if (this.isOpen())
 					this.isOpen = false;
 				return true;
 			} else
 				return false;
-		} else
-			return false;
+	//	} else return false;
 
 	}
 

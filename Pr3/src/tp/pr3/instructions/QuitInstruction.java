@@ -12,7 +12,6 @@ public class QuitInstruction implements Instruction{
 	
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;
-		this.navigation = navigation;
 	}
 	public void execute() throws InstructionExecutionException{
 		engine.requestQuit();
@@ -28,5 +27,4 @@ public class QuitInstruction implements Instruction{
 		else throw new WrongInstructionFormatException(); 
 	}
 	private RobotEngine engine;
-	private NavigationModule navigation;
 }
