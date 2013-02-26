@@ -15,8 +15,10 @@ public class ScanInstruction implements Instruction {
 	}
 
 	public void execute() throws InstructionExecutionException {
-		if (this.robotContainer.numberOfItems() == 0)
-			engine.say("My inventory is empty");
+		if (this.robotContainer.numberOfItems() == 0){
+			//engine.say("My inventory is empty");
+			throw new InstructionExecutionException("My inventory is empty");
+		}
 		else if (id == null)
 			engine.say("I am carrying the following items" + LINE_SEPARATOR
 					+ this.robotContainer.toString());
@@ -24,8 +26,10 @@ public class ScanInstruction implements Instruction {
 			Item item3 = this.robotContainer.getItem(id);
 			if (item3 != null)
 				engine.say(item3.toString());
-			else
-				engine.say("I don't have that item");
+			else{
+				//engine.say("I don't have that item");
+				throw new InstructionExecutionException("I don't have that item");
+			}
 		}
 	}
 
@@ -38,7 +42,7 @@ public class ScanInstruction implements Instruction {
 		String[] comando = cad.split(" ");
 		if (((comando[0].equalsIgnoreCase("SCAN")) || (comando[0].equalsIgnoreCase("ESCANEAR"))) && 
 			((comando.length == 1)|| (comando.length == 2))) {
-			comando[1] = id;
+			if (comando.length == 2) comando[1] = id;
 			return this;
 		} else
 			throw new WrongInstructionFormatException();

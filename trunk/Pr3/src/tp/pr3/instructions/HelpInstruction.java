@@ -12,9 +12,7 @@ public class HelpInstruction implements Instruction{
 		
 	}
 	public void execute() throws InstructionExecutionException{
-		
 		engine.requestHelp();
-
 	}
 	public String getHelp(){
 		return "HELP|AYUDA";
