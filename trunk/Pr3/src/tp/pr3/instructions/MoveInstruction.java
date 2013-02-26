@@ -51,7 +51,7 @@ public class MoveInstruction implements Instruction{
 		this.navigation.say("Moving in direction " + this.navigation.getCurrentHeading().toString()
 				+ LINE_SEPARATOR + this.navigation.getCurrentPlace().toString());
 		this.engine.addFuel(-5);//fuel -= 5;
-		this.engine.printStatus();
+		this.engine.printRobotState();
 		System.out.println("WALL·E is looking at direction "
 				+ this.navigation.getCurrentHeading().toString());
 	}
