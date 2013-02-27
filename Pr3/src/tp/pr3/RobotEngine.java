@@ -159,19 +159,19 @@ public class RobotEngine {
 		System.out.println("WALL·E is looking at direction "
 				+ this.direction.toString());
 
-		prompt();
+		//prompt();
 		Scanner comando = new Scanner(System.in);
 
-		command = comando.nextLine();
+		//command = comando.nextLine();
 		
 		while (!(quit|| this.place.isSpaceship() || this.fuel == 0)) {
-			try{
-				instruccion = Interpreter.generateInstruction(command);
-				communicateRobot(instruccion);//esto donde va? aquí o abajo?
-			}
-			catch (WrongInstructionFormatException exc){
-					
-			}
+			//try{
+			//	instruccion = Interpreter.generateInstruction(command);
+			//	communicateRobot(instruccion);//esto donde va? aquí o abajo?
+			//}
+			//catch (WrongInstructionFormatException exc){
+			//		
+			//}
 			//communicateRobot(instruccion);
 			if (!this.place.isSpaceship() && (this.fuel != 0) && !quit) {
 				// System.out.print(LINE_SEPARATOR);
@@ -179,6 +179,7 @@ public class RobotEngine {
 				command = comando.nextLine();
 				try{
 					instruccion = Interpreter.generateInstruction(command);
+					communicateRobot(instruccion);
 				}
 				catch (WrongInstructionFormatException exc){
 						
