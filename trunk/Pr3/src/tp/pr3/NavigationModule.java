@@ -71,7 +71,7 @@ public class NavigationModule {
 	}
 
 	public void scanCurrentPlace() {
-		this.place.toString();
+		say(this.place.toString());
 
 	}
 	
