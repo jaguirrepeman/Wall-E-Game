@@ -9,6 +9,7 @@ import tp.pr3.City;
 import tp.pr3.Direction;
 import tp.pr3.Place;
 import tp.pr3.Street;
+import tp.pr3.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 import tp.pr3.items.*;
 
 public class CityLoaderFromTxtFile {
@@ -67,13 +68,17 @@ public class CityLoaderFromTxtFile {
 	}
     private Place parsePlace(int num) throws IOException{
         boolean spaceship;
-        forceString("place");
-        forceNumber (num);
-        String name = forceString();
-        String desc = forceString();
-        spaceship = forceString ("noSpaceShip", "SpaceShip");       
-        Place ret = new Place(name, spaceship, desc);
-        return ret;
+        //try{
+	        forceString("place");
+	        forceNumber (num);
+	        String name = forceString();
+	        String desc = forceString();
+	        spaceship = forceString ("noSpaceShip", "SpaceShip");       
+	        Place ret = new Place(name, spaceship, desc);
+	        return ret;
+       // } catch(IOException e){
+        	
+        //}throw new IOException();
         
 
     }
@@ -81,6 +86,7 @@ public class CityLoaderFromTxtFile {
         boolean open = true;
         String key = null;
         int initPlace, targetPlace;
+        try{
         Direction dir;
         forceString("street");
         forceNumber (num);
@@ -93,6 +99,9 @@ public class CityLoaderFromTxtFile {
         if (!open) key = forceString();
         Street ret = new Street(places.get(initPlace), dir, places.get(targetPlace), open, key);
         return ret;
+        } catch(IOException e){
+        	
+        }throw new IOException();
         
 
     }
@@ -100,6 +109,7 @@ public class CityLoaderFromTxtFile {
 	private Item parseItem(int num) throws IOException{
 		Item ret;
 		int number;
+		//try{
         forceString("item");
         forceNumber (num);
         
@@ -119,7 +129,10 @@ public class CityLoaderFromTxtFile {
         forceString();
         number = checkNumber();
         this.places.get(number).addItem(ret);
-        return ret;                  
+        return ret;   
+		//}catch(IOException e){
+			
+		//}throw new IOException();
    
 	}
     private Garbage leerGarbage(int num) throws IOException {
@@ -150,7 +163,7 @@ public class CityLoaderFromTxtFile {
 		
 	}
 	private void parsePlaces() throws IOException{
-        int i = 0;
+        int i = 1;
         boolean ok = true;
         forceString("BeginPlaces");
         while (ok){
@@ -166,7 +179,7 @@ public class CityLoaderFromTxtFile {
         forceString ("EndPlaces");
     }
     private void parseStreets() throws IOException{
-        int i = 0;
+        int i = 1;
         boolean ok = true;
         forceString("BeginStreets");
         while (ok){
@@ -182,7 +195,7 @@ public class CityLoaderFromTxtFile {
         forceString ("EndStreets");
     }
     private void parseItems() throws IOException{
-    	int i = 0;
+    	int i = 1;
         boolean ok = true;
         forceString("BeginItems");
         while (ok){
@@ -199,15 +212,26 @@ public class CityLoaderFromTxtFile {
                               
     }
 
-    public City loadCity(java.io.InputStream file) throws java.io.IOException{
+    public City loadCity(java.io.InputStream file) throws /**/java.io.IOException/**/ /*WrongCityFormatException*/{
         stk = new StreamTokenizer(new InputStreamReader(file));
         stk.wordChars('\u0021', '\u007E');
         //stk.quoteChar("");
+        //try {
+			forceString ("BeginMap");
+			parsePlaces();
+	        parseStreets();
+	        parseItems();        
+	        forceString("EndMap");
+		//} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+    //}
+       /* 
         forceString ("BeginMap");
         parsePlaces();
         parseStreets();
         parseItems();        
-        forceString("EndMap");
+        forceString("EndMap");*/
         return aCity;
         
     }
