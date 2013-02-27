@@ -26,8 +26,10 @@ public class OperateInstruction implements Instruction{
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
 						this.items.pickItem(id);
-					} else
+					} else{
 						engine.say("I have problems using the object " + id);
+						throw new InstructionExecutionException();
+					}
 				} else {
 					if ((initialFuel != this.engine.getFuel())
 							|| (initialRecMat != this.engine.getRecycledMaterial()))
@@ -38,9 +40,11 @@ public class OperateInstruction implements Instruction{
 						this.items.pickItem(id);
 					}
 				}
-			} else
+			} else{
+				navigation.say("I have problems using the object " + id);
 				throw new InstructionExecutionException("I have problems using the object "
 						+ id);
+			}
 	}
 	
 	public String getHelp(){

@@ -20,6 +20,7 @@ public class DropInstruction implements Instruction {
 		if (navigation.findItemAtCurrentPlace(id)) throw new InstructionExecutionException("This item already exists in this place");			
 		if (!((item == null) || (navigation.findItemAtCurrentPlace(id)))){
 			navigation.dropItemAtCurrentPlace(item);
+			navigation.say("I've dropped the item " + id + " in this place");
 		}
 		
 
