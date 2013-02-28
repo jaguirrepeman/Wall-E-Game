@@ -212,7 +212,7 @@ public class RobotEngine {
 		try{
 			c.execute();
 		} catch(InstructionExecutionException exc){
-			
+			System.err.println(exc);
 		}
 	}
 	
