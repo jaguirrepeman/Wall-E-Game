@@ -50,9 +50,13 @@ public class CityLoaderFromTxtFile {
     	else throw new IOException();
     }
     private void forceString(String expected) throws IOException{
+    	try{
         if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!stk.sval.equals(expected))){
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
+    	}catch(IOException e){
+    		throw e;
+    	}
     }
     private void forceNumber(int expected) throws IOException{
         if ((stk.nextToken() != StreamTokenizer.TT_NUMBER) || (stk.nval != expected)){
@@ -163,7 +167,7 @@ public class CityLoaderFromTxtFile {
 		
 	}
 	private void parsePlaces() throws IOException{
-        int i = 0;
+        int i = 1;
         boolean ok = true;
         forceString("BeginPlaces");
         while (ok){
@@ -179,7 +183,7 @@ public class CityLoaderFromTxtFile {
         forceString ("EndPlaces");
     }
     private void parseStreets() throws IOException{
-        int i = 0;
+        int i = 1;
         boolean ok = true;
         forceString("BeginStreets");
         while (ok){
@@ -195,12 +199,13 @@ public class CityLoaderFromTxtFile {
         forceString ("EndStreets");
     }
     private void parseItems() throws IOException{
-    	int i = 0;
+    	int i = 1;
         boolean ok = true;
         forceString("BeginItems");
         while (ok){
         	try{
-	            parseItem(i);	            
+	            parseItem(i);	
+	            
 	            i++;
         	}catch (IOException e){
         		ok = false;
@@ -212,27 +217,20 @@ public class CityLoaderFromTxtFile {
                               
     }
 
-    public City loadCity(java.io.InputStream file) throws /**/java.io.IOException/**/ /*WrongCityFormatException*/{
+    public City loadCity(java.io.InputStream file) throws /*java.io.IOException*/ WrongCityFormatException/**/{
         stk = new StreamTokenizer(new InputStreamReader(file));
         stk.wordChars('\u0021', '\u007E');
-        //stk.quoteChar("");
-        //try {
-			forceString ("BeginMap");
+        stk.quoteChar('"');
+        try{
+			forceString ("BeginCity");
 			parsePlaces();
 	        parseStreets();
 	        parseItems();        
-	        forceString("EndMap");
-		//} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-    //}
-       /* 
-        forceString ("BeginMap");
-        parsePlaces();
-        parseStreets();
-        parseItems();        
-        forceString("EndMap");*/
-        return aCity;
+	        forceString("EndCity");
+        
+        }catch (IOException exc){
+        	throw new WrongCityFormatException();
+        }return aCity;
         
     }
     public Place getInitialPlace(){
