@@ -171,6 +171,9 @@ public class Main {
 			}catch (IOException e) {
 				//ESCRIBIR QUE EL MAPA ES INCORRECTO
 			}
+			//catch (WrongCityFormatException e){
+				
+			//}
 			
 		}
 		
