@@ -184,15 +184,16 @@ public class Main {
          if (args.length == 0){
                 // Escribe.llamadaIncorrecta();
                  System.exit(1);
-                 System.err.println("Bad params." + Interpreter.LINE_SEPARATOR + 
-"Usage: java tp.pr3.Main <mapfile>" + Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR + "<mapfile> : file with the description of the city.");
+                 System.err.println("KOHHHH");
+                 System.err.println("Bad params." + Interpreter.LINE_SEPARATOR + "Usage: java tp.pr3.Main <mapfile>" +
+                 Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR + "<mapfile> : file with the description of the city.");
          }
          FileInputStream input = null;
          try {
                  input = new FileInputStream(args[0]);
          } catch (FileNotFoundException e) {
                //  Escribe.noExisteFichero(args[0]);
-        	 System.err.println("Error reading the map file:" +  args[0] + "(No existe el fichero o el directorio)");
+        	 System.err.println("Error reading the map file: " +  args[0] + " (No existe el fichero o el directorio)");
                  System.exit(2);
          }
          CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
@@ -201,12 +202,14 @@ public class Main {
                  city = cityLoader.loadCity(input);
          } catch (IOException e) {
                 // Escribe.mapaIncorrecto(e.getMessage());
+        	 System.err.println("Error reading the map file:" +  args[0] + "(No existe el fichero o el directorio)");
                  System.exit(2);
          }
          RobotEngine engine = 
                          new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
          
          engine.startEngine();
+         System.exit(0);
          
  }
 	
