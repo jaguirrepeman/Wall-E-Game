@@ -27,8 +27,8 @@ public class OperateInstruction implements Instruction{
 								+ id + " in my inventory");
 						this.items.pickItem(id);
 					} else{
-						engine.say("I have problems using the object " + id);
-						throw new InstructionExecutionException();
+						//engine.say("I have problems using the object " + id);
+						throw new InstructionExecutionException("I have problems using the object " + id);
 					}
 				} else {
 					if ((initialFuel != this.engine.getFuel())
@@ -38,6 +38,7 @@ public class OperateInstruction implements Instruction{
 					if (!this.items.getItem(id).canBeUsed()) {
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
+						
 						this.items.pickItem(id);
 					}
 				}
