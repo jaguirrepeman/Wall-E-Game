@@ -78,7 +78,7 @@ public class CityLoaderFromTxtFile {
 	        String name = forceString();
 	        String desc = forceString();
 	        spaceship = forceString ("noSpaceShip", "SpaceShip");       
-	        Place ret = new Place(name, spaceship, desc);
+	        Place ret = new Place(name, spaceship, desc.replace('_', ' '));
 	        return ret;
        // } catch(IOException e){
         	
@@ -145,7 +145,7 @@ public class CityLoaderFromTxtFile {
 		id = forceString();
 		description = forceString();
 		recycledMaterial = forceNumber();
-		return new Garbage(id, description, recycledMaterial);
+		return new Garbage(id, description.replace('_', ' '), recycledMaterial);
         
     }
     private CodeCard leerCodecard(int num) throws IOException {
@@ -153,7 +153,7 @@ public class CityLoaderFromTxtFile {
 		id = forceString();
 		description = forceString();
 		code = forceString();
-		return new CodeCard(id, description, code);
+		return new CodeCard(id, description.replace('_', ' '), code);
 		
 	}
 	private Fuel leerFuel(int num) throws IOException {
@@ -163,7 +163,7 @@ public class CityLoaderFromTxtFile {
 		description = forceString();
 		power = forceNumber();
 		times = forceNumber();
-		return new Fuel(id, description, power, times);
+		return new Fuel(id, description.replace('_', ' '), power, times);
 		
 	}
 	private void parsePlaces() throws IOException{
