@@ -139,7 +139,7 @@ public class Main {
 	 * starts the simulation
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void mainAntiguo(String[] args) {
 		// create the different places
 		Place[] places = createPlaces();
 		// create the different Streets generating the map
@@ -179,7 +179,7 @@ public class Main {
 		
 	}
 	//CO QUE HAY QUE QUITAR ESTA FUNCION CO
-	 public static void mainAntiguo(String[] args) {
+	 public static void main(String[] args) {
          if (args.length == 0){
                 // Escribe.llamadaIncorrecta();
                  System.exit(1);
@@ -202,7 +202,7 @@ public class Main {
          }
          RobotEngine engine = 
                          new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
-         // plays
+         
          engine.startEngine();
          
  }
