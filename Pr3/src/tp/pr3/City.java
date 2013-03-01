@@ -11,7 +11,17 @@ public class City {
 	}
 
 	public void addStreet(Street street) {
-		cityMap[cityMap.length] = street;
+		if (this.cityMap == null){
+			this.cityMap = new Street[1];
+			this.cityMap[0] = street;
+		}else{
+			Street[] aux = new Street[this.cityMap.length + 1];
+			for (int i=0; i< this.cityMap.length; i++)
+				aux[i] = this.cityMap[i];
+			aux[this.cityMap.length] = street;
+			this.cityMap = aux;
+		}
+	
 	}
 
 	public Street lookForStreet(Place currentPlace, Direction currentHeading) {
@@ -25,6 +35,6 @@ public class City {
 		return null;
 	}
 
-	private Street[] cityMap;
+	private Street[] cityMap = null;
 
 }

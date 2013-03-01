@@ -16,56 +16,81 @@ public class CityLoaderFromTxtFile {
     public CityLoaderFromTxtFile(){
         
     }
-   private String forceString()throws IOException{
-    	if ((stk.nextToken() != StreamTokenizer.TT_WORD)) return stk.sval;
+    private void forceActualString(String expected) throws IOException{
+    	try{
+    		String value = stk.sval;
+	        if ((value == null) || (!value.equals(expected))){
+	            throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
+        }
+    	}catch(IOException e){
+    		throw e;
+    	}
+    }
+   private String forceString() throws IOException{
+	   stk.nextToken();
+    	if (stk.sval != null) return stk.sval;
     	else throw new IOException();
         
     }
+   
+   private String getStringValue() throws IOException {
+	   if (stk.sval != null)
+		   return stk.sval;
+	   throw new IOException();
+   }
     private int forceNumber()throws IOException{
-    	if ((stk.nextToken() != StreamTokenizer.TT_WORD)) return (int) stk.nval;
+    	stk.nextToken();
+    	if (stk.ttype == StreamTokenizer.TT_NUMBER) return (int) stk.nval;
     	else throw new IOException();
         
     }
 	private Direction forceDirection() throws IOException {
+		stk.nextToken();
 		String value = stk.sval;
 	
-		if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!((value.equals("EAST")) ||(value.equals("NORTH"))|| (value.equals("SOUTH")) || (value.equals("UNKNOWN")) || (value.equals("WEST"))))){
-			throw new IOException();
-		}
-				
-		else if (value.equals("EAST")) return Direction.EAST;
-		else if (value.equals("NORTH")) return Direction.NORTH;
-		else if (value.equals("SOUTH")) return Direction.SOUTH;
-		else if (value.equals("UNKNOWN")) return Direction.UNKNOWN;
-		else if (value.equals("WEST")) return Direction.WEST;
-		else return null;
+		//if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!((value.equals("EAST")) ||(value.equals("NORTH"))|| (value.equals("SOUTH")) || (value.equals("UNKNOWN")) || (value.equals("WEST"))))){
+		//	throw new IOException();
+		//}
+		if (value == null) throw new IOException();		
+		else if (value.equalsIgnoreCase("EAST")) return Direction.EAST;
+		else if (value.equalsIgnoreCase("NORTH")) return Direction.NORTH;
+		else if (value.equalsIgnoreCase("SOUTH")) return Direction.SOUTH;
+		else if (value.equalsIgnoreCase("UNKNOWN")) return Direction.UNKNOWN;
+		else if (value.equalsIgnoreCase("WEST")) return Direction.WEST;
+		else throw new IOException();
+		//else return null;
 		 
 		
 	}
     private boolean forceString (String ex1, String ex2) throws IOException{
     	String ex;
+    	stk.nextToken();
     	ex = stk.sval;
-    	if (ex.compareTo(ex1) == 1) return false;
-    	else if (ex.compareTo(ex2) == 1) return true;
+    	if (ex.equalsIgnoreCase(ex1)) return false;
+    	else if (ex.equalsIgnoreCase(ex2)) return true;
     	else throw new IOException();
     }
     private void forceString(String expected) throws IOException{
     	try{
-        if ((stk.nextToken() != StreamTokenizer.TT_WORD) || (!stk.sval.equals(expected))){
-            throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
+    		stk.nextToken();
+    		String value = stk.sval;
+	        if ((value == null) || (!value.equals(expected))){
+	            throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
     	}catch(IOException e){
     		throw e;
     	}
     }
     private void forceNumber(int expected) throws IOException{
-        if ((stk.nextToken() != StreamTokenizer.TT_NUMBER) || (stk.nval != expected)){
+    	stk.nextToken();
+        if ((stk.ttype != StreamTokenizer.TT_NUMBER) || ((int)stk.nval != expected)){
             throw new IOException("Error, se esperaba " +  expected + " en la línea "  + stk.lineno() +  " y se encontró " + stk.sval); 
         }
     }
     private int checkNumber() throws IOException{ //FALTA IMPLEMENTAR
+    	stk.nextToken();
     	int num = (int) stk.nval;
-    	if (num >= places.size()) throw new IOException();
+    	if ((num >= places.size()) || num < 0) throw new IOException();
 		//el numero siguiente debe ser el numero de un place
     	return num;
 		
@@ -73,7 +98,9 @@ public class CityLoaderFromTxtFile {
     private Place parsePlace(int num) throws IOException{
         boolean spaceship;
         //try{
-	        forceString("place");
+	        //forceString("place");
+        	if (!getStringValue().equals("place"))
+        		throw new IOException();
 	        forceNumber (num);
 	        String name = forceString();
 	        String desc = forceString();
@@ -91,18 +118,18 @@ public class CityLoaderFromTxtFile {
         String key = null;
         int initPlace, targetPlace;
         try{
-        Direction dir;
-        forceString("street");
-        forceNumber (num);
-        forceString("place");
-        initPlace = checkNumber();
-        dir = forceDirection();
-        forceString("place");
-        targetPlace = checkNumber();
-        open = forceString ("open", "closed");
-        if (!open) key = forceString();
-        Street ret = new Street(places.get(initPlace), dir, places.get(targetPlace), open, key);
-        return ret;
+	        Direction dir;
+	        forceActualString("street");
+	        forceNumber (num);
+	        forceString("place");
+	        initPlace = checkNumber();
+	        dir = forceDirection();//
+	        forceString("place");
+	        targetPlace = checkNumber();
+	        open = forceString ("closed", "open");
+	        if (!open) key = forceString();
+	        Street ret = new Street(places.get(initPlace), dir, places.get(targetPlace), open, key);
+	        return ret;
         } catch(IOException e){
         	
         }throw new IOException();
@@ -114,18 +141,18 @@ public class CityLoaderFromTxtFile {
 		Item ret;
 		int number;
 		//try{
-        forceString("item");
-        forceNumber (num);
+        //forceString("item");
+        //forceNumber (num);
         
-        String desc = forceString();
+        String desc = getStringValue();
 
-        if (desc.equals("Garbage")){
+        if (desc.equals("garbage")){
         	ret = leerGarbage(num);
         }
-        else if (desc.equals("Fuel")){
+        else if (desc.equals("fuel")){
         	ret = leerFuel(num);
         }
-        else if (desc.equals("Codecard")){
+        else if (desc.equals("codecard")){
         	ret = leerCodecard(num);
         }
       
@@ -134,14 +161,13 @@ public class CityLoaderFromTxtFile {
         number = checkNumber();
         this.places.get(number).addItem(ret);
         return ret;   
-		//}catch(IOException e){
-			
-		//}throw new IOException();
+		
    
 	}
     private Garbage leerGarbage(int num) throws IOException {
 		String id, description;
 		int recycledMaterial;
+		forceNumber(num);
 		id = forceString();
 		description = forceString();
 		recycledMaterial = forceNumber();
@@ -150,6 +176,7 @@ public class CityLoaderFromTxtFile {
     }
     private CodeCard leerCodecard(int num) throws IOException {
     	String id, description, code;
+    	forceNumber(num);
 		id = forceString();
 		description = forceString();
 		code = forceString();
@@ -159,6 +186,7 @@ public class CityLoaderFromTxtFile {
 	private Fuel leerFuel(int num) throws IOException {
 		String id, description;
 		int power, times;
+		forceNumber(num);
 		id = forceString();
 		description = forceString();
 		power = forceNumber();
@@ -170,51 +198,61 @@ public class CityLoaderFromTxtFile {
         int i = 0;
         boolean ok = true;
         forceString("BeginPlaces");
-        while (ok){
+        stk.nextToken();
+        while (!getStringValue().equalsIgnoreCase("EndPlaces") && ok){
         	try{
+        		//get
 	            Place p = parsePlace(i);
 	            places.add(p);
-	            if (i == 0) this.initialPlace = p;
+//<<<<<<< .mine
+	            stk.nextToken();
+//=======
+//	            if (i == 0) this.initialPlace = p;
+//>>>>>>> .r86
 	            i++;
         	}catch (IOException e){
         		ok = false;
         	}
                       
-        }    
-        forceString ("EndPlaces");
+        }  if (!getStringValue().equalsIgnoreCase("EndPlaces"))
+        	throw new IOException();
+        //forceString ("EndPlaces");
     }
     private void parseStreets() throws IOException{
         int i = 0;
         boolean ok = true;
         forceString("BeginStreets");
-        while (ok){
+        stk.nextToken();
+        while (!getStringValue().equalsIgnoreCase("EndStreets") && ok){
         	try{
 	            Street str = parseStreet(i);
 	            this.aCity.addStreet(str);
+	            stk.nextToken();
 	            i++;
+	            
         	}catch(IOException e){
         		ok = false;
         	}
                   
         }    
-        forceString ("EndStreets");
+        forceActualString ("EndStreets");
     }
     private void parseItems() throws IOException{
     	int i = 0;
         boolean ok = true;
         forceString("BeginItems");
-        while (ok){
+        stk.nextToken();
+        while (!getStringValue().equalsIgnoreCase("EndItems") && ok){
         	try{
 	            parseItem(i);	
-	            
+	            stk.nextToken();
 	            i++;
         	}catch (IOException e){
         		ok = false;
         	}
-            
-            //FALTA EL add en el array        
+               
         }    
-        forceString ("EndItems");
+        forceActualString ("EndItems");
                               
     }
 
@@ -235,11 +273,11 @@ public class CityLoaderFromTxtFile {
         
     }
     public Place getInitialPlace(){
-        return this.initialPlace;
+        return places.get(0);
     }
     private Place initialPlace; // hay que ponerlo en los bucles!!!
     private StreamTokenizer stk;
-    private City aCity;
-    private ArrayList<Place> places;
+    private City aCity = new City();
+    private ArrayList<Place> places = new ArrayList<Place>();
     //private String filename;
 }
