@@ -167,7 +167,7 @@ public class CityLoaderFromTxtFile {
 		
 	}
 	private void parsePlaces() throws IOException{
-        int i = 1;
+        int i = 0;
         boolean ok = true;
         forceString("BeginPlaces");
         while (ok){
@@ -183,7 +183,7 @@ public class CityLoaderFromTxtFile {
         forceString ("EndPlaces");
     }
     private void parseStreets() throws IOException{
-        int i = 1;
+        int i = 0;
         boolean ok = true;
         forceString("BeginStreets");
         while (ok){
@@ -199,7 +199,7 @@ public class CityLoaderFromTxtFile {
         forceString ("EndStreets");
     }
     private void parseItems() throws IOException{
-    	int i = 1;
+    	int i = 0;
         boolean ok = true;
         forceString("BeginItems");
         while (ok){

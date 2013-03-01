@@ -139,7 +139,9 @@ public class Main {
 	 * starts the simulation
 	 * @param args
 	 */
-	public static void mainA(String[] args) {
+
+	public static void mainAntiguo(String[] args) {
+
 		// create the different places
 		Place[] places = createPlaces();
 		// create the different Streets generating the map
@@ -151,14 +153,13 @@ public class Main {
 		engine.startEngine();
 		
 	}
-	public static void mainKiker(String[] args){
+	public static void main(String[] args){
 		if (args.length == 0 || args.length > 1){
 			System.err.println("Bad params." + Interpreter.LINE_SEPARATOR + 
 			"Usage: java tp.pr3.Main <mapfile>" + Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR + 
 			"<mapfile> : file with the description of the city.");
-			System.exit(1);
+			System.exit(2);
 		}
-		else if (args.length == 1){
 			try{
 				FileInputStream file = new FileInputStream(args[0]);
 				CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
@@ -175,11 +176,11 @@ public class Main {
 				
 			//}
 			
-		}
+		
 		
 	}
 	//CO QUE HAY QUE QUITAR ESTA FUNCION CO
-	 public static void main(String[] args) {
+	 public static void mainSuperKiker(String[] args) {
          if (args.length == 0){
                 // Escribe.llamadaIncorrecta();
                  System.exit(1);
