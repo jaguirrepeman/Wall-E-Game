@@ -1,6 +1,5 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Interpreter;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;

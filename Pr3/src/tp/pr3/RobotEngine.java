@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import tp.pr3.instructions.*;
 import tp.pr3.instructions.exceptions.*;
-import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
 public class RobotEngine {
@@ -253,8 +252,6 @@ public class RobotEngine {
 	}
 
 
-	private static final String LINE_SEPARATOR = System
-			.getProperty("line.separator");
 	private Place place;
 	private Direction direction;
 	private City cityMap;
