@@ -184,7 +184,6 @@ public class Main {
          if (args.length == 0){
                 // Escribe.llamadaIncorrecta();
                  System.exit(1);
-                 System.err.println("KOHHHH");
                  System.err.println("Bad params." + Interpreter.LINE_SEPARATOR + "Usage: java tp.pr3.Main <mapfile>" +
                  Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR + "<mapfile> : file with the description of the city.");
          }
