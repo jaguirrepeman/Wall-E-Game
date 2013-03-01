@@ -139,7 +139,7 @@ public class Main {
 	 * starts the simulation
 	 * @param args
 	 */
-	public static void mainViejo(String[] args) {
+	public static void mainA(String[] args) {
 		// create the different places
 		Place[] places = createPlaces();
 		// create the different Streets generating the map
