@@ -3,6 +3,10 @@ package tp.pr3;
 import tp.pr3.items.CodeCard;
 
 public class Street {
+	
+	public Street(){
+		
+	}
 
 	public Street(Place source, Direction direction, Place target) {
 		this.source = source;
