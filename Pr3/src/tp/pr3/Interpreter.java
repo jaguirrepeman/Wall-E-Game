@@ -15,7 +15,7 @@ public class Interpreter {
 			}catch (WrongInstructionFormatException exc) {
 				
 			}
-		}throw new WrongInstructionFormatException("I do not understand");
+		}throw new WrongInstructionFormatException("I do not understand. Please repeat.");
 		
 	}
 	
