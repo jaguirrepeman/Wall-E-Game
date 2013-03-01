@@ -9,9 +9,9 @@ public class InstructionExecutionException extends Exception {
 	}
 
 	public InstructionExecutionException(String message) {
-		//super(message);
+		super(message);
 		// TODO Auto-generated constructor stub
-		this.message = message;
+
 	}
 
 	public InstructionExecutionException(Throwable cause) {
@@ -29,11 +29,5 @@ public class InstructionExecutionException extends Exception {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public String toString(){
-		return message;
-	}
 
-	
-	private String message;
 }
