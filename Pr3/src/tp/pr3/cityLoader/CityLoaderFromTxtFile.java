@@ -174,6 +174,7 @@ public class CityLoaderFromTxtFile {
         	try{
 	            Place p = parsePlace(i);
 	            places.add(p);
+	            if (i == 0) this.initialPlace = p;
 	            i++;
         	}catch (IOException e){
         		ok = false;
