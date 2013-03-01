@@ -54,7 +54,8 @@ public class RobotEngine {
 					communicateRobot(instruccion);
 				}
 				catch (WrongInstructionFormatException exc){
-					System.err.println(exc.getMessage());	
+					//System.err.println(exc.getMessage());	
+					say(exc.getMessage());
 				}
 			}
 		}
@@ -84,7 +85,8 @@ public class RobotEngine {
 		try{
 			c.execute();
 		} catch(InstructionExecutionException exc){
-			System.err.println(exc.getMessage());
+			//System.err.println(exc.getMessage());
+			System.out.println(exc.getMessage());
 		}
 	}
 	
