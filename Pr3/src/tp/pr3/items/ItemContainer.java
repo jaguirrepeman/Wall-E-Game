@@ -20,9 +20,7 @@ public class ItemContainer {
 		if(searchItem(item.getId()) != -1) return false;
 		else {
 			int length = container.length;
-			//System.out.println(length);
 			if (counter == length){
-				//ok = false; // lista llena
 				Item[] auxContainer = new Item[counter];
 				auxContainer = this.container;
 				this.container = new Item[length * 2];

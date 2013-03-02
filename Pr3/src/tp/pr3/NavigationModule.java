@@ -22,7 +22,7 @@ public class NavigationModule {
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
-		return  this.place.existItem(id);
+		return this.place.existItem(id);
 	}
 
 	public Direction getCurrentHeading() {
@@ -51,35 +51,40 @@ public class NavigationModule {
 
 				this.place = this.city.lookForStreet(this.place, direction)
 						.nextPlace(place);
-				say("Moving in direction " + this.direction.toString()
-						+ LINE_SEPARATOR + this.place.toString());
-			} else
-				throw new InstructionExecutionException("Arrggg, there is a street but it is closed!");
+
+			} else {
+				throw new InstructionExecutionException(
+						"Arrggg, there is a street but it is closed!");
+			}
 		} else
-			throw new InstructionExecutionException("There is no street in direction "
-					+ this.direction.toString());
+			throw new InstructionExecutionException(
+					"There is no street in direction "
+							+ this.direction.toString());
 	}
 
 	public Item pickItemFromCurrentPlace(String id) {
-		
+
 		return place.pickItem(id);
 	}
 
 	public void rotate(Rotation rotation) {
-		
+
 		this.direction = direction.nextDirection(rotation);
 	}
 
 	public void scanCurrentPlace() {
-		say(this.place.toString());
+		System.out.println(this.place.toString());
 
 	}
-	
-	
+
 	public void say(String mensaje) {
 		System.out.println("WALL·E says: " + mensaje);
 	}
-	
+
+	public void print(String mensaje) {
+		System.out.println(mensaje);
+	}
+
 	private static final String LINE_SEPARATOR = System
 			.getProperty("line.separator");
 	private City city;

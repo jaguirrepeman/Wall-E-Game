@@ -22,10 +22,11 @@ public class TurnInstruction implements Instruction{
 	
 	public void execute() throws InstructionExecutionException {
 			this.navigation.rotate(rotation);
-			this.engine.addFuel(-1);
-			this.engine.printRobotState();
+			this.engine.addFuel(-5);
 			System.out.println("WALL·E is looking at direction "
 					+ this.navigation.getCurrentHeading().toString());
+			this.engine.printRobotState();
+			
 	}
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
@@ -34,7 +35,6 @@ public class TurnInstruction implements Instruction{
 		if ((comando.length == 2)
 				&& ((comando[0].equalsIgnoreCase("TURN")) || (comando[0].equalsIgnoreCase("GIRAR"))
 						&& ((comando[1].equalsIgnoreCase("LEFT")) || (comando[1].equalsIgnoreCase("RIGHT"))))){
-			//Rotation rotation;
 			
 			if (comando[1].equalsIgnoreCase("RIGHT")) this.rotation = Rotation.RIGHT;
 			else if (comando[1].equalsIgnoreCase("LEFT")) this.rotation = Rotation.LEFT;

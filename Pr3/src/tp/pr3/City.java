@@ -11,10 +11,13 @@ public class City {
 	}
 
 	public void addStreet(Street street) {
+		//Si el cityMap es nulo, añadir un elemento
 		if (this.cityMap == null){
 			this.cityMap = new Street[1];
 			this.cityMap[0] = street;
-		}else{
+		}
+		//si no, se copia el cityMap en un auxiliar con un elemento más, se añade el elemento deseado y se copia al cityMap
+		else{
 			Street[] aux = new Street[this.cityMap.length + 1];
 			for (int i=0; i< this.cityMap.length; i++)
 				aux[i] = this.cityMap[i];
