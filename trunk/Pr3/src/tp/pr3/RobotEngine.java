@@ -1,6 +1,5 @@
 package tp.pr3;
 
-
 import java.util.Scanner;
 
 import tp.pr3.instructions.*;
@@ -8,7 +7,7 @@ import tp.pr3.instructions.exceptions.*;
 import tp.pr3.items.ItemContainer;
 
 public class RobotEngine {
-	
+
 	public RobotEngine(City cityMap, Place initialPlace, Direction dir) {
 
 		this.cityMap = cityMap;
@@ -17,51 +16,40 @@ public class RobotEngine {
 		this.fuel = 100;
 		this.items = new ItemContainer();
 		this.recycledMaterial = 0;
-		this.navigation = new NavigationModule (cityMap, initialPlace);
+		this.navigation = new NavigationModule(cityMap, initialPlace);
 		this.quit = false;
 	}
 
 	public void startEngine() {
-	
+
 		navigation.initHeading(direction);
 		Instruction instruccion = null;
 		String command = new String();
 		System.out.println(this.place.toString());
-		printRobotState();
 		System.out.println("WALL·E is looking at direction "
 				+ this.direction.toString());
+		printRobotState();
 
-		//prompt();
 		Scanner comando = new Scanner(System.in);
 
-		//command = comando.nextLine();
-		
-		while (!(quit|| this.place.isSpaceship() || this.fuel == 0)) {
-			//try{
-			//	instruccion = Interpreter.generateInstruction(command);
-			//	communicateRobot(instruccion);//esto donde va? aquí o abajo?
-			//}
-			//catch (WrongInstructionFormatException exc){
-			//		
-			//}
-			//communicateRobot(instruccion);
+		while (!(quit || this.place.isSpaceship() || this.fuel == 0)) {
+
 			if (!this.place.isSpaceship() && (this.fuel != 0) && !quit) {
-				// System.out.print(LINE_SEPARATOR);
+
 				prompt();
 				command = comando.nextLine();
-				try{
+				try {
 					instruccion = Interpreter.generateInstruction(command);
 					communicateRobot(instruccion);
-				}
-				catch (WrongInstructionFormatException exc){
-					//System.err.println(exc.getMessage());	
+				} catch (WrongInstructionFormatException exc) {
+
 					say(exc.getMessage());
 				}
 			}
 		}
 		comando.close();
 		if (this.place.isSpaceship())
-			say("I am at my space ship. Bye Bye");
+			say("I am at my spaceship. Bye bye");
 		else if (this.fuel == 0)
 			say("I run out of fuel. I cannot move. Shutting down...");
 		else
@@ -76,32 +64,32 @@ public class RobotEngine {
 		this.recycledMaterial += weight;
 	}
 
-	public void requestHelp(){
+	public void requestHelp() {
 		System.out.println(Interpreter.interpreterHelp());
 	}
-	
-	public void	communicateRobot(Instruction c) {
+
+	public void communicateRobot(Instruction c) {
 		c.configureContext(this, navigation, items);
-		try{
+		try {
 			c.execute();
-		} catch(InstructionExecutionException exc){
-			//System.err.println(exc.getMessage());
+			this.place = navigation.getCurrentPlace();
+		} catch (InstructionExecutionException exc) {
 			System.out.println(exc.getMessage());
 		}
 	}
-	
-	public void	printRobotState() {
+
+	public void printRobotState() {
 		if (this.fuel < 0)
 			this.fuel = 0;
-		System.out.println("   * My power is " + this.fuel);
-		System.out.println("   * My recycled material is: "
+		System.out.println("      * My power is " + this.fuel);
+		System.out.println("      * My reclycled material is "
 				+ this.recycledMaterial);
 	}
-	
-	public void	requestQuit() {
+
+	public void requestQuit() {
 		quit = true;
 	}
-		
+
 	public int getFuel() {
 		return this.fuel;
 	}
@@ -119,13 +107,12 @@ public class RobotEngine {
 	}
 
 	public void prompt(String mensaje) {
-		System.out.println("WALL·E > " + mensaje);
+		System.out.println("WALL·E> " + mensaje);
 	}
 
 	public void prompt() {
-		System.out.print("WALL·E > ");
+		System.out.print("WALL·E> ");
 	}
-
 
 	private Place place;
 	private Direction direction;

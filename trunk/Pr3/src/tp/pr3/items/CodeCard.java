@@ -32,6 +32,5 @@ public class CodeCard extends Item {
 	}
 	
 	private String code;
-	//private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
+	
 }

@@ -26,7 +26,7 @@ public class Place {
 	public String toString() {
 		if (this.items.numberOfItems() != 0)
 			return this.name + LINE_SEPARATOR + this.description
-					+ LINE_SEPARATOR + "The place contains these objects: "
+					+ LINE_SEPARATOR + "The place contains these objects:"
 					+ LINE_SEPARATOR + this.items.toString();
 		else
 			return this.name + LINE_SEPARATOR + this.description
@@ -34,31 +34,33 @@ public class Place {
 					+ "The place is empty. There are no objects to pick"
 					+ LINE_SEPARATOR;
 	}
-	public boolean existItem(String id){
-		return (this.items.searchItem(id) >= 0) ;
-		
+
+	public boolean existItem(String id) {
+		return (this.items.searchItem(id) >= 0);
+
 	}
+
 	public Item pickItem(String id) {
 
 		if (this.equals(null))
 			return null;
 		else
-			// if (this.items.searchItem(id) >= 0)
 			return this.items.pickItem(id);
-		// else
-		// return null;
+		
 	}
 
 	public boolean addItem(Item it) {
 
 		return this.items.addItem(it);
 	}
-	public boolean dropItem(Item it){
-		 if(this.items.searchItem(it.getId()) != -1) return false;
-		 else{
+
+	public boolean dropItem(Item it) {
+		if (this.items.searchItem(it.getId()) != -1)
+			return false;
+		else {
 			this.addItem(it);
 			return true;
-		 }
+		}
 	}
 
 	private static final String LINE_SEPARATOR = System

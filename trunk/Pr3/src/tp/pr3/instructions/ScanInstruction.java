@@ -16,7 +16,6 @@ public class ScanInstruction implements Instruction {
 
 	public void execute() throws InstructionExecutionException {
 		if (this.robotContainer.numberOfItems() == 0){
-			//engine.say("My inventory is empty");
 			throw new InstructionExecutionException("My inventory is empty");
 		}
 		else if (id == null)
@@ -27,7 +26,6 @@ public class ScanInstruction implements Instruction {
 			if (item3 != null)
 				engine.say(item3.toString());
 			else{
-				//engine.say("I don't have that item");
 				throw new InstructionExecutionException("I don't have that item");
 			}
 		}

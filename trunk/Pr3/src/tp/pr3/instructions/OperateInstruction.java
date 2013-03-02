@@ -15,22 +15,26 @@ public class OperateInstruction implements Instruction{
 	}
 	
 	public void execute() throws InstructionExecutionException{
-					// Item item2 = this.items.getItem(instruccion.getId());
-			// hay que revisar algunas cosas
-			int initialFuel = this.engine.getFuel();
+			
+		int initialFuel = this.engine.getFuel();
 			int initialRecMat = this.engine.getRecycledMaterial();
 
 			if (!(this.items.getItem(id) == null)) {
+				
 				if (!this.items.getItem(id).use(this.engine, this.navigation)) { // si no se puede usar aqui
+				
 					if (!this.items.getItem(id).canBeUsed()) { // si ya no se puede usar
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
+					
 						this.items.pickItem(id);
-					} else{
-						//engine.say("I have problems using the object " + id);
+					}
+					else{
+						
 						throw new InstructionExecutionException("I have problems using the object " + id);
 					}
 				} else {
+					
 					if ((initialFuel != this.engine.getFuel())
 							|| (initialRecMat != this.engine.getRecycledMaterial()))
 						this.engine.printRobotState();
@@ -42,7 +46,9 @@ public class OperateInstruction implements Instruction{
 						this.items.pickItem(id);
 					}
 				}
-			} else{
+			} 
+			else{
+				
 				navigation.say("I have problems using the object " + id);
 				throw new InstructionExecutionException("I have problems using the object "
 						+ id);
@@ -55,6 +61,7 @@ public class OperateInstruction implements Instruction{
 	}
 	
 	public Instruction parse (String cad) throws WrongInstructionFormatException{
+		
 		String[] comando = cad.split(" ");
 		if((comando[0].equalsIgnoreCase("OPERATE") || comando[0].equalsIgnoreCase("OPERAR")) && (comando.length == 2)) {
 			this.id = comando[1];

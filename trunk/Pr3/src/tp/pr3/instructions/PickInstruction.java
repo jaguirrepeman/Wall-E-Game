@@ -8,8 +8,7 @@ import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
 /**
- * En todos los <>Instruction hay que hacer en los execute un try catch y esas
- * cosas nazis
+ * 
  * 
  * @author usuario_local
  * 
@@ -22,21 +21,20 @@ public class PickInstruction implements Instruction {
 		this.robotContainer = robotContainer;
 	}
 
-	public void execute() throws InstructionExecutionException{
-			Item item = this.navigation.getCurrentPlace().pickItem(id);
-			if (item != null) {
-				if (this.robotContainer.addItem(item))
-					engine.say("I am happy! Now I have  " + id);
-				else{
-					//engine.say("I am stupid! I had already the object " + id);
-					throw new InstructionExecutionException("I am stupid! I had already the object " + id);
-				}
-			} else{
-				
-			
-				engine.say("Ooops, this place has not the object " + id);	
-				throw new InstructionExecutionException();
+	public void execute() throws InstructionExecutionException {
+		Item item = this.navigation.getCurrentPlace().pickItem(id);
+		if (item != null) {
+			if (this.robotContainer.addItem(item))
+				engine.say("I am happy! Now I have " + id);
+			else {
+				throw new InstructionExecutionException(
+						"I am stupid! I had already the object " + id);
 			}
+		} else {
+
+			engine.say("Ooops, this place has not the object " + id);
+			throw new InstructionExecutionException();
+		}
 	}
 
 	public String getHelp() {
@@ -51,8 +49,8 @@ public class PickInstruction implements Instruction {
 				.equalsIgnoreCase("COGER")) && (comando.length == 2)) {
 			this.id = comando[1];
 			return this;
-		}
-		else throw new WrongInstructionFormatException();
+		} else
+			throw new WrongInstructionFormatException();
 	}
 
 	private RobotEngine engine;
