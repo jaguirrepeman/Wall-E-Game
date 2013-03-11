@@ -85,8 +85,8 @@ public class NavigationModule {
 		System.out.println(mensaje);
 	}
 
-	private static final String LINE_SEPARATOR = System
-			.getProperty("line.separator");
+	//private static final String LINE_SEPARATOR = System
+		//	.getProperty("line.separator");
 	private City city;
 	private Place place;
 	private Direction direction;

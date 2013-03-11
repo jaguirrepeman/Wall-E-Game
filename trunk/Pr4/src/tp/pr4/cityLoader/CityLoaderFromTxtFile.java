@@ -1,5 +1,6 @@
 package tp.pr4.cityLoader;
 
+//import java.io.WrongCityFormatException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StreamTokenizer;
@@ -11,55 +12,66 @@ import tp.pr4.Place;
 import tp.pr4.Street;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 import tp.pr4.items.*;
+import tp.pr4.cityLoader.cityLoaderExceptions.*;
 
 public class CityLoaderFromTxtFile {
 	public CityLoaderFromTxtFile() {
 
 	}
 
-	private void forceActualString(String expected) throws IOException {
-		try {
-			String value = stk.sval;
-			if ((value == null) || (!value.equals(expected))) {
-				throw new IOException("Error, se esperaba " + expected
-						+ " en la línea " + stk.lineno() + " y se encontró "
-						+ stk.sval);
-			}
-		} catch (IOException e) {
-			throw e;
+	private void forceActualString(String expected) throws WrongCityFormatException {
+		
+		String value = stk.sval;
+		if ((value == null) || (!value.equals(expected))) {
+			throw new WrongCityFormatException("Error, se esperaba " + expected
+					+ " en la línea " + stk.lineno() + " y se encontró "
+					+ stk.sval);
 		}
+	
 	}
 
-	private String forceString() throws IOException {
-		stk.nextToken();
+	private String forceString() throws WrongCityFormatException {
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		if (stk.sval != null)
 			return stk.sval;
 		else
-			throw new IOException();
+			throw new WrongCityFormatException();
 
 	}
 
-	private String getStringValue() throws IOException {
+	private String getStringValue() throws WrongCityFormatException {
 		if (stk.sval != null)
 			return stk.sval;
-		throw new IOException();
+		throw new WrongCityFormatException();
 	}
 
-	private int forceNumber() throws IOException {
-		stk.nextToken();
+	private int forceNumber() throws WrongCityFormatException {
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		if (stk.ttype == StreamTokenizer.TT_NUMBER)
 			return (int) stk.nval;
 		else
-			throw new IOException();
+			throw new WrongCityFormatException();
 
 	}
 
-	private Direction forceDirection() throws IOException {
-		stk.nextToken();
+	private Direction forceDirection() throws WrongCityFormatException {
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		String value = stk.sval;
 
 		if (value == null)
-			throw new IOException();
+			throw new WrongCityFormatException();
 		else if (value.equalsIgnoreCase("EAST"))
 			return Direction.EAST;
 		else if (value.equalsIgnoreCase("NORTH"))
@@ -71,13 +83,17 @@ public class CityLoaderFromTxtFile {
 		else if (value.equalsIgnoreCase("WEST"))
 			return Direction.WEST;
 		else
-			throw new IOException();
+			throw new WrongCityFormatException();
 
 	}
 
-	private boolean forceString(String ex1, String ex2) throws IOException {
+	private boolean forceString(String ex1, String ex2) throws WrongCityFormatException {
 		String ex;
-		stk.nextToken();
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		ex = stk.sval;
 		if (ex != null) {
 			if (ex.equalsIgnoreCase(ex1))
@@ -85,52 +101,64 @@ public class CityLoaderFromTxtFile {
 			else if (ex.equalsIgnoreCase(ex2))
 				return true;
 			else
-				throw new IOException();
+				throw new WrongCityFormatException();
 		} else
-			throw new IOException();
+			throw new WrongCityFormatException();
 	}
 
-	private void forceString(String expected) throws IOException {
+	private void forceString(String expected) throws WrongCityFormatException {
 
-		stk.nextToken();
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		String value = stk.sval;
 		if ((value == null) || (!value.equals(expected))) {
-			throw new IOException("Error, se esperaba " + expected
+			throw new WrongCityFormatException("Error, se esperaba " + expected
 					+ " en la línea " + stk.lineno() + " y se encontró "
 					+ stk.sval);
 		}
 
 	}
 
-	private void forceNumber(int expected) throws IOException {
-		stk.nextToken();
+	private void forceNumber(int expected) throws WrongCityFormatException {
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		if ((stk.ttype != StreamTokenizer.TT_NUMBER)) {
-			throw new IOException("Error, se esperaba " + expected
+			throw new WrongCityFormatException("Error, se esperaba " + expected
 					+ " en la línea " + stk.lineno() + " y se encontró "
 					+ stk.sval);
 		} else if (((int) stk.nval != expected)) {
-			throw new IOException("Error, se esperaba " + expected
+			throw new WrongCityFormatException("Error, se esperaba " + expected
 					+ " en la línea " + stk.lineno() + " y se encontró "
 					+ stk.sval);
 		}
 
 	}
 
-	private int checkNumber() throws IOException { //
-		stk.nextToken();
+	private int checkNumber() throws WrongCityFormatException { //
+		try {
+			stk.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
 		int num = (int) stk.nval;
 		if ((num >= places.size()) || num < 0)
-			throw new IOException();
+			throw new WrongCityFormatException();
 		// el numero siguiente debe ser el numero de un place
-		return num;
+		return num; 
 
 	}
 
-	private Place parsePlace(int num) throws IOException {
+	private Place parsePlace(int num) throws WrongCityFormatException {
 		boolean spaceship;
 
 		if (!getStringValue().equals("place"))
-			throw new IOException();
+			throw new WrongCityFormatException();
 		forceNumber(num);
 		String name = forceString();
 		String desc = forceString();
@@ -140,33 +168,29 @@ public class CityLoaderFromTxtFile {
 
 	}
 
-	private Street parseStreet(int num) throws IOException {
+	private Street parseStreet(int num) throws WrongCityFormatException {
 		boolean open = true;
 		String key = null;
 		int initPlace, targetPlace;
-		try {
-			Direction dir;
-			forceActualString("street");
-			forceNumber(num);
-			forceString("place");
-			initPlace = checkNumber();
-			dir = forceDirection();//
-			forceString("place");
-			targetPlace = checkNumber();
-			open = forceString("closed", "open");
-			if (!open)
-				key = forceString();
-			Street ret = new Street(places.get(initPlace), dir,
-					places.get(targetPlace), open, key);
-			return ret;
-		} catch (IOException e) {
-
-		}
-		throw new IOException();
+			
+		Direction dir;
+		forceActualString("street");
+		forceNumber(num);
+		forceString("place");
+		initPlace = checkNumber();
+		dir = forceDirection();//
+		forceString("place");
+		targetPlace = checkNumber();
+		open = forceString("closed", "open");
+		if (!open)
+			key = forceString();
+		Street ret = new Street(places.get(initPlace), dir,
+				places.get(targetPlace), open, key);
+		return ret;
 
 	}
 
-	private Item parseItem(int num) throws IOException {
+	private Item parseItem(int num) throws WrongCityFormatException {
 		Item ret;
 		int number;
 
@@ -181,7 +205,7 @@ public class CityLoaderFromTxtFile {
 		}
 
 		else
-			throw new IOException();
+			throw new WrongCityFormatException();
 		forceString();
 		number = checkNumber();
 		this.places.get(number).addItem(ret);
@@ -189,7 +213,7 @@ public class CityLoaderFromTxtFile {
 
 	}
 
-	private Garbage leerGarbage(int num) throws IOException {
+	private Garbage leerGarbage(int num) throws WrongCityFormatException {
 		String id, description;
 		int recycledMaterial;
 		forceNumber(num);
@@ -200,7 +224,7 @@ public class CityLoaderFromTxtFile {
 
 	}
 
-	private CodeCard leerCodecard(int num) throws IOException {
+	private CodeCard leerCodecard(int num) throws WrongCityFormatException {
 		String id, description, code;
 		forceNumber(num);
 		id = forceString();
@@ -210,7 +234,7 @@ public class CityLoaderFromTxtFile {
 
 	}
 
-	private Fuel leerFuel(int num) throws IOException {
+	private Fuel leerFuel(int num) throws WrongCityFormatException {
 		String id, description;
 		int power, times;
 		forceNumber(num);
@@ -222,79 +246,74 @@ public class CityLoaderFromTxtFile {
 
 	}
 
-	private void parsePlaces() throws IOException {
+	private void parsePlaces() throws WrongCityFormatException {
 		int i = 0;
-		boolean ok = true;
 		forceString("BeginPlaces");
-		stk.nextToken();
-		while (!getStringValue().equalsIgnoreCase("EndPlaces") && ok) {
-			try {
-				Place p = parsePlace(i);
-				places.add(p);
-				stk.nextToken();
-				i++;
-			} catch (IOException e) {
-				ok = false;
+		try {
+			stk.nextToken();
+			
+			while (!getStringValue().equalsIgnoreCase("EndPlaces") ) {
+				
+					Place p = parsePlace(i);
+					places.add(p);
+					stk.nextToken();
+					i++;
 			}
-
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 		}
-		if (!getStringValue().equalsIgnoreCase("EndPlaces"))
-			throw new IOException();
+		forceActualString("EndPlaces");
+		//if (!getStringValue().equalsIgnoreCase("EndPlaces"))
+		//	throw new WrongCityFormatException();
 	}
 
-	private void parseStreets() throws IOException {
+	private void parseStreets() throws WrongCityFormatException {
 		int i = 0;
-		boolean ok = true;
 		forceString("BeginStreets");
-		stk.nextToken();
-		while (!getStringValue().equalsIgnoreCase("EndStreets") && ok) {
-			try {
-				Street str = parseStreet(i);
-				this.aCity.addStreet(str);
-				stk.nextToken();
-				i++;
-
-			} catch (IOException e) {
-				ok = false;
+		try {
+			stk.nextToken();
+		
+			while (!getStringValue().equalsIgnoreCase("EndStreets")) {
+				
+					Street str = parseStreet(i);
+					this.aCity.addStreet(str);
+					stk.nextToken();
+					i++;
+	
 			}
-
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 		}
 		forceActualString("EndStreets");
 	}
 
-	private void parseItems() throws IOException {
+	private void parseItems() throws WrongCityFormatException {
 		int i = 0;
-		boolean ok = true;
 		forceString("BeginItems");
-		stk.nextToken();
-		while (!getStringValue().equalsIgnoreCase("EndItems") && ok) {
-			try {
+		try {
+			stk.nextToken();		
+			
+			while (!getStringValue().equalsIgnoreCase("EndItems")) {
 				parseItem(i);
 				stk.nextToken();
 				i++;
-			} catch (IOException e) {
-				ok = false;
 			}
-
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 		}
 		forceActualString("EndItems");
 
 	}
 
-	public City loadCity(java.io.InputStream file) throws /* java.io.IOException */WrongCityFormatException/**/{
+	public City loadCity(java.io.InputStream file) throws WrongCityFormatException {
 		stk = new StreamTokenizer(new InputStreamReader(file));
 		stk.wordChars('\u0021', '\u007E');
 		stk.quoteChar('"');
-		try {
 			forceString("BeginCity");
 			parsePlaces();
 			parseStreets();
 			parseItems();
 			forceString("EndCity");
-
-		} catch (IOException exc) {
-			throw new WrongCityFormatException();
-		}
 		return aCity;
 
 	}
