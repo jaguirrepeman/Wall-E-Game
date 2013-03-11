@@ -2,7 +2,6 @@ package tp.pr4;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
@@ -208,7 +207,7 @@ public class Main {
 		if (args.length == 0 || args.length > 1) {
 
 			System.err.println("Bad params." + Interpreter.LINE_SEPARATOR
-					+ "Usage: java tp.pr3.Main <mapfile>"
+					+ "Usage: "+ Main.class.getCanonicalName() + "<mapfile>"
 					+ Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR
 					+ "<mapfile> : file with the description of the city.");
 			System.exit(1);
@@ -226,7 +225,7 @@ public class Main {
 			System.err
 					.println("Error reading the map file: noExiste.txt (No existe el fichero o el directorio)");
 			System.exit(2);
-		} catch (IOException e) {
+		} catch (WrongCityFormatException e) {
 
 			System.err.println("Error reading the map file: " + args[0]
 					+ " (La sintaxis del fichero no es correcta)");
