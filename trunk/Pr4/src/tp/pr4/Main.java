@@ -198,12 +198,12 @@ public class Main {
 		// crate the engine of the game
 		RobotEngine engine = new RobotEngine(new City(streets), places[0],
 				Direction.NORTH);
-		// plays
+		// -lays
 		engine.startEngine();
 
 	}
 
-	public static void main(String[] args) {
+	public static void mainAntiguo(String[] args) {
 		if (args.length == 0 || args.length > 1) {
 
 			System.err.println("Bad params." + Interpreter.LINE_SEPARATOR
@@ -235,5 +235,8 @@ public class Main {
 		System.exit(0);
 
 	}
-
+	public static void main(String[] args){
+		
+	}
+	}
 }
