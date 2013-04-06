@@ -16,6 +16,7 @@ public class MainWindow extends JFrame {
 		RobotPanel robotPan = new RobotPanel();
 		this.add(robotPan, BorderLayout.NORTH);
 		//setVisible(true);
+		this.add(new NavigationPanel(), BorderLayout.SOUTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.engine = engine;
 	}
