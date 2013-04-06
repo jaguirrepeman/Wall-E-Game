@@ -13,6 +13,7 @@ public class NavigationPanel extends JPanel {
 		JLabel mapViewPanel = new JLabel();
 		this.add(mapViewPanel, BorderLayout.NORTH);
 		//setVisible(true);
+		//JScrollPanel
 		JTextArea text = new JTextArea();
 		this.add(text, BorderLayout.SOUTH);
 	}
