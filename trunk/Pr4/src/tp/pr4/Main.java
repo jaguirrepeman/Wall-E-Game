@@ -3,6 +3,11 @@ package tp.pr4;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import tp.pr4.City;
+import tp.pr4.Direction;
+import tp.pr4.Place;
+import tp.pr4.RobotEngine;
+import tp.pr4.Street;
 import tp.pr4.Gui.MainWindow;
 import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
@@ -225,9 +230,20 @@ public class Main {
 		System.exit(0);
 
 	}
-	public static void main(String[] args) {
-		
-		
+	public static void main(String[] args){
+		// create the different places
+		Place[] places = createPlaces();
+		// create the different Streets generating the map
+		Street[] streets = createStreets(places);
+		// crate the engine of the game
+		RobotEngine engine = new RobotEngine(new City(streets), places[0],
+				Direction.NORTH);
+		// plays
+		MainWindow window = new MainWindow(engine);
+		window.setVisible(true);
+		engine.startEngine();
+
+
 	}
 	
 }
