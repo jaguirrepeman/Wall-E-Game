@@ -3,6 +3,7 @@ package tp.pr4;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import tp.pr4.Gui.MainWindow;
 import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 import tp.pr4.items.CodeCard;
@@ -189,21 +190,8 @@ public class Main {
 	 * @param args
 	 */
 
-	public static void mainAntiguo(String[] args) {
 
-		// create the different places
-		Place[] places = createPlaces();
-		// create the different Streets generating the map
-		Street[] streets = createStreets(places);
-		// crate the engine of the game
-		RobotEngine engine = new RobotEngine(new City(streets), places[0],
-				Direction.NORTH);
-		// -lays
-		engine.startEngine();
-
-	}
-
-	public static void mainAntiguo(String[] args) {
+	public static void mainA(String[] args) {
 		if (args.length == 0 || args.length > 1) {
 
 			System.err.println("Bad params." + Interpreter.LINE_SEPARATOR
@@ -220,6 +208,8 @@ public class Main {
 			RobotEngine WallE = new RobotEngine(city,
 					cityLoader.getInitialPlace(), Direction.NORTH);
 			WallE.startEngine();
+			MainWindow window = new MainWindow(WallE);
+			window.setVisible(true);
 		} catch (FileNotFoundException e) {
 
 			System.err
@@ -235,8 +225,9 @@ public class Main {
 		System.exit(0);
 
 	}
-	public static void main(String[] args){
+	public static void main(String[] args) {
+		
 		
 	}
-	}
+	
 }
