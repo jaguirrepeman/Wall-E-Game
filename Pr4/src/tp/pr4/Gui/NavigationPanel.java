@@ -11,8 +11,10 @@ import javax.swing.JTextArea;
 public class NavigationPanel extends JPanel {
 	public NavigationPanel() {
 		this.setLayout(new BorderLayout(10, 10));
-		ImageIcon icon = createImageIcon("gui/images/walleNorth.png", "WALLE");
+		//ejemplo de como meter imagenes
+		ImageIcon icon = createImageIcon("images/walleNorth.png", "WALLE");
 		JLabel mapViewPanel = new JLabel(icon);
+		//mapViewPanel.setIcon(icon); 
 		this.add(mapViewPanel, BorderLayout.NORTH);
 		setVisible(true);
 		// JScrollPanel
