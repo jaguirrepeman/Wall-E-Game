@@ -10,9 +10,9 @@ import javax.swing.JTextArea;
 public class NavigationPanel extends JPanel {
 	public NavigationPanel(){
 		this.setLayout(new BorderLayout(10, 10));
-		JLabel mapViewPanel = new JLabel();
+		JLabel mapViewPanel = new JLabel("Aquí va la imagen del puto WALLE");
 		this.add(mapViewPanel, BorderLayout.NORTH);
-		//setVisible(true);
+		setVisible(true);
 		//JScrollPanel
 		JTextArea text = new JTextArea();
 		this.add(text, BorderLayout.SOUTH);
