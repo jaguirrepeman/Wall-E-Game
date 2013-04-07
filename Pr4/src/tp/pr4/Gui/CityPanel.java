@@ -34,6 +34,11 @@ public class CityPanel extends JPanel{
 		//aqui se crea la ciudad que se mostrara en la ventana
 		JPanel cityMap = new JPanel();
 		cityMap.setLayout(new GridLayout(11, 11));
+		for (int i = 0; i< 121; i++) cityMap.add(new PlaceCell());
+		PlaceCell[] places;
+		PlaceCell place = new PlaceCell();
+		//place.setActual(true);
+		//cityMap.add(place);
 		return cityMap;
 	}
 }
