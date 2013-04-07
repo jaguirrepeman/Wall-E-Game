@@ -6,7 +6,7 @@ import javax.swing.JButton;
 
 public class PlaceCell extends JButton {
 	public PlaceCell(){
-		//hay que averigüar como leches se pone el color de fondo para el boton
+		//con JColorChooser parece que se cambia el color, hay que mirarlo
 		actual = true;
 		this.setFocusPainted(actual);
 		
