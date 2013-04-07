@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{
 	public CityPanel() {
@@ -33,6 +34,8 @@ public class CityPanel extends JPanel{
 	public JPanel setCity(){
 		//aqui se crea la ciudad que se mostrara en la ventana
 		JPanel cityMap = new JPanel();
+		TitledBorder titled = new TitledBorder("City Map");
+		cityMap.setBorder(titled);
 		cityMap.setLayout(new GridLayout(11, 11));
 		for (int i = 0; i< 121; i++) cityMap.add(new PlaceCell());
 		PlaceCell[] places;
