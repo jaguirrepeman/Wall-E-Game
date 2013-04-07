@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 import tp.pr4.RobotEngine;
 @SuppressWarnings("serial")
@@ -12,7 +13,6 @@ public class MainWindow extends JFrame {
 	public MainWindow(RobotEngine engine){
 		super("WALL·E");
 		this.setSize(1080, 720);
-		
 		this.setLayout(new BorderLayout(10, 10));
 		RobotPanel robotPan = new RobotPanel(engine);
 		robotPan.setPreferredSize(new Dimension(200, 200));
