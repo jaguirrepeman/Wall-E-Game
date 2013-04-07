@@ -7,16 +7,19 @@ import java.awt.LayoutManager;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import tp.pr4.RobotEngine;
+
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel {
 
-	public RobotPanel() {
+	public RobotPanel(RobotEngine engine) {
 		this.setLayout(new BorderLayout(10, 10));
 
 		// setVisible(true);
@@ -30,7 +33,11 @@ public class RobotPanel extends JPanel {
 
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
-
+		JFormattedTextField robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+		robotInfo.setEditable(false);
+		statusPanel.add(robotInfo);
+		this.add(statusPanel, BorderLayout.CENTER);
+		
 		JScrollPane tabla = new JScrollPane();
 		dataPanel.add(tabla, BorderLayout.SOUTH);
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
