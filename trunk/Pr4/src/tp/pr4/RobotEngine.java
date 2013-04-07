@@ -2,6 +2,7 @@ package tp.pr4;
 
 import java.util.Scanner;
 
+import tp.pr4.Gui.*;
 import tp.pr4.instructions.*;
 import tp.pr4.instructions.exceptions.*;
 import tp.pr4.items.ItemContainer;
@@ -114,6 +115,18 @@ public class RobotEngine {
 		System.out.print("WALL·E> ");
 	}
 
+	public void setGUIWindow(MainWindow mainWindow){
+		
+	}
+	
+	public void setRobotPanel(RobotPanel robotPanel){
+		
+	}
+	
+	public void setNavigationPanel(NavigationPanel navPanel){
+		
+	}
+	
 	private Place place;
 	private Direction direction;
 	private City cityMap;
