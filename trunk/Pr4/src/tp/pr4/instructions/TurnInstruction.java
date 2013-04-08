@@ -8,6 +8,20 @@ import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
 public class TurnInstruction implements Instruction{
+	
+	public TurnInstruction(String rotacion){
+		try {
+			this.parse("Turn" + " " + rotacion);
+		} catch (WrongInstructionFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public TurnInstruction() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.engine = engine;
