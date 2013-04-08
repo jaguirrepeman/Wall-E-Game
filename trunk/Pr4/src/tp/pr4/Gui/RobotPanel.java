@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import tp.pr4.Direction;
 import tp.pr4.RobotEngine;
 import tp.pr4.Rotation;
+import tp.pr4.instructions.MoveInstruction;
 
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel {
@@ -32,7 +35,7 @@ public class RobotPanel extends JPanel {
 
 		// setVisible(true);
 		// JScrollPanel
-		JPanel instructionPanel = createInstructionPanel();
+		JPanel instructionPanel = createInstructionPanel(engine);
 		this.add(instructionPanel, BorderLayout.WEST);
 
 		TitledBorder titled = new TitledBorder("Robot Info");
@@ -74,13 +77,139 @@ public class RobotPanel extends JPanel {
 		this.add(dataPanel, BorderLayout.CENTER);
 	}
 
-	public JPanel createInstructionPanel() {
+	public JPanel createInstructionPanel(final RobotEngine engine) {
 		JPanel instructionPanel = new JPanel();
 		TitledBorder titled = new TitledBorder("Instructions");
 		instructionPanel.setBorder(titled);
 		instructionPanel.setLayout(new GridLayout(4, 2, 3, 3));
-		JButton move = new JButton("MOVE"), quit = new JButton("QUIT"), turn = new JButton("TURN"), 
-				pick = new JButton("PICK"), drop = new JButton("DROP"), operate = new JButton("OPERATE");
+		JButton move = new JButton("MOVE") {
+			{
+				this.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new MoveInstruction());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+				});
+			}
+			
+		};
+		
+		
+		JButton quit = new JButton("QUIT"){
+			{
+				this.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new MoveInstruction());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+				});
+			}
+			
+		};
+		JButton turn = new JButton("TURN"){
+			{
+				this.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new MoveInstruction());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+				});
+			}
+			
+		};
+		JButton	pick = new JButton("PICK"){
+			{
+				this.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new MoveInstruction());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+				});
+			}
+			
+		};
+		JButton drop = new JButton("DROP"){
+			{
+				this.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new MoveInstruction());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+				});
+			}
+			
+		};
+		JButton operate = new JButton("OPERATE"){
+			{
+				this.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new MoveInstruction());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+				});
+			}
+			
+		};
 		JTextField objectToPick = new JTextField();
 		String[] rotationString = {Rotation.LEFT.toString(), Rotation.RIGHT.toString()};
 		JComboBox directionToTurn = new JComboBox(rotationString);

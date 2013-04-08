@@ -1,5 +1,6 @@
 package tp.pr4;
 
+import tp.pr4.Gui.NavigationPanel;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.items.Item;
 
@@ -83,6 +84,10 @@ public class NavigationModule {
 
 	public void print(String mensaje) {
 		System.out.println(mensaje);
+	}
+	
+	public void setNavigationPanel(NavigationPanel navPanel){
+		
 	}
 
 	//private static final String LINE_SEPARATOR = System
