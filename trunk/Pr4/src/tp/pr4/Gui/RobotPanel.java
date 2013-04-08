@@ -1,7 +1,6 @@
 package tp.pr4.Gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -54,16 +53,13 @@ public class RobotPanel extends JPanel {
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
 		statusPanel.add(robotInfo);
-
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 		
 		//JScrollPane tabla = new JScrollPane();
 
         String[] columnNames = {"id", "Description"};
-
-        Object[][] data = {
-	    {"Newspapers", "News on sport"},
-        };
+       
+        Object[][] data = {    {"Newspapers", "News on sport"}    };
 
         final JTable table = new JTable(data, columnNames);
         table.setEnabled(false);	//para no poder modificar la tabla
@@ -183,7 +179,8 @@ public class RobotPanel extends JPanel {
 		instructionPanel.add(operate);
 		return instructionPanel;
 
-	}OyenteRaton ratonPerez;
+	}
+	OyenteRaton ratonPerez;
 	String rotacion;
 	JComboBox directionToTurn;
 }
