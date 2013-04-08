@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,7 +16,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import tp.pr4.Direction;
 import tp.pr4.RobotEngine;
+import tp.pr4.Rotation;
 
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel {
@@ -51,15 +54,17 @@ public class RobotPanel extends JPanel {
 	}
 
 	public JPanel createInstructionPanel() {
-
 		JPanel instructionPanel = new JPanel();
 		TitledBorder titled = new TitledBorder("Instructions");
 		instructionPanel.setBorder(titled);
-		instructionPanel.setLayout(new GridLayout(4, 2));
+		instructionPanel.setLayout(new GridLayout(4, 2, 3, 3));
 		JButton move = new JButton("MOVE"), quit = new JButton("QUIT"), turn = new JButton("TURN"), 
 				pick = new JButton("PICK"), drop = new JButton("DROP"), operate = new JButton("OPERATE");
 		JTextField objectToPick = new JTextField();
-		JComboBox directionToTurn = new JComboBox();
+		String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+		JComboBox directionToTurn = new JComboBox(petStrings);
+		directionToTurn.setSelectedIndex(4);
+		directionToTurn.addActionListener((ActionListener) this);
 		instructionPanel.add(move);
 		instructionPanel.add(quit);
 		instructionPanel.add(turn);
