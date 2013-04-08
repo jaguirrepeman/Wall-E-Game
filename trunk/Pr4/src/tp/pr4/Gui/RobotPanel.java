@@ -61,9 +61,10 @@ public class RobotPanel extends JPanel {
 		JButton move = new JButton("MOVE"), quit = new JButton("QUIT"), turn = new JButton("TURN"), 
 				pick = new JButton("PICK"), drop = new JButton("DROP"), operate = new JButton("OPERATE");
 		JTextField objectToPick = new JTextField();
-		String[] directions = {"RIGHT", "LEFT"};
-		JComboBox directionToTurn = new JComboBox(directions);
+		String[] rotationString = {Rotation.LEFT.toString(), Rotation.RIGHT.toString()};
+		JComboBox directionToTurn = new JComboBox(rotationString);
 		directionToTurn.setSelectedIndex(1);
+
 		instructionPanel.add(move);
 		instructionPanel.add(quit);
 		instructionPanel.add(turn);
