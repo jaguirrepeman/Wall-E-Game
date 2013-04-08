@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 public class CityPanel extends JPanel{
 	public CityPanel() {
 		
-		this.setLayout(new BorderLayout(10, 10));
+		this.setLayout(new BorderLayout());
 		ImageIcon icon = createImageIcon("images/walleNorth.png", "WALLE");
 		JLabel walle = new JLabel(icon);
 		this.add(walle, BorderLayout.WEST);
