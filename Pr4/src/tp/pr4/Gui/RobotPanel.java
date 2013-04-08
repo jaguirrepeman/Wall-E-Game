@@ -64,7 +64,6 @@ public class RobotPanel extends JPanel {
 		String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
 		JComboBox directionToTurn = new JComboBox(petStrings);
 		directionToTurn.setSelectedIndex(4);
-		//directionToTurn.addActionListener((ActionListener) this);
 		instructionPanel.add(move);
 		instructionPanel.add(quit);
 		instructionPanel.add(turn);
