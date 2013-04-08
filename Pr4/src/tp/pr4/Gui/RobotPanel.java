@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -25,7 +26,7 @@ import javax.swing.border.TitledBorder;
 import tp.pr4.Direction;
 import tp.pr4.RobotEngine;
 import tp.pr4.Rotation;
-import tp.pr4.instructions.MoveInstruction;
+import tp.pr4.instructions.*;
 
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel {
@@ -75,6 +76,9 @@ public class RobotPanel extends JPanel {
 		dataPanel.setBorder(titled);
 		
 		this.add(dataPanel, BorderLayout.CENTER);
+		
+		
+		rotacion = directionToTurn.getSelectedItem().toString();
 	}
 
 	public JPanel createInstructionPanel(final RobotEngine engine) {
@@ -111,7 +115,7 @@ public class RobotPanel extends JPanel {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new MoveInstruction());
+						engine.communicateRobot(new QuitInstruction());
 					}
 
 					@Override
@@ -132,7 +136,7 @@ public class RobotPanel extends JPanel {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new MoveInstruction());
+						engine.communicateRobot(new TurnInstruction(rotacion));
 					}
 
 					@Override
@@ -153,7 +157,7 @@ public class RobotPanel extends JPanel {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new MoveInstruction());
+						engine.communicateRobot(new PickInstruction());
 					}
 
 					@Override
@@ -174,7 +178,7 @@ public class RobotPanel extends JPanel {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new MoveInstruction());
+						engine.communicateRobot(new DropInstruction());
 					}
 
 					@Override
@@ -195,7 +199,7 @@ public class RobotPanel extends JPanel {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new MoveInstruction());
+						engine.communicateRobot(new OperateInstruction());
 					}
 
 					@Override
@@ -212,9 +216,15 @@ public class RobotPanel extends JPanel {
 		};
 		JTextField objectToPick = new JTextField();
 		String[] rotationString = {Rotation.LEFT.toString(), Rotation.RIGHT.toString()};
-		JComboBox directionToTurn = new JComboBox(rotationString);
+		directionToTurn = new JComboBox(rotationString);
 		directionToTurn.setSelectedIndex(1);
-
+		directionToTurn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rotacion = directionToTurn.getSelectedItem().toString();
+				//System.out.println(rotacion);
+			}
+		});
 		instructionPanel.add(move);
 		instructionPanel.add(quit);
 		instructionPanel.add(turn);
@@ -225,5 +235,7 @@ public class RobotPanel extends JPanel {
 		instructionPanel.add(operate);
 		return instructionPanel;
 
-	}
+	}OyenteRaton ratonPerez;
+	String rotacion;
+	JComboBox directionToTurn;
 }
