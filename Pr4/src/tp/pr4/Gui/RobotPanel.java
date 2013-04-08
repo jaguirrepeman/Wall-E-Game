@@ -13,6 +13,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -49,8 +50,8 @@ public class RobotPanel extends JPanel {
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 		
 		JScrollPane tabla = new JScrollPane();
-		
-		
+		JSeparator separador = new JSeparator();
+		separador.add(comp)
 		
 		
 		dataPanel.add(tabla, BorderLayout.SOUTH);
