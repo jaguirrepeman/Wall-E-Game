@@ -1,6 +1,7 @@
 package tp.pr4.Gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -50,8 +52,20 @@ public class RobotPanel extends JPanel {
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 		
 		JScrollPane tabla = new JScrollPane();
-		JSeparator separador = new JSeparator();
-		separador.add(comp)
+
+        String[] columnNames = {"id", "Description"};
+
+        Object[][] data = {
+	    {"Kathy", "Smith"},
+	    {"John", "Doe"},
+	    {"Sue", "Black"},
+	    {"Jane", "White"},
+	    {"Joe", "Brown"}
+        };
+
+        final JTable table = new JTable(data, columnNames);
+        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        table.setFillsViewportHeight(true);
 		
 		
 		dataPanel.add(tabla, BorderLayout.SOUTH);
