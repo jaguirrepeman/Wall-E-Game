@@ -2,6 +2,7 @@ package tp.pr4.Gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
@@ -38,9 +39,9 @@ public class RobotPanel extends JPanel {
 
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
-		
+		Font font = new Font("Verdana", Font.ITALIC, 12);
 		JFormattedTextField robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
-	
+		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
 		statusPanel.add(robotInfo);
 
