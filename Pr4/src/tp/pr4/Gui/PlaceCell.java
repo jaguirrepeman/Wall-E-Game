@@ -4,6 +4,8 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
+import tp.pr4.Place;
+
 public class PlaceCell extends JButton {
 	public PlaceCell(){
 		//con JColorChooser parece que se cambia el color, hay que mirarlo
@@ -18,7 +20,7 @@ public class PlaceCell extends JButton {
 
 		return actual;
 	}
-
+	
 
 	public void setActual(boolean actual) {
 		this.actual = actual;
@@ -26,4 +28,5 @@ public class PlaceCell extends JButton {
 
 
 	private boolean actual;
+	private Place place;
 }
