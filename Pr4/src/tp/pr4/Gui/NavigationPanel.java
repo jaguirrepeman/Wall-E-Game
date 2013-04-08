@@ -23,6 +23,7 @@ public class NavigationPanel extends JPanel {
 		// JScrollPanel
 		TitledBorder titled = new TitledBorder("Log");
 		JTextArea text = new JTextArea("Aqui ira el texto y esas mierdas");
+		text.setEditable(false);
 		JScrollPane scroller = new JScrollPane(text);
         scroller.setPreferredSize(new Dimension(100,100));
         scroller.setBorder(titled);
