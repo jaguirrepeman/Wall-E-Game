@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
+import tp.pr4.Gui.CloseApp;
+
 @SuppressWarnings("serial")
 
 public class gui extends JFrame {
@@ -27,7 +29,7 @@ public class gui extends JFrame {
 		JButton button = new JButton("STOP");
 		this.add(button);
 		
-		OyenteBoton oBoton = new OyenteBoton();
+		CloseApp oBoton = new CloseApp();
 		button.addActionListener(oBoton);
 		//this.add(boton);
 		//this.add(boton2);
