@@ -1,6 +1,7 @@
 package tp.pr4.Gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -65,7 +66,8 @@ public class RobotPanel extends JPanel {
         };
 
         final JTable table = new JTable(data, columnNames);
-        table.setEnabled(false);
+        table.setEnabled(false);	//para no poder modificar la tabla
+        table.setOpaque(false); //con esto se consigue que el fondo de la tabla este en gris
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
 		
