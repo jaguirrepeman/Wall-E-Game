@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,7 +31,8 @@ import tp.pr4.Rotation;
 import tp.pr4.instructions.*;
 
 @SuppressWarnings("serial")
-public class RobotPanel extends JPanel {
+public class RobotPanel extends JPanel 
+						implements PropertyChangeListener {
 
 	public RobotPanel(RobotEngine engine) {
 		this.setLayout(new BorderLayout(10, 10));
@@ -48,10 +51,11 @@ public class RobotPanel extends JPanel {
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		JFormattedTextField robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+		robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
+		robotInfo.addPropertyChangeListener("value", this);
 		statusPanel.add(robotInfo);
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 		
@@ -75,6 +79,13 @@ public class RobotPanel extends JPanel {
 		
 		
 		rotacion = directionToTurn.getSelectedItem().toString();
+	}
+	
+	//no funciona
+	public void propertyChange(PropertyChangeEvent evt, RobotEngine engine) {
+
+		robotInfo.setValue("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+		
 	}
 
 	public JPanel createInstructionPanel(final RobotEngine engine) {
@@ -180,7 +191,13 @@ public class RobotPanel extends JPanel {
 		return instructionPanel;
 
 	}
-	OyenteRaton ratonPerez;
-	String rotacion;
-	JComboBox directionToTurn;
+	private String rotacion;
+	private JComboBox directionToTurn;
+	JFormattedTextField robotInfo;
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
