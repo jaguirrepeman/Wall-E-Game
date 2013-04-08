@@ -39,8 +39,9 @@ public class RobotPanel extends JPanel {
 
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
-		Font font = new Font("Verdana", Font.ITALIC, 12);
+		Font font = new Font(null, Font.BOLD, 12);
 		JFormattedTextField robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
 		statusPanel.add(robotInfo);
@@ -48,9 +49,13 @@ public class RobotPanel extends JPanel {
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 		
 		JScrollPane tabla = new JScrollPane();
+		
+		
+		
+		
 		dataPanel.add(tabla, BorderLayout.SOUTH);
 		dataPanel.setBorder(titled);
-
+		
 		this.add(dataPanel, BorderLayout.CENTER);
 	}
 
