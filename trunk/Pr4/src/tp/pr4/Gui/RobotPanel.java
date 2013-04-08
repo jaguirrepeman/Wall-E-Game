@@ -41,6 +41,7 @@ public class RobotPanel extends JPanel {
 
 		TitledBorder titled = new TitledBorder("Robot Info");
 		JPanel dataPanel = new JPanel();
+		dataPanel.setLayout(new BorderLayout());
 		// aqui seguramente habria que hacer lo de las clases internas que sale
 		// en los apunntes
 
@@ -55,24 +56,21 @@ public class RobotPanel extends JPanel {
 
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 		
-		JScrollPane tabla = new JScrollPane();
+		//JScrollPane tabla = new JScrollPane();
 
         String[] columnNames = {"id", "Description"};
 
         Object[][] data = {
-	    {"Kathy", "Smith"},
-	    {"John", "Doe"},
-	    {"Sue", "Black"},
-	    {"Jane", "White"},
-	    {"Joe", "Brown"}
+	    {"Newspapers", "News on sport"},
         };
 
         final JTable table = new JTable(data, columnNames);
+        table.setEnabled(false);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
 		
-		
-		dataPanel.add(tabla, BorderLayout.SOUTH);
+        JScrollPane tableScrollPane = new JScrollPane(table);
+		dataPanel.add(tableScrollPane, BorderLayout.SOUTH);
 		dataPanel.setBorder(titled);
 		
 		this.add(dataPanel, BorderLayout.CENTER);
