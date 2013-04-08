@@ -2,9 +2,10 @@ package tp.pr4.Gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-public class OyenteRaton implements MouseListener {
+public abstract class OyenteRaton implements MouseListener {
 
-	
+		@Override
+	abstract public void mouseClicked(MouseEvent e);
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -30,10 +31,6 @@ public class OyenteRaton implements MouseListener {
 		
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

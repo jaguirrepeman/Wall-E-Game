@@ -86,21 +86,12 @@ public class RobotPanel extends JPanel {
 		instructionPanel.setLayout(new GridLayout(4, 2, 3, 3));
 		JButton move = new JButton("MOVE") {
 			{
-				this.addMouseListener(new MouseListener() {
+				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new MoveInstruction());
 					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {}
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					@Override
-					public void mouseEntered(MouseEvent e) {}
-					@Override
-					public void mouseExited(MouseEvent e) {}
 				});
 			}
 			
@@ -109,105 +100,62 @@ public class RobotPanel extends JPanel {
 		
 		JButton quit = new JButton("QUIT"){
 			{
-				this.addMouseListener(new MouseListener() {
+				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new QuitInstruction());
 					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {}
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					@Override
-					public void mouseEntered(MouseEvent e) {}
-					@Override
-					public void mouseExited(MouseEvent e) {}
 				});
 			}
 			
 		};
 		JButton turn = new JButton("TURN"){
 			{
-				this.addMouseListener(new MouseListener() {
+				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new TurnInstruction(rotacion));
 					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {}
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					@Override
-					public void mouseEntered(MouseEvent e) {}
-					@Override
-					public void mouseExited(MouseEvent e) {}
 				});
 			}
 			
 		};
 		JButton	pick = new JButton("PICK"){
 			{
-				this.addMouseListener(new MouseListener() {
+				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new PickInstruction());
 					}
 
-					@Override
-					public void mousePressed(MouseEvent e) {}
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					@Override
-					public void mouseEntered(MouseEvent e) {}
-					@Override
-					public void mouseExited(MouseEvent e) {}
 				});
 			}
 			
 		};
 		JButton drop = new JButton("DROP"){
 			{
-				this.addMouseListener(new MouseListener() {
+				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new DropInstruction());
 					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {}
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					@Override
-					public void mouseEntered(MouseEvent e) {}
-					@Override
-					public void mouseExited(MouseEvent e) {}
 				});
 			}
 			
 		};
 		JButton operate = new JButton("OPERATE"){
 			{
-				this.addMouseListener(new MouseListener() {
+				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new OperateInstruction());
 					}
 
-					@Override
-					public void mousePressed(MouseEvent e) {}
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					@Override
-					public void mouseEntered(MouseEvent e) {}
-					@Override
-					public void mouseExited(MouseEvent e) {}
 				});
 			}
 			
