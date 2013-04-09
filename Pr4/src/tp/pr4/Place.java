@@ -17,6 +17,10 @@ public class Place {
 		this.description = description;
 		this.items = new ItemContainer();
 	}
+	
+	public String getName(){
+		return this.name;
+	}
 
 	public boolean isSpaceship() {
 

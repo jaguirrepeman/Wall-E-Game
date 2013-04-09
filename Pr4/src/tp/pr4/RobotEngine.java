@@ -124,7 +124,7 @@ public class RobotEngine {
 	}
 	
 	public void setNavigationPanel(NavigationPanel navPanel){
-		
+		navigation.setNavigationPanel(navPanel);
 	}
 	
 	private Place place;
