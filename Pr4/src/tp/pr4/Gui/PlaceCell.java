@@ -28,6 +28,11 @@ public class PlaceCell extends JButton {
 		
 	}
 	
+	public PlaceCell setPlace(Place place){
+		
+		this.place = place;
+		return this;
+	}
 	
 	public boolean isActual() {
 

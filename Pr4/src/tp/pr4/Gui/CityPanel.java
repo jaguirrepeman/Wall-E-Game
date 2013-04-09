@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import tp.pr4.Direction;
+import tp.pr4.Place;
 import tp.pr4.instructions.OperateInstruction;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{
@@ -42,7 +44,7 @@ public class CityPanel extends JPanel{
 		TitledBorder titled = new TitledBorder("City Map");
 		cityMap.setBorder(titled);
 		cityMap.setLayout(new GridLayout(11, 11));
-		PlaceCell[][] places = new PlaceCell[CELDAS_FILAS][CELDAS_COLUMNAS];
+		places = new PlaceCell[CELDAS_FILAS][CELDAS_COLUMNAS];
 		for (int i = 0; i< CELDAS_FILAS; i++) 
 			for (int j = 0; j< CELDAS_COLUMNAS; j++){
 				places[i][j] = new PlaceCell(text);
@@ -57,6 +59,21 @@ public class CityPanel extends JPanel{
 		return cityMap;
 	}
 	
+	public void move(Direction headingDirection, Place place){
+		places[pos_x][pos_y].setActual(false);
+		if (headingDirection == Direction.NORTH) 		pos_y++;
+		else if (headingDirection == Direction.SOUTH) 	pos_y--;
+		else if (headingDirection == Direction.EAST) 	pos_x++;
+		else if (headingDirection == Direction.WEST) 	pos_x--;
+		places[pos_x][pos_y].setPlace(place).setActual(true);
+	}
+	
 	 private static final int CELDAS_FILAS = 11;
 	 private static final int CELDAS_COLUMNAS = 11;
+	 private static final int INIT_X = 5;
+	 private static final int INIT_Y = 5;
+	 private int pos_x = 5;
+	 private int pos_y = 5;
+	 
+	 private PlaceCell[][] places;
 }
