@@ -1,6 +1,5 @@
 package tp.pr4.Gui;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import tp.pr4.Gui.*;
 import tp.pr4.instructions.*;
 import tp.pr4.instructions.exceptions.*;
+import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
 public class RobotEngine {
@@ -125,6 +126,9 @@ public class RobotEngine {
 	
 	public void setNavigationPanel(NavigationPanel navPanel){
 		navigation.setNavigationPanel(navPanel);
+	}
+	public Object[][] getItemsFromContainer(){
+		return items.listOfItems();
 	}
 	
 	private Place place;
