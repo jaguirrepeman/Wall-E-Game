@@ -3,20 +3,25 @@ package tp.pr4.Gui;
 import java.awt.BorderLayout;
 
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+
+import tp.pr4.instructions.OperateInstruction;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{
-	public CityPanel() {
+	public CityPanel(JTextArea text) {
 		
 		this.setLayout(new BorderLayout());
 		ImageIcon icon = createImageIcon("images/walleNorth.png", "WALLE");
 		JLabel walle = new JLabel(icon);
 		this.add(walle, BorderLayout.WEST);
-		JPanel cityMap = this.setCity();
+		JPanel cityMap = this.setCity(text);
 		this.add(cityMap);
 
 		
@@ -31,7 +36,7 @@ public class CityPanel extends JPanel{
 			return null;
 		}
 	}
-	public JPanel setCity(){
+	public JPanel setCity(JTextArea text){
 		//aqui se crea la ciudad que se mostrara en la ventana
 		JPanel cityMap = new JPanel();
 		TitledBorder titled = new TitledBorder("City Map");
@@ -40,9 +45,11 @@ public class CityPanel extends JPanel{
 		PlaceCell[][] places = new PlaceCell[CELDAS_FILAS][CELDAS_COLUMNAS];
 		for (int i = 0; i< CELDAS_FILAS; i++) 
 			for (int j = 0; j< CELDAS_COLUMNAS; j++){
-				places[i][j] = new PlaceCell();
+				places[i][j] = new PlaceCell(text);
+				
 				cityMap.add(places[i][j]);
 			}
+		
 
 		//PlaceCell place = new PlaceCell();
 		//place.setActual(true);
