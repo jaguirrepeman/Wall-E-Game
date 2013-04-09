@@ -64,8 +64,9 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		String[] columnNames = { "id", "Description" };
 
 		Object[][] data = { { "Newspapers", "News on sport" } };
+		Object[][] objects = engine.getItemsFromContainer();
 
-		final JTable table = new JTable(data, columnNames);
+		final JTable table = new JTable(objects, columnNames);
 		table.setEnabled(false); // para no poder modificar la tabla
 		table.setOpaque(false); // con esto se consigue que el fondo de la tabla
 								// este en gris
