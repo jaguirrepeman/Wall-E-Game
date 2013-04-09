@@ -127,9 +127,9 @@ public class RobotEngine {
 	public void setNavigationPanel(NavigationPanel navPanel){
 		navigation.setNavigationPanel(navPanel);
 	}
-	public Object[][] getItemsFromContainer(){
+	/*public Object[][] getItemsFromContainer(){
 		return items.listOfItems();
-	}
+	}*/
 	
 	private Place place;
 	private Direction direction;

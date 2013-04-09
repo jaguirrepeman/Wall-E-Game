@@ -94,7 +94,7 @@ public class ItemContainer {
 		}
 		return string;
 	}
-	public Object[][] listOfItems(){
+	/*public Object[][] listOfItems(){
 		Object[][] items = null;
 		for(int i = 0; i< container.length; i++){
 			items[i][0] = container[i].getId();
@@ -102,7 +102,7 @@ public class ItemContainer {
 		}
 		return items;
 		
-	}
+	}*/
 	public void useItem(Item item){
 		
 }
