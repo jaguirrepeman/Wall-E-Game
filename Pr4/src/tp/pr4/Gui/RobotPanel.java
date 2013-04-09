@@ -31,8 +31,7 @@ import tp.pr4.Rotation;
 import tp.pr4.instructions.*;
 
 @SuppressWarnings("serial")
-public class RobotPanel extends JPanel 
-						implements PropertyChangeListener {
+public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 	public RobotPanel(RobotEngine engine) {
 		this.setLayout(new BorderLayout(10, 10));
@@ -51,41 +50,43 @@ public class RobotPanel extends JPanel
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+		robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel()
+				+ " Recycled: " + engine.getRecycledMaterial());
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
 		robotInfo.addPropertyChangeListener("value", this);
 		statusPanel.add(robotInfo);
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
-		
-		//JScrollPane tabla = new JScrollPane();
 
-        String[] columnNames = {"id", "Description"};
-       
-        Object[][] data = {    {"Newspapers", "News on sport"}    };
+		// JScrollPane tabla = new JScrollPane();
 
-        final JTable table = new JTable(data, columnNames);
-        table.setEnabled(false);	//para no poder modificar la tabla
-        table.setOpaque(false); //con esto se consigue que el fondo de la tabla este en gris
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
-		
-        JScrollPane tableScrollPane = new JScrollPane(table);
+		String[] columnNames = { "id", "Description" };
+
+		Object[][] data = { { "Newspapers", "News on sport" } };
+
+		final JTable table = new JTable(data, columnNames);
+		table.setEnabled(false); // para no poder modificar la tabla
+		table.setOpaque(false); // con esto se consigue que el fondo de la tabla
+								// este en gris
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table.setFillsViewportHeight(true);
+
+		JScrollPane tableScrollPane = new JScrollPane(table);
 		dataPanel.add(tableScrollPane, BorderLayout.SOUTH);
 		dataPanel.setBorder(titled);
-		
+
 		this.add(dataPanel, BorderLayout.CENTER);
-		
-		
+
 		rotacion = directionToTurn.getSelectedItem().toString();
 	}
-	
-	//no funciona
+
+	// no funciona
 	public void propertyChange(PropertyChangeEvent evt, RobotEngine engine) {
 
-		robotInfo.setValue("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
-		
+		robotInfo.setValue("Fuel: " + engine.getFuel() + " Recycled: "
+				+ engine.getRecycledMaterial());
+
 	}
 
 	public JPanel createInstructionPanel(final RobotEngine engine) {
@@ -103,11 +104,10 @@ public class RobotPanel extends JPanel
 					}
 				});
 			}
-			
+
 		};
-		
-		
-		JButton quit = new JButton("QUIT"){
+
+		JButton quit = new JButton("QUIT") {
 			{
 				this.addMouseListener(new OyenteRaton() {
 
@@ -117,9 +117,9 @@ public class RobotPanel extends JPanel
 					}
 				});
 			}
-			
+
 		};
-		JButton turn = new JButton("TURN"){
+		JButton turn = new JButton("TURN") {
 			{
 				this.addMouseListener(new OyenteRaton() {
 
@@ -129,22 +129,22 @@ public class RobotPanel extends JPanel
 					}
 				});
 			}
-			
+
 		};
-		JButton	pick = new JButton("PICK"){
+		JButton pick = new JButton("PICK") {
 			{
 				this.addMouseListener(new OyenteRaton() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new PickInstruction());
+						engine.communicateRobot(new PickInstruction(objectId));
 					}
 
 				});
 			}
-			
+
 		};
-		JButton drop = new JButton("DROP"){
+		JButton drop = new JButton("DROP") {
 			{
 				this.addMouseListener(new OyenteRaton() {
 
@@ -154,9 +154,9 @@ public class RobotPanel extends JPanel
 					}
 				});
 			}
-			
+
 		};
-		JButton operate = new JButton("OPERATE"){
+		JButton operate = new JButton("OPERATE") {
 			{
 				this.addMouseListener(new OyenteRaton() {
 
@@ -167,17 +167,18 @@ public class RobotPanel extends JPanel
 
 				});
 			}
-			
+
 		};
 		JTextField objectToPick = new JTextField();
-		String[] rotationString = {Rotation.LEFT.toString(), Rotation.RIGHT.toString()};
+		String[] rotationString = { Rotation.LEFT.toString(),
+				Rotation.RIGHT.toString() };
 		directionToTurn = new JComboBox(rotationString);
 		directionToTurn.setSelectedIndex(1);
 		directionToTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rotacion = directionToTurn.getSelectedItem().toString();
-				//System.out.println(rotacion);
+				// System.out.println(rotacion);
 			}
 		});
 		instructionPanel.add(move);
@@ -188,16 +189,22 @@ public class RobotPanel extends JPanel
 		instructionPanel.add(objectToPick);
 		instructionPanel.add(drop);
 		instructionPanel.add(operate);
+		
+		objectId = objectToPick.getName();
+		
 		return instructionPanel;
 
 	}
+
 	private String rotacion;
+	private String objectId;
 	private JComboBox directionToTurn;
 	JFormattedTextField robotInfo;
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
