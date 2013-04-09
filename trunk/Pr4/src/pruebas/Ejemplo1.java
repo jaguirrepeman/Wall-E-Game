@@ -9,7 +9,7 @@ public class Ejemplo1 {
 		new Ejemplo1().metodoQueLanzaExcepcion();
 	}
 }
-public class MiExcepcion extends Exception
+/*public class MiExcepcion extends Exception
 {
    public MiExcepcion() {
   }
@@ -23,8 +23,8 @@ public class MiClase{
    {
       //ejecutoMiCodigo();
       // si hay fallo, se lanza la excepcion.
-      if (/*hayFallo()*/true)
+      if (/*hayFallo()*//*true)
          throw new MiExcepcion();
       return resultado;
-   }
-}
+   }*/
+//S}
