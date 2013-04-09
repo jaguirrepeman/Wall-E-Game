@@ -213,7 +213,7 @@ public class Main {
 			RobotEngine WallE = new RobotEngine(city,
 					cityLoader.getInitialPlace(), Direction.NORTH);
 			WallE.startEngine();
-			MainWindow window = new MainWindow(WallE);
+			MainWindow window = new MainWindow(WallE, cityLoader.getInitialPlace());
 			window.setVisible(true);
 		} catch (FileNotFoundException e) {
 
@@ -239,7 +239,7 @@ public class Main {
 		RobotEngine engine = new RobotEngine(new City(streets), places[0],
 				Direction.NORTH);
 		// plays
-		MainWindow window = new MainWindow(engine);
+		MainWindow window = new MainWindow(engine, places[0]);
 		window.setVisible(true);
 		engine.startEngine();
 

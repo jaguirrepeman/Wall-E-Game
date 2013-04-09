@@ -52,6 +52,7 @@ public class NavigationModule {
 
 				this.place = this.city.lookForStreet(this.place, direction)
 						.nextPlace(place);
+				navPanel.move(direction, place);
 
 			} else {
 				throw new InstructionExecutionException(
@@ -87,7 +88,11 @@ public class NavigationModule {
 	}
 	
 	public void setNavigationPanel(NavigationPanel navPanel){
-		
+		this.navPanel = navPanel;
+	}
+	
+	public void setInitialPlace(Place initPlace){
+		this.navPanel.setInitialPlace(initPlace);
 	}
 
 	//private static final String LINE_SEPARATOR = System
@@ -95,4 +100,5 @@ public class NavigationModule {
 	private City city;
 	private Place place;
 	private Direction direction;
+	private NavigationPanel navPanel;
 }

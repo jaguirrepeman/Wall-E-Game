@@ -1,5 +1,6 @@
 package tp.pr4.Gui;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 import javax.swing.Action;
@@ -31,6 +32,7 @@ public class PlaceCell extends JButton {
 	public PlaceCell setPlace(Place place){
 		
 		this.place = place;
+		this.setText(place.getName());
 		return this;
 	}
 	
@@ -43,6 +45,8 @@ public class PlaceCell extends JButton {
 
 	public void setActual(boolean actual) {
 		this.actual = actual;
+		if (actual)this.setBackground(Color.GREEN);
+		else this.setBackground(Color.GRAY);
 	}
 
 

@@ -10,6 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import tp.pr4.Direction;
+import tp.pr4.Place;
+
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel {
 	public NavigationPanel() {
@@ -18,7 +21,7 @@ public class NavigationPanel extends JPanel {
 		//setVisible(true);
 		// JScrollPanel
 		TitledBorder titled = new TitledBorder("Log");
-		JTextArea text = new JTextArea("Aqui ira el texto y esas mierdas");
+		text = new JTextArea("Aqui ira el texto y esas mierdas");
 		text.setEditable(false);
 		//ejemplo de como meter imagenes
 		cityPanel = new CityPanel(text);
@@ -31,10 +34,15 @@ public class NavigationPanel extends JPanel {
 		// JScrollPanel text = new JScrollPanel();
 		this.add(scroller, BorderLayout.SOUTH);
 	}
-	public void move(){
-		
+	public void move(Direction headingDirection, Place place){
+		cityPanel.move(headingDirection, place);
+	}
+	
+	public void setInitialPlace(Place initPlace){
+		cityPanel.setInitialPlace(initPlace);
 	}
 	
 	private CityPanel cityPanel;
+	private JTextArea text;
 
 }

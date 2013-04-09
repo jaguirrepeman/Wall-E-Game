@@ -59,13 +59,17 @@ public class CityPanel extends JPanel{
 		return cityMap;
 	}
 	
-	public void move(Direction headingDirection, Place place){
+	public void move (Direction headingDirection, Place place){
 		places[pos_x][pos_y].setActual(false);
 		if (headingDirection == Direction.NORTH) 		pos_y++;
 		else if (headingDirection == Direction.SOUTH) 	pos_y--;
 		else if (headingDirection == Direction.EAST) 	pos_x++;
 		else if (headingDirection == Direction.WEST) 	pos_x--;
 		places[pos_x][pos_y].setPlace(place).setActual(true);
+	}
+	
+	public void setInitialPlace(Place initPlace){
+		places[INIT_X][INIT_Y].setPlace(initPlace).setActual(true);
 	}
 	
 	 private static final int CELDAS_FILAS = 11;
