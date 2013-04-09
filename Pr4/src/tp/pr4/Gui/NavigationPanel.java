@@ -21,7 +21,7 @@ public class NavigationPanel extends JPanel {
 		JTextArea text = new JTextArea("Aqui ira el texto y esas mierdas");
 		text.setEditable(false);
 		//ejemplo de como meter imagenes
-		CityPanel cityPanel = new CityPanel(text);
+		cityPanel = new CityPanel(text);
 		//mapViewPanel.setIcon(icon); 
 		this.add(cityPanel);
 				
@@ -31,6 +31,10 @@ public class NavigationPanel extends JPanel {
 		// JScrollPanel text = new JScrollPanel();
 		this.add(scroller, BorderLayout.SOUTH);
 	}
-
+	public void setPlace(){
+		
+	}
+	
+	private CityPanel cityPanel;
 
 }
