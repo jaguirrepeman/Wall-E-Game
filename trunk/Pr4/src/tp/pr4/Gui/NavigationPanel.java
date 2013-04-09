@@ -31,7 +31,7 @@ public class NavigationPanel extends JPanel {
 		// JScrollPanel text = new JScrollPanel();
 		this.add(scroller, BorderLayout.SOUTH);
 	}
-	public void setPlace(){
+	public void move(){
 		
 	}
 	

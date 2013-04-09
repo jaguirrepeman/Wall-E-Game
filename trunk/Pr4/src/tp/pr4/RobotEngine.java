@@ -83,7 +83,7 @@ public class RobotEngine {
 		if (this.fuel < 0)
 			this.fuel = 0;
 		System.out.println("      * My power is " + this.fuel);
-		System.out.println("      * My reclycled material is "
+		System.out.println("      * My recycled material is "
 				+ this.recycledMaterial);
 	}
 
