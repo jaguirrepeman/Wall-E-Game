@@ -14,6 +14,18 @@ import tp.pr4.items.ItemContainer;
  * 
  */
 public class PickInstruction implements Instruction {
+	
+	public PickInstruction(){
+		//Constructor vacío
+	}
+	public PickInstruction(String itemId){
+		try {
+			this.parse("Pick" + " " + itemId);
+		} catch (WrongInstructionFormatException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.engine = engine;

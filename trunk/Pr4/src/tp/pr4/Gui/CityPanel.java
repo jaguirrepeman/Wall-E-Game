@@ -37,11 +37,19 @@ public class CityPanel extends JPanel{
 		TitledBorder titled = new TitledBorder("City Map");
 		cityMap.setBorder(titled);
 		cityMap.setLayout(new GridLayout(11, 11));
-		for (int i = 0; i< 121; i++) cityMap.add(new PlaceCell());
-		PlaceCell[] places;
-		PlaceCell place = new PlaceCell();
+		PlaceCell[][] places = new PlaceCell[CELDAS_FILAS][CELDAS_COLUMNAS];
+		for (int i = 0; i< CELDAS_FILAS; i++) 
+			for (int j = 0; j< CELDAS_COLUMNAS; j++){
+				places[i][j] = new PlaceCell();
+				cityMap.add(places[i][j]);
+			}
+
+		//PlaceCell place = new PlaceCell();
 		//place.setActual(true);
 		//cityMap.add(place);
 		return cityMap;
 	}
+	
+	 private static final int CELDAS_FILAS = 11;
+	 private static final int CELDAS_COLUMNAS = 11;
 }
