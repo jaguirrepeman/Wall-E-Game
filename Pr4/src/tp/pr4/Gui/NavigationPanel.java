@@ -38,6 +38,10 @@ public class NavigationPanel extends JPanel {
 		cityPanel.move(headingDirection, place);
 	}
 	
+	public void rotate(Direction direction){
+		cityPanel.turnWalleIcon(direction);
+	}
+	
 	public void setInitialPlace(Place initPlace){
 		cityPanel.setInitialPlace(initPlace);
 	}
