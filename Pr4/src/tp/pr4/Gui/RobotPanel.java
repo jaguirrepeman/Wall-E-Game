@@ -182,6 +182,13 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 				// System.out.println(rotacion);
 			}
 		});
+		objectToPick.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				objectId = objectToPick.getText().toString();
+				// System.out.println(rotacion);
+			}
+		});
 		instructionPanel.add(move);
 		instructionPanel.add(quit);
 		instructionPanel.add(turn);
