@@ -20,13 +20,20 @@ public class CityPanel extends JPanel{
 	public CityPanel(JTextArea text) {
 		
 		this.setLayout(new BorderLayout());
-		ImageIcon icon = createImageIcon("images/walleNorth.png", "WALLE");
-		JLabel walle = new JLabel(icon);
-		this.add(walle, BorderLayout.WEST);
+		
+		walle = createImageIcon("images/walleNorth.png", "WALLE");
+		ImageIcon walleSouth = createImageIcon("images/walleSouth.png", "WALLE");
+		JLabel imagen = new JLabel(walle);
+		JLabel imgWallSouth = new JLabel(walleSouth);
+		this.add(imagen, BorderLayout.WEST);
+		this.add(imgWallSouth, BorderLayout.WEST);
 		JPanel cityMap = this.setCity(text);
 		this.add(cityMap);
 
 		
+	}
+	public void Turn (Direction direction){
+		this.remove(imagen);
 	}
 
 	protected static ImageIcon createImageIcon(String path, String description) {
@@ -80,4 +87,5 @@ public class CityPanel extends JPanel{
 	 private int pos_y = 5;
 	 
 	 private PlaceCell[][] places;
+	 private ImageIcon walle;
 }

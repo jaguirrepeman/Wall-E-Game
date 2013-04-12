@@ -72,6 +72,7 @@ public class NavigationModule {
 	public void rotate(Rotation rotation) {
 
 		this.direction = direction.nextDirection(rotation);
+		
 	}
 
 	public void scanCurrentPlace() {
