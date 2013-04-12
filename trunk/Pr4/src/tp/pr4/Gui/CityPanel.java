@@ -17,23 +17,44 @@ import tp.pr4.Place;
 import tp.pr4.instructions.OperateInstruction;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{
+	
 	public CityPanel(JTextArea text) {
 		
 		this.setLayout(new BorderLayout());
 		
 		walle = createImageIcon("images/walleNorth.png", "WALLE");
-		ImageIcon walleSouth = createImageIcon("images/walleSouth.png", "WALLE");
-		JLabel imagen = new JLabel(walle);
-		JLabel imgWallSouth = new JLabel(walleSouth);
-		this.add(imagen, BorderLayout.WEST);
-		this.add(imgWallSouth, BorderLayout.WEST);
+		walleSouth = createImageIcon("images/walleSouth.png", "WALLE");
+		walleEast = createImageIcon("images/walleEast.png", "WALLE");
+		walleWest = createImageIcon("images/walleWest.png", "WALLE");
+		imagenWalle = new JLabel(walle);
+//		imagenWalleSouth = new JLabel(walleSouth);
+//		imagenWalleEast = new JLabel(walleEast);
+//		imagenWalleWest = new JLabel(walleWest);
+		this.add(imagenWalle, BorderLayout.WEST);
 		JPanel cityMap = this.setCity(text);
 		this.add(cityMap);
 
 		
 	}
-	public void Turn (Direction direction){
-		this.remove(imagen);
+	
+	public void turnWalleIcon (Direction direction){
+		
+		switch (direction) {
+		 
+		case NORTH:
+			imagenWalle.setIcon(walle);
+			break;
+		case SOUTH:
+			imagenWalle.setIcon(walleSouth);
+			break;
+		case EAST:
+			imagenWalle.setIcon(walleEast);
+			break;
+		case WEST:
+			imagenWalle.setIcon(walleWest);
+			break;
+		}
+		
 	}
 
 	protected static ImageIcon createImageIcon(String path, String description) {
@@ -45,12 +66,14 @@ public class CityPanel extends JPanel{
 			return null;
 		}
 	}
+	
 	public JPanel setCity(JTextArea text){
 		//aqui se crea la ciudad que se mostrara en la ventana
 		JPanel cityMap = new JPanel();
 		TitledBorder titled = new TitledBorder("City Map");
 		cityMap.setBorder(titled);
 		cityMap.setLayout(new GridLayout(11, 11));
+		
 		places = new PlaceCell[CELDAS_FILAS][CELDAS_COLUMNAS];
 		for (int i = 0; i< CELDAS_FILAS; i++) 
 			for (int j = 0; j< CELDAS_COLUMNAS; j++){
@@ -88,4 +111,12 @@ public class CityPanel extends JPanel{
 	 
 	 private PlaceCell[][] places;
 	 private ImageIcon walle;
+	 private ImageIcon walleSouth;
+	 private ImageIcon walleEast;
+	 private ImageIcon walleWest;
+	 
+	 private JLabel imagenWalle;
+	 private JLabel imagenWalleSouth;
+	 private JLabel imagenWalleEast;
+	 private JLabel imagenWalleWest;
 }
