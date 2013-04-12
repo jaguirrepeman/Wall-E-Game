@@ -139,7 +139,11 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new PickInstruction(objectToPick.getText()));
+						//if (objectToPick.getText() != null)
+						if (!objectToPick.getText().isEmpty())
+							engine.communicateRobot(new PickInstruction(objectToPick.getText()));
+							//engine.communicateRobot(new PickInstruction(objectId));
+						//else engine.communicateRobot(new PickInstruction(objectId));
 					}
 
 				});
