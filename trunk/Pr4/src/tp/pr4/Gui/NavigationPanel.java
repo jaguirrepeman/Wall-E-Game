@@ -28,7 +28,7 @@ public class NavigationPanel extends JPanel {
 		//mapViewPanel.setIcon(icon); 
 		this.add(cityPanel);
 				
-		JScrollPane scroller = new JScrollPane(text);
+		scroller = new JScrollPane(text);
         scroller.setPreferredSize(new Dimension(100,100));
         scroller.setBorder(titled);
 		// JScrollPanel text = new JScrollPanel();
@@ -36,6 +36,7 @@ public class NavigationPanel extends JPanel {
 	}
 	public void move(Direction headingDirection, Place place){
 		cityPanel.move(headingDirection, place);
+		text.setText(place.toString());
 	}
 	
 	public void rotate(Direction direction){
@@ -46,7 +47,12 @@ public class NavigationPanel extends JPanel {
 		cityPanel.setInitialPlace(initPlace);
 	}
 	
+	public void pickItem(Place place){
+		
+	}
+	
 	private CityPanel cityPanel;
 	private JTextArea text;
+	private JScrollPane scroller;
 
 }

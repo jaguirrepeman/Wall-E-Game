@@ -65,7 +65,7 @@ public class NavigationModule {
 	}
 
 	public Item pickItemFromCurrentPlace(String id) {
-
+		
 		return place.pickItem(id);
 	}
 
