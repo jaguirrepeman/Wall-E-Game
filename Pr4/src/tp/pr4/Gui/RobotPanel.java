@@ -62,7 +62,8 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		// JScrollPane tabla = new JScrollPane();
 
 		String[] columnNames = { "id", "Description" };
-
+		
+		Object[][] objeticos = engine.getItemsFromContainer();
 		Object[][] data = { { "Newspapers", "News on sport" } };
 		//Object[][] objects = engine.getItemsFromContainer();
 
