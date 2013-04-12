@@ -90,12 +90,12 @@ public class CityPanel extends JPanel{
 	}
 	
 	public void move (Direction headingDirection, Place place){
-		places[pos_x][pos_y].setActual(false);
-		if (headingDirection == Direction.NORTH) 		pos_y++;
-		else if (headingDirection == Direction.SOUTH) 	pos_y--;
+		places[pos_y][pos_x].setActual(false);
+		if (headingDirection == Direction.NORTH) 		pos_y--;
+		else if (headingDirection == Direction.SOUTH) 	pos_y++;
 		else if (headingDirection == Direction.EAST) 	pos_x++;
 		else if (headingDirection == Direction.WEST) 	pos_x--;
-		places[pos_x][pos_y].setPlace(place).setActual(true);
+		places[pos_y][pos_x].setPlace(place).setActual(true);
 	}
 	
 	public void setInitialPlace(Place initPlace){
