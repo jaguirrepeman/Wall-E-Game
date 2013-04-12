@@ -170,7 +170,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 			}
 
 		};
-		JTextField objectToPick = new JTextField();
+		objectToPick = new JTextField();
 		String[] rotationString = { Rotation.LEFT.toString(),
 				Rotation.RIGHT.toString() };
 		directionToTurn = new JComboBox(rotationString);
@@ -196,7 +196,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		return instructionPanel;
 
 	}
-
+	private JTextField objectToPick;
 	private String rotacion;
 	private String objectId;
 	private JComboBox directionToTurn;
