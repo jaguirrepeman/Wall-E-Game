@@ -22,7 +22,7 @@ public class PickInstruction implements Instruction {
 		try {
 			this.parse("Pick" + " " + itemId);
 		} catch (WrongInstructionFormatException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
@@ -55,6 +55,7 @@ public class PickInstruction implements Instruction {
 	}
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
+		
 		String[] comando = cad.split(" ");
 
 		if ((comando[0].equalsIgnoreCase("PICK") || comando[0]
