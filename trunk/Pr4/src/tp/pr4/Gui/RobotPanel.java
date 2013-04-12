@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import tp.pr4.Direction;
 import tp.pr4.RobotEngine;
@@ -34,6 +35,7 @@ import tp.pr4.instructions.*;
 public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 	public RobotPanel(RobotEngine engine) {
+		this.engine = engine;
 		this.setLayout(new BorderLayout(10, 10));
 
 		// setVisible(true);
@@ -63,12 +65,17 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 		String[] columnNames = { "id", "Description" };
 		
-		Object[][] objeticos = engine.getItemsFromContainer();
+		// Object[][] objeticos = engine.getItemsFromContainer(flags);
 		Object[][] data = { { "Newspapers", "News on sport" } };
 		//Object[][] objects = engine.getItemsFromContainer();
+		
+		DefaultTableModel modelo = new DefaultTableModel(new String[]{"Id.","Description"},0);
+		JTable table = new JTable(modelo);
+		
 
-		final JTable table = new JTable(data, columnNames);
-		table.setEnabled(false); // para no poder modificar la tabla
+		
+		//final JTable table = new JTable(data, columnNames);
+		//table.setEnabled(false); // para no poder modificar la tabla
 		table.setOpaque(false); // con esto se consigue que el fondo de la tabla
 								// este en gris
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -90,7 +97,14 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 				+ engine.getRecycledMaterial());
 
 	}
-
+	public void changeInventory(DefaultTableModel modelo){
+		int rows = modelo.getRowCount();
+		for(int i = 0; i < rows; i++)
+			modelo.removeRow(0);                                                                                                                        
+		
+		for(int i = 0; i< engine.numberOfItems(); i++)
+			modelo.addRow(engine.getItemsFromContainer(i)/*objeto del array*/);
+	}
 	public JPanel createInstructionPanel(final RobotEngine engine) {
 		JPanel instructionPanel = new JPanel();
 		TitledBorder titled = new TitledBorder("Instructions");
@@ -188,7 +202,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				objectId = objectToPick.getText().toString();
-				// System.out.println(rotacion);
+				
 			}
 		});
 		instructionPanel.add(move);
@@ -210,6 +224,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 	private String objectId;
 	private JComboBox directionToTurn;
 	JFormattedTextField robotInfo;
+	private RobotEngine engine;
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
