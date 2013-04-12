@@ -139,7 +139,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new PickInstruction(objectId));
+						engine.communicateRobot(new PickInstruction(objectToPick.getText()));
 					}
 
 				});

@@ -116,7 +116,5 @@ public class CityPanel extends JPanel{
 	 private ImageIcon walleWest;
 	 
 	 private JLabel imagenWalle;
-	 private JLabel imagenWalleSouth;
-	 private JLabel imagenWalleEast;
-	 private JLabel imagenWalleWest;
+	
 }
