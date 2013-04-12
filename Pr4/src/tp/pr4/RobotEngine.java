@@ -127,10 +127,12 @@ public class RobotEngine {
 	public void setNavigationPanel(NavigationPanel navPanel){
 		navigation.setNavigationPanel(navPanel);
 	}
-	public Object[][] getItemsFromContainer(){
-		return items.listOfItems();
+	public String[] getItemsFromContainer(int n){
+		return items.itemForTable(n);
 	}
-	
+	public int numberOfItems(){
+		return this.items.numberOfItems();
+	}
 	private Place place;
 	private Direction direction;
 	private City cityMap;

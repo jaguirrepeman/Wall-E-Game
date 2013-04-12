@@ -94,17 +94,14 @@ public class ItemContainer {
 		}
 		return string;
 	}
-	public Object[][] listOfItems(){
-		Object[][] items = new Object[2][];
-		if (this.counter != 0){
-			for(int i = 0; i< container.length; i++){
-				items[0][i] = container[i].getId();
-				items[1][i] = container[i].description;
-			}
-		}
-		return items;
+	//devuelve un array de Strings con el id y la descripcion del objeto para mostrarlo en la tabla
+	public String[] itemForTable(int n){
+		String[] object= new String[2];
+		object[0] = container[n].getId();
+		object[1] = container[n].toString();
+		return object;
 		
-	} 
+	}
 	public void useItem(Item item){
 		
 }
