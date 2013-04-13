@@ -34,7 +34,7 @@ public class PickInstruction implements Instruction {
 	}
 
 	public void execute() throws InstructionExecutionException {
-		Item item = this.navigation.getCurrentPlace().pickItem(id);
+		Item item = this.navigation.pickItemFromCurrentPlace(id);
 		if (item != null) {
 			if (this.robotContainer.addItem(item))
 				engine.say("I am happy! Now I have " + id);

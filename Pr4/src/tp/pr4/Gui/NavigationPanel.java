@@ -49,6 +49,7 @@ public class NavigationPanel extends JPanel {
 	
 	public void pickItem(Place place){
 		
+		text.setText(place.toString());
 	}
 	
 	private CityPanel cityPanel;
