@@ -65,8 +65,11 @@ public class NavigationModule {
 	}
 
 	public Item pickItemFromCurrentPlace(String id) {
-		
-		return place.pickItem(id);
+		say(place.toString());
+		Item item = place.pickItem(id);
+		say(place.toString());
+		navPanel.pickItem(place);
+		return item;
 	}
 
 	public void rotate(Rotation rotation) {
