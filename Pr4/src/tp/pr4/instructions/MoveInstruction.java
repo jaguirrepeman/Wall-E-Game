@@ -25,6 +25,7 @@ public class MoveInstruction implements Instruction{
 				throw new InstructionExecutionException("Arrggg, there is a street but it is closed!");
 			}
 		}
+		this.engine.moveToPlace(this.navigation.getCurrentPlace());
 		this.navigation.say("Moving in direction " + this.navigation.getCurrentHeading().toString()
 				+ LINE_SEPARATOR + this.navigation.getCurrentPlace().toString());
 		this.engine.addFuel(-5);

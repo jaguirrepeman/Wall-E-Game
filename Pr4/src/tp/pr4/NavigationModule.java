@@ -97,7 +97,6 @@ public class NavigationModule {
 	public void setInitialPlace(Place initPlace){
 		this.navPanel.setInitialPlace(initPlace);
 	}
-
 	//private static final String LINE_SEPARATOR = System
 		//	.getProperty("line.separator");
 	private City city;

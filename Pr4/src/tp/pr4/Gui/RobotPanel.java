@@ -5,12 +5,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -35,13 +32,13 @@ import tp.pr4.instructions.*;
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel implements PropertyChangeListener {
 
-	public RobotPanel(RobotEngine engine) {
+	public RobotPanel(final RobotEngine engine) {
 		this.engine = engine;
 		this.setLayout(new BorderLayout(10, 10));
 
 		// setVisible(true);
 		// JScrollPanel
-		JPanel instructionPanel = createInstructionPanel(engine);
+		JPanel instructionPanel = createInstructionPanel();
 		this.add(instructionPanel, BorderLayout.WEST);
 
 		TitledBorder titled = new TitledBorder("Robot Info");
@@ -49,7 +46,6 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		dataPanel.setLayout(new BorderLayout());
 		// aqui seguramente habria que hacer lo de las clases internas que sale
 		// en los apunntes
-
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
@@ -64,10 +60,10 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 		// JScrollPane tabla = new JScrollPane();
 
-		String[] columnNames = { "id", "Description" };
+		//String[] columnNames = { "id", "Description" };
 
 		// Object[][] objeticos = engine.getItemsFromContainer(flags);
-		Object[][] data = { { "Newspapers", "News on sport" } };
+		//Object[][] data = { { "Newspapers", "News on sport" } };
 		// Object[][] objects = engine.getItemsFromContainer();
 
 		tabla = new DefaultTableModel(new String[] { "Id.", "Description" }, 0);
@@ -108,7 +104,8 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 	}
 
-	public JPanel createInstructionPanel(final RobotEngine engine) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public JPanel createInstructionPanel() {
 		JPanel instructionPanel = new JPanel();
 		TitledBorder titled = new TitledBorder("Instructions");
 		instructionPanel.setBorder(titled);
@@ -228,7 +225,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		objectToPick.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				objectId = objectToPick.getText().toString();
+				objectToPick.getText().toString();
 
 			}
 		});
@@ -241,7 +238,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		instructionPanel.add(drop);
 		instructionPanel.add(operate);
 
-		objectId = objectToPick.getName();
+		objectToPick.getName();
 
 		return instructionPanel;
 
@@ -249,15 +246,20 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 	private JTextField objectToPick;
 	private String rotacion;
-	private String objectId;
+	@SuppressWarnings("rawtypes")
 	private JComboBox directionToTurn;
 	private DefaultTableModel tabla;
-	JFormattedTextField robotInfo;
+	private JFormattedTextField robotInfo;
+	
 	private RobotEngine engine;
-
+	
 	@Override
+	//no funciona
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
+		/*robotInfo.setText("Fuel: " + engFuel
+				+ " Recycled: " + engRecycled);
+				*/
 
 	}
 

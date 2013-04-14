@@ -5,8 +5,8 @@ import java.util.Scanner;
 import tp.pr4.Gui.*;
 import tp.pr4.instructions.*;
 import tp.pr4.instructions.exceptions.*;
-import tp.pr4.items.Item;
-import tp.pr4.items.ItemContainer;
+import tp.pr4.items.*;
+
 
 public class RobotEngine {
 
@@ -73,8 +73,8 @@ public class RobotEngine {
 	public void communicateRobot(Instruction c) {
 		c.configureContext(this, navigation, items);
 		try {
+			
 			c.execute();
-			this.place = navigation.getCurrentPlace();
 		} catch (InstructionExecutionException exc) {
 			System.out.println(exc.getMessage());
 		}
@@ -102,6 +102,10 @@ public class RobotEngine {
 
 	public Street getHeadingStreet() {
 		return this.cityMap.lookForStreet(this.place, this.direction);
+	}
+	
+	public void moveToPlace(Place headingPlace){
+		this.place = headingPlace;
 	}
 
 	public void say(String mensaje) {
