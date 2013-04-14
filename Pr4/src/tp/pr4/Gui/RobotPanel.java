@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
@@ -69,9 +70,9 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		Object[][] data = { { "Newspapers", "News on sport" } };
 		//Object[][] objects = engine.getItemsFromContainer();
 		
-		DefaultTableModel modelo = new DefaultTableModel(new String[]{"Id.","Description"},0);
-		JTable table = new JTable(modelo);
-		
+		tabla = new DefaultTableModel(new String[]{"Id.","Description"},0);
+		JTable table = new JTable(tabla);
+		//table.addComponentListener(new ComponentListener())
 
 		
 		//final JTable table = new JTable(data, columnNames);
@@ -80,6 +81,8 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 								// este en gris
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
+
+
 
 		JScrollPane tableScrollPane = new JScrollPane(table);
 		dataPanel.add(tableScrollPane, BorderLayout.SOUTH);
@@ -104,6 +107,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		
 		for(int i = 0; i< engine.numberOfItems(); i++)
 			modelo.addRow(engine.getItemsFromContainer(i)/*objeto del array*/);
+		
 	}
 	public JPanel createInstructionPanel(final RobotEngine engine) {
 		JPanel instructionPanel = new JPanel();
@@ -117,8 +121,13 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new MoveInstruction());
+						robotInfo.setText("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
 					}
+					//hacer cosas con el fuel y tal...
+					
 				});
+			//	robotInfo.setText("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+				//robotInfo.setValue("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
 			}
 
 		};
@@ -142,8 +151,13 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new TurnInstruction(rotacion));
+						robotInfo.setText("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
 					}
+					
 				});
+				
+			//	robotInfo.setValue("Fuel: " + engine.getFuel() + " Recycled: " + engine.getRecycledMaterial());
+			//al compilar no sale la ventana 
 			}
 
 		};
@@ -155,6 +169,9 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					public void mouseClicked(MouseEvent e) {
 						if (!objectToPick.getText().isEmpty())
 							engine.communicateRobot(new PickInstruction(objectToPick.getText()));
+						//hacer cosas nazis con la tabla
+						changeInventory(tabla);
+						//tabla.fireTableDataChanged();
 					}
 
 				});
@@ -168,7 +185,10 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new DropInstruction());
+						changeInventory(tabla);
 					}
+					//hacer cosas nazis con la tabla
+					
 				});
 			}
 
@@ -180,6 +200,8 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new OperateInstruction());
+						changeInventory(tabla);
+
 					}
 
 				});
@@ -217,12 +239,14 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		objectId = objectToPick.getName();
 		
 		return instructionPanel;
-
+		
 	}
+	
 	private JTextField objectToPick;
 	private String rotacion;
 	private String objectId;
 	private JComboBox directionToTurn;
+	private DefaultTableModel tabla;
 	JFormattedTextField robotInfo;
 	private RobotEngine engine;
 
