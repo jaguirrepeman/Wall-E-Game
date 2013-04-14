@@ -98,7 +98,7 @@ public class ItemContainer {
 	public String[] itemForTable(int n){
 		String[] object= new String[2];
 		object[0] = container[n].getId();
-		object[1] = container[n].toString();
+		object[1] = container[n].description;
 		return object;
 		
 	}
