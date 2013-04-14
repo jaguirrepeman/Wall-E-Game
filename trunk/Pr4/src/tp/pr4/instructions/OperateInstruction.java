@@ -8,6 +8,21 @@ import tp.pr4.items.ItemContainer;
 
 public class OperateInstruction implements Instruction{
 	
+	public OperateInstruction() {
+
+	}
+	
+	public OperateInstruction(String robotsObject) {
+		try {
+			this.parse("OPERATE " + robotsObject);
+		} catch (WrongInstructionFormatException e) {
+			
+		}
+		
+	}
+
+
+
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;
 		this.navigation = navigation;

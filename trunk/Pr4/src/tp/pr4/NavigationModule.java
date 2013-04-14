@@ -20,6 +20,7 @@ public class NavigationModule {
 
 	public void dropItemAtCurrentPlace(Item it) {
 		this.place.addItem(it);
+		navPanel.setPlace(place);
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
@@ -67,7 +68,7 @@ public class NavigationModule {
 	public Item pickItemFromCurrentPlace(String id) {
 		
 		Item item = place.pickItem(id);
-		navPanel.pickItem(place);
+		navPanel.setPlace(place);
 		return item;
 	}
 
