@@ -53,6 +53,8 @@ public class CityPanel extends JPanel{
 		case WEST:
 			imagenWalle.setIcon(walleWest);
 			break;
+		default:
+			break;
 		}
 		
 	}

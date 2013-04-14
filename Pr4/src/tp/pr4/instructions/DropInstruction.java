@@ -8,6 +8,21 @@ import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
 public class DropInstruction implements Instruction {
+	
+	public DropInstruction() {
+		
+	}
+	
+	public DropInstruction(String robotsObject) {
+		try {
+			this.parse("DROP "+ robotsObject);
+			System.out.println(robotsObject);
+		} catch (WrongInstructionFormatException e) {
+			
+		}
+	}
+
+
 
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {

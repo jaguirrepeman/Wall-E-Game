@@ -67,7 +67,32 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		// Object[][] objects = engine.getItemsFromContainer();
 
 		tabla = new DefaultTableModel(new String[] { "Id.", "Description" }, 0);
-		JTable table = new JTable(tabla);
+		final JTable table = new JTable(tabla);
+		table.addMouseListener(new OyenteRaton(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = table.getSelectedRow();
+				
+				if (i>=0)
+					robotsObject = table.getValueAt(i,0).toString();
+				
+			}
+			
+		});
+		/*{
+			{
+				this.addMouseListener(new OyenteRaton(){
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						int i = table.getSelectedRow();
+						
+					}
+					
+				});
+			}
+		};*/
 		// table.addComponentListener(new ComponentListener())
 
 		// final JTable table = new JTable(data, columnNames);
@@ -186,8 +211,10 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new DropInstruction());
-						changeInventory(tabla);
+						if (robotsObject != null){
+							engine.communicateRobot(new DropInstruction(robotsObject));
+							changeInventory(tabla);
+						}
 					}
 					// hacer cosas nazis con la tabla
 
@@ -201,8 +228,12 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new OperateInstruction());
-						changeInventory(tabla);
+						if (robotsObject != null){
+							engine.communicateRobot(new OperateInstruction(robotsObject));
+							changeInventory(tabla);
+							robotInfo.setText("Fuel: " + engine.getFuel()
+									+ " Recycled: " + engine.getRecycledMaterial());
+						}
 
 					}
 
@@ -246,6 +277,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 
 	private JTextField objectToPick;
 	private String rotacion;
+	private String robotsObject;
 	@SuppressWarnings("rawtypes")
 	private JComboBox directionToTurn;
 	private DefaultTableModel tabla;
