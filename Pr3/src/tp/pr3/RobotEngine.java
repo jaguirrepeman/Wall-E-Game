@@ -72,7 +72,7 @@ public class RobotEngine {
 		c.configureContext(this, navigation, items);
 		try {
 			c.execute();
-			this.place = navigation.getCurrentPlace();
+			
 		} catch (InstructionExecutionException exc) {
 			System.out.println(exc.getMessage());
 		}
@@ -100,6 +100,10 @@ public class RobotEngine {
 
 	public Street getHeadingStreet() {
 		return this.cityMap.lookForStreet(this.place, this.direction);
+	}
+	
+	public void moveToPlace(Place headingPlace){
+		this.place = headingPlace;
 	}
 
 	public void say(String mensaje) {
