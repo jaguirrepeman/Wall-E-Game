@@ -40,13 +40,10 @@ public class CloseApp implements ActionListener {
 	}
 
 	public static void requestQuit(String quitReason) {
-		int seleccion = JOptionPane.showOptionDialog(null, null, quitReason,
-				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				CityPanel.createImageIcon("images/2WALLEExit.png", "WALLE"),
-				new Object[] { "OK", "" }, "null");
-
-		if (seleccion == -1 || seleccion == 0)
-			System.exit(0);
+		JOptionPane.showMessageDialog(null, quitReason, "End of the game",
+				JOptionPane.OK_OPTION,
+				CityPanel.createImageIcon("images/2WALLExit.png", "WALLE"));
+		System.exit(0);
 
 	}
 
