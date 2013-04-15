@@ -254,8 +254,8 @@ public class Main {
 		RobotEngine engine = new RobotEngine(new City(streets), places[0],
 				Direction.NORTH);
 		// plays
-		MainWindow window = new MainWindow(engine, places[0]);
-		window.setVisible(true);
+		//MainWindow window = new MainWindow(engine, places[0]);
+	//	window.setVisible(true);
 		engine.startEngine();
 
 

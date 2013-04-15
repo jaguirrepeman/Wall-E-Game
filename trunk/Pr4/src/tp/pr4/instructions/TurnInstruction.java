@@ -19,7 +19,7 @@ public class TurnInstruction extends UndoableInstruction{
 	}
 	
 	public TurnInstruction() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public void configureContext(RobotEngine engine,

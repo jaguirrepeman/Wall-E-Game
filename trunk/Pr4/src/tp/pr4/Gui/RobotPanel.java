@@ -182,6 +182,8 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 
 						if (seleccion == -1 || seleccion == 0) System.exit(0);
 					
+					
+					
 					}
 					
 				});
