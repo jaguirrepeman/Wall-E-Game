@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -30,7 +31,7 @@ import tp.pr4.Rotation;
 import tp.pr4.instructions.*;
 
 @SuppressWarnings("serial")
-public class RobotPanel extends JPanel implements PropertyChangeListener {
+public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 
 	public RobotPanel(final RobotEngine engine) {
 		this.engine = engine;
@@ -54,7 +55,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
-		robotInfo.addPropertyChangeListener("value", this);
+		//robotInfo.addPropertyChangeListener("value", this);
 		statusPanel.add(robotInfo);
 		dataPanel.add(statusPanel, BorderLayout.CENTER);
 
@@ -163,7 +164,20 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new QuitInstruction());
+					
+						int seleccion = JOptionPane.showOptionDialog(null,
+								null, "Exit WALL·E",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+								CityPanel.createImageIcon("images/walleExit.png", "WALLE"),
+
+					//			null, // null para icono por defecto.
+								/*null,  null para YES, NO y CANCEL, si no: */new Object[] { "YES", "NO"},
+								"null");
+
+						if (seleccion == -1 || seleccion == 0) System.exit(0);
+					
 					}
+					
 				});
 			}
 
@@ -194,8 +208,7 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if (!objectToPick.getText().isEmpty())
-							engine.communicateRobot(new PickInstruction(
-									objectToPick.getText()));
+							engine.communicateRobot(new PickInstruction(objectToPick.getText()));
 						// hacer cosas nazis con la tabla
 						changeInventory(tabla);
 						// tabla.fireTableDataChanged();
@@ -285,14 +298,4 @@ public class RobotPanel extends JPanel implements PropertyChangeListener {
 	
 	private RobotEngine engine;
 	
-	@Override
-	//no funciona
-	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-		/*robotInfo.setText("Fuel: " + engFuel
-				+ " Recycled: " + engRecycled);
-				*/
-
-	}
-
 }

@@ -6,7 +6,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class MoveInstruction implements Instruction{
+public class MoveInstruction implements UndoableInstruction{
 	
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;
@@ -33,6 +33,12 @@ public class MoveInstruction implements Instruction{
 		
 	}
 		
+	@Override
+	public void undo() {
+		this.navigation.moveBackwards();
+		this.engine.addFuel(5);
+		this.engine.printRobotState();
+	}
 	
 	public String getHelp(){
 		return "MOVE|MOVER";
@@ -49,4 +55,5 @@ public class MoveInstruction implements Instruction{
 	
 	private RobotEngine engine;
 	private NavigationModule navigation;
+	
 }

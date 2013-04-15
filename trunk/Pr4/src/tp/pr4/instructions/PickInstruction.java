@@ -13,17 +13,13 @@ import tp.pr4.items.ItemContainer;
  * @author usuario_local
  * 
  */
-public class PickInstruction implements Instruction {
+public class PickInstruction implements UndoableInstruction {
 	
 	public PickInstruction(){
 		//Constructor vacío
 	}
 	public PickInstruction(String itemId){
-		try {
-			this.parse("Pick" + " " + itemId);
-		} catch (WrongInstructionFormatException e) {
-			//e.printStackTrace();
-		}
+		this.id = itemId;
 	}
 	
 	public void configureContext(RobotEngine engine,
@@ -70,4 +66,9 @@ public class PickInstruction implements Instruction {
 	private NavigationModule navigation;
 	private ItemContainer robotContainer;
 	private String id;
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
 }
