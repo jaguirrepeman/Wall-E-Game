@@ -10,23 +10,26 @@ public class UndoInstruction implements Instruction {
 
 	@Override
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
-		return null;
+		String[] comando = cad.split(" ");
+		if((comando[0].equalsIgnoreCase("UNDO"))  && comando.length == 1)
+			return this;
+		else throw new WrongInstructionFormatException();
 	}
 
 	@Override
 	public String getHelp() {
-		return null;
+		return "UNDO";
 	}
 
 	@Override
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
-
+		this.engine = engine;
 	}
 
 	@Override
 	public void execute() throws InstructionExecutionException {
-		
+		engine.undoInstruction();
 	}
 
 	@Override
@@ -37,5 +40,7 @@ public class UndoInstruction implements Instruction {
 
 	@Override
 	public void undo() {}
+	
+	private RobotEngine engine;
 
 }

@@ -44,7 +44,8 @@ public class TurnInstruction extends UndoableInstruction{
 	}
 	@Override
 	public void undo() {
-		
+		this.navigation.rotate(rotation.Opposite());
+		this.engine.addFuel(5);
 	}
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 

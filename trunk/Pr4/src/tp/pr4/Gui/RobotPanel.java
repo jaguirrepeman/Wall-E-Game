@@ -139,7 +139,7 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 		JPanel instructionPanel = new JPanel();
 		TitledBorder titled = new TitledBorder("Instructions");
 		instructionPanel.setBorder(titled);
-		instructionPanel.setLayout(new GridLayout(4, 2, 3, 3));
+		instructionPanel.setLayout(new GridLayout(5, 2, 3, 3));
 		JButton move = new JButton("MOVE") {
 			{
 				this.addMouseListener(new OyenteRaton() {
@@ -258,6 +258,19 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 			}
 
 		};
+		JButton undo = new JButton("UNDO") {
+			{
+				this.addMouseListener(new OyenteRaton() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						engine.communicateRobot(new UndoInstruction());
+						changeInventory(tabla);
+					}
+					
+				});
+			}
+		};
 		objectToPick = new JTextField();
 		String[] rotationString = { Rotation.LEFT.toString(),
 				Rotation.RIGHT.toString() };
@@ -285,6 +298,7 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 		instructionPanel.add(objectToPick);
 		instructionPanel.add(drop);
 		instructionPanel.add(operate);
+		instructionPanel.add(undo);
 
 		//objectToPick.getName();
 
