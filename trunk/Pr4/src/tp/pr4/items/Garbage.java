@@ -21,14 +21,20 @@ public class Garbage extends Item {
 	public boolean use(RobotEngine r, NavigationModule nav) {
 		if (this.canBeUsed()) {
 			r.addRecycledMaterial(recycledMaterial);
-			this.recycledMaterial = 0;
 			this.hasBeenUsed = true;
 			return true;
 		} else
 			return false;
 
 	}
-
+	
+	@Override
+	public void undoUse(RobotEngine r, NavigationModule nav) {
+		
+		this.hasBeenUsed = false;
+		r.addRecycledMaterial(-this.recycledMaterial);
+	}
+	
 	public String toString() {
 		return this.getId() + ": " + super.toString()
 				+ "// recycled material = " + this.recycledMaterial;
@@ -36,4 +42,5 @@ public class Garbage extends Item {
 
 	private int recycledMaterial;
 	private boolean hasBeenUsed;
+
 }

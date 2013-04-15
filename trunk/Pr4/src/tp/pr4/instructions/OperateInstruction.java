@@ -1,9 +1,11 @@
 package tp.pr4.instructions;
 
+
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
 public class OperateInstruction implements UndoableInstruction{
@@ -13,12 +15,8 @@ public class OperateInstruction implements UndoableInstruction{
 	}
 	
 	public OperateInstruction(String robotsObject) {
-		try {
-			this.parse("OPERATE " + robotsObject);
-		} catch (WrongInstructionFormatException e) {
-			
-		}
 		
+		this.id = robotsObject;
 	}
 
 
@@ -42,7 +40,7 @@ public class OperateInstruction implements UndoableInstruction{
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
 					
-						this.items.pickItem(id);
+						this.usedItem = this.items.pickItem(id);
 					}
 					else{
 						
@@ -58,7 +56,7 @@ public class OperateInstruction implements UndoableInstruction{
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
 						
-						this.items.pickItem(id);
+						this.usedItem = this.items.pickItem(id);
 					}
 				}
 			} 
@@ -70,9 +68,14 @@ public class OperateInstruction implements UndoableInstruction{
 			}
 	}
 	
+	//@Override
 	public void undo() {
 	
+		if (usedItem != null){
+			items.addItem(this.usedItem);
+		}
 		
+		this.items.getItem(id).undoUse(this.engine, this.navigation);
 	}
 	
 	public String getHelp(){
@@ -95,5 +98,6 @@ public class OperateInstruction implements UndoableInstruction{
 	private NavigationModule navigation;
 	private ItemContainer items;
 	private String id;
+	private Item usedItem = null;
 
 }

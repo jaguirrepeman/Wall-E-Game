@@ -16,7 +16,7 @@ import tp.pr4.items.ItemContainer;
 public class PickInstruction implements UndoableInstruction {
 	
 	public PickInstruction(){
-		//Constructor vacío
+		
 	}
 	public PickInstruction(String itemId){
 		this.id = itemId;
@@ -44,7 +44,12 @@ public class PickInstruction implements UndoableInstruction {
 			throw new InstructionExecutionException();
 		}
 	}
-
+	
+	public void undo() {
+		Item item = robotContainer.pickItem(id);
+		this.navigation.dropItemAtCurrentPlace(item);
+	}
+	
 	public String getHelp() {
 		return "PICK|COGER <id>";
 
@@ -66,9 +71,5 @@ public class PickInstruction implements UndoableInstruction {
 	private NavigationModule navigation;
 	private ItemContainer robotContainer;
 	private String id;
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

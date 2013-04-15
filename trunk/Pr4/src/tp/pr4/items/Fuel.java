@@ -28,7 +28,14 @@ public class Fuel extends Item {
 			return false;
 
 	}
-
+	
+	@Override
+	public void undoUse(RobotEngine r, NavigationModule nav) {
+		r.addFuel(-this.power);
+		this.times++;
+		
+	}
+	
 	public String toString() {
 		return this.getId() + ": " + super.toString() + "// power = "
 				+ this.power + ", times = " + this.times;
@@ -36,4 +43,5 @@ public class Fuel extends Item {
 
 	private int power;
 	private int times;
+
 }

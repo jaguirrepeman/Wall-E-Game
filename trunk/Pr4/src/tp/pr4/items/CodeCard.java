@@ -23,14 +23,25 @@ public class CodeCard extends Item {
 		}
 		else return false;
 	}
+	
+	@Override
+	public void undoUse(RobotEngine r, NavigationModule nav) {
+		
+		if (nav.getHeadingStreet().isOpen()) nav.getHeadingStreet().close(this);
+		else nav.getHeadingStreet().open(this);
+	}
+	
 	public String getCode(){
 		return this.code;
 	}
+	
 	public String toString(){
 		return this.getId() + ": " + super.toString();
 		
 	}
 	
 	private String code;
+
+	
 	
 }
