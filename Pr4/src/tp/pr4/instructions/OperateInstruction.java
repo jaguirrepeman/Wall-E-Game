@@ -70,6 +70,11 @@ public class OperateInstruction implements UndoableInstruction{
 			}
 	}
 	
+	public void undo() {
+	
+		
+	}
+	
 	public String getHelp(){
 		
 		return "OPERATE|OPERAR <ID>";
@@ -90,9 +95,5 @@ public class OperateInstruction implements UndoableInstruction{
 	private NavigationModule navigation;
 	private ItemContainer items;
 	private String id;
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
+
 }
