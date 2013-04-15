@@ -42,6 +42,9 @@ public class PlaceCell extends JButton {
 		return actual;
 	}
 	
+	public boolean isSpaceShip(){
+		return this.place.isSpaceship();
+	}
 
 	public void setActual(boolean actual) {
 		this.actual = actual;

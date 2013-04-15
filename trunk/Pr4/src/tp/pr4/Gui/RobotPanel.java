@@ -132,6 +132,9 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 	
 	public void setStatus(int fuel, int recycled){
 		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycled);
+		if (fuel <= 0){
+			CloseApp.requestQuit("You run out of fuel, the game has ended");
+		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -167,8 +170,7 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new QuitInstruction());
-					
+						
 						int seleccion = JOptionPane.showOptionDialog(null,
 								null, "Exit WALL·E",
 								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,

@@ -1,4 +1,5 @@
 package tp.pr4.Gui;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,31 +11,43 @@ public class CloseApp implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		/*
-		JOptionPane opcion = new JOptionPane(
-				"¿Está seguro que desea cerrar la aplicación?");
+		 * JOptionPane opcion = new JOptionPane(
+		 * "¿Está seguro que desea cerrar la aplicación?");
+		 * 
+		 * Object[] options = { "OK", "CANCEL" };
+		 * 
+		 * 
+		 * JOptionPane.showOptionDialog(null, "Click OK to continue",
+		 * "¿Está seguro que desea cerrar la aplicación?",
+		 * JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+		 * options, options[0]);
+		 */
 
-		Object[] options = { "OK", "CANCEL" };
-		
-		
-		JOptionPane.showOptionDialog(null, "Click OK to continue",
-				"¿Está seguro que desea cerrar la aplicación?",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
-				options, options[0]);
-
-*/
-
-		
-		int seleccion = JOptionPane.showOptionDialog(null,
-				"Select an option", "Exit WALL·E",
-				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				null, // null para icono por defecto.
-				null,  // null para YES, NO y CANCEL, si no: new Object[] { "opcion 1", "opcion 2", "opcion 3" }
+		int seleccion = JOptionPane.showOptionDialog(null, "Select an option",
+				"Exit WALL·E", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+													// defecto.
+				null, // null para YES, NO y CANCEL, si no: new Object[] {
+						// "opcion 1", "opcion 2", "opcion 3" }
 				"null");
-		
-		if (seleccion == -1 || seleccion == 0) System.exit(0);
-			
-		else System.out.println("seleccionada opcion " + (seleccion + 1));
-		
+
+		if (seleccion == -1 || seleccion == 0)
+			System.exit(0);
+
+		else
+			System.out.println("seleccionada opcion " + (seleccion + 1));
+
+	}
+
+	public static void requestQuit(String quitReason) {
+		int seleccion = JOptionPane.showOptionDialog(null, null, quitReason,
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				CityPanel.createImageIcon("images/2WALLEExit.png", "WALLE"),
+				new Object[] { "OK", "" }, "null");
+
+		if (seleccion == -1 || seleccion == 0)
+			System.exit(0);
+
 	}
 
 }

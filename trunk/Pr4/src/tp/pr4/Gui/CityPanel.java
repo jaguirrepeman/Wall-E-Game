@@ -98,6 +98,8 @@ public class CityPanel extends JPanel{
 		else if (headingDirection == Direction.EAST) 	pos_x++;
 		else if (headingDirection == Direction.WEST) 	pos_x--;
 		places[pos_y][pos_x].setPlace(place).setActual(true);
+		if(places[pos_y][pos_x].isSpaceShip()) CloseApp.requestQuit("You finally found your spaceship");
+			
 	}
 	
 	public void setInitialPlace(Place initPlace){
