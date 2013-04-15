@@ -98,6 +98,7 @@ public class RobotEngine {
 	public void undoInstruction(){
 		if (!instructions.isEmpty())
 			instructions.pop().undo();
+		else say("There is no instruction to be undone.");
 	}
 
 	public void requestQuit() {

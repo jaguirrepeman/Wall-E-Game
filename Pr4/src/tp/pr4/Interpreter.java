@@ -33,7 +33,8 @@ public class Interpreter {
 			new DropInstruction(), new HelpInstruction(),
 			new OperateInstruction(), new PickInstruction(),
 			new QuitInstruction(), new RadarInstruction(),
-			new ScanInstruction(), new TurnInstruction()
+			new ScanInstruction(), new TurnInstruction(),
+			new UndoInstruction()
 
 	};
 }
