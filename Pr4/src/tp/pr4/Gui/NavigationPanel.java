@@ -21,7 +21,7 @@ public class NavigationPanel extends JPanel {
 		//setVisible(true);
 		// JScrollPanel
 		TitledBorder titled = new TitledBorder("Log");
-		text = new JTextArea("Aqui ira el texto y esas mierdas");
+		text = new JTextArea("");
 		text.setEditable(false);
 		//ejemplo de como meter imagenes
 		cityPanel = new CityPanel(text);
@@ -42,7 +42,7 @@ public class NavigationPanel extends JPanel {
 	public void rotate(Direction direction){
 		cityPanel.turnWalleIcon(direction);
 	}
-	
+	// TODO estas no estan repetidas con respecto a placecell¿?
 	public void setInitialPlace(Place initPlace){
 		cityPanel.setInitialPlace(initPlace);
 	}

@@ -10,10 +10,12 @@ import javax.swing.JTextArea;
 
 import tp.pr4.Place;
 
+@SuppressWarnings("serial")
 public class PlaceCell extends JButton {
 	
 	public PlaceCell(final JTextArea text){
 		//con JColorChooser parece que se cambia el color, hay que mirarlo
+		
 		actual = true;
 		this.setFocusPainted(actual);
 		
@@ -32,7 +34,8 @@ public class PlaceCell extends JButton {
 	public PlaceCell setPlace(Place place){
 		
 		this.place = place;
-		this.setText(place.getName());
+		this.setText(place.getName()); 
+		// TODO aqui falla co
 		return this;
 	}
 	

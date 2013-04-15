@@ -21,10 +21,11 @@ public class RobotEngine {
 		this.recycledMaterial = 0;
 		this.navigation = new NavigationModule(cityMap, initialPlace);
 		this.quit = false;
+		this.mainWindow = new MainWindow(this, initialPlace);
 	}
 
 	public void startEngine() {
-
+		mainWindow.setVisible(true);
 		navigation.initHeading(direction);
 		Instruction instruccion = null;
 		String command = new String();
@@ -134,7 +135,7 @@ public class RobotEngine {
 	}
 
 	public void setGUIWindow(MainWindow mainWindow){
-		
+		this.mainWindow = mainWindow;
 	}
 	
 	public void setRobotPanel(RobotPanel robotPanel){
@@ -159,5 +160,6 @@ public class RobotEngine {
 	private NavigationModule navigation;
 	private boolean quit;
 	private RobotPanel robotPanel;
+	private MainWindow mainWindow;
 	private Stack<Instruction> instructions = new Stack<Instruction>();
 }
