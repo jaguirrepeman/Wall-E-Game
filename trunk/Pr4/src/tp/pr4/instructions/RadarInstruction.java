@@ -6,7 +6,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class RadarInstruction implements Instruction{
+public class RadarInstruction extends NotUndoableInstruction{
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.navigation = navigation;
 	}

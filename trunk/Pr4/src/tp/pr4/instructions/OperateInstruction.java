@@ -8,7 +8,7 @@ import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
-public class OperateInstruction implements UndoableInstruction{
+public class OperateInstruction extends UndoableInstruction{
 	
 	public OperateInstruction() {
 

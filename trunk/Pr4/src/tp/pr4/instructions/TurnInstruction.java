@@ -7,7 +7,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class TurnInstruction implements UndoableInstruction{
+public class TurnInstruction extends UndoableInstruction{
 	
 	public TurnInstruction(String rotacion){
 		try {

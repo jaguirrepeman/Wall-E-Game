@@ -1,8 +1,12 @@
 package tp.pr4.instructions;
 
 
-public interface UndoableInstruction extends Instruction {
+public abstract class UndoableInstruction implements Instruction {
 	
-	void undo();
+	public abstract void undo();
+	
+	public boolean isUndoableInstruction(){
+		return true;
+	}
 	
 }

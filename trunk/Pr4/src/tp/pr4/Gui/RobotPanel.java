@@ -129,6 +129,10 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 			modelo.addRow(engine.getItemsFromContainer(i)/* objeto del array */);
 
 	}
+	
+	public void setStatus(int fuel, int recycled){
+		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycled);
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JPanel createInstructionPanel() {
@@ -143,8 +147,8 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new MoveInstruction());
-						robotInfo.setText("Fuel: " + engine.getFuel()
-								+ " Recycled: " + engine.getRecycledMaterial());
+						//robotInfo.setText("Fuel: " + engine.getFuel()
+						//		+ " Recycled: " + engine.getRecycledMaterial());
 					}
 					// hacer cosas con el fuel y tal...
 
@@ -189,8 +193,8 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						engine.communicateRobot(new TurnInstruction(rotacion));
-						robotInfo.setText("Fuel: " + engine.getFuel()
-								+ " Recycled: " + engine.getRecycledMaterial());
+						//robotInfo.setText("Fuel: " + engine.getFuel()
+						//		+ " Recycled: " + engine.getRecycledMaterial());
 					}
 
 				});
@@ -244,8 +248,8 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 						if (robotsObject != null){
 							engine.communicateRobot(new OperateInstruction(robotsObject));
 							changeInventory(tabla);
-							robotInfo.setText("Fuel: " + engine.getFuel()
-									+ " Recycled: " + engine.getRecycledMaterial());
+						//	robotInfo.setText("Fuel: " + engine.getFuel()
+						//			+ " Recycled: " + engine.getRecycledMaterial());
 						}
 
 					}
@@ -282,7 +286,7 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 		instructionPanel.add(drop);
 		instructionPanel.add(operate);
 
-		objectToPick.getName();
+		//objectToPick.getName();
 
 		return instructionPanel;
 

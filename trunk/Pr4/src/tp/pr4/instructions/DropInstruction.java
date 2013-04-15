@@ -7,7 +7,7 @@ import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
-public class DropInstruction implements UndoableInstruction {
+public class DropInstruction extends UndoableInstruction {
 	
 	public DropInstruction() {
 		

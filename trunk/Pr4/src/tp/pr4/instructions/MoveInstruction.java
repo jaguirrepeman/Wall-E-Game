@@ -6,7 +6,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class MoveInstruction implements UndoableInstruction{
+public class MoveInstruction extends UndoableInstruction{
 	
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer){
 		this.engine = engine;

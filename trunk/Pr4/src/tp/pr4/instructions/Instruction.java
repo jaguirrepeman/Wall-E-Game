@@ -14,5 +14,12 @@ public interface Instruction {
 	void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer);
 
 	void execute() throws InstructionExecutionException;
+	
+	public boolean isUndoableInstruction();
+	
+	public void undo();
+	
 	static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
+	
 }

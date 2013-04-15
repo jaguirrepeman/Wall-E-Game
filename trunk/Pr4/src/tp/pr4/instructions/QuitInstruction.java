@@ -6,7 +6,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class QuitInstruction implements Instruction{
+public class QuitInstruction extends NotUndoableInstruction{
 	public QuitInstruction() {
 	}
 	
