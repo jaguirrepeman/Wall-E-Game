@@ -7,7 +7,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class TurnInstruction implements Instruction{
+public class TurnInstruction implements UndoableInstruction{
 	
 	public TurnInstruction(String rotacion){
 		try {
@@ -42,7 +42,10 @@ public class TurnInstruction implements Instruction{
 			this.engine.printRobotState();
 			
 	}
-
+@Override
+	public void undo() {
+		
+	}
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 
 		String[] comando = cad.split(" ");
@@ -62,4 +65,5 @@ public class TurnInstruction implements Instruction{
 	private RobotEngine engine;
 	private NavigationModule navigation;
 	private Rotation rotation;
+	
 }

@@ -64,7 +64,12 @@ public class NavigationModule {
 					"There is no street in direction "
 							+ this.direction.toString());
 	}
-
+	public void moveBackwards() {
+		
+			this.place = this.city.lookForStreet(this.place, direction.Opposite()).nextPlace(place);
+			navPanel.move(direction.Opposite(), place);
+	}
+	
 	public Item pickItemFromCurrentPlace(String id) {
 		
 		Item item = place.pickItem(id);
@@ -104,4 +109,5 @@ public class NavigationModule {
 	private Place place;
 	private Direction direction;
 	private NavigationPanel navPanel;
+	
 }

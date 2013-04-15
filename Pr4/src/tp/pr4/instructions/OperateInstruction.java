@@ -6,7 +6,7 @@ import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
 
-public class OperateInstruction implements Instruction{
+public class OperateInstruction implements UndoableInstruction{
 	
 	public OperateInstruction() {
 
@@ -90,4 +90,9 @@ public class OperateInstruction implements Instruction{
 	private NavigationModule navigation;
 	private ItemContainer items;
 	private String id;
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
 }

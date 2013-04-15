@@ -7,7 +7,7 @@ import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
-public class DropInstruction implements Instruction {
+public class DropInstruction implements UndoableInstruction {
 	
 	public DropInstruction() {
 		
@@ -28,6 +28,7 @@ public class DropInstruction implements Instruction {
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.navigation = navigation;
 		this.robotContainer = robotContainer;
+		
 	}
 
 	public void execute() throws InstructionExecutionException {
@@ -45,6 +46,12 @@ public class DropInstruction implements Instruction {
 		}
 
 	}
+	
+	public void undo() {
+		
+		navigation.pickItemFromCurrentPlace(id);
+		
+	}
 
 	public String getHelp() {
 		return "DROP|SOLTAR <id>";
@@ -61,8 +68,9 @@ public class DropInstruction implements Instruction {
 			throw new WrongInstructionFormatException();
 
 	}
-
+	
 	private NavigationModule navigation;
 	private ItemContainer robotContainer;
 	private String id;
+
 }
