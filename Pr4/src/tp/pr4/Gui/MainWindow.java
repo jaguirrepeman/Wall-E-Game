@@ -24,6 +24,7 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.engine = engine;
 		this.engine.setNavigationPanel(navPanel);
+		this.engine.setRobotPanel(robotPan);
 		this.navPanel.setInitialPlace(initPlace);
 	}
 	

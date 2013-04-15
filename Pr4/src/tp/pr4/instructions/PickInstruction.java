@@ -13,7 +13,7 @@ import tp.pr4.items.ItemContainer;
  * @author usuario_local
  * 
  */
-public class PickInstruction implements UndoableInstruction {
+public class PickInstruction extends UndoableInstruction {
 	
 	public PickInstruction(){
 		

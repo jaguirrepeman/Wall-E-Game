@@ -7,7 +7,7 @@ import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.Item;
 import tp.pr4.items.ItemContainer;
 
-public class ScanInstruction implements Instruction {
+public class ScanInstruction extends NotUndoableInstruction {
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.engine = engine;

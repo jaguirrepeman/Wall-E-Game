@@ -1,6 +1,7 @@
 package tp.pr4;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 import tp.pr4.Gui.*;
 import tp.pr4.instructions.*;
@@ -60,10 +61,12 @@ public class RobotEngine {
 
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
+		robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
+		robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void requestHelp() {
@@ -75,6 +78,10 @@ public class RobotEngine {
 		try {
 			
 			c.execute();
+			
+			if(c.isUndoableInstruction())
+				instructions.add(c);
+			
 		} catch (InstructionExecutionException exc) {
 			System.out.println(exc.getMessage());
 		}
@@ -86,6 +93,11 @@ public class RobotEngine {
 		System.out.println("      * My power is " + this.fuel);
 		System.out.println("      * My recycled material is "
 				+ this.recycledMaterial);
+	}
+	
+	public void undoInstruction(){
+		if (!instructions.isEmpty())
+			instructions.pop().undo();
 	}
 
 	public void requestQuit() {
@@ -125,7 +137,7 @@ public class RobotEngine {
 	}
 	
 	public void setRobotPanel(RobotPanel robotPanel){
-		
+		this.robotPanel = robotPanel;
 	}
 	
 	public void setNavigationPanel(NavigationPanel navPanel){
@@ -145,4 +157,6 @@ public class RobotEngine {
 	private int recycledMaterial;
 	private NavigationModule navigation;
 	private boolean quit;
+	private RobotPanel robotPanel;
+	private Stack<Instruction> instructions = new Stack<Instruction>();
 }
