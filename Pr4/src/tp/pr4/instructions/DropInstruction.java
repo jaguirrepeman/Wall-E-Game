@@ -14,18 +14,13 @@ public class DropInstruction implements UndoableInstruction {
 	}
 	
 	public DropInstruction(String robotsObject) {
-		try {
-			this.parse("DROP "+ robotsObject);
-			System.out.println(robotsObject);
-		} catch (WrongInstructionFormatException e) {
-			
-		}
+
+		this.id = robotsObject;
 	}
 
 
 
-	public void configureContext(RobotEngine engine,
-			NavigationModule navigation, ItemContainer robotContainer) {
+	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer) {
 		this.navigation = navigation;
 		this.robotContainer = robotContainer;
 		
@@ -49,8 +44,8 @@ public class DropInstruction implements UndoableInstruction {
 	
 	public void undo() {
 		
-		navigation.pickItemFromCurrentPlace(id);
-		
+		Item item = navigation.pickItemFromCurrentPlace(id);
+		this.robotContainer.addItem(item);
 	}
 
 	public String getHelp() {

@@ -2,7 +2,7 @@ package pruebas;
 import java.util.Vector;
 
 class Inventario {
-	Vector<Item> v = new Vector<Item>();
+	Vector<GlugluItem> v = new Vector<GlugluItem>();
 
 	public Inventario() {
 
@@ -12,11 +12,11 @@ class Inventario {
 		return v.size();
 	}
 
-	public void addItem(Item i) {
+	public void addItem(GlugluItem i) {
 		v.add(i);
 	}
 
-	public Item getItem(int i) {
+	public GlugluItem getItem(int i) {
 		return v.elementAt(i);
 	}
 }

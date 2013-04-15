@@ -15,6 +15,21 @@ import tp.pr4.items.CodeCard;
 import tp.pr4.items.Fuel;
 import tp.pr4.items.Garbage;
 
+
+/*
+ * 
+ * public class FilterOutputStream extends OutputStream{privateOutputStream out; private boolean is writing;
+ * Const(OutputStream out, boolean isWriting){this.out = out; this.isWriting = isWriting}
+ * @Override 
+ * public void write(int b)throws IOException{
+ * if (isWriting) out.write(b);
+ * 
+ * 
+ * }
+ * 
+ * System.setOut(new PrintStream(new FilterOutputStream(Sytem.out, true))));
+ * System.setErr(new PrintStream(new FilterOutputStream(System.err, true))));
+ */
 /**
  * gluglu Aplicación que utiliza las clases de la práctica sobre el mapa que
  * aparece como ejemplo en el enunciado.
