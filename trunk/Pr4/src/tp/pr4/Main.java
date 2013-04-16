@@ -248,7 +248,7 @@ public class Main {
 	}
 	public static void main(String[] args){
 		
-		/*Options opt = new Options();
+		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
 		Option interf = new Option("i", "interface", true, "Type of interface");
@@ -260,11 +260,22 @@ public class Main {
 		BasicParser parser = new BasicParser();
 		try {
 			CommandLine cmd = parser.parse(opt, args);
+			if(cmd.hasOption('h')){
+				HelpFormatter h = new HelpFormatter();
+				h.printHelp("Help", opt);
+			}
+			
+			//
+			
+			if(cmd.getOptionValue('i').equals("swing")){
+				//getOptionValue devuelve el parámetro tras -i 	
+			}
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		// create the different places
 		Place[] places = createPlaces();
 		// create the different Streets generating the map
