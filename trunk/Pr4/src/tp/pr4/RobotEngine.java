@@ -21,11 +21,11 @@ public class RobotEngine {
 		this.recycledMaterial = 0;
 		this.navigation = new NavigationModule(cityMap, initialPlace);
 		this.quit = false;
-		this.mainWindow = new MainWindow(this, initialPlace);
+		
+		
 	}
 
 	public void startEngine() {
-		mainWindow.setVisible(true);
 		navigation.initHeading(direction);
 		Instruction instruccion = null;
 		String command = new String();
@@ -62,12 +62,12 @@ public class RobotEngine {
 
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
-		robotPanel.setStatus(this.fuel, this.recycledMaterial);
+		if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		robotPanel.setStatus(this.fuel, this.recycledMaterial);
+		if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void requestHelp() {
@@ -135,7 +135,7 @@ public class RobotEngine {
 	}
 
 	public void setGUIWindow(MainWindow mainWindow){
-		this.mainWindow = mainWindow;
+
 	}
 	
 	public void setRobotPanel(RobotPanel robotPanel){
@@ -160,6 +160,5 @@ public class RobotEngine {
 	private NavigationModule navigation;
 	private boolean quit;
 	private RobotPanel robotPanel;
-	private MainWindow mainWindow;
 	private Stack<Instruction> instructions = new Stack<Instruction>();
 }

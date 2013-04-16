@@ -14,7 +14,7 @@ import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 import tp.pr4.items.CodeCard;
 import tp.pr4.items.Fuel;
 import tp.pr4.items.Garbage;
-
+import org.apache.commons.cli.*;
 
 /*
  * 
@@ -44,6 +44,7 @@ public class Main {
 	 * 
 	 * @return The place where the robot starts the game
 	 */
+	
 	private static Place[] createPlaces() {
 		Place[] _places = new Place[10];
 		// 0: Puerta del Sol
@@ -246,6 +247,24 @@ public class Main {
 
 	}
 	public static void main(String[] args){
+		
+		/*Options opt = new Options();
+		Option help = new Option("h", "help", false, "Shows this help message");
+		opt.addOption(help);
+		Option interf = new Option("i", "interface", true, "Type of interface");
+		interf.setArgName("type");
+		Option map = new Option("m", "map", true, "File map name");
+		opt.addOption(interf);
+		opt.addOption(map);
+		
+		BasicParser parser = new BasicParser();
+		try {
+			CommandLine cmd = parser.parse(opt, args);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 		// create the different places
 		Place[] places = createPlaces();
 		// create the different Streets generating the map
@@ -254,8 +273,8 @@ public class Main {
 		RobotEngine engine = new RobotEngine(new City(streets), places[0],
 				Direction.NORTH);
 		// plays
-		//MainWindow window = new MainWindow(engine, places[0]);
-	//	window.setVisible(true);
+		MainWindow window = new MainWindow(engine, places[0]);
+		window.setVisible(true);
 		engine.startEngine();
 
 

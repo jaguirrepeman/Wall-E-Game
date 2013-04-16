@@ -35,7 +35,7 @@ public class NavigationPanel extends JPanel {
 		this.add(scroller, BorderLayout.SOUTH);
 	}
 	public void move(Direction headingDirection, Place place){
-		cityPanel.move(headingDirection, place);
+		if (cityPanel != null) cityPanel.move(headingDirection, place);
 		text.setText(place.toString());
 	}
 	
