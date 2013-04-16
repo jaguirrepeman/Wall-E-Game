@@ -20,7 +20,7 @@ public class NavigationModule {
 
 	public void dropItemAtCurrentPlace(Item it) {
 		this.place.addItem(it);
-		navPanel.setPlace(place);
+		if (navPanel != null) navPanel.setPlace(place);
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
@@ -53,7 +53,7 @@ public class NavigationModule {
 
 				this.place = this.city.lookForStreet(this.place, direction)
 						.nextPlace(place);
-				navPanel.move(direction, place);
+				if (navPanel != null)	navPanel.move(direction, place);
 
 			} else {
 				throw new InstructionExecutionException(
@@ -67,20 +67,20 @@ public class NavigationModule {
 	public void moveBackwards() {
 		
 			this.place = this.city.lookForStreet(this.place, direction.Opposite()).nextPlace(place);
-			navPanel.move(direction.Opposite(), place);
+			if (navPanel != null) navPanel.move(direction.Opposite(), place);
 	}
 	
 	public Item pickItemFromCurrentPlace(String id) {
 		
 		Item item = place.pickItem(id);
-		navPanel.setPlace(place);
+		if (navPanel != null) navPanel.setPlace(place);
 		return item;
 	}
 
 	public void rotate(Rotation rotation) {
 
 		this.direction = direction.nextDirection(rotation);
-		navPanel.rotate(this.direction);
+		if (navPanel != null) navPanel.rotate(this.direction);
 	}
 
 	public void scanCurrentPlace() {
