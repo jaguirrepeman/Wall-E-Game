@@ -2,6 +2,7 @@ package tp.pr4;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 import tp.pr4.City;
 import tp.pr4.Direction;
@@ -247,7 +248,7 @@ public class Main {
 
 	}
 	public static void main(String[] args){
-		
+		 
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
@@ -268,10 +269,12 @@ public class Main {
 			//
 			
 			if(cmd.getOptionValue('i').equals("swing")){
-				//getOptionValue devuelve el parámetro tras -i 	
+				System.setOut(new PrintStream(new FilterOutputStream(System.out, true)));
+				System.setErr(new PrintStream(new FilterOutputStream(System.err, true)));
 			}
 			else if (cmd.getOptionValue('i').equals("console")){
-				
+				System.setOut(new PrintStream(new FilterOutputStream(System.out, true)));
+				System.setErr(new PrintStream(new FilterOutputStream(System.err, true)));
 			}
 			
 		} catch (ParseException e) {
