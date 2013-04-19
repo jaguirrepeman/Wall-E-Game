@@ -252,9 +252,9 @@ public class Main {
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
-		Option interf = new Option("i", "interface", true, "Type of interface");
+		Option interf = new Option("i", "interface", true, "The type of interface: console or swing");
 		interf.setArgName("type");
-		Option map = new Option("m", "map", true, "File map name");
+		Option map = new Option("m", "map", true, "File with the description of the city");
 		opt.addOption(interf);
 		opt.addOption(map);
 		
