@@ -269,8 +269,8 @@ public class Main {
 			//
 			
 			if(cmd.getOptionValue('i').equals("swing")){
-				System.setOut(new PrintStream(new FilterOutputStream(System.out, true)));
-				System.setErr(new PrintStream(new FilterOutputStream(System.err, true)));
+				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
+				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
 			}
 			else if (cmd.getOptionValue('i').equals("console")){
 				System.setOut(new PrintStream(new FilterOutputStream(System.out, true)));

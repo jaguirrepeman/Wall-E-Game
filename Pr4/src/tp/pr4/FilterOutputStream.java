@@ -12,7 +12,7 @@ public class FilterOutputStream extends OutputStream {
 	  }
 	 @Override 
 	 public void write(int b)throws IOException{
-	 if (isWriting) out.write(b);
+	 if (this.isWriting) out.write(b);
 	 
 	 
 	 }
