@@ -9,7 +9,6 @@ public class CloseApp implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		/*
 		 * JOptionPane opcion = new JOptionPane(
 		 * "¿Está seguro que desea cerrar la aplicación?");

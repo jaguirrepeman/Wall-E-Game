@@ -3,6 +3,9 @@ package tp.pr4.Gui;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -14,6 +17,30 @@ public class MainWindow extends JFrame {
 		super("WALL·E");
 		this.setSize(1080, 720);
 		this.setLayout(new BorderLayout(10, 10));
+		menuBar = new JMenuBar();
+		JMenu menu = new JMenu("File");
+		menuBar.add(menu);
+		JMenuItem quit = new JMenuItem("Quit");
+		menu.add(quit);
+		quit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int seleccion = JOptionPane.showOptionDialog(null,
+						null, "Exit WALL·E",
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+						CityPanel.createImageIcon("images/walleExit.png", "WALLE"), 
+							new Object[] { "YES", "NO"},"null");
+
+				if (seleccion == -1 || seleccion == 0) System.exit(0);
+			
+			}
+			
+		});
+		this.setJMenuBar(menuBar);	
+		
+			
+		
 		robotPan = new RobotPanel(engine);
 	//	robotPan.setPreferredSize(new Dimension(200, 200));
 		robotPan.setSize(200, 200);
@@ -35,4 +62,5 @@ public class MainWindow extends JFrame {
 	private RobotEngine engine;
 	private RobotPanel robotPan;
 	private NavigationPanel navPanel;
+	private JMenuBar menuBar;
 }
