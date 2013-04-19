@@ -270,6 +270,9 @@ public class Main {
 			if(cmd.getOptionValue('i').equals("swing")){
 				//getOptionValue devuelve el parámetro tras -i 	
 			}
+			else if (cmd.getOptionValue('i').equals("console")){
+				
+			}
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
