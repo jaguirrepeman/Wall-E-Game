@@ -3,8 +3,7 @@ package tp.pr4.Gui;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 
-import javax.swing.Action;
-import javax.swing.Icon;
+
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 

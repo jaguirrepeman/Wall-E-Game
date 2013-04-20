@@ -1,16 +1,14 @@
 package tp.pr4.Gui;
 
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import tp.pr4.Place;
 import tp.pr4.RobotEngine;
+
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	public MainWindow(RobotEngine engine, Place initPlace){
