@@ -16,7 +16,9 @@ public abstract class Item {
 
 	public abstract boolean use(RobotEngine r, NavigationModule nav);
 	
-	public abstract void undoUse(RobotEngine r, NavigationModule nav);
+	public  void undoUse(RobotEngine r, NavigationModule nav){
+		
+	}
 
 	public String getId() {
 		
