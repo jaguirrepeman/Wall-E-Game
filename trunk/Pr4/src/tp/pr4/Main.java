@@ -403,9 +403,9 @@ public class Main {
 		opt.addOption(help);
 		Option interf = new Option("i", "interface", true, "The type of interface: console or swing");
 		interf.setArgName("type");
+		opt.addOption(interf);
 		Option map = new Option("m", "map", true, "File with the description of the city");
 		map.setArgName("mapfile");
-		opt.addOption(interf);
 		opt.addOption(map);
 		
 		BasicParser parser = new BasicParser();
