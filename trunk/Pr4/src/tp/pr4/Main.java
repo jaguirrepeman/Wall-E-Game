@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import tp.pr4.City;
 import tp.pr4.Direction;
 import tp.pr4.Place;
@@ -50,7 +53,7 @@ public class Main {
 		Place[] _places = new Place[10];
 		// 0: Puerta del Sol
 		_places[0] = new Place(
-				"PUERTA DEL SOL",
+				"SOL",
 				false,
 				"You are at the PUERTA DEL SOL, the center of Madrid. "
 						+ Interpreter.LINE_SEPARATOR
@@ -115,11 +118,11 @@ public class Main {
 						+ "Take all the iron you find");
 
 		// 8: Puerta de Alcala
-		_places[8] = new Place("PUERTA DE ALCALA", true,
+		_places[8] = new Place("ALCALA", true,
 				"Ok, finally you have found your spaceship....");
 
 		// 9: Plaza de Jacinto Benavente
-		_places[9] = new Place("JACINTO BENAVENTE", false,
+		_places[9] = new Place("BENAVENTE", false,
 				"If you are cold you can start a fire with the wheels of those old buses");
 
 		return _places;
@@ -248,7 +251,17 @@ public class Main {
 
 	}
 	public static void main(String[] args){
-		 
+		/**
+		 * esto es para que funcione bien en mac 
+		 */
+		try {
+			UIManager.setLookAndFeel(
+			        UIManager.getCrossPlatformLookAndFeelClassName());
+		} 
+		catch (ClassNotFoundException e1) {}
+		catch (InstantiationException e1) {} 
+		catch (IllegalAccessException e1) {} 
+		catch (UnsupportedLookAndFeelException e1) {}
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
