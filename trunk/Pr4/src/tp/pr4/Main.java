@@ -262,6 +262,7 @@ public class Main {
 		catch (InstantiationException e1) {} 
 		catch (IllegalAccessException e1) {} 
 		catch (UnsupportedLookAndFeelException e1) {}
+		
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
@@ -275,81 +276,110 @@ public class Main {
 		boolean swingOn = false;
 		String fileName = null;
 		try {
+			/*
+			 * Comprobación de los parámetros para ejecutar la aplicación
+			 * 
+			 */
+			
 			CommandLine cmd = parser.parse(opt, args);
 			
-			fileName = cmd.getOptionValue('m');
+			HelpFormatter h = new HelpFormatter();
 			
 			if(cmd.hasOption('h')){
-				HelpFormatter h = new HelpFormatter();
-				h.printHelp("Help", opt);
+				System.out.println("Execute this assignment with these parameters:");
+				h.printHelp(
+						Main.class.getCanonicalName()
+						+ "[-h] [-i <type>] [-m <mapfile>]", opt);
+			}
+			/*
+			 * Parámetros erróneos, no se ha elegido ni consola ni swing, o no hay mapa que cargar
+			 */
+			if (!cmd.hasOption('m')) 
+				throw new ParseException("Map file not specified");
+				
+			else if (!(cmd.hasOption('i')
+					&& (cmd.getOptionValue('i').equals("console") || cmd
+							.getOptionValue('i').equals("swing")))) {
+				throw new ParseException("Interface not specified");
 			}
 			
-			if(cmd.getOptionValue('i').equals("swing")){
-				swingOn = true;
-				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
-				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
-			}
-			
-			else if (cmd.getOptionValue('i').equals("console")){
-				System.setOut(new PrintStream(new FilterOutputStream(System.out, true)));
-				System.setErr(new PrintStream(new FilterOutputStream(System.err, true)));
-			}
-			else {
+			/*else {
+				if (!cmd.hasOption('h'))
+					h.printHelp("Help", opt);
 				System.err.println("Bad params." + Interpreter.LINE_SEPARATOR
 					+ "Usage: "+ Main.class.getCanonicalName() + "<mapfile>"
 					+ Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR
 					+ "<mapfile> : file with the description of the city.");
-				System.exit(1);
+				///throw new ParseException("hello");
+				//System.exit(1);
+			}*/
+			/*
+			 * Si no hay parámetros erróneos se lee el nombre del mapa y se comprueba 
+			 * 	si se ha deseado ejecutar la aplicación en swing o no
+			 */
+			fileName = cmd.getOptionValue('m');
+			if (cmd.getOptionValue('i').equals("swing")) {
+					swingOn = true;
+
 			}
-			
+			/*
+			 * Lectura del mapa y creación de la ciudad
+			 */
 			FileInputStream file = new FileInputStream(fileName);
 			
 			CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
 			City city = cityLoader.loadCity(file);
-			
+			/*
+			 * Creación del robotEngine
+			 */
 			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
-			
+			/*
+			 * Si se ha elegido ejecutar la aplicación con swing, se cancelan las salidas por consola
+			 * y se crea el mainWindow
+			 */
 			if (swingOn){
+				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
+				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
+				
 				MainWindow window = new MainWindow(wallE, cityLoader.getInitialPlace());
 				window.setVisible(true);
 			}
+			/*
+			 * Comienza la ejecución del programa
+			 */
 			wallE.startEngine();
+		
+		}
+		/*
+		 * Parseo erróneo
+		 */
+		catch (ParseException e) {
+			//e.printStackTrace();
+			System.err.println(e.getMessage());
+			System.exit(1);
 			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
+			
+		} 
+		/*
+		 * Mapa no encontrado
+		 */
+		catch (FileNotFoundException e) {
+		 
 
 			System.err
 					.println("Error reading the map file: "+ fileName +"(No existe el fichero o el directorio)");
 			System.exit(2);
-		} catch (WrongCityFormatException e) {
+		}
+		/*
+		 * Mapa con formato erróneo
+		 */
+		catch (WrongCityFormatException e) {
 
 			System.err.println("Error reading the map file: " + args[0]
 					+ " (La sintaxis del fichero no es correcta)");
 			System.exit(2);
 		}
-		try {
-
-			FileInputStream file = new FileInputStream(fileName);
-			CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
-			City city = cityLoader.loadCity(file);
-			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
-			if (swingOn){
-				MainWindow window = new MainWindow(wallE, cityLoader.getInitialPlace());
-				window.setVisible(true);
-			}
-			wallE.startEngine();
-		} catch (FileNotFoundException e) {
-
-			System.err
-					.println("Error reading the map file: "+ fileName +"(No existe el fichero o el directorio)");
-			System.exit(2);
-		} catch (WrongCityFormatException e) {
-
-			System.err.println("Error reading the map file: " + args[0]
-					+ " (La sintaxis del fichero no es correcta)");
-			System.exit(2);
-		}
+		
 
 		System.exit(0);
 	}
@@ -376,7 +406,6 @@ public class Main {
 		
 		BasicParser parser = new BasicParser();
 		boolean swingOn = false;
-		String fileName;
 		try {
 			CommandLine cmd = parser.parse(opt, args);
 			if(cmd.hasOption('h')){
