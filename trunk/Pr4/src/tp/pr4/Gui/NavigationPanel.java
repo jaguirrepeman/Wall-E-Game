@@ -3,8 +3,7 @@ package tp.pr4.Gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;

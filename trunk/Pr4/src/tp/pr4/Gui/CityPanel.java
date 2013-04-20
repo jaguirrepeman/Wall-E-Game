@@ -1,12 +1,9 @@
 package tp.pr4.Gui;
 
 import java.awt.BorderLayout;
-
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -14,7 +11,6 @@ import javax.swing.border.TitledBorder;
 
 import tp.pr4.Direction;
 import tp.pr4.Place;
-import tp.pr4.instructions.OperateInstruction;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{
 	
