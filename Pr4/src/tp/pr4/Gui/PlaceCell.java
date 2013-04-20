@@ -34,7 +34,6 @@ public class PlaceCell extends JButton {
 		
 		this.place = place;
 		this.setText(place.getName()); 
-		// TODO aqui falla co
 		return this;
 	}
 	
@@ -45,6 +44,7 @@ public class PlaceCell extends JButton {
 	}
 	
 	public boolean isSpaceShip(){
+		
 		return this.place.isSpaceship();
 	}
 
