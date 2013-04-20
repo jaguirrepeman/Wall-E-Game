@@ -27,10 +27,8 @@ public class CityPanel extends JPanel{
 		walleEast = createImageIcon("images/walleEast.png", "WALLE");
 		walleWest = createImageIcon("images/walleWest.png", "WALLE");
 		imagenWalle = new JLabel(walle);
-//		imagenWalleSouth = new JLabel(walleSouth);
-//		imagenWalleEast = new JLabel(walleEast);
-//		imagenWalleWest = new JLabel(walleWest);
 		this.add(imagenWalle, BorderLayout.WEST);
+		
 		JPanel cityMap = this.setCity(text);
 		this.add(cityMap);
 
@@ -70,7 +68,7 @@ public class CityPanel extends JPanel{
 	}
 	
 	public JPanel setCity(JTextArea text){
-		//aqui se crea la ciudad que se mostrara en la ventana
+		//aqui se crea la ciudad que se mostrará en la ventana
 		JPanel cityMap = new JPanel();
 		TitledBorder titled = new TitledBorder("City Map");
 		cityMap.setBorder(titled);
@@ -84,10 +82,6 @@ public class CityPanel extends JPanel{
 				cityMap.add(places[i][j]);
 			}
 		
-
-		//PlaceCell place = new PlaceCell();
-		//place.setActual(true);
-		//cityMap.add(place);
 		return cityMap;
 	}
 	
@@ -119,11 +113,11 @@ public class CityPanel extends JPanel{
 	 private int pos_y = 5;
 	 
 	 private PlaceCell[][] places;
+	 
 	 private ImageIcon walle;
 	 private ImageIcon walleSouth;
 	 private ImageIcon walleEast;
 	 private ImageIcon walleWest;
-	 
 	 private JLabel imagenWalle;
 	
 }
