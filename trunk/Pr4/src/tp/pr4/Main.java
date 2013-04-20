@@ -284,12 +284,13 @@ public class Main {
 			CommandLine cmd = parser.parse(opt, args);
 			
 			HelpFormatter h = new HelpFormatter();
-			
-			if(cmd.hasOption('h')){
+			boolean requestHelp = cmd.hasOption('h');
+			if(requestHelp){
 				System.out.println("Execute this assignment with these parameters:");
 				h.printHelp(
 						Main.class.getCanonicalName()
-						+ "[-h] [-i <type>] [-m <mapfile>]", opt);
+						+ " [-h] [-i <type>] [-m <mapfile>]", opt);
+				if (!cmd.hasOption('m') && !cmd.hasOption('i')) System.exit(0);
 			}
 			/*
 			 * Parámetros erróneos, no se ha elegido ni consola ni swing, o no hay mapa que cargar
@@ -297,10 +298,12 @@ public class Main {
 			if (!cmd.hasOption('m')) 
 				throw new ParseException("Map file not specified");
 				
-			else if (!(cmd.hasOption('i')
-					&& (cmd.getOptionValue('i').equals("console") || cmd
-							.getOptionValue('i').equals("swing")))) {
+			if (!cmd.hasOption('i')) {
 				throw new ParseException("Interface not specified");
+			}
+			else if (!(cmd.getOptionValue('i').equals("console") || cmd
+							.getOptionValue('i').equals("swing"))){
+				throw new ParseException("Wrong type of interface");
 			}
 			
 			/*else {
@@ -348,7 +351,7 @@ public class Main {
 			 * Comienza la ejecución del programa
 			 */
 			wallE.startEngine();
-		
+			System.exit(0);
 		}
 		/*
 		 * Parseo erróneo
@@ -367,7 +370,7 @@ public class Main {
 		 
 
 			System.err
-					.println("Error reading the map file: "+ fileName +"(No existe el fichero o el directorio)");
+					.println("Error reading the map file: "+ fileName +" (No existe el fichero o el directorio)");
 			System.exit(2);
 		}
 		/*
@@ -381,7 +384,7 @@ public class Main {
 		}
 		
 
-		System.exit(0);
+		
 	}
 	public static void mainAnt(String[] args){
 		/**
