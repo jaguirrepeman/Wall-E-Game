@@ -37,6 +37,7 @@ public class NavigationPanel extends JPanel {
 	public void move(Direction headingDirection, Place place){
 		if (cityPanel != null) cityPanel.move(headingDirection, place);
 		text.setText(place.toString());
+		if (cityPanel.isSpaceShip()) CloseApp.requestQuit("You finally found your spaceship");
 	}
 	
 	public void rotate(Direction direction){
@@ -45,6 +46,7 @@ public class NavigationPanel extends JPanel {
 	// TODO estas no estan repetidas con respecto a placecell¿?
 	public void setInitialPlace(Place initPlace){
 		cityPanel.setInitialPlace(initPlace);
+		text.setText(initPlace.toString());
 	}
 	
 	public void setPlace(Place place){
