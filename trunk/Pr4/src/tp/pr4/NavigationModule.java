@@ -56,13 +56,16 @@ public class NavigationModule {
 				if (navPanel != null)	navPanel.move(direction, place);
 
 			} else {
+				navPanel.say("The street is closed");
 				throw new InstructionExecutionException(
 						"Arrggg, there is a street but it is closed!");
 			}
-		} else
+		} else{
+			navPanel.say("There is no street in direction "+ this.direction.toString());
 			throw new InstructionExecutionException(
 					"There is no street in direction "
 							+ this.direction.toString());
+		}
 	}
 	public void moveBackwards() {
 		
