@@ -272,6 +272,111 @@ public class Main {
 		opt.addOption(map);
 		
 		BasicParser parser = new BasicParser();
+		boolean swingOn = false;
+		String fileName = null;
+		try {
+			CommandLine cmd = parser.parse(opt, args);
+			
+			fileName = cmd.getOptionValue('m');
+			
+			if(cmd.hasOption('h')){
+				HelpFormatter h = new HelpFormatter();
+				h.printHelp("Help", opt);
+			}
+			
+			if(cmd.getOptionValue('i').equals("swing")){
+				swingOn = true;
+				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
+				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
+			}
+			
+			else if (cmd.getOptionValue('i').equals("console")){
+				System.setOut(new PrintStream(new FilterOutputStream(System.out, true)));
+				System.setErr(new PrintStream(new FilterOutputStream(System.err, true)));
+			}
+			else {
+				System.err.println("Bad params." + Interpreter.LINE_SEPARATOR
+					+ "Usage: "+ Main.class.getCanonicalName() + "<mapfile>"
+					+ Interpreter.LINE_SEPARATOR + Interpreter.LINE_SEPARATOR
+					+ "<mapfile> : file with the description of the city.");
+				System.exit(1);
+			}
+			
+			FileInputStream file = new FileInputStream(fileName);
+			
+			CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
+			City city = cityLoader.loadCity(file);
+			
+			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
+			
+			if (swingOn){
+				MainWindow window = new MainWindow(wallE, cityLoader.getInitialPlace());
+				window.setVisible(true);
+			}
+			wallE.startEngine();
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+
+			System.err
+					.println("Error reading the map file: "+ fileName +"(No existe el fichero o el directorio)");
+			System.exit(2);
+		} catch (WrongCityFormatException e) {
+
+			System.err.println("Error reading the map file: " + args[0]
+					+ " (La sintaxis del fichero no es correcta)");
+			System.exit(2);
+		}
+		try {
+
+			FileInputStream file = new FileInputStream(fileName);
+			CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
+			City city = cityLoader.loadCity(file);
+			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
+			if (swingOn){
+				MainWindow window = new MainWindow(wallE, cityLoader.getInitialPlace());
+				window.setVisible(true);
+			}
+			wallE.startEngine();
+		} catch (FileNotFoundException e) {
+
+			System.err
+					.println("Error reading the map file: "+ fileName +"(No existe el fichero o el directorio)");
+			System.exit(2);
+		} catch (WrongCityFormatException e) {
+
+			System.err.println("Error reading the map file: " + args[0]
+					+ " (La sintaxis del fichero no es correcta)");
+			System.exit(2);
+		}
+
+		System.exit(0);
+	}
+	public static void mainAnt(String[] args){
+		/**
+		 * esto es para que funcione bien en mac 
+		 */
+		try {
+			UIManager.setLookAndFeel(
+			        UIManager.getCrossPlatformLookAndFeelClassName());
+		} 
+		catch (ClassNotFoundException e1) {}
+		catch (InstantiationException e1) {} 
+		catch (IllegalAccessException e1) {} 
+		catch (UnsupportedLookAndFeelException e1) {}
+		Options opt = new Options();
+		Option help = new Option("h", "help", false, "Shows this help message");
+		opt.addOption(help);
+		Option interf = new Option("i", "interface", true, "The type of interface: console or swing");
+		interf.setArgName("type");
+		Option map = new Option("m", "map", true, "File with the description of the city");
+		opt.addOption(interf);
+		opt.addOption(map);
+		
+		BasicParser parser = new BasicParser();
+		boolean swingOn = false;
+		String fileName;
 		try {
 			CommandLine cmd = parser.parse(opt, args);
 			if(cmd.hasOption('h')){
@@ -282,6 +387,7 @@ public class Main {
 			//
 			
 			if(cmd.getOptionValue('i').equals("swing")){
+				swingOn = true;
 				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
 				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
 			}
@@ -291,7 +397,6 @@ public class Main {
 			}
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -303,10 +408,13 @@ public class Main {
 		RobotEngine engine = new RobotEngine(new City(streets), places[0],
 				Direction.NORTH);
 		// plays
-		MainWindow window = new MainWindow(engine, places[0]);
-		window.setVisible(true);
+		if (swingOn){
+			MainWindow window = new MainWindow(engine, places[0]);
+			window.setVisible(true);
+		}
 		engine.startEngine();
 
+		
 
 	}
 	
