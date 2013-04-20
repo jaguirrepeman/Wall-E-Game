@@ -14,6 +14,9 @@ import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 import tp.pr4.items.*;
 import tp.pr4.cityLoader.cityLoaderExceptions.*;
 
+@SuppressWarnings("unused")
+
+
 public class CityLoaderFromTxtFile {
 	public CityLoaderFromTxtFile() {
 
@@ -34,7 +37,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		if (stk.sval != null)
 			return stk.sval;
@@ -53,7 +56,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		if (stk.ttype == StreamTokenizer.TT_NUMBER)
 			return (int) stk.nval;
@@ -66,7 +69,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		String value = stk.sval;
 
@@ -92,7 +95,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		ex = stk.sval;
 		if (ex != null) {
@@ -111,7 +114,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		String value = stk.sval;
 		if ((value == null) || (!value.equals(expected))) {
@@ -126,7 +129,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		if ((stk.ttype != StreamTokenizer.TT_NUMBER)) {
 			throw new WrongCityFormatException("Error, se esperaba " + expected
@@ -144,7 +147,7 @@ public class CityLoaderFromTxtFile {
 		try {
 			stk.nextToken();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 		}
 		int num = (int) stk.nval;
 		if ((num >= places.size()) || num < 0)
@@ -260,7 +263,7 @@ public class CityLoaderFromTxtFile {
 					i++;
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			
 		}
 		forceActualString("EndPlaces");
 		//if (!getStringValue().equalsIgnoreCase("EndPlaces"))
@@ -282,7 +285,7 @@ public class CityLoaderFromTxtFile {
 	
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			
 		}
 		forceActualString("EndStreets");
 	}
@@ -299,7 +302,7 @@ public class CityLoaderFromTxtFile {
 				i++;
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			
 		}
 		forceActualString("EndItems");
 
