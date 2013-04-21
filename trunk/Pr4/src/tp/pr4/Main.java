@@ -9,31 +9,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import tp.pr4.City;
 import tp.pr4.Direction;
-import tp.pr4.Place;
 import tp.pr4.RobotEngine;
-import tp.pr4.Street;
 import tp.pr4.Gui.MainWindow;
 import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
-import tp.pr4.items.CodeCard;
-import tp.pr4.items.Fuel;
-import tp.pr4.items.Garbage;
 import org.apache.commons.cli.*;
 
-/*
- * 
- * public class FilterOutputStream extends OutputStream{privateOutputStream out; private boolean is writing;
- * Const(OutputStream out, boolean isWriting){this.out = out; this.isWriting = isWriting}
- * @Override 
- * public void write(int b)throws IOException{
- * if (isWriting) out.write(b);
- * 
- * 
- * }
- * 
- * System.setOut(new PrintStream(new FilterOutputStream(Sytem.out, true))));
- * System.setErr(new PrintStream(new FilterOutputStream(System.err, true))));
- */
+
 /**
  * gluglu Aplicación que utiliza las clases de la práctica sobre el mapa que
  * aparece como ejemplo en el enunciado.
@@ -46,7 +28,7 @@ public class Main {
 	
 
 	/**
-	 * Creates the city, the engine and finally starts the simulation
+	 * Creates the city, the engine and the mainwindow and finally starts the simulation
 	 * 
 	 * @param args
 	 */
