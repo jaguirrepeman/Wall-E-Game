@@ -73,7 +73,7 @@ public class Main {
 				System.out.println("Execute this assignment with these parameters:");
 				h.printHelp(
 						Main.class.getCanonicalName()
-						+ " [-h] [-i <type>] [-m <mapfyle>]", opt);
+						+ " [-h] [-i <type>] [-m <mapfile>]", opt);
 				if (!cmd.hasOption('m') && !cmd.hasOption('i')) System.exit(0);
 			}
 			/*
