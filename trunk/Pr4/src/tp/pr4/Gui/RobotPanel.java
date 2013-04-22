@@ -67,6 +67,8 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 			
 		});
 		
+		
+		
 		table.setOpaque(false); // con esto se consigue que el fondo de la tabla
 								// este en gris
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -106,12 +108,12 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 		instructionPanel.setLayout(new GridLayout(5, 2, 3, 3));
 		JButton move = new JButton("MOVE") {
 			{
-				this.addMouseListener(new OyenteRaton() {
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
-						
+					public void actionPerformed(ActionEvent e) {
 						engine.communicateRobot(new MoveInstruction());
+						
 					}
 				
 				});
@@ -120,103 +122,118 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 
 		};
 
-		JButton quit = new JButton("QUIT") {
+		JButton quit = new JButton	("QUIT") {
 			{
-				this.addMouseListener(new OyenteRaton() {
+
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
-						
+					public void actionPerformed(ActionEvent e) {
 						int seleccion = JOptionPane.showOptionDialog(null,
-								null, "Exit WALL·E",
-								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-								CityPanel.createImageIcon("images/walleExit.png", "WALLE"),
+								null,
+								"Exit WALL·E",
+								JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE,
+								CityPanel.createImageIcon(
+										"images/walleExit.png", "WALLE"),
 
-					//			null, // null para icono por defecto.
-								/*null,  null para YES, NO y CANCEL, si no: */new Object[] { "YES", "NO"},
-								"null");
+								// null, // null para icono por defecto.
+								/* null, null para YES, NO y CANCEL, si no: */new Object[] {
+										"YES", "NO" }, "null");
 
-						if (seleccion == -1 || seleccion == 0) System.exit(0);
-					
-					
-					
+						if (seleccion == -1 || seleccion == 0)
+							System.exit(0);
 					}
-					
+
 				});
+
 			}
 
 		};
 		JButton turn = new JButton("TURN") {
 			{
-				this.addMouseListener(new OyenteRaton() {
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void actionPerformed(ActionEvent e) {
+						engine.communicateRobot(new TurnInstruction	(rotacion));
 						
-						engine.communicateRobot(new TurnInstruction(rotacion));
 					}
-
+				
 				});
-
 				
 			}
 
 		};
 		JButton pick = new JButton("PICK") {
 			{
-				this.addMouseListener(new OyenteRaton() {
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						if (!objectToPick.getText().isEmpty()){
 							engine.communicateRobot(new PickInstruction(objectToPick.getText()));
 							changeInventory(tabla);
 						}
+						
 					}
+				
 				});
+				
 			}
 
 		};
 		JButton drop = new JButton("DROP") {
+			
 			{
-				this.addMouseListener(new OyenteRaton() {
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
 							engine.communicateRobot(new DropInstruction(robotsObject));
 							changeInventory(tabla);
 						}
 					}
+				
 				});
+				
 			}
+			
 
 		};
 		JButton operate = new JButton("OPERATE") {
 			{
-				this.addMouseListener(new OyenteRaton() {
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
 							engine.communicateRobot(new OperateInstruction(robotsObject));
 							changeInventory(tabla);
 						}
 					}
+				
 				});
+				
 			}
 
 		};
 		JButton undo = new JButton("UNDO") {
+			
 			{
-				this.addMouseListener(new OyenteRaton() {
+				this.addActionListener(new ActionListener() {
 
 					@Override
-					public void mouseClicked(MouseEvent e) {
-						engine.communicateRobot(new UndoInstruction());
-						changeInventory(tabla);
+					public void actionPerformed(ActionEvent e) {
+						if (robotsObject != null){
+							engine.communicateRobot(new UndoInstruction());
+							changeInventory(tabla);
+						}
 					}
+				
 				});
+				
 			}
 		};
 		objectToPick = new JTextField();

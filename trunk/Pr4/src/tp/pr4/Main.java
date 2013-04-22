@@ -125,8 +125,8 @@ public class Main {
 			/*
 			 * Comienza la ejecución del programa
 			 */
-			wallE.startEngine();
-			System.exit(0);
+			else wallE.startEngine();
+			
 		}
 		/*
 		 * Parseo erróneo
