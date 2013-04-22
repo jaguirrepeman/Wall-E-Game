@@ -20,13 +20,14 @@ public class RobotEngine {
 		this.items = new ItemContainer();
 		this.recycledMaterial = 0;
 		this.navigation = new NavigationModule(cityMap, initialPlace);
+		this.navigation.initHeading(dir);
+		
 		this.quit = false;
 		
 		
 	}
 
 	public void startEngine() {
-		navigation.initHeading(direction);
 		Instruction instruccion = null;
 		String command = new String();
 		System.out.println(this.place.toString());

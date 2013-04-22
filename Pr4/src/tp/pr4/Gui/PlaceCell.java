@@ -1,6 +1,8 @@
 package tp.pr4.Gui;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 
@@ -8,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 
 import tp.pr4.Place;
+import tp.pr4.instructions.UndoInstruction;
 
 @SuppressWarnings("serial")
 public class PlaceCell extends JButton {
@@ -17,17 +20,19 @@ public class PlaceCell extends JButton {
 		
 		actual = true;
 		this.setFocusPainted(actual);
-		
-				this.addMouseListener(new OyenteRaton(){
 
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						if (place != null) text.setText(place.toString());
-						else text.setText("This place hasn't been explored yet.");
-					}
-					
-				});
-		
+		this.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (place != null)
+					text.setText(place.toString());
+				else
+					text.setText("This place hasn't been explored yet.");
+			}
+
+		});
+
 	}
 	
 	public PlaceCell setPlace(Place place){
