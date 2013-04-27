@@ -3,14 +3,10 @@ package tp.pr4.Gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-
-
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
 import tp.pr4.Place;
-import tp.pr4.instructions.UndoInstruction;
 
 @SuppressWarnings("serial")
 public class PlaceCell extends JButton {
