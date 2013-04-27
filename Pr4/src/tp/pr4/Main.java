@@ -126,6 +126,7 @@ public class Main {
 			 * Comienza la ejecución del programa
 			 */
 			else wallE.startEngine();
+			 
 			
 		}
 		/*
