@@ -34,17 +34,7 @@ public class Main {
 	 */
 
 	public static void main(String[] args){
-		/**
-		 * esto es para que funcione bien en mac 
-		 */
-		try {
-			UIManager.setLookAndFeel(
-			        UIManager.getCrossPlatformLookAndFeelClassName());
-		} 
-		catch (ClassNotFoundException e1) {}
-		catch (InstantiationException e1) {} 
-		catch (IllegalAccessException e1) {} 
-		catch (UnsupportedLookAndFeelException e1) {}
+		
 		
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
@@ -116,6 +106,18 @@ public class Main {
 			 * y se crea el mainWindow
 			 */
 			if (swingOn){
+				/**
+				 * esto es para que funcione bien en mac 
+				 */
+				try {
+					UIManager.setLookAndFeel(
+					        UIManager.getCrossPlatformLookAndFeelClassName());
+				} 
+				catch (ClassNotFoundException e1) {}
+				catch (InstantiationException e1) {} 
+				catch (IllegalAccessException e1) {} 
+				catch (UnsupportedLookAndFeelException e1) {}
+				
 				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
 				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
 				
