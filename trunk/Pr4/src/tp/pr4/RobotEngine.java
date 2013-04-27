@@ -21,6 +21,7 @@ public class RobotEngine {
 		this.recycledMaterial = 0;
 		this.navigation = new NavigationModule(cityMap, initialPlace);
 		this.navigation.initHeading(dir);
+		this.instructions = new Stack<Instruction>();
 		
 		this.quit = false;
 		
@@ -161,5 +162,5 @@ public class RobotEngine {
 	private NavigationModule navigation;
 	private boolean quit;
 	private RobotPanel robotPanel;
-	private Stack<Instruction> instructions = new Stack<Instruction>();
+	private Stack<Instruction> instructions;
 }

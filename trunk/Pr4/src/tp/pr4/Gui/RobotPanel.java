@@ -226,10 +226,9 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if (robotsObject != null){
-							engine.communicateRobot(new UndoInstruction());
-							changeInventory(tabla);
-						}
+						engine.communicateRobot(new UndoInstruction());
+						changeInventory(tabla);
+						
 					}
 				
 				});
