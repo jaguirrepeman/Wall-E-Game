@@ -1,6 +1,6 @@
-package tp.pr4;
+package tp.pr5;
 
-import tp.pr4.items.CodeCard;
+import tp.pr5.items.CodeCard;
 
 public class Street {
 

@@ -1,8 +1,8 @@
-package tp.pr4;
+package tp.pr5;
 
-import tp.pr4.Gui.NavigationPanel;
-import tp.pr4.instructions.exceptions.InstructionExecutionException;
-import tp.pr4.items.Item;
+import tp.pr5.Gui.NavigationPanel;
+import tp.pr5.instructions.exceptions.InstructionExecutionException;
+import tp.pr5.items.Item;
 
 public class NavigationModule {
 

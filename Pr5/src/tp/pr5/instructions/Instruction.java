@@ -1,10 +1,10 @@
-package tp.pr4.instructions;
+package tp.pr5.instructions;
 
-import tp.pr4.NavigationModule;
-import tp.pr4.RobotEngine;
-import tp.pr4.instructions.exceptions.InstructionExecutionException;
-import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
-import tp.pr4.items.ItemContainer;
+import tp.pr5.NavigationModule;
+import tp.pr5.RobotEngine;
+import tp.pr5.instructions.exceptions.InstructionExecutionException;
+import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr5.items.ItemContainer;
 
 public interface Instruction {
 	Instruction parse(java.lang.String cad) throws WrongInstructionFormatException;

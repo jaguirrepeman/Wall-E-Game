@@ -1,4 +1,4 @@
-package tp.pr4.cityLoader;
+package tp.pr5.cityLoader;
 
 public class CityLoaderFromTxtFile_WithSplit {
 
