@@ -1,7 +1,7 @@
-package tp.pr4.items;
+package tp.pr5.items;
 
-import tp.pr4.NavigationModule;
-import tp.pr4.RobotEngine;
+import tp.pr5.NavigationModule;
+import tp.pr5.RobotEngine;
 
 public class Garbage extends Item {
 
