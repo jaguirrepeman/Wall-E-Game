@@ -1,4 +1,4 @@
-package tp.pr4.Gui;
+package tp.pr5.Gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import tp.pr4.Place;
-import tp.pr4.RobotEngine;
+import tp.pr5.Place;
+import tp.pr5.RobotEngine;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {

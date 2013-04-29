@@ -1,4 +1,4 @@
-package tp.pr4.Gui;
+package tp.pr5.Gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

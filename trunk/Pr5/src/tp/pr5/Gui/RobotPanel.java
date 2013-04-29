@@ -1,4 +1,4 @@
-package tp.pr4.Gui;
+package tp.pr5.Gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import tp.pr4.RobotEngine;
-import tp.pr4.Rotation;
-import tp.pr4.instructions.*;
+import tp.pr5.RobotEngine;
+import tp.pr5.Rotation;
+import tp.pr5.instructions.*;
 
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {

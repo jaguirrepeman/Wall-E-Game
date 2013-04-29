@@ -1,4 +1,4 @@
-package tp.pr4.Gui;
+package tp.pr5.Gui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-import tp.pr4.Place;
+import tp.pr5.Place;
 
 @SuppressWarnings("serial")
 public class PlaceCell extends JButton {

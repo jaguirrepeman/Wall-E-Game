@@ -1,7 +1,7 @@
-package tp.pr4;
+package tp.pr5;
 
-import tp.pr4.items.Item;
-import tp.pr4.items.ItemContainer;
+import tp.pr5.items.Item;
+import tp.pr5.items.ItemContainer;
 
 public class Place {
 

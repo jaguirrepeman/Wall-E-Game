@@ -1,12 +1,12 @@
-package tp.pr4;
+package tp.pr5;
 
 import java.util.Scanner;
 import java.util.Stack;
 
-import tp.pr4.Gui.*;
-import tp.pr4.instructions.*;
-import tp.pr4.instructions.exceptions.*;
-import tp.pr4.items.*;
+import tp.pr5.Gui.*;
+import tp.pr5.instructions.*;
+import tp.pr5.instructions.exceptions.*;
+import tp.pr5.items.*;
 
 
 public class RobotEngine {

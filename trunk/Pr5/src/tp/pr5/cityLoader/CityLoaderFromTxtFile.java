@@ -1,4 +1,4 @@
-package tp.pr4.cityLoader;
+package tp.pr5.cityLoader;
 
 //import java.io.WrongCityFormatException;
 import java.io.IOException;
@@ -6,13 +6,13 @@ import java.io.InputStreamReader;
 import java.io.StreamTokenizer;
 import java.util.ArrayList;
 
-import tp.pr4.City;
-import tp.pr4.Direction;
-import tp.pr4.Place;
-import tp.pr4.Street;
-import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
-import tp.pr4.items.*;
-import tp.pr4.cityLoader.cityLoaderExceptions.*;
+import tp.pr5.City;
+import tp.pr5.Direction;
+import tp.pr5.Place;
+import tp.pr5.Street;
+import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
+import tp.pr5.items.*;
+import tp.pr5.cityLoader.cityLoaderExceptions.*;
 
 @SuppressWarnings("unused")
 

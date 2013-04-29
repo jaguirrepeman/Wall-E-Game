@@ -1,4 +1,4 @@
-package tp.pr4.instructions.exceptions;
+package tp.pr5.instructions.exceptions;
 
 public class WrongInstructionFormatException extends Exception {
 

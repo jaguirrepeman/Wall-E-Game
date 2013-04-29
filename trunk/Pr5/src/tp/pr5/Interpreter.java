@@ -1,7 +1,7 @@
-package tp.pr4;
+package tp.pr5;
 
-import tp.pr4.instructions.*;
-import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr5.instructions.*;
+import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
 
 public class Interpreter {
 
