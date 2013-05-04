@@ -3,7 +3,7 @@ package tp.pr5;
 import tp.pr5.items.Item;
 import tp.pr5.items.ItemContainer;
 
-public class Place {
+public class Place implements PlaceInfo{
 
 	private boolean isSpaceShip;
 	private String name;
@@ -27,7 +27,8 @@ public class Place {
 		return this.isSpaceShip;
 	}
 
-	public String toString() {
+	public String getDescription() {
+		//antes era toString();
 		if (this.items.numberOfItems() != 0)
 			return this.name + LINE_SEPARATOR + this.description
 					+ LINE_SEPARATOR + "The place contains these objects:"
@@ -69,5 +70,6 @@ public class Place {
 
 	private static final String LINE_SEPARATOR = System
 			.getProperty("line.separator");
+
 
 }
