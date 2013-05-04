@@ -1,5 +1,5 @@
 package tp.pr5;
 
-public class Controller {
+public abstract class Controller {
 
 }

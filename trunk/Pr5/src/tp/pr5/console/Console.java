@@ -44,26 +44,29 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void engineOff(boolean atShip) {
-		// TODO Auto-generated method stub
+		
+		if (atShip)
+			robotSays("I am at my spaceship. Bye bye");
+		else 
+			robotSays("I run out of fuel. I cannot move. Shutting down...");
+		
 
 	}
 
 	@Override
 	public void communicationCompleted() {
-		// TODO Auto-generated method stub
+		robotSays("I have communication problems. Bye bye");
 
 	}
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
-		// TODO Auto-generated method stub
-
+		robotSays("Robot attributes has been updated");
 	}
 
 	@Override
 	public void robotSays(String message) {
-		// TODO Auto-generated method stub
-
+		System.out.println("WALL·E says: " + message);
 	}
 
 	@Override
@@ -86,8 +89,14 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void placeHasChanged(PlaceInfo placeDescription) {
-		// TODO Auto-generated method stub
+		placeDescription.getDescription();
 
 	}
+	public void headingChanged(Direction newHeading){
+		System.out.println("WALL·E is looking at direction "
+				+ newHeading);
+
+	}
+
 
 }
