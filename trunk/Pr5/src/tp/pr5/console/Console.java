@@ -3,6 +3,7 @@ package tp.pr5.console;
 import java.util.List;
 
 import tp.pr5.Direction;
+import tp.pr5.Interpreter;
 import tp.pr5.NavigationObserver;
 import tp.pr5.PlaceInfo;
 import tp.pr5.RobotEngineObserver;
@@ -61,11 +62,17 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
-		robotSays("Robot attributes has been updated");
+		//robotSays("Robot attributes has been updated");
+		System.out.println("      * My power is " + fuel);
+		System.out.println("      * My recycled material is "
+				+ recycledMaterial);
 	}
 
 	@Override
 	public void robotSays(String message) {
+		System.out.println(message);
+	}
+	public void say(String message){
 		System.out.println("WALL·E says: " + message);
 	}
 
@@ -101,7 +108,7 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void communicationHelp(String help) {
-		// TODO Auto-generated method stub
+		System.out.println(Interpreter.interpreterHelp());
 		
 	}
 

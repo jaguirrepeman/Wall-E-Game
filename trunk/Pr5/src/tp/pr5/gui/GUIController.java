@@ -6,8 +6,7 @@ import tp.pr5.RobotEngine;
 public class GUIController extends Controller {
 	//
 	public GUIController (RobotEngine robot){
-		this.engine = robot;
+		super(robot);
 	}
-	private RobotEngine engine;
 
 }

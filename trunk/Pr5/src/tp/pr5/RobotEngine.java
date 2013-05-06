@@ -33,11 +33,20 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
+		for (RobotEngineObserver o : robObservers){ 
+			o.robotSays(this.place.toString());
+			o.robotSays("WALL·E is looking at direction "
+				+ this.direction.toString());
+			o.robotUpdate(fuel, recycledMaterial);
+		}
+		/**
+		 Cosas antiguas
+		 
 		System.out.println(this.place.toString());
 		System.out.println("WALL·E is looking at direction "
 				+ this.direction.toString());
 		printRobotState();
-
+*/
 		Scanner comando = new Scanner(System.in);
 
 		while (!(quit || this.place.isSpaceship() || this.fuel == 0)) {
@@ -56,26 +65,37 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 			}
 		}
 		comando.close();
+		if (!quit) for (RobotEngineObserver o : robObservers) o.engineOff(this.place.isSpaceship());
+		else for (RobotEngineObserver o : robObservers) o.communicationCompleted();
+		/**
+		  Más cosas antiguas
+		
 		if (this.place.isSpaceship())
 			say("I am at my spaceship. Bye bye");
 		else if (this.fuel == 0)
 			say("I run out of fuel. I cannot move. Shutting down...");
 		else
 			say("I have communication problems. Bye bye");
+			
+		 */
 	}
 
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
-		if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
+		for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
+		for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void requestHelp() {
-		System.out.println(Interpreter.interpreterHelp());
+		for (RobotEngineObserver o : robObservers) o.communicationHelp(Interpreter.interpreterHelp());
+
+		//System.out.println(Interpreter.interpreterHelp());
 	}
 
 	public void communicateRobot(Instruction c) {
@@ -156,13 +176,13 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		return this.items.numberOfItems();
 	}
 	public void addNavigationObserver(NavigationObserver robotObserver){
-		
+		navObservers.add(robotObserver);
 	}
 	public void addEngineObserver(RobotEngineObserver observer){
-		
+		robObservers.add(observer);
 	}
 	public void addItemContainerObserver(InventoryObserver c){
-		
+		invObservers.add(c);
 	}
 	/*private void emitPartidaEmpezada() {
 		for (RobotEngineObserver o : _observers)
@@ -179,6 +199,10 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	private boolean quit;
 	private RobotPanel robotPanel;
 	private Stack<Instruction> instructions;
-	private Vector<RobotEngineObserver> _observers;
+	private Vector<RobotEngineObserver> robObservers;
+	private Vector<NavigationObserver> navObservers;
+	private Vector<InventoryObserver> invObservers;
+	
+	
 
 }
