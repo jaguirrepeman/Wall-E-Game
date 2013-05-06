@@ -3,7 +3,7 @@ package tp.pr5;
 import java.util.Scanner;
 import java.util.Stack;
 
-import tp.pr5.Gui.*;
+import tp.pr5.gui.*;
 import tp.pr5.instructions.*;
 import tp.pr5.instructions.exceptions.*;
 import tp.pr5.items.*;

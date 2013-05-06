@@ -92,6 +92,7 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 		placeDescription.getDescription();
 
 	}
+	
 	public void headingChanged(Direction newHeading){
 		System.out.println("WALL·E is looking at direction "
 				+ newHeading);
