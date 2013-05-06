@@ -1,4 +1,4 @@
-package tp.pr5.Gui;
+package tp.pr5.gui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
