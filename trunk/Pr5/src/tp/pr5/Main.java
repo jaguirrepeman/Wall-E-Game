@@ -127,8 +127,8 @@ public class Main {
 				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
 				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
 				
-				MainWindow window = new MainWindow(wallE, cityLoader.getInitialPlace());
-				window.setVisible(true);
+				MainWindow ventana = new MainWindow(wallE, cityLoader.getInitialPlace());
+				ventana.setVisible(true);
 			}
 			/*
 			 * Comienza la ejecución del programa
