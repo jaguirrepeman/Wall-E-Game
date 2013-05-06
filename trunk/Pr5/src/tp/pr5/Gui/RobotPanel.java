@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,11 +22,15 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import tp.pr5.RobotEngine;
+import tp.pr5.RobotEngineObserver;
 import tp.pr5.Rotation;
 import tp.pr5.instructions.*;
+import tp.pr5.items.InventoryObserver;
+import tp.pr5.items.Item;
 
 @SuppressWarnings("serial")
-public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
+public class RobotPanel extends JPanel implements RobotEngineObserver,
+		InventoryObserver{
 
 	public RobotPanel(final RobotEngine engine) {
 		
@@ -269,6 +274,70 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 
 	}
 
+	
+	
+	@Override
+	public void inventoryChange(List<Item> inventory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void inventoryScanned(String inventoryDescription) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void itemScanned(String description) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void itemEmpty(String itemName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void raiseError(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void communicationHelp(String help) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void engineOff(boolean atShip) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void communicationCompleted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void robotUpdate(int fuel, int recycledMaterial) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void robotSays(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 	private JTextField objectToPick;
 	private String rotacion;
 	private String robotsObject;
@@ -278,5 +347,6 @@ public class RobotPanel extends JPanel /*implements PropertyChangeListener*/ {
 	private JFormattedTextField robotInfo;
 	
 	private RobotEngine engine;
+
 	
 }
