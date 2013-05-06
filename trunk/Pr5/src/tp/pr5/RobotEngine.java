@@ -2,6 +2,7 @@ package tp.pr5;
 
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Vector;
 
 import tp.pr5.gui.*;
 import tp.pr5.instructions.*;
@@ -163,6 +164,11 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public void addItemContainerObserver(InventoryObserver c){
 		
 	}
+	/*private void emitPartidaEmpezada() {
+		for (RobotEngineObserver o : _observers)
+		o.partidaEmpezada();
+	}*/
+	
 	private Place place;
 	private Direction direction;
 	private City cityMap;
@@ -173,4 +179,6 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	private boolean quit;
 	private RobotPanel robotPanel;
 	private Stack<Instruction> instructions;
+	private Vector<RobotEngineObserver> _observers;
+
 }
