@@ -9,7 +9,8 @@ import tp.pr5.instructions.exceptions.*;
 import tp.pr5.items.*;
 
 
-public class RobotEngine {
+public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
+{
 
 	public RobotEngine(City cityMap, Place initialPlace, Direction dir) {
 
@@ -152,6 +153,15 @@ public class RobotEngine {
 	}
 	public int numberOfItems(){
 		return this.items.numberOfItems();
+	}
+	public void addNavigationObserver(NavigationObserver robotObserver){
+		
+	}
+	public void addEngineObserver(RobotEngineObserver observer){
+		
+	}
+	public void addItemContainerObserver(InventoryObserver c){
+		
 	}
 	private Place place;
 	private Direction direction;
