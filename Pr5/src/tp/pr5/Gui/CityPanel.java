@@ -1,4 +1,4 @@
-package tp.pr5.Gui;
+package tp.pr5.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
