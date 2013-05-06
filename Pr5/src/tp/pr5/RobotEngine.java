@@ -24,7 +24,9 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		this.navigation = new NavigationModule(cityMap, initialPlace);
 		this.navigation.initHeading(dir);
 		this.instructions = new Stack<Instruction>();
-		
+		this.invObservers = new Vector<InventoryObserver>();
+		this.navObservers = new Vector<NavigationObserver>();
+		this.robObservers = new Vector<RobotEngineObserver>();
 		this.quit = false;
 		
 		
@@ -34,7 +36,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		Instruction instruccion = null;
 		String command = new String();
 		for (RobotEngineObserver o : robObservers){ 
-			o.robotSays(this.place.toString());
+			o.robotSays(this.place.getDescription());
 			o.robotSays("WALL·E is looking at direction "
 				+ this.direction.toString());
 			o.robotUpdate(fuel, recycledMaterial);
@@ -82,13 +84,13 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
-		for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** de momento se quita esto*/ // for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** de momento se quita esto*/	//for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 

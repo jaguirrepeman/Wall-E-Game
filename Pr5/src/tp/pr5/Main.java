@@ -50,7 +50,7 @@ public class Main {
 		opt.addOption(map);
 		
 		BasicParser parser = new BasicParser();
-		boolean swingOn = false;
+		boolean cons = false, swing = false;
 		String fileName = null;
 		try {
 			/*
@@ -79,7 +79,7 @@ public class Main {
 				throw new ParseException("Interface not specified");
 			}
 			else if (!(cmd.getOptionValue('i').equals("console") || cmd
-							.getOptionValue('i').equals("swing"))){
+							.getOptionValue('i').equals("swing") || cmd.getOptionValue('i').equals("both"))){
 				throw new ParseException("Wrong type of interface");
 			}
 			
@@ -89,9 +89,19 @@ public class Main {
 			 * 	si se ha deseado ejecutar la aplicación en swing o no
 			 */
 			fileName = cmd.getOptionValue('m');
-			if (cmd.getOptionValue('i').equals("swing")) {
-					swingOn = true;
+			if (cmd.getOptionValue('i').equals("console")) {
+				cons = true;//swingOn = true;
+			
 
+		}
+			else if (cmd.getOptionValue('i').equals("swing")) {
+				swing = true;//swingOn = true;
+			
+
+		}
+			else{
+				cons = true; 
+				swing = true;
 			}
 			/*
 			 * Lectura del mapa y creación de la ciudad
@@ -105,41 +115,25 @@ public class Main {
 			 */
 			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
 			
-			ConsoleController consCont = new ConsoleController(wallE);
-			Console console = new Console();
-			wallE.addEngineObserver(console);
-			
-			
-			GUIController guiCont = new GUIController(wallE);
-			MainWindow window = new MainWindow(guiCont);
-			wallE.addEngineObserver(window);
-			/*
-			 * Si se ha elegido ejecutar la aplicación con swing, se cancelan las salidas por consola
-			 * y se crea el mainWindow
-			 */
-			if (swingOn){
-				/**
-				 * esto es para que funcione bien en mac 
-				 */
-				try {
-					UIManager.setLookAndFeel(
-					        UIManager.getCrossPlatformLookAndFeelClassName());
-				} 
-				catch (ClassNotFoundException e1) {}
-				catch (InstantiationException e1) {} 
-				catch (IllegalAccessException e1) {} 
-				catch (UnsupportedLookAndFeelException e1) {}
-				
-				System.setOut(new PrintStream(new FilterOutputStream(System.out, false)));
-				System.setErr(new PrintStream(new FilterOutputStream(System.err, false)));
-				
-				MainWindow ventana = new MainWindow(wallE, cityLoader.getInitialPlace());
-				ventana.setVisible(true);
+			if (cons){
+				ConsoleController consCont = new ConsoleController(wallE);
+				Console console = new Console();
+				wallE.addEngineObserver(console);
 			}
+
+			if (swing){
+				GUIController guiCont = new GUIController(wallE);
+				MainWindow window = new MainWindow(guiCont);
+				wallE.addEngineObserver(window);
+			}
+			
+			//	MainWindow ventana = new MainWindow(wallE, cityLoader.getInitialPlace());
+			//	ventana.setVisible(true);
+			
 			/*
 			 * Comienza la ejecución del programa
 			 */
-			else wallE.startEngine();
+			wallE.startEngine();
 			 
 			
 		}
