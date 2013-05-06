@@ -8,9 +8,10 @@ import javax.swing.*;
 
 import tp.pr5.Place;
 import tp.pr5.RobotEngine;
+import tp.pr5.RobotEngineObserver;
 
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements RobotEngineObserver {
 	public MainWindow(RobotEngine engine, Place initPlace){
 		super("WALL·E");
 		this.setSize(1080, 720);
@@ -52,6 +53,40 @@ public class MainWindow extends JFrame {
 		this.engine.setRobotPanel(robotPan);
 		this.navPanel.setInitialPlace(initPlace);
 	}
+
+	public MainWindow(GUIController gameController){
+		
+	}
+	@Override
+	public void raiseError(String msg){
+		
+	}
+	@Override
+	public void communicationHelp(String help){
+		
+	}
+	@Override
+	public void engineOff(boolean atShip){
+		
+	}
+	
+	@Override
+	public void communicationCompleted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void robotUpdate(int fuel, int recycledMaterial) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void robotSays(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public NavigationPanel getNavigationPanel(){
 		return this.navPanel;
@@ -61,4 +96,5 @@ public class MainWindow extends JFrame {
 	private RobotPanel robotPan;
 	private NavigationPanel navPanel;
 	private JMenuBar menuBar;
+	
 }
