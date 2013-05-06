@@ -10,9 +10,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 import tp.pr5.City;
 import tp.pr5.Direction;
 import tp.pr5.RobotEngine;
-import tp.pr5.Gui.MainWindow;
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
+import tp.pr5.gui.MainWindow;
+
 import org.apache.commons.cli.*;
 
 

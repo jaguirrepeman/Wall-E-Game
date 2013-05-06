@@ -1,6 +1,6 @@
 package tp.pr5;
 
-import tp.pr5.Gui.NavigationPanel;
+import tp.pr5.gui.NavigationPanel;
 import tp.pr5.instructions.exceptions.InstructionExecutionException;
 import tp.pr5.items.Item;
 
