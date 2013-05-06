@@ -12,8 +12,9 @@ import tp.pr5.Direction;
 import tp.pr5.RobotEngine;
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
+import tp.pr5.console.ConsoleController;
+import tp.pr5.gui.GUIController;
 import tp.pr5.gui.MainWindow;
-
 import org.apache.commons.cli.*;
 
 
@@ -102,6 +103,10 @@ public class Main {
 			 * Creación del robotEngine
 			 */
 			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
+			ConsoleController consCont = new ConsoleController(wallE);
+			MainWindow window = new MainWindow(wallE, cityLoader.getInitialPlace());
+			GUIController guiCont = new GUIController(wallE);
+			wallE.addEngineObserver(window);
 			/*
 			 * Si se ha elegido ejecutar la aplicación con swing, se cancelan las salidas por consola
 			 * y se crea el mainWindow
