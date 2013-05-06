@@ -10,10 +10,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import tp.pr5.Direction;
+import tp.pr5.NavigationObserver;
 import tp.pr5.Place;
+import tp.pr5.PlaceInfo;
 
 @SuppressWarnings("serial")
-public class NavigationPanel extends JPanel {
+public class NavigationPanel extends JPanel implements NavigationObserver {
 	public NavigationPanel() {
 		this.setLayout(new BorderLayout(10, 10));
 		
@@ -58,8 +60,41 @@ public class NavigationPanel extends JPanel {
 		text.setText(place.toString());
 	}
 	
+	@Override
+	public void headingChanged(Direction newHeading) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void placeScanned(PlaceInfo placeDescription) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void placeHasChanged(PlaceInfo placeDescription) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 	private CityPanel cityPanel;
 	private JTextArea text;
 	private JScrollPane scroller;
+	
 
 }
