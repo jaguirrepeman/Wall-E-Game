@@ -13,7 +13,6 @@ public class TurnInstruction extends UndoableInstruction{
 		try {
 			this.parse("Turn" + " " + rotacion);
 		} catch (WrongInstructionFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

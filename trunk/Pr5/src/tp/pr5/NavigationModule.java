@@ -87,7 +87,7 @@ public class NavigationModule {
 	}
 
 	public void scanCurrentPlace() {
-		System.out.println(this.place.toString());
+		System.out.println(this.place.getDescription());
 
 	}
 

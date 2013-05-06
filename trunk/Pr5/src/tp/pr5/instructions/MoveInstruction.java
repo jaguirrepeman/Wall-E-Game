@@ -27,7 +27,7 @@ public class MoveInstruction extends UndoableInstruction{
 		}
 		this.engine.moveToPlace(this.navigation.getCurrentPlace());
 		this.navigation.say("Moving in direction " + this.navigation.getCurrentHeading().toString()
-				+ LINE_SEPARATOR + this.navigation.getCurrentPlace().toString());
+				+ LINE_SEPARATOR + this.navigation.getCurrentPlace().getDescription());
 		this.engine.addFuel(-5);
 		this.engine.printRobotState();
 		
