@@ -5,4 +5,8 @@ public abstract class Controller {
 	 *registerEngineObserver, registerItemContainerObserver, 
 	 *registerRobotObserver, startController
 	 */
+	public Controller(RobotEngine wallE){
+		robot = wallE;
+	}
+	RobotEngine robot;
 }
