@@ -98,5 +98,11 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	}
 
+	@Override
+	public void communicationHelp(String help) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

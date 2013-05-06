@@ -4,6 +4,8 @@ public interface RobotEngineObserver {
 	
 	void raiseError(String msg);
 	
+	void communicationHelp(String help);
+	
 	void engineOff(boolean atShip);
 	
 	void communicationCompleted();
