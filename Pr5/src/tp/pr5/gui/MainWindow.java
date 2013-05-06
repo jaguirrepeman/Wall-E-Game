@@ -55,7 +55,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 	}
 
 	public MainWindow(GUIController gameController){
-		
+		// TODO este es el constructor bueno
 	}
 	@Override
 	public void raiseError(String msg){
