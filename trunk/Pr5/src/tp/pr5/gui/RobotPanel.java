@@ -31,7 +31,59 @@ import tp.pr5.items.Item;
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel implements RobotEngineObserver,
 		InventoryObserver{
+	public RobotPanel(){
+		this.setLayout(new BorderLayout(10, 10));
 
+		//Creación del panel de instrucciones
+		JPanel instructionPanel = createInstructionPanel();
+		this.add(instructionPanel, BorderLayout.WEST);
+
+		//Creación del StatusPanel del robot
+		TitledBorder titled = new TitledBorder("Robot Info");
+		JPanel dataPanel = new JPanel();
+		dataPanel.setLayout(new BorderLayout());
+		JPanel statusPanel = new JPanel();
+		statusPanel.setLayout(new FlowLayout());
+		Font font = new Font(null, Font.BOLD, 12);
+		robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel()
+				+ " Recycled: " + engine.getRecycledMaterial());
+		robotInfo.setBorder(null);
+		robotInfo.setFont(font);
+		robotInfo.setEditable(false);
+		statusPanel.add(robotInfo);
+		dataPanel.add(statusPanel, BorderLayout.CENTER);
+
+		//Creación del inventario del robot
+		tabla = new DefaultTableModel(new String[] { "Id.", "Description" }, 0);
+		final JTable table = new JTable(tabla);
+		table.addMouseListener(new OyenteRaton(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = table.getSelectedRow();
+				
+				if (i>=0)
+					robotsObject = table.getValueAt(i,0).toString();
+				
+			}
+			
+		});
+		
+		
+		
+		table.setOpaque(false); // con esto se consigue que el fondo de la tabla
+								// este en gris
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table.setFillsViewportHeight(true);
+
+		JScrollPane tableScrollPane = new JScrollPane(table);
+		dataPanel.add(tableScrollPane, BorderLayout.SOUTH);
+		dataPanel.setBorder(titled);
+
+		this.add(dataPanel, BorderLayout.CENTER);
+
+		rotacion = directionToTurn.getSelectedItem().toString();
+ }
 	public RobotPanel(final RobotEngine engine) {
 		
 		this.engine = engine;

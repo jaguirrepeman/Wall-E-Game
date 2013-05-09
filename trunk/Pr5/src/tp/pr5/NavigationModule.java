@@ -83,7 +83,7 @@ public class NavigationModule {
 	public void rotate(Rotation rotation) {
 
 		this.direction = direction.nextDirection(rotation);
-		if (navPanel != null) navPanel.rotate(this.direction);
+		if (navPanel != null) navPanel.headingChanged(this.direction);
 	}
 
 	public void scanCurrentPlace() {

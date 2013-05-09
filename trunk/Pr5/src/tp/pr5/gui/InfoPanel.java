@@ -9,7 +9,8 @@ import tp.pr5.RobotEngineObserver;
 import tp.pr5.items.InventoryObserver;
 import tp.pr5.items.Item;
 
-public class InfoPanel implements RobotEngineObserver, NavigationObserver,
+public class InfoPanel extends javax.swing.JPanel
+implements RobotEngineObserver, NavigationObserver,
 		InventoryObserver {
 
 	@Override

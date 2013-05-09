@@ -186,6 +186,11 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public void addItemContainerObserver(InventoryObserver c){
 		invObservers.add(c);
 	}
+	public void requestStart(){
+		
+	}
+
+	
 	/*private void emitPartidaEmpezada() {
 		for (RobotEngineObserver o : _observers)
 		o.partidaEmpezada();
