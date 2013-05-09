@@ -124,6 +124,7 @@ public class Main {
 			if (swing){
 				GUIController guiCont = new GUIController(wallE);
 				MainWindow window = new MainWindow(guiCont);
+				window.setVisible(true);
 				wallE.addEngineObserver(window);
 			}
 			

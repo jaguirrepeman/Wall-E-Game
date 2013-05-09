@@ -46,24 +46,24 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 		if (cityPanel.isSpaceShip()) CloseApp.requestQuit("You finally found your spaceship");
 	}
 	
-	public void rotate(Direction direction){
+	/*public void rotate(Direction direction){
 		cityPanel.turnWalleIcon(direction);
-	}
+	}*/
 	// TODO estas no estan repetidas con respecto a placecell¿?
 	public void setInitialPlace(Place initPlace){
 		cityPanel.setInitialPlace(initPlace);
 		text.setText(initPlace.toString());
 	}
 	
-	public void setPlace(Place place){
+	/*public void setPlace(Place place){
 		
-		text.setText(place.toString());
-	}
+		text.setText(place.getDescription());
+	}*/
 	
 	@Override
 	public void headingChanged(Direction newHeading) {
 		// TODO Auto-generated method stub
-		
+		cityPanel.turnWalleIcon(newHeading);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	@Override
 	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
 		// TODO Auto-generated method stub
-		
+		text.setText(place.getDescription());
 	}
 
 	@Override
