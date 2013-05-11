@@ -1,5 +1,7 @@
 package tp.pr5;
 
+import java.util.Vector;
+
 import tp.pr5.gui.NavigationPanel;
 import tp.pr5.instructions.exceptions.InstructionExecutionException;
 import tp.pr5.items.Item;
@@ -20,7 +22,11 @@ public class NavigationModule {
 
 	public void dropItemAtCurrentPlace(Item it) {
 		this.place.addItem(it);
-		if (navPanel != null) navPanel.setPlace(place);
+		
+		//TODO mover a un emit?
+		for (NavigationObserver obs: navObservers)
+			obs.placeHasChanged(this.place);
+		
 	}
 
 	public boolean findItemAtCurrentPlace(String id) {
@@ -47,21 +53,24 @@ public class NavigationModule {
 	}
 
 	public void move() throws InstructionExecutionException {
+		
 		if (!(this.city.lookForStreet(this.place, this.direction) == null)) {
 			//
 			if (this.city.lookForStreet(this.place, this.direction).isOpen()) {
 
 				this.place = this.city.lookForStreet(this.place, direction)
 						.nextPlace(place);
-				if (navPanel != null)	navPanel.move(direction, place);
+				//TODO pasar a un emit?
+				for (NavigationObserver obs: navObservers)
+					obs.robotArrivesAtPlace(this.direction, this.place);
 
 			} else {
-				if (navPanel != null)navPanel.say("The street is closed");
+				//if (navPanel != null)navPanel.say("The street is closed");
 				throw new InstructionExecutionException(
 						"Arrggg, there is a street but it is closed!");
 			}
 		} else{
-			if (navPanel != null)navPanel.say("There is no street in direction "+ this.direction.toString());
+			//if (navPanel != null)navPanel.say("There is no street in direction "+ this.direction.toString());
 			throw new InstructionExecutionException(
 					"There is no street in direction "
 							+ this.direction.toString());
@@ -70,24 +79,39 @@ public class NavigationModule {
 	public void moveBackwards() {
 		
 			this.place = this.city.lookForStreet(this.place, direction.Opposite()).nextPlace(place);
-			if (navPanel != null) navPanel.move(direction.Opposite(), place);
+			//TODO pasar a  un emit? es con direction.Opposite()
+			for (NavigationObserver obs: navObservers)
+				obs.robotArrivesAtPlace(this.direction.Opposite(), this.place);
 	}
 	
 	public Item pickItemFromCurrentPlace(String id) {
 		
-		Item item = place.pickItem(id);
-		if (navPanel != null) navPanel.setPlace(place);
+		Item item = this.place.pickItem(id);
+		
+		//TODO mover a un emit?
+		for (NavigationObserver obs: navObservers)
+			obs.placeHasChanged(this.place);
+		
 		return item;
 	}
 
 	public void rotate(Rotation rotation) {
 
 		this.direction = direction.nextDirection(rotation);
-		if (navPanel != null) navPanel.headingChanged(this.direction);
+		
+		//TODO mover a un emit?
+		
+		for (NavigationObserver obs: navObservers){
+			obs.headingChanged(this.direction);
+		}
 	}
 
 	public void scanCurrentPlace() {
-		System.out.println(this.place.getDescription());
+		
+		//TODO mover a un emit?
+		for (NavigationObserver obs : navObservers)
+			obs.placeHasChanged(place);
+		
 
 	}
 
@@ -99,18 +123,23 @@ public class NavigationModule {
 		System.out.println(mensaje);
 	}
 	
-	public void setNavigationPanel(NavigationPanel navPanel){
-		this.navPanel = navPanel;
+	public void addNavigationObserver(NavigationObserver navigationObserver){
+		navObservers.add(navigationObserver);
 	}
 	
-	public void setInitialPlace(Place initPlace){
+
+	//Esto está hecho en el request start del engine
+	/**
+	 * public void setInitialPlace(Place initPlace){
+	 *
 		this.navPanel.setInitialPlace(initPlace);
-	}
+	}*/
 	//private static final String LINE_SEPARATOR = System
 		//	.getProperty("line.separator");
 	private City city;
 	private Place place;
 	private Direction direction;
-	private NavigationPanel navPanel;
+	private Vector<NavigationObserver> navObservers;
+
 	
 }
