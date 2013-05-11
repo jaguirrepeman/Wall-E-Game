@@ -52,13 +52,13 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
-		/** de momento se quita esto*/ // for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** TODO de momento se quita esto*/ // for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		/** de momento se quita esto*/	//for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** TODO de momento se quita esto*/	//for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 	
@@ -78,8 +78,6 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void requestHelp() {
 		for (RobotEngineObserver o : robObservers) o.communicationHelp(Interpreter.interpreterHelp());
-
-		//System.out.println(Interpreter.interpreterHelp());
 	}
 	
 	public void undoInstruction(){
@@ -98,7 +96,9 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	}
 	
 	public void saySomething(String message){
-		
+		for (RobotEngineObserver obs: robObservers){
+			obs.robotSays(message);
+		}
 	}
 	
 	
