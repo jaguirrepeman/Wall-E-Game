@@ -12,6 +12,8 @@ import tp.pr5.RobotEngineObserver;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements RobotEngineObserver {
+	
+	
 	public MainWindow(RobotEngine engine, Place initPlace){
 		super("WALL·E");
 		this.setSize(1080, 720);

@@ -2,6 +2,9 @@ package tp.pr5.gui;
 
 import java.util.List;
 
+import javax.swing.JFormattedTextField;
+import javax.swing.JPanel;
+
 import tp.pr5.Direction;
 import tp.pr5.NavigationObserver;
 import tp.pr5.PlaceInfo;
@@ -9,9 +12,8 @@ import tp.pr5.RobotEngineObserver;
 import tp.pr5.items.InventoryObserver;
 import tp.pr5.items.Item;
 
-public class InfoPanel extends javax.swing.JPanel
-implements RobotEngineObserver, NavigationObserver,
-		InventoryObserver {
+public class InfoPanel extends JPanel implements
+		RobotEngineObserver, NavigationObserver, InventoryObserver {
 
 	@Override
 	public void inventoryChange(List<Item> inventory) {
@@ -93,14 +95,17 @@ implements RobotEngineObserver, NavigationObserver,
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
-		// TODO Auto-generated method stub
+		
+		this.displayMessage.setText("Robot's attributes have been updated: ("
+				+ fuel + ", " + recycledMaterial + ")");
 
 	}
 
 	@Override
 	public void robotSays(String message) {
-		// TODO Auto-generated method stub
-
+		this.displayMessage.setText("Wall·E says: " + message);
 	}
+	
+	private JFormattedTextField displayMessage;
 
 }
