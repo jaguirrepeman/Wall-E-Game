@@ -45,8 +45,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel()
-				+ " Recycled: " + engine.getRecycledMaterial());
+		robotInfo = new JFormattedTextField();//TODO hay que hacer el robotUpdate
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
@@ -378,8 +377,8 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
-		// TODO Auto-generated method stub
-		
+		robotInfo.setText("Fuel: " + fuel
+				+ " Recycled: " + recycledMaterial);
 	}
 
 	@Override

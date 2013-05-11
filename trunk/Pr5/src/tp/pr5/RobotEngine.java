@@ -35,12 +35,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
-		for (RobotEngineObserver o : robObservers){ 
-			o.robotSays(this.place.getDescription());
-			o.robotSays("WALL·E is looking at direction "
-				+ this.direction.toString());
-			o.robotUpdate(fuel, recycledMaterial);
-		}
+		emitPartidaEmpezada();
 		/**
 		 Cosas antiguas
 		 
@@ -191,10 +186,18 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	}
 
 	
-	/*private void emitPartidaEmpezada() {
-		for (RobotEngineObserver o : _observers)
-		o.partidaEmpezada();
-	}*/
+	private void emitPartidaEmpezada() {
+		for (NavigationObserver o : navObservers){ 
+			/*o.robotSays(this.place.getDescription());
+			o.robotSays("WALL·E is looking at direction "
+				+ this.direction.toString());
+			o.robotUpdate(fuel, recycledMaterial);*/
+			o.initNavigationModule(this.place, this.direction);
+		}
+		for (RobotEngineObserver obs: robObservers){
+			obs.robotUpdate(this.fuel, this.recycledMaterial);
+		}
+	}
 	
 	private Place place;
 	private Direction direction;

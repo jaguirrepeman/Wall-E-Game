@@ -8,5 +8,5 @@ public abstract class Controller {
 	public Controller(RobotEngine wallE){
 		robot = wallE;
 	}
-	RobotEngine robot;
+	protected RobotEngine robot;
 }

@@ -78,8 +78,9 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
-		// TODO Auto-generated method stub
-
+		
+		System.out.println(initialPlace);
+		System.out.println("Wall·E is looking at direction" + heading.toString());
 	}
 
 	@Override
