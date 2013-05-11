@@ -72,7 +72,7 @@ public class InfoPanel extends JPanel implements
 	@Override
 	public void raiseError(String msg) {
 		// TODO Auto-generated method stub
-
+		this.displayMessage.setText(msg);
 	}
 
 	@Override
