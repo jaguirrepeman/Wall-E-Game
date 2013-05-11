@@ -42,7 +42,7 @@ public class ConsoleController extends tp.pr5.Controller{
 					instruccion = Interpreter.generateInstruction(command);
 					game.communicateRobot(instruccion);
 				} catch (WrongInstructionFormatException exc) {
-					say(exc.getMessage());
+					game.requestError(exc.getMessage());
 				}
 			}
 		}
