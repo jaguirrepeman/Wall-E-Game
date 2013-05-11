@@ -88,8 +88,13 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		else say("There is no instruction to be undone.");
 	}
 
-	public void requestQuit() {
+	public void commandQuit() {
 		quit = true;
+	}
+	
+	public void requestQuit() {
+		if (!quit) for (RobotEngineObserver o : robObservers) o.engineOff(this.place.isSpaceship());
+		else for (RobotEngineObserver o : robObservers) o.communicationCompleted();
 	}
 	
 	public void saySomething(String message){
@@ -157,7 +162,12 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 
 	public void requestStart(){
-		
+		for (NavigationObserver o : navObservers){ 
+			o.initNavigationModule(this.place, this.direction);
+		}
+		for (RobotEngineObserver obs: robObservers){
+			obs.robotUpdate(this.fuel, this.recycledMaterial);
+		}
 	}
 	
 	public void addNavigationObserver(NavigationObserver robotObserver){

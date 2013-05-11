@@ -14,7 +14,7 @@ public class QuitInstruction extends NotUndoableInstruction{
 		this.engine = engine;
 	}
 	public void execute() throws InstructionExecutionException{
-		engine.requestQuit();
+		engine.commandQuit();
 	}
 	public String getHelp(){
 		return "QUIT|SALIR";

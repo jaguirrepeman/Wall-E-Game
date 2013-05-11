@@ -15,12 +15,13 @@ public class ConsoleController extends tp.pr5.Controller{
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
-		for (RobotEngineObserver o : robObservers){ 
+		/*for (RobotEngineObserver o : robObservers){ 
 			game.o.robotSays(this.place.getDescription());
 			o.robotSays("WALL·E is looking at direction "
 				+ this.direction.toString());
 			o.robotUpdate(fuel, recycledMaterial);
-		}
+		}*/
+		game.requestStart();
 		/**
 		 Cosas antiguas
 		 
@@ -31,7 +32,6 @@ public class ConsoleController extends tp.pr5.Controller{
 */
 		Scanner comando = new Scanner(System.in);
 
-		boolean quit;
 		while (!game.isOver()) {
 
 			if (!game.isOver()) {
@@ -42,14 +42,12 @@ public class ConsoleController extends tp.pr5.Controller{
 					instruccion = Interpreter.generateInstruction(command);
 					game.communicateRobot(instruccion);
 				} catch (WrongInstructionFormatException exc) {
-
 					say(exc.getMessage());
 				}
 			}
 		}
 		comando.close();
-		if (!quit) for (RobotEngineObserver o : robObservers) o.engineOff(this.place.isSpaceship());
-		else for (RobotEngineObserver o : robObservers) o.communicationCompleted();
+		game.requestQuit();
 		/**
 		  Más cosas antiguas
 		
