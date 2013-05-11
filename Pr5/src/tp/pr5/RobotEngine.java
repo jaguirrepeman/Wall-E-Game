@@ -70,6 +70,16 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		return this.recycledMaterial;
 	}
 	
+	public void requestStart(){
+		//TODO partida empezada?
+		for (NavigationObserver o : navObservers){ 
+			o.initNavigationModule(this.place, this.direction);
+		}
+		for (RobotEngineObserver obs: robObservers){
+			obs.robotUpdate(this.fuel, this.recycledMaterial);
+		}
+	}
+	
 	public void requestError(String msg){
 		for (RobotEngineObserver obs: robObservers){
 			obs.raiseError(msg);
@@ -103,6 +113,75 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	
 	
+	
+
+
+
+
+
+	public void printRobotState() {
+		if (this.fuel < 0)
+			this.fuel = 0;
+		System.out.println("      * My power is " + this.fuel);
+		System.out.println("      * My recycled material is "
+				+ this.recycledMaterial);
+	}
+	
+
+
+	
+	public void addNavigationObserver(NavigationObserver robotObserver){
+		navObservers.add(robotObserver);
+		//TODO esto se hará así, supongo
+		this.navigation.addNavigationObserver(robotObserver);
+	}
+	
+	public void addEngineObserver(RobotEngineObserver observer){
+		robObservers.add(observer);
+	}
+	
+	public void addItemContainerObserver(InventoryObserver c){
+		invObservers.add(c);
+	}
+//OTROS MÉTODOS
+	public Street getHeadingStreet() {
+		return this.cityMap.lookForStreet(this.place, this.direction);
+	}
+	
+	public void moveToPlace(Place headingPlace){
+		this.place = headingPlace;
+	}
+
+	public void say(String mensaje) {
+		System.out.println("WALL·E says: " + mensaje);
+	}
+
+	public void prompt(String mensaje) {
+		System.out.println("WALL·E> " + mensaje);
+	}
+
+	public void prompt() {
+		System.out.print("WALL·E> ");
+	}
+
+	public void setGUIWindow(MainWindow mainWindow){
+
+	}
+	
+	public void setRobotPanel(RobotPanel robotPanel){
+		this.robotPanel = robotPanel;
+	}
+	
+	/*public void setNavigationPanel(NavigationPanel navPanel){
+		navigation.setNavigationPanel(navPanel);
+	}*/
+	public String[] getItemsFromContainer(int n){
+		return items.itemForTable(n);
+	}
+	public int numberOfItems(){
+		return this.items.numberOfItems();
+	}
+//OBsoleto	
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
@@ -147,88 +226,10 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 			
 		 */
 	}
-
-
-
-
-
-	public void printRobotState() {
-		if (this.fuel < 0)
-			this.fuel = 0;
-		System.out.println("      * My power is " + this.fuel);
-		System.out.println("      * My recycled material is "
-				+ this.recycledMaterial);
-	}
-	
-
-	public void requestStart(){
-		for (NavigationObserver o : navObservers){ 
-			o.initNavigationModule(this.place, this.direction);
-		}
-		for (RobotEngineObserver obs: robObservers){
-			obs.robotUpdate(this.fuel, this.recycledMaterial);
-		}
-	}
-	
-	public void addNavigationObserver(NavigationObserver robotObserver){
-		navObservers.add(robotObserver);
-	}
-	
-	public void addEngineObserver(RobotEngineObserver observer){
-		robObservers.add(observer);
-	}
-	
-	public void addItemContainerObserver(InventoryObserver c){
-		invObservers.add(c);
-	}
-//OTROS MÉTODOS
-	public Street getHeadingStreet() {
-		return this.cityMap.lookForStreet(this.place, this.direction);
-	}
-	
-	public void moveToPlace(Place headingPlace){
-		this.place = headingPlace;
-	}
-
-	public void say(String mensaje) {
-		System.out.println("WALL·E says: " + mensaje);
-	}
-
-	public void prompt(String mensaje) {
-		System.out.println("WALL·E> " + mensaje);
-	}
-
-	public void prompt() {
-		System.out.print("WALL·E> ");
-	}
-
-	public void setGUIWindow(MainWindow mainWindow){
-
-	}
-	
-	public void setRobotPanel(RobotPanel robotPanel){
-		this.robotPanel = robotPanel;
-	}
-	
-	public void setNavigationPanel(NavigationPanel navPanel){
-		navigation.setNavigationPanel(navPanel);
-	}
-	public String[] getItemsFromContainer(int n){
-		return items.itemForTable(n);
-	}
-	public int numberOfItems(){
-		return this.items.numberOfItems();
-	}
-	
-
-
+//END obsoleto
 	
 	private void emitPartidaEmpezada() {
 		for (NavigationObserver o : navObservers){ 
-			/*o.robotSays(this.place.getDescription());
-			o.robotSays("WALL·E is looking at direction "
-				+ this.direction.toString());
-			o.robotUpdate(fuel, recycledMaterial);*/
 			o.initNavigationModule(this.place, this.direction);
 		}
 		for (RobotEngineObserver obs: robObservers){
