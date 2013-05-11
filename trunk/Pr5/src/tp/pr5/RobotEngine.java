@@ -46,7 +46,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 				instructions.add(c);
 			
 		} catch (InstructionExecutionException exc) {
-			System.out.println(exc.getMessage());//TODO, pasar al requestError y implementar en lascosas raras
+			requestError(exc.getMessage());//, pasar al requestError y implementar en lascosas raras
 		}
 	}
 	

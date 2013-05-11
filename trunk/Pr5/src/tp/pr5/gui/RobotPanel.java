@@ -377,8 +377,9 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
-		robotInfo.setText("Fuel: " + fuel
-				+ " Recycled: " + recycledMaterial);
+		//robotInfo.setText("Fuel: " + fuel
+		//		+ " Recycled: " + recycledMaterial);
+		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycledMaterial);
 	}
 
 	@Override

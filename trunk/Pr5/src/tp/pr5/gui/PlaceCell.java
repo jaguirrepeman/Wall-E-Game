@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-import tp.pr5.Place;
+import tp.pr5.PlaceInfo;
 
 @SuppressWarnings("serial")
 public class PlaceCell extends JButton {
@@ -31,7 +31,7 @@ public class PlaceCell extends JButton {
 
 	}
 	
-	public PlaceCell setPlace(Place place){
+	public PlaceCell setPlace(PlaceInfo place){
 		
 		this.place = place;
 		this.setText(place.getName()); 
@@ -57,5 +57,5 @@ public class PlaceCell extends JButton {
 
 
 	private boolean actual;
-	private Place place;
+	private PlaceInfo place;
 }

@@ -45,5 +45,15 @@ public class CloseApp implements ActionListener {
 		System.exit(0);
 
 	}
+	
+	public static void quitApp(){
+		int seleccion = JOptionPane.showOptionDialog(null,
+				null, "Exit WALL·E",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				CityPanel.createImageIcon("images/walleExit.png", "WALLE"), 
+					new Object[] { "YES", "NO"},"null");
+
+		if (seleccion == -1 || seleccion == 0) System.exit(0);
+	}
 
 }

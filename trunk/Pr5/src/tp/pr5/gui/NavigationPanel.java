@@ -62,19 +62,20 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	
 	@Override
 	public void headingChanged(Direction newHeading) {
-		// TODO Auto-generated method stub
 		cityPanel.turnWalleIcon(newHeading);
 	}
 
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
-		// TODO Auto-generated method stub
+		this.direction = direction;
+		this.cityPanel.setInitialPlace(initialPlace);
 		
 	}
 
 	@Override
 	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
-		// TODO Auto-generated method stub
+		// TODO (cityPanel != null)
+		this.cityPanel.move(heading, place);
 		text.setText(place.getDescription());
 	}
 
@@ -87,7 +88,7 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	@Override
 	public void placeHasChanged(PlaceInfo placeDescription) {
 		// TODO Auto-generated method stub
-		
+		text.setText(placeDescription.getDescription());
 	}
 	
 	
@@ -96,5 +97,6 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	private JTextArea text;
 	private JScrollPane scroller;
 	
+	private Direction direction;
 
 }
