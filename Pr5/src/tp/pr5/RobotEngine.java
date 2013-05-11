@@ -32,6 +32,72 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		
 	}
 
+	public boolean isOver(){
+		
+		return ((quit) || (fuel == 0) ||( this.place.isSpaceship()));
+		
+	}
+	
+	public void communicateRobot(Instruction c) {
+		c.configureContext(this, navigation, items);
+		try {
+			c.execute();
+			if(c.isUndoableInstruction())
+				instructions.add(c);
+			
+		} catch (InstructionExecutionException exc) {
+			System.out.println(exc.getMessage());//TODO, pasar al requestError y implementar en lascosas raras
+		}
+	}
+	
+	public void addFuel(int fuel) {
+		this.fuel += fuel;
+		/** de momento se quita esto*/ // for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
+	}
+
+	public void addRecycledMaterial(int weight) {
+		this.recycledMaterial += weight;
+		/** de momento se quita esto*/	//for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
+	}
+	
+	public int getFuel() {
+		return this.fuel;
+	}
+
+	public int getRecycledMaterial() {
+		return this.recycledMaterial;
+	}
+	
+	public void requestError(String msg){
+		for (RobotEngineObserver obs: robObservers){
+			obs.raiseError(msg);
+		}
+	}
+	
+	public void requestHelp() {
+		for (RobotEngineObserver o : robObservers) o.communicationHelp(Interpreter.interpreterHelp());
+
+		//System.out.println(Interpreter.interpreterHelp());
+	}
+	
+	public void undoInstruction(){
+		if (!instructions.isEmpty())
+			instructions.pop().undo();
+		else say("There is no instruction to be undone.");
+	}
+
+	public void requestQuit() {
+		quit = true;
+	}
+	
+	public void saySomething(String message){
+		
+	}
+	
+	
+	
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
@@ -77,37 +143,9 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		 */
 	}
 
-	public void addFuel(int fuel) {
-		this.fuel += fuel;
-		/** de momento se quita esto*/ // for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
-		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
-	}
 
-	public void addRecycledMaterial(int weight) {
-		this.recycledMaterial += weight;
-		/** de momento se quita esto*/	//for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
-		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
-	}
 
-	public void requestHelp() {
-		for (RobotEngineObserver o : robObservers) o.communicationHelp(Interpreter.interpreterHelp());
 
-		//System.out.println(Interpreter.interpreterHelp());
-	}
-
-	public void communicateRobot(Instruction c) {
-		c.configureContext(this, navigation, items);
-		try {
-			
-			c.execute();
-			
-			if(c.isUndoableInstruction())
-				instructions.add(c);
-			
-		} catch (InstructionExecutionException exc) {
-			System.out.println(exc.getMessage());
-		}
-	}
 
 	public void printRobotState() {
 		if (this.fuel < 0)
@@ -117,24 +155,23 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 				+ this.recycledMaterial);
 	}
 	
-	public void undoInstruction(){
-		if (!instructions.isEmpty())
-			instructions.pop().undo();
-		else say("There is no instruction to be undone.");
-	}
 
-	public void requestQuit() {
-		quit = true;
+	public void requestStart(){
+		
 	}
-
-	public int getFuel() {
-		return this.fuel;
+	
+	public void addNavigationObserver(NavigationObserver robotObserver){
+		navObservers.add(robotObserver);
 	}
-
-	public int getRecycledMaterial() {
-		return this.recycledMaterial;
+	
+	public void addEngineObserver(RobotEngineObserver observer){
+		robObservers.add(observer);
 	}
-
+	
+	public void addItemContainerObserver(InventoryObserver c){
+		invObservers.add(c);
+	}
+//OTROS MÉTODOS
 	public Street getHeadingStreet() {
 		return this.cityMap.lookForStreet(this.place, this.direction);
 	}
@@ -172,18 +209,8 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public int numberOfItems(){
 		return this.items.numberOfItems();
 	}
-	public void addNavigationObserver(NavigationObserver robotObserver){
-		navObservers.add(robotObserver);
-	}
-	public void addEngineObserver(RobotEngineObserver observer){
-		robObservers.add(observer);
-	}
-	public void addItemContainerObserver(InventoryObserver c){
-		invObservers.add(c);
-	}
-	public void requestStart(){
-		
-	}
+	
+
 
 	
 	private void emitPartidaEmpezada() {

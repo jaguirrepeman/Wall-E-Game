@@ -32,9 +32,9 @@ public class ConsoleController extends tp.pr5.Controller{
 		Scanner comando = new Scanner(System.in);
 
 		boolean quit;
-		while (!(quit || this.place.isSpaceship() || this.fuel == 0)) {
+		while (!game.isOver()) {
 
-			if (!this.place.isSpaceship() && (this.fuel != 0) && !quit) {
+			if (!game.isOver()) {
 
 				prompt();
 				command = comando.nextLine();
