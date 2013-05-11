@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 
 import tp.pr5.Direction;
 import tp.pr5.Place;
+import tp.pr5.PlaceInfo;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{
 	
@@ -81,7 +82,7 @@ public class CityPanel extends JPanel{
 		return cityMap;
 	}
 	
-	public void move (Direction headingDirection, Place place){
+	public void move (Direction headingDirection, PlaceInfo place){
 		places[pos_y][pos_x].setActual(false);
 		if (headingDirection == Direction.NORTH) 		pos_y--;
 		else if (headingDirection == Direction.SOUTH) 	pos_y++;
@@ -97,8 +98,8 @@ public class CityPanel extends JPanel{
 		else return false;
 	}
 	
-	public void setInitialPlace(Place initPlace){
-		places[INIT_X][INIT_Y].setPlace(initPlace).setActual(true);
+	public void setInitialPlace(PlaceInfo initialPlace){
+		places[INIT_X][INIT_Y].setPlace(initialPlace).setActual(true);
 	}
 	
 	 private static final int CELDAS_FILAS = 11;

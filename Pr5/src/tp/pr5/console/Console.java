@@ -39,7 +39,8 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void raiseError(String msg) {
-		// TODO Auto-generated method stub
+		
+		System.out.println(msg);
 
 	}
 

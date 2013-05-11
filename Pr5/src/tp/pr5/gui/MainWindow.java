@@ -50,9 +50,9 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		navPanel = new NavigationPanel();
 		this.add(navPanel);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.engine = engine;
-		this.engine.setNavigationPanel(navPanel);
-		this.engine.setRobotPanel(robotPan);
+		//this.engine = engine;
+		//this.engine.setNavigationPanel(navPanel);
+		//this.engine.setRobotPanel(robotPan);
 		this.navPanel.setInitialPlace(initPlace);
 	}
 
@@ -84,7 +84,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		
 			
 		
-		robotPan = new RobotPanel(engine);
+		robotPan = new RobotPanel();
 	//	robotPan.setPreferredSize(new Dimension(200, 200));
 		robotPan.setSize(200, 200);
 		this.add(robotPan, BorderLayout.NORTH);

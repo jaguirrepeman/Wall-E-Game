@@ -96,7 +96,7 @@ public class InfoPanel extends JPanel implements
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
 		
-		this.displayMessage.setText("Robot's attributes have been updated: ("
+		this.displayMessage.setText("Wall·E's attributes have been updated: ("
 				+ fuel + ", " + recycledMaterial + ")");
 
 	}
