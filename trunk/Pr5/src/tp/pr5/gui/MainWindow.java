@@ -84,7 +84,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		
 			
 		
-		robotPan = new RobotPanel();
+		robotPan = new RobotPanel(gameController);
 	//	robotPan.setPreferredSize(new Dimension(200, 200));
 		robotPan.setSize(200, 200);
 		this.add(robotPan, BorderLayout.NORTH);

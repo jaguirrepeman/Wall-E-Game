@@ -71,7 +71,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	}
 	
 	public void requestStart(){
-		//TODO partida empezada?
+		//TODO emit partida empezada?
 		for (NavigationObserver o : navObservers){ 
 			o.initNavigationModule(this.place, this.direction);
 		}

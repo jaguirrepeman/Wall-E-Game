@@ -31,7 +31,10 @@ import tp.pr5.items.Item;
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel implements RobotEngineObserver,
 		InventoryObserver{
-	public RobotPanel(){
+	public RobotPanel(GUIController gameController){
+		
+		this.game = gameController;
+		
 		this.setLayout(new BorderLayout(10, 10));
 
 		//Creación del panel de instrucciones
@@ -45,7 +48,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField();//TODO hay que hacer el robotUpdate
+		robotInfo = new JFormattedTextField();//TODO hay que hacer el robotUpdate, no tonto del culo, se hace en el startController del GUIController
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
@@ -143,7 +146,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		int rows = modelo.getRowCount();
 		for (int i = 0; i < rows; i++)
 			modelo.removeRow(0);
-
+		//TODO cambiar a los métodos del interfaz
 		for (int i = 0; i < engine.numberOfItems(); i++)
 			modelo.addRow(engine.getItemsFromContainer(i)/* objeto del array */);
 
@@ -168,7 +171,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						engine.communicateRobot(new MoveInstruction());
+						game.communicateInstruction(new MoveInstruction());
 						
 					}
 				
@@ -212,7 +215,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						engine.communicateRobot(new TurnInstruction	(rotacion));
+						game.communicateInstruction(new TurnInstruction	(rotacion));
 						
 					}
 				
@@ -228,7 +231,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (!objectToPick.getText().isEmpty()){
-							engine.communicateRobot(new PickInstruction(objectToPick.getText()));
+							game.communicateInstruction(new PickInstruction(objectToPick.getText()));
 							changeInventory(tabla);
 						}
 						
@@ -247,7 +250,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
-							engine.communicateRobot(new DropInstruction(robotsObject));
+							game.communicateInstruction(new DropInstruction(robotsObject));
 							changeInventory(tabla);
 						}
 					}
@@ -265,7 +268,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
-							engine.communicateRobot(new OperateInstruction(robotsObject));
+							game.communicateInstruction(new OperateInstruction(robotsObject));
 							changeInventory(tabla);
 						}
 					}
@@ -282,7 +285,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						engine.communicateRobot(new UndoInstruction());
+						game.communicateInstruction(new UndoInstruction());
 						changeInventory(tabla);
 						
 					}
@@ -398,7 +401,8 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	private DefaultTableModel tabla;
 	private JFormattedTextField robotInfo;
 	
-	private RobotEngine engine;
+	private GUIController game;
+	//private RobotEngine engine;
 
 	
 }
