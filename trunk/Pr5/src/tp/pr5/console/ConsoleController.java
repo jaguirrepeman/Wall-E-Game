@@ -21,7 +21,7 @@ public class ConsoleController extends tp.pr5.Controller{
 				+ this.direction.toString());
 			o.robotUpdate(fuel, recycledMaterial);
 		}*/
-		game.requestStart();
+		robot.requestStart();
 		/**
 		 Cosas antiguas
 		 
@@ -32,22 +32,22 @@ public class ConsoleController extends tp.pr5.Controller{
 */
 		Scanner comando = new Scanner(System.in);
 
-		while (!game.isOver()) {
+		while (!robot.isOver()) {
 
-			if (!game.isOver()) {
+			if (!robot.isOver()) {
 
 				prompt();
 				command = comando.nextLine();
 				try {
 					instruccion = Interpreter.generateInstruction(command);
-					game.communicateRobot(instruccion);
+					robot.communicateRobot(instruccion);
 				} catch (WrongInstructionFormatException exc) {
-					game.requestError(exc.getMessage());
+					robot.requestError(exc.getMessage());
 				}
 			}
 		}
 		comando.close();
-		game.requestQuit();
+		robot.requestQuit();
 		/**
 		  Más cosas antiguas
 		
@@ -70,6 +70,6 @@ public class ConsoleController extends tp.pr5.Controller{
 		
 	}
 
-	private RobotEngine game;
+	//private RobotEngine game;
 
 }
