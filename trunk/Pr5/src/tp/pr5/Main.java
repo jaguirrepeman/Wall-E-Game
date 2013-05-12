@@ -119,6 +119,7 @@ public class Main {
 				ConsoleController consCont = new ConsoleController(wallE);
 				Console console = new Console();
 				wallE.addEngineObserver(console);
+				wallE.addNavigationObserver(console);
 				consCont.startEngine();
 			}
 

@@ -12,6 +12,7 @@ public class NavigationModule {
 
 		this.city = aCity;
 		this.place = initialPlace;
+		this.navObservers = new Vector<NavigationObserver>();
 	}
 
 	public boolean atSpaceship() {
