@@ -119,9 +119,19 @@ public class Main {
 				ConsoleController consCont = new ConsoleController(wallE);
 				Console console = new Console();
 				wallE.addEngineObserver(console);
+				consCont.startEngine();
 			}
 
 			if (swing){
+				try {
+					UIManager.setLookAndFeel(
+					        UIManager.getCrossPlatformLookAndFeelClassName());
+				} 
+				catch (ClassNotFoundException e1) {}
+				catch (InstantiationException e1) {} 
+				catch (IllegalAccessException e1) {} 
+				catch (UnsupportedLookAndFeelException e1) {}
+				
 				GUIController guiCont = new GUIController(wallE);
 				MainWindow window = new MainWindow(guiCont);
 				window.setVisible(true);
@@ -134,7 +144,7 @@ public class Main {
 			/*
 			 * Comienza la ejecución del programa
 			 */
-			wallE.startEngine();
+			//wallE.startEngine();
 			 
 			
 		}

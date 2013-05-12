@@ -6,7 +6,7 @@ public abstract class Controller {
 	 *registerRobotObserver, startController
 	 */
 	public Controller(RobotEngine wallE){
-		robot = wallE;
+		this.robot = wallE;
 	}
 	protected RobotEngine robot;
 }
