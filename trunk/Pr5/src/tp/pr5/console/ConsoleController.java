@@ -60,7 +60,7 @@ public class ConsoleController extends tp.pr5.Controller{
 			
 		 */
 	}
-
+//estos dos deben ser eliminados
 	private void say(String message) {
 		// TODO Auto-generated method stub
 		

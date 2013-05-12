@@ -86,6 +86,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 		rotacion = directionToTurn.getSelectedItem().toString();
  }
+	//OBsoleto
 	public RobotPanel(final RobotEngine engine) {
 		
 		this.engine = engine;
