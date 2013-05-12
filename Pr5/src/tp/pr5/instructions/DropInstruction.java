@@ -37,7 +37,7 @@ public class DropInstruction extends UndoableInstruction {
 					"This item already exists in this place");
 		if (!((item == null) || (navigation.findItemAtCurrentPlace(id)))) {
 			navigation.dropItemAtCurrentPlace(item);
-			navigation.print("Great! I have dropped " + id);
+			//TODO quitar, ya está en el navigation implementado navigation.print("Great! I have dropped " + id);
 		}
 
 	}
