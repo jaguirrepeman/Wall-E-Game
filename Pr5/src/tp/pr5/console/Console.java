@@ -80,8 +80,8 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
 		
-		System.out.println(initialPlace);
-		System.out.println("Wall·E is looking at direction" + heading.toString());
+		System.out.println(initialPlace.getDescription());
+		System.out.println("Wall·E is looking at direction " + heading.toString());
 	}
 
 	@Override
