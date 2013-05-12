@@ -37,6 +37,7 @@ public class OperateInstruction extends UndoableInstruction{
 				if (!this.items.getItem(id).use(this.engine, this.navigation)) { // si no se puede usar aqui
 				
 					if (!this.items.getItem(id).canBeUsed()) { // si ya no se puede usar
+						//TODO
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
 					
@@ -53,6 +54,7 @@ public class OperateInstruction extends UndoableInstruction{
 						this.engine.printRobotState();
 					
 					if (!this.items.getItem(id).canBeUsed()) {
+						//TODO
 						engine.say("What a pity! I have no more "
 								+ id + " in my inventory");
 						
@@ -61,8 +63,8 @@ public class OperateInstruction extends UndoableInstruction{
 				}
 			} 
 			else{
-				
-				navigation.say("I have problems using the object " + id);
+				//TODO
+				//navigation.say("I have problems using the object " + id);
 				throw new InstructionExecutionException("I have problems using the object "
 						+ id);
 			}

@@ -19,14 +19,16 @@ public class ScanInstruction extends NotUndoableInstruction {
 			throw new InstructionExecutionException("My inventory is empty");
 		}
 		else if (id == null)
+			//TODO
 			engine.say("I am carrying the following items" + LINE_SEPARATOR
 					+ this.robotContainer.toString());
 		else {
 			Item item3 = this.robotContainer.getItem(id);
+			//TODO
 			if (item3 != null)
 				engine.say(item3.toString());
 			else{
-				throw new InstructionExecutionException("I don't have that item");
+				throw new InstructionExecutionException("I don't have the item "+ id);
 			}
 		}
 	}
