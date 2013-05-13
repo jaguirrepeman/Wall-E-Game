@@ -1,7 +1,7 @@
 package tp.pr5.items;
 
 //import java.util.ArrayList;
-
+//TODO java.util.Collections addAll;
 public class ItemContainer {
 	public ItemContainer() {
 		this.container = new Item[1];

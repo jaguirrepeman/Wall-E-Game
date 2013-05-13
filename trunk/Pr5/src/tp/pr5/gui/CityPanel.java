@@ -94,8 +94,10 @@ public class CityPanel extends JPanel{
 	}
 	
 	public boolean isSpaceShip(){
-		if (places[pos_y][pos_x] != null) return places[pos_y][pos_x].isSpaceShip();
-		else return false;
+		if (places[pos_y][pos_x] != null)
+			return places[pos_y][pos_x].isSpaceShip();
+		else 
+			return false;
 	}
 	
 	public void setInitialPlace(PlaceInfo initialPlace){

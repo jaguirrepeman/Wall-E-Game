@@ -87,7 +87,8 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	}
 	
 	public void requestHelp() {
-		for (RobotEngineObserver o : robObservers) o.communicationHelp(Interpreter.interpreterHelp());
+		for (RobotEngineObserver o : robObservers) 
+			o.communicationHelp(Interpreter.interpreterHelp());
 	}
 	
 	public void undoInstruction(){
@@ -101,8 +102,12 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	}
 	
 	public void requestQuit() {
-		if (!quit) for (RobotEngineObserver o : robObservers) o.engineOff(this.place.isSpaceship());
-		else for (RobotEngineObserver o : robObservers) o.communicationCompleted();
+		if (!quit)
+			for (RobotEngineObserver o : robObservers) 
+				o.engineOff(this.place.isSpaceship());
+		else 
+			for (RobotEngineObserver o : robObservers)
+				o.communicationCompleted();
 	}
 	
 	public void saySomething(String message){
