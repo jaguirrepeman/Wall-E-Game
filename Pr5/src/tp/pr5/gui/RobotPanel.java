@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import tp.pr5.RobotEngine;
@@ -36,7 +37,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		this.game = gameController;
 		
 		this.setLayout(new BorderLayout(10, 10));
-
+		// TODO 
 		//Creación del panel de instrucciones
 		JPanel instructionPanel = createInstructionPanel();
 		this.add(instructionPanel, BorderLayout.WEST);
@@ -143,14 +144,29 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		rotacion = directionToTurn.getSelectedItem().toString();
 	}
 
-	public void changeInventory(DefaultTableModel modelo) {
+	public void changeInventory(Table modelo) {
 		int rows = modelo.getRowCount();
 		for (int i = 0; i < rows; i++)
 			modelo.removeRow(0);
+		RobotEngine engine;
 		//TODO cambiar a los métodos del interfaz
 		for (int i = 0; i < engine.numberOfItems(); i++)
 			modelo.addRow(engine.getItemsFromContainer(i)/* objeto del array */);
 
+	}
+	@Override
+	public void inventoryChange(List<Item> inventory) {
+		Table modelo;
+		modelo.change(inventory);
+		int rows = modelo.getRowCount();
+		for (int i = 0; i < rows; i++)
+			modelo.removeRow(0);
+		RobotEngine engine;
+		//TODO cambiar a los métodos del interfaz
+		for (int i = 0; i < engine.numberOfItems(); i++)
+			modelo.addRow(engine.getItemsFromContainer(i)/* objeto del array */);
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public void setStatus(int fuel, int recycled){
@@ -369,7 +385,6 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 	@Override
 	public void engineOff(boolean atShip) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -400,6 +415,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	@SuppressWarnings("rawtypes")
 	private JComboBox directionToTurn;
 	private DefaultTableModel tabla;
+	private AbstractTableModel tablaItems;
 	private JFormattedTextField robotInfo;
 	
 	private GUIController game;
