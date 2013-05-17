@@ -99,6 +99,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 	public void commandQuit() {
 		quit = true;
+		requestQuit();
 	}
 	
 	public void requestQuit() {
