@@ -86,7 +86,8 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
-		// TODO Auto-generated method stub
+		System.out.println("Wall·E says: " + "Moving in direction " +heading
+				+ LINE_SEPARATOR + place.getDescription());
 
 	}
 
@@ -113,6 +114,8 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 		System.out.println(Interpreter.interpreterHelp());
 		
 	}
+	
+	static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
 
 }

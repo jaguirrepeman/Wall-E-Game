@@ -89,8 +89,7 @@ public class InfoPanel extends JPanel implements
 
 	@Override
 	public void communicationCompleted() {
-		// TODO Auto-generated method stub
-
+		CloseApp.requestQuit("I have communication problems, bye bye!");
 	}
 
 	@Override
