@@ -67,7 +67,7 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
-		this.direction = direction;
+		this.direction = heading;
 		this.cityPanel.setInitialPlace(initialPlace);
 		
 	}

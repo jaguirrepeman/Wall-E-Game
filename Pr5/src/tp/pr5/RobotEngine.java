@@ -112,7 +112,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void saySomething(String message){
 		for (RobotEngineObserver obs: robObservers){
-			obs.robotSays(message);
+			obs.robotSays("WALL·E says: " + message);
 		}
 	}
 	

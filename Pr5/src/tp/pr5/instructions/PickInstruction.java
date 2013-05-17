@@ -33,14 +33,14 @@ public class PickInstruction extends UndoableInstruction {
 		Item item = this.navigation.pickItemFromCurrentPlace(id);
 		if (item != null) {
 			if (this.robotContainer.addItem(item))
-				engine.say("I am happy! Now I have " + id);
+				engine.saySomething("I am happy! Now I have " + id);
 			else {
 				throw new InstructionExecutionException(
 						"I am stupid! I had already the object " + id);
 			}
 		} else {
 
-			engine.say("Ooops, this place has not the object " + id);
+			engine.saySomething("Ooops, this place has not the object " + id);
 			throw new InstructionExecutionException();
 		}
 	}

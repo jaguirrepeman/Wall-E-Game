@@ -20,13 +20,15 @@ public class ScanInstruction extends NotUndoableInstruction {
 		}
 		else if (id == null)
 			//TODO
-			engine.say("I am carrying the following items" + LINE_SEPARATOR
-					+ this.robotContainer.toString());
+			//engine.say("I am carrying the following items" + LINE_SEPARATOR
+			//		+ this.robotContainer.toString());
+			robotContainer.requestScanCollection();
+			
 		else {
-			Item item3 = this.robotContainer.getItem(id);
 			//TODO
-			if (item3 != null)
-				engine.say(item3.toString());
+			if (this.robotContainer.getItem(id) != null)
+				//engine.say(item3.toString());
+				robotContainer.requestScanItem(id);
 			else{
 				throw new InstructionExecutionException("I don't have the item "+ id);
 			}
