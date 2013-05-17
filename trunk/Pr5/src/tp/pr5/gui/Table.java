@@ -1,4 +1,4 @@
-package tp.pr5.gui;
+/*package tp.pr5.gui;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class Table extends AbstractTableModel {
         fireTableRowsDeleted(row, row);
     
 	}
-/*	public void changeInventory() {
+	public void changeInventory() {
 		int rows = this.getRowCount();
 		for (int i = 0; i < rows; i++)
 			this.removeRow(0);
@@ -49,7 +49,7 @@ public class Table extends AbstractTableModel {
 			this.addRow(engine.getItemsFromContainer(i) objeto del array );
 
 	}
-	*/
+	
 	private void addRow(Item item) {
 		// TODO Auto-generated method stub
 		if(getRowCount() == numElems)
@@ -65,7 +65,7 @@ public class Table extends AbstractTableModel {
 			this.removeRow(0);
 		//TODO cambiar a los métodos del interfaz
 		for (int i = 0; i < inventory.size(); i++)
-			this.addRow(inventory.get(i)/* objeto del array */);
+			this.addRow(inventory.get(i) objeto del array );
 	}
 	private String[] columnNames;
 	private String[][] data;
@@ -75,3 +75,4 @@ public class Table extends AbstractTableModel {
 	
 
 }
+*/

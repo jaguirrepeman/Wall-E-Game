@@ -1,11 +1,18 @@
 package tp.pr5.items;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
+
+
+
 //import java.util.ArrayList;
 //TODO java.util.Collections addAll;
 public class ItemContainer {
 	public ItemContainer() {
 		this.container = new Item[1];
 		counter = 0;
+		invObservers = new Vector<InventoryObserver>();
 
 	}
 	public boolean containsItem(String id){
@@ -39,6 +46,8 @@ public class ItemContainer {
 				container[i] = item;
 				counter++;
 			}
+			//Avisamos a los observadores de que el inventorio ha cambiado
+			this.emitInventoryChange();
 			return true;
 		}
 
@@ -82,9 +91,19 @@ public class ItemContainer {
 				container[i] = container[i + 1];
 			}
 			counter--;
+			//Avisamos a los observadores de que el inventorio ha cambiado
+			this.emitInventoryChange();
 			return item;
 		} else
 			return null;
+	}
+	
+	public void requestScanCollection(){
+		emitScanCollection();
+	}
+	
+	public void requestScanItem(String id){
+		
 	}
 
 	public String toString() {
@@ -102,11 +121,33 @@ public class ItemContainer {
 		return object;
 		
 	}
+	
+	private List<Item> inventoryToList(){
+		List<Item> returnList = null;
+		Collections.addAll(returnList, this.container);
+		return returnList;
+	}
+	
 	public void useItem(Item item){
 		
-}
+	}
+	
+	private void emitScanCollection(){
+		
+		for(InventoryObserver obs: invObservers)
+			obs.inventoryScanned(this.toString());
+				
+	}
+	
+	private void emitInventoryChange(){
+		
+		for (InventoryObserver obs: invObservers)
+			obs.inventoryChange(this.inventoryToList());
+	}
+	
 	private static final String LINE_SEPARATOR = System
 			.getProperty("line.separator");
 	private Item[] container;
 	private int counter;
+	private Vector<InventoryObserver> invObservers;
 }

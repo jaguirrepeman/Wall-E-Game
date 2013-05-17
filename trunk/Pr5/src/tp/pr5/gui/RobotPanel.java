@@ -90,7 +90,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	//OBsoleto
 	public RobotPanel(final RobotEngine engine) {
 		
-		this.engine = engine;
+		//this.engine = engine;
 		this.setLayout(new BorderLayout(10, 10));
 
 		//Creación del panel de instrucciones
@@ -144,30 +144,17 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		rotacion = directionToTurn.getSelectedItem().toString();
 	}
 
-	public void changeInventory(Table modelo) {
-		int rows = modelo.getRowCount();
+	public void changeInventory(List<Item> inventory) {
+		int rows = tabla.getRowCount();
 		for (int i = 0; i < rows; i++)
-			modelo.removeRow(0);
-		RobotEngine engine;
-		//TODO cambiar a los métodos del interfaz
-		for (int i = 0; i < engine.numberOfItems(); i++)
-			modelo.addRow(engine.getItemsFromContainer(i)/* objeto del array */);
+			tabla.removeRow(0);
+		//RobotEngine engine = null;
+		//TODO JUNíSIMOOOOO
+		for (int i = 0; i < inventory.size(); i++)
+			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
 
 	}
-	@Override
-	public void inventoryChange(List<Item> inventory) {
-		Table modelo;
-		modelo.change(inventory);
-		int rows = modelo.getRowCount();
-		for (int i = 0; i < rows; i++)
-			modelo.removeRow(0);
-		RobotEngine engine;
-		//TODO cambiar a los métodos del interfaz
-		for (int i = 0; i < engine.numberOfItems(); i++)
-			modelo.addRow(engine.getItemsFromContainer(i)/* objeto del array */);
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	public void setStatus(int fuel, int recycled){
 		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycled);
@@ -249,7 +236,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					public void actionPerformed(ActionEvent e) {
 						if (!objectToPick.getText().isEmpty()){
 							game.communicateInstruction(new PickInstruction(objectToPick.getText()));
-							changeInventory(tabla);
+							//TODO changeInventory(tabla);
 						}
 						
 					}
@@ -268,7 +255,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
 							game.communicateInstruction(new DropInstruction(robotsObject));
-							changeInventory(tabla);
+							//TODO changeInventory(tabla);
 						}
 					}
 				
@@ -286,7 +273,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
 							game.communicateInstruction(new OperateInstruction(robotsObject));
-							changeInventory(tabla);
+							//TODO changeInventory(tabla);
 						}
 					}
 				
@@ -303,7 +290,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.communicateInstruction(new UndoInstruction());
-						changeInventory(tabla);
+						//TODO changeInventory(tabla);
 						
 					}
 				
@@ -349,8 +336,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	
 	@Override
 	public void inventoryChange(List<Item> inventory) {
-		// TODO Auto-generated method stub
-		
+		changeInventory(inventory);
 	}
 
 	@Override

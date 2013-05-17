@@ -21,19 +21,18 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void inventoryScanned(String inventoryDescription) {
-		// TODO Auto-generated method stub
-
+		robotSays(inventoryDescription);
 	}
 
 	@Override
 	public void itemScanned(String description) {
-		// TODO Auto-generated method stub
-
+		robotSays(description);
 	}
 
 	@Override
 	public void itemEmpty(String itemName) {
-		// TODO Auto-generated method stub
+		
+		robotSays("What a pity! I have no more " + itemName + " in my inventory");
 
 	}
 
@@ -73,6 +72,7 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	public void robotSays(String message) {
 		System.out.println(message);
 	}
+	
 	public void say(String message){
 		System.out.println("WALL·E says: " + message);
 	}

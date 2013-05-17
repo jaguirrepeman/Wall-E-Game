@@ -19,6 +19,14 @@ public abstract class Item {
 	public  void undoUse(RobotEngine r, NavigationModule nav){
 		
 	}
+	
+	public String[] itemForTable(){
+		String[] object= new String[2];
+		object[0] = this.id;
+		object[1] = this.description;
+		return object;
+		
+	}
 
 	public String getId() {
 		
