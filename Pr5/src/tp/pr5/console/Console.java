@@ -111,7 +111,7 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void communicationHelp(String help) {
-		System.out.println(Interpreter.interpreterHelp());
+		System.out.println(help);
 		
 	}
 	
