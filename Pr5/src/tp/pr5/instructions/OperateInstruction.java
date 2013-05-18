@@ -50,9 +50,9 @@ public class OperateInstruction extends UndoableInstruction{
 					}
 				} else {
 					
-					if ((initialFuel != this.engine.getFuel())
-							|| (initialRecMat != this.engine.getRecycledMaterial()))
-						this.engine.printRobotState();
+					//TODO quitar if ((initialFuel != this.engine.getFuel())
+						//	|| (initialRecMat != this.engine.getRecycledMaterial()))
+						//this.engine.printRobotState();
 					
 					if (!this.items.getItem(id).canBeUsed()) {
 						//TODO

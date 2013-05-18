@@ -1,5 +1,6 @@
 package tp.pr5.items;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -123,13 +124,17 @@ public class ItemContainer {
 	}
 	
 	private List<Item> inventoryToList(){
-		List<Item> returnList = null;
+		List<Item> returnList = new ArrayList<Item>();
 		Collections.addAll(returnList, this.container);
 		return returnList;
 	}
 	
 	public void useItem(Item item){
 		
+	}
+	
+	public void addItemContainerObserver(InventoryObserver c){
+		invObservers.add(c);
 	}
 	
 	private void emitScanCollection(){

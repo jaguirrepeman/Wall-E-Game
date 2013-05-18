@@ -38,7 +38,7 @@ public class TurnInstruction extends UndoableInstruction{
 			this.engine.addFuel(-5);
 			//System.out.println("WALL·E is looking at direction "
 			//		+ this.navigation.getCurrentHeading().toString());
-			this.engine.printRobotState();
+			//this.engine.printRobotState();
 			
 	}
 	@Override
