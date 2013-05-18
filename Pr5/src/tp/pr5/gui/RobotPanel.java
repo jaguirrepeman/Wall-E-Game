@@ -49,7 +49,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField("Fuel: "+ 110 + " Recycled: " + 110);//TODO hay que hacer el robotUpdate, no tonto del culo, se hace en el startController del GUIController
+		robotInfo = new JFormattedTextField("");//TODO hay que hacer el robotUpdate, no tonto del culo, se hace en el startController del GUIController
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
@@ -334,8 +334,9 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			tabla.removeRow(0);
 		//RobotEngine engine = null;
 		//TODO JUNíSIMOOOOO
-		for (int i = 0; i < inventory.size(); i++)
+		for (int i = 0; i < inventory.size(); i++){
 			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
+		}
 	}
 	public void changeInventory(List<Item> inventory) {
 		int rows = tabla.getRowCount();

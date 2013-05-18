@@ -52,13 +52,18 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
-		/** TODO de momento se quita esto*/ for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		if (this.fuel <= 0){
+			this.fuel = 0;
+			for (RobotEngineObserver o: robObservers)o.robotUpdate(this.fuel, this.recycledMaterial);
+			for (RobotEngineObserver o: robObservers)o.engineOff(false);
+		}
+		/** TODO de momento se quita esto*/ else for (RobotEngineObserver o : robObservers) o.robotUpdate(this.fuel, this.recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		/** TODO de momento se quita esto*/	for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** TODO de momento se quita esto*/	for (RobotEngineObserver o : robObservers) o.robotUpdate(this.fuel, this.recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 	
@@ -159,6 +164,10 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void moveToPlace(Place headingPlace){
 		this.place = headingPlace;
+		if (this.place.isSpaceship()){
+			for (RobotEngineObserver o: robObservers)
+				o.engineOff(true);
+		}
 	}
 
 	public void say(String mensaje) {

@@ -25,11 +25,12 @@ public class MoveInstruction extends UndoableInstruction{
 				throw new InstructionExecutionException("Arrggg, there is a street but it is closed!");
 			}
 		}
+		this.engine.addFuel(-5);
 		this.engine.moveToPlace(this.navigation.getCurrentPlace());
 		//this.navigation.say("Moving in direction " + this.navigation.getCurrentHeading().toString()
 		//		+ LINE_SEPARATOR + this.navigation.getCurrentPlace().getDescription());
-		this.engine.addFuel(-5);
-		this.engine.printRobotState();
+		
+		//this.engine.printRobotState();
 		
 	}
 		

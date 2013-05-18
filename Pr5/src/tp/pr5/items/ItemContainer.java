@@ -1,6 +1,7 @@
 package tp.pr5.items;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -90,7 +91,7 @@ public class ItemContainer {
 			item = container[posicion];
 			for (int i = posicion; i < counter-1; i++) {
 				container[i] = container[i + 1];
-			}
+			}container[counter-1] = null;
 			counter--;
 			//Avisamos a los observadores de que el inventorio ha cambiado
 			this.emitInventoryChange();
@@ -124,9 +125,12 @@ public class ItemContainer {
 	}
 	
 	private List<Item> inventoryToList(){
-		List<Item> returnList = new ArrayList<Item>();
+		/*List<Item> returnList = new ArrayList<Item>();
 		Collections.addAll(returnList, this.container);
-		return returnList;
+		return returnList.subList(0, counter);
+		*/
+		return Arrays.asList(this.container).subList(0, counter);
+		
 	}
 	
 	public void useItem(Item item){
