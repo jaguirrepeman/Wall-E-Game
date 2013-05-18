@@ -15,6 +15,9 @@ import tp.pr5.items.Item;
 public class InfoPanel extends JPanel implements
 		RobotEngineObserver, NavigationObserver, InventoryObserver {
 
+	public InfoPanel(){
+		displayMessage = new JFormattedTextField();
+	}
 	@Override
 	public void inventoryChange(List<Item> inventory) {
 		// TODO Auto-generated method stub
@@ -108,5 +111,7 @@ public class InfoPanel extends JPanel implements
 	}
 	
 	private JFormattedTextField displayMessage;
+
+	
 
 }
