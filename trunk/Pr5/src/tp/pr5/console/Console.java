@@ -13,14 +13,11 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 		InventoryObserver {
 
 	@Override
-	public void inventoryChange(List<Item> inventory) {
-		// TODO Auto-generated method stub
-
-	}
+	public void inventoryChange(List<Item> inventory) {}
 
 	@Override
 	public void inventoryScanned(String inventoryDescription) {
-		robotSays(inventoryDescription);
+		say(inventoryDescription);
 	}
 
 	@Override
@@ -73,7 +70,7 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	}
 	
 	public void say(String message){
-		System.out.println("Wall·E says: " + message);
+		System.out.println("WALL·E says: " + message);
 	}
 
 	@Override
@@ -94,12 +91,12 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 
 	@Override
 	public void placeScanned(PlaceInfo placeDescription) {
-		System.out.println(placeDescription.getDescription());
+		System.out.println(placeDescription.toString());
 	}
 
 	@Override
 	public void placeHasChanged(PlaceInfo placeDescription) {
-		System.out.println(placeDescription.toString());
+		//System.out.println(placeDescription.toString());
 
 	}
 	
