@@ -105,7 +105,9 @@ public class ItemContainer {
 	}
 	
 	public void requestScanItem(String id){
-		
+		//
+		for(InventoryObserver o: this.invObservers)
+			o.itemScanned(getItem(id).toString());
 	}
 
 	public String toString() {

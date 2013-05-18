@@ -23,7 +23,7 @@ public class DropInstruction extends UndoableInstruction {
 	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer) {
 		this.navigation = navigation;
 		this.robotContainer = robotContainer;
-		
+		this.engine = engine;
 	}
 
 	public void execute() throws InstructionExecutionException {
@@ -37,6 +37,7 @@ public class DropInstruction extends UndoableInstruction {
 					"This item already exists in this place");
 		if (!((item == null) || (navigation.findItemAtCurrentPlace(id)))) {
 			navigation.dropItemAtCurrentPlace(item);
+			engine.saySomething("Great! I have dropped " + id);
 			//TODO quitar, ya está en el navigation implementado navigation.print("Great! I have dropped " + id);
 		}
 
@@ -64,6 +65,7 @@ public class DropInstruction extends UndoableInstruction {
 
 	}
 	
+	private RobotEngine engine;
 	private NavigationModule navigation;
 	private ItemContainer robotContainer;
 	private String id;

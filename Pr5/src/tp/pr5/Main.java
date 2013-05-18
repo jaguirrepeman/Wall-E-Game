@@ -42,7 +42,7 @@ public class Main {
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
-		Option interf = new Option("i", "interface", true, "The type of interface: console or swing");
+		Option interf = new Option("i", "interface", true, "The type of interface: console, swing or both");
 		interf.setArgName("type");
 		Option map = new Option("m", "map", true, "File with the description of the city");
 		map.setArgName("mapfile");
@@ -50,7 +50,7 @@ public class Main {
 		opt.addOption(map);
 		
 		BasicParser parser = new BasicParser();
-		boolean cons = false, swing = false;
+		boolean /*cons = false, */swingOn = false, both = false;
 		String fileName = null;
 		try {
 			/*
@@ -90,18 +90,18 @@ public class Main {
 			 */
 			fileName = cmd.getOptionValue('m');
 			if (cmd.getOptionValue('i').equals("console")) {
-				cons = true;//swingOn = true;
-			
+				//cons = true;//swingOn = true;
+				swingOn = false;
 
-		}
+			}
 			else if (cmd.getOptionValue('i').equals("swing")) {
-				swing = true;//swingOn = true;
+				swingOn = true;//swingOn = true;
 			
-
-		}
+				
+			}
 			else{
-				cons = true; 
-				swing = true;
+				swingOn = true;
+				both = true;
 			}
 			/*
 			 * Lectura del mapa y creación de la ciudad
@@ -115,15 +115,16 @@ public class Main {
 			 */
 			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
 			
-			if (cons){
+			if (!swingOn){
 				ConsoleController consCont = new ConsoleController(wallE);
 				Console console = new Console();
 				wallE.addEngineObserver(console);
 				wallE.addNavigationObserver(console);
+				wallE.addItemContainerObserver(console);
 				consCont.startEngine();
 			}
 
-			if (swing){
+			if (swingOn){
 				try {
 					UIManager.setLookAndFeel(
 					        UIManager.getCrossPlatformLookAndFeelClassName());
@@ -137,6 +138,12 @@ public class Main {
 				MainWindow window = new MainWindow(guiCont);
 				window.setVisible(true);
 				wallE.addEngineObserver(window);
+				if (both){
+					Console console = new Console();
+					wallE.addEngineObserver(console);
+					wallE.addNavigationObserver(console);
+					wallE.addItemContainerObserver(console);
+				}
 				guiCont.startController();
 			}
 			
@@ -156,7 +163,7 @@ public class Main {
 		catch (ParseException e) {
 			//e.printStackTrace();
 			System.err.println(e.getMessage());
-			System.exit(1);
+			System.exit(3);
 			
 			
 		} 

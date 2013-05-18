@@ -31,7 +31,7 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	@Override
 	public void itemEmpty(String itemName) {
 		
-		robotSays("What a pity! I have no more " + itemName + " in my inventory");
+		say("What a pity! I have no more " + itemName + " in my inventory");
 
 	}
 
@@ -46,16 +46,16 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	public void engineOff(boolean atShip) {
 		
 		if (atShip)
-			robotSays("I am at my spaceship. Bye bye");
+			say("I am at my spaceship. Bye bye");
 		else 
-			robotSays("I run out of fuel. I cannot move. Shutting down...");
+			say("I run out of fuel. I cannot move. Shutting down...");
 		
 
 	}
 
 	@Override
 	public void communicationCompleted() {
-		robotSays("I have communication problems. Bye bye");
+		say("I have communication problems. Bye bye");
 
 	}
 
@@ -73,32 +73,33 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	}
 	
 	public void say(String message){
-		System.out.println("WALL·E says: " + message);
+		System.out.println("Wall·E says: " + message);
 	}
 
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
 		
 		//System.out.println(initialPlace.getDescription());
-		System.out.println(initialPlace.toString());
-		System.out.println("Wall·E is looking at direction " + heading.toString());
+		System.out.println(initialPlace.toString() + LINE_SEPARATOR
+				+ "WALL·E is looking at direction " + heading.toString());
+
 	}
 
 	@Override
 	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
-		System.out.println("Wall·E says: " + "Moving in direction " +heading
+		say("Moving in direction " +heading
 				+ LINE_SEPARATOR + place.toString());
 
 	}
 
 	@Override
 	public void placeScanned(PlaceInfo placeDescription) {
-		System.out.println(placeDescription.toString());
+		System.out.println(placeDescription.getDescription());
 	}
 
 	@Override
 	public void placeHasChanged(PlaceInfo placeDescription) {
-		placeDescription.toString();
+		System.out.println(placeDescription.toString());
 
 	}
 	
