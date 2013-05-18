@@ -132,13 +132,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 
 
-	public void printRobotState() {
-		if (this.fuel < 0)
-			this.fuel = 0;
-		System.out.println("      * My power is " + this.fuel);
-		System.out.println("      * My recycled material is "
-				+ this.recycledMaterial);
-	}
+
 	
 
 
@@ -174,20 +168,6 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		System.out.println("WALL·E says: " + mensaje);
 	}
 
-	
-
-	public void prompt() {
-		for (RobotEngineObserver o: robObservers)
-			o.robotSays("WALL·E> ");
-	}
-
-	
-	public String[] getItemsFromContainer(int n){
-		return items.itemForTable(n);
-	}
-	public int numberOfItems(){
-		return this.items.numberOfItems();
-	}
 //OBsoleto	
 	public void startEngine() {
 		Instruction instruccion = null;
@@ -207,7 +187,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 			if (!this.place.isSpaceship() && (this.fuel != 0) && !quit) {
 
-				prompt();
+				//prompt();
 				command = comando.nextLine();
 				try {
 					instruccion = Interpreter.generateInstruction(command);
@@ -232,6 +212,22 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 			say("I have communication problems. Bye bye");
 			
 		 */
+		
+	}
+
+	
+	public String[] getItemsFromContainer(int n){
+		return items.itemForTable(n);
+	}
+	public int numberOfItems(){
+		return this.items.numberOfItems();
+	}
+	public void printRobotState() {
+		if (this.fuel < 0)
+			this.fuel = 0;
+		System.out.println("      * My power is " + this.fuel);
+		System.out.println("      * My recycled material is "
+				+ this.recycledMaterial);
 	}
 //END obsoleto
 	

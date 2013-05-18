@@ -65,7 +65,7 @@ public class ConsoleController extends tp.pr5.Controller{
 		
 	}
 	private void prompt() {
-		robot.prompt();
+		System.out.print("WALL·E> ");
 	}
 
 	//private RobotEngine game;

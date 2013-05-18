@@ -111,7 +111,7 @@ public class NavigationModule {
 		
 		//TODO mover a un emit?
 		for (NavigationObserver obs : navObservers)
-			obs.placeHasChanged(place);
+			obs.placeScanned(place);
 		
 
 	}
