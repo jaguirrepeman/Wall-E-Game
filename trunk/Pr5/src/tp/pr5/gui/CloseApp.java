@@ -50,7 +50,7 @@ public class CloseApp implements ActionListener {
 		int seleccion = JOptionPane.showOptionDialog(null,
 				null, "Exit WALL·E",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				CityPanel.createImageIcon("images/walleExit.png", "WALLE"), 
+				CityPanel.createImageIcon("images/2WALLExit.png", "WALLE"), 
 					new Object[] { "YES", "NO"},"null");
 
 		if (seleccion == -1 || seleccion == 0) System.exit(0);

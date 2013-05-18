@@ -47,7 +47,7 @@ public class ConsoleController extends tp.pr5.Controller{
 			}
 		}
 		comando.close();
-		robot.requestQuit();
+		//robot.requestQuit();
 		/**
 		  Más cosas antiguas
 		
