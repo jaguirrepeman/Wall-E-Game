@@ -28,16 +28,25 @@ public class Place implements PlaceInfo{
 	}
 
 	public String getDescription() {
-		//antes era toString();
 		if (this.items.numberOfItems() != 0)
-			return this.name + LINE_SEPARATOR + this.description
+			return this.description
 					+ LINE_SEPARATOR + "The place contains these objects:"
 					+ LINE_SEPARATOR + this.items.toString();
 		else
-			return this.name + LINE_SEPARATOR + this.description
+			return this.description
 					+ LINE_SEPARATOR
 					+ "The place is empty. There are no objects to pick"
 					+ LINE_SEPARATOR;
+	}
+	
+	@Override
+	public String toString(){
+		if (this.items.numberOfItems() != 0)
+			return this.name + LINE_SEPARATOR + this.getDescription();
+					
+		else
+			return this.name + LINE_SEPARATOR + this.getDescription();
+					
 	}
 
 	public boolean existItem(String id) {

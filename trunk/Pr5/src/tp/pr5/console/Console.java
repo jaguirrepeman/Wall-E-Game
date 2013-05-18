@@ -79,25 +79,26 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
 		
-		System.out.println(initialPlace.getDescription());
+		//System.out.println(initialPlace.getDescription());
+		System.out.println(initialPlace.toString());
 		System.out.println("Wall·E is looking at direction " + heading.toString());
 	}
 
 	@Override
 	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
 		System.out.println("Wall·E says: " + "Moving in direction " +heading
-				+ LINE_SEPARATOR + place.getDescription());
+				+ LINE_SEPARATOR + place.toString());
 
 	}
 
 	@Override
 	public void placeScanned(PlaceInfo placeDescription) {
-		System.out.println(placeDescription.getDescription());
+		System.out.println(placeDescription.toString());
 	}
 
 	@Override
 	public void placeHasChanged(PlaceInfo placeDescription) {
-		placeDescription.getDescription();
+		placeDescription.toString();
 
 	}
 	
