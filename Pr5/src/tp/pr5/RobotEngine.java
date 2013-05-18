@@ -103,8 +103,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 	public void commandQuit() {
 		quit = true;
-		for (RobotEngineObserver o : robObservers)
-			o.communicationCompleted();
+		requestQuit();
 		
 	}
 	
@@ -112,6 +111,8 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		if (!quit)
 			for (RobotEngineObserver o : robObservers) 
 				o.engineOff(this.place.isSpaceship());
+		else for (RobotEngineObserver o : robObservers)
+			o.communicationCompleted();
 		//TODO else 
 		//	for (RobotEngineObserver o : robObservers)
 		//		o.communicationCompleted();
