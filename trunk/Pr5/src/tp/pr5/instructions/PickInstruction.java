@@ -40,8 +40,8 @@ public class PickInstruction extends UndoableInstruction {
 			}
 		} else {
 
-			engine.saySomething("Ooops, this place has not the object " + id);
-			throw new InstructionExecutionException();
+			//engine.saySomething("Ooops, this place has not the object " + id);
+			throw new InstructionExecutionException("Ooops, this place has not the object " + id);
 		}
 	}
 	
