@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import tp.pr5.Place;
-import tp.pr5.RobotEngine;
 import tp.pr5.RobotEngineObserver;
 import tp.pr5.instructions.QuitInstruction;
 
@@ -94,7 +92,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		this.navPanel.setInitialPlace(initPlace);
 	 * */
 		infoPanel = new InfoPanel();
-		this.add(infoPanel, BorderLayout.SOUTH);
+		this.add(infoPanel, BorderLayout.AFTER_LAST_LINE);
 		
 		gameController.registerEngineObserver(robotPan);
 		gameController.registerEngineObserver(infoPanel);

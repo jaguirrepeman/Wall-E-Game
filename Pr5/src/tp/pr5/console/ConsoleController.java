@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import tp.pr5.Interpreter;
 import tp.pr5.RobotEngine;
-import tp.pr5.RobotEngineObserver;
 import tp.pr5.instructions.Instruction;
 import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
 
