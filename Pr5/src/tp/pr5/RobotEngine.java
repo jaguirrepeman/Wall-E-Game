@@ -36,7 +36,9 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		return ((quit) || (fuel == 0) ||( this.place.isSpaceship()));
 		
 	}
-	
+	public boolean atSpaceship(){
+		return (this.place.isSpaceship() == true);
+	}
 	public void communicateRobot(Instruction c) {
 		c.configureContext(this, navigation, items);
 		try {
