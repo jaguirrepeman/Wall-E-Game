@@ -8,9 +8,11 @@ import tp.pr5.instructions.Instruction;
 import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
 
 public class ConsoleController extends tp.pr5.Controller{
+	
 	public ConsoleController(RobotEngine game){
 		super(game);
 	}
+	
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
@@ -59,15 +61,10 @@ public class ConsoleController extends tp.pr5.Controller{
 			
 		 */
 	}
-//estos dos deben ser eliminados
-	private void say(String message) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	private void prompt() {
 		System.out.print("WALL·E> ");
 	}
 
-	//private RobotEngine game;
 
 }
