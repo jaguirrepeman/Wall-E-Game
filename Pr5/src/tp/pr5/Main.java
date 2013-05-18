@@ -2,8 +2,6 @@ package tp.pr5;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
-
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -38,7 +36,9 @@ public class Main {
 
 	public static void main(String[] args){
 		
-		
+		/*
+		 * Creación de las opciones del main
+		 */
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
 		opt.addOption(help);
@@ -59,7 +59,9 @@ public class Main {
 			 */
 			
 			CommandLine cmd = parser.parse(opt, args);
-			
+			/*
+			 * Mensaje de ayuda
+			 */
 			HelpFormatter h = new HelpFormatter();
 			boolean requestHelp = cmd.hasOption('h');
 			if(requestHelp){
@@ -70,13 +72,13 @@ public class Main {
 				if (!cmd.hasOption('m') && !cmd.hasOption('i')) System.exit(0);
 			}
 			/*
-			 * Parámetros erróneos, no se ha elegido ni consola ni swing, o no hay mapa que cargar
+			 * Faltan argumentos, no se ha elegido ni consola ni swing, o no hay mapa que cargar
 			 */
 			if (!cmd.hasOption('m')) 
-				throw new ParseException("Map file not specified");
+				throw new MissingOptionException("Map file not specified");
 				
 			if (!cmd.hasOption('i')) {
-				throw new ParseException("Interface not specified");
+				throw new MissingOptionException("Interface not specified");
 			}
 			else if (!(cmd.getOptionValue('i').equals("console") || cmd
 							.getOptionValue('i').equals("swing") || cmd.getOptionValue('i').equals("both"))){
@@ -86,7 +88,7 @@ public class Main {
 			
 			/*
 			 * Si no hay parámetros erróneos se lee el nombre del mapa y se comprueba 
-			 * 	si se ha deseado ejecutar la aplicación en swing o no
+			 * 	si se ha deseado ejecutar la aplicación en swing, en consola o en ambas
 			 */
 			fileName = cmd.getOptionValue('m');
 			if (cmd.getOptionValue('i').equals("console")) {
@@ -116,6 +118,9 @@ public class Main {
 			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
 			
 			if (!swingOn){
+				/*
+				 * Se crea el controlador de la consola y se añade el observador consola
+				 */
 				ConsoleController consCont = new ConsoleController(wallE);
 				Console console = new Console();
 				wallE.addEngineObserver(console);
@@ -133,7 +138,9 @@ public class Main {
 				catch (InstantiationException e1) {} 
 				catch (IllegalAccessException e1) {} 
 				catch (UnsupportedLookAndFeelException e1) {}
-				
+				/*
+				 * Se crea el controlador de GUI y se añaden los observadores
+				 */
 				GUIController guiCont = new GUIController(wallE);
 				MainWindow window = new MainWindow(guiCont);
 				window.setVisible(true);
@@ -146,16 +153,15 @@ public class Main {
 				}
 				guiCont.startController();
 			}
-			
-			//	MainWindow ventana = new MainWindow(wallE, cityLoader.getInitialPlace());
-			//	ventana.setVisible(true);
-			
-			/*
-			 * Comienza la ejecución del programa
-			 */
-			//wallE.startEngine();
 			 
 			
+		}
+		/*
+		 * Faltan argumentos
+		 */
+		catch (MissingOptionException e){
+			System.err.println(e.getMessage());
+			System.exit(1);
 		}
 		/*
 		 * Parseo erróneo
@@ -182,7 +188,7 @@ public class Main {
 		 */
 		catch (WrongCityFormatException e) {
 
-			System.err.println("Error reading the map file: " + args[0]
+			System.err.println("Error reading the map file: " + fileName
 					+ " (La sintaxis del fichero no es correcta)");
 			System.exit(2);
 		}

@@ -146,8 +146,9 @@ public class ItemContainer {
 	private void emitScanCollection(){
 		
 		for(InventoryObserver obs: invObservers)
-			obs.inventoryScanned(this.toString());
-				
+			obs.inventoryScanned("I am carrying the following items "
+					+ LINE_SEPARATOR + this.toString());
+	
 	}
 	
 	private void emitInventoryChange(){
