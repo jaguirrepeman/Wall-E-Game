@@ -9,12 +9,15 @@ import javax.swing.*;
 import tp.pr5.Place;
 import tp.pr5.RobotEngine;
 import tp.pr5.RobotEngineObserver;
+import tp.pr5.instructions.QuitInstruction;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements RobotEngineObserver {
 	
 	
-	public MainWindow(RobotEngine engine, Place initPlace){
+	/*
+	 * TODO no
+	 * public MainWindow(RobotEngine engine, Place initPlace){
 		super("WALL·E");
 		this.setSize(1080, 720);
 		this.setLayout(new BorderLayout(10, 10));
@@ -55,8 +58,8 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		//this.engine.setRobotPanel(robotPan);
 		this.navPanel.setInitialPlace(initPlace);
 	}
-
-	public MainWindow(GUIController gameController){
+*/
+	public MainWindow(final GUIController gameController){
 		super("WALL·E");
 		this.setSize(1080, 720);
 		this.setLayout(new BorderLayout(10, 10));
@@ -69,14 +72,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int seleccion = JOptionPane.showOptionDialog(null,
-						null, "Exit WALL·E",
-						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-						CityPanel.createImageIcon("images/walleExit.png", "WALLE"), 
-							new Object[] { "YES", "NO"},"null");
-
-				if (seleccion == -1 || seleccion == 0) System.exit(0);
-			
+				gameController.communicateInstruction(new QuitInstruction());			
 			}
 			
 		});
@@ -100,6 +96,13 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		infoPanel = new InfoPanel();
 		this.add(infoPanel, BorderLayout.SOUTH);
 		
+		gameController.registerEngineObserver(robotPan);
+		//gameController.registerEngineObserver(infoPanel);
+		gameController.registerItemContainerObserver(robotPan);
+		//gameController.registerItemContainerObserver(infoPanel);
+		gameController.registerRobotObserver(navPanel);
+		//gameController.registerRobotObserver(infoPanel);
+		
 	}
 	@Override
 	public void raiseError(String msg){
@@ -111,13 +114,15 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 	}
 	@Override
 	public void engineOff(boolean atShip){
-		
+		if (atShip)
+			CloseApp.requestQuit("You finally found your spaceship");
+		else
+			CloseApp.requestQuit("You run out of fuel");
 	}
 	
 	@Override
 	public void communicationCompleted() {
-		// TODO Auto-generated method stub
-		
+		CloseApp.quitApp();
 	}
 
 	@Override

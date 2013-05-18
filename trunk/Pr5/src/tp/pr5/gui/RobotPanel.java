@@ -49,7 +49,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField();//TODO hay que hacer el robotUpdate, no tonto del culo, se hace en el startController del GUIController
+		robotInfo = new JFormattedTextField("Fuel: "+ 110 + " Recycled: " + 110);//TODO hay que hacer el robotUpdate, no tonto del culo, se hace en el startController del GUIController
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
@@ -87,6 +87,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 		rotacion = directionToTurn.getSelectedItem().toString();
  }
+	/*
 	//OBsoleto
 	public RobotPanel(final RobotEngine engine) {
 		
@@ -142,26 +143,17 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		this.add(dataPanel, BorderLayout.CENTER);
 
 		rotacion = directionToTurn.getSelectedItem().toString();
-	}
+	}*/
 
-	public void changeInventory(List<Item> inventory) {
-		int rows = tabla.getRowCount();
-		for (int i = 0; i < rows; i++)
-			tabla.removeRow(0);
-		//RobotEngine engine = null;
-		//TODO JUNíSIMOOOOO
-		for (int i = 0; i < inventory.size(); i++)
-			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
-
-	}
 
 	
-	public void setStatus(int fuel, int recycled){
+	//TODO no
+	/*public void setStatus(int fuel, int recycled){
 		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycled);
 		if (fuel <= 0){
 			CloseApp.requestQuit("You run out of fuel, the game has ended");
 		}
-	}
+	}*/
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JPanel createInstructionPanel() {
@@ -192,7 +184,8 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int seleccion = JOptionPane.showOptionDialog(null,
+						game.communicateInstruction(new QuitInstruction());
+						/*int seleccion = JOptionPane.showOptionDialog(null,
 								null,
 								"Exit WALL·E",
 								JOptionPane.YES_NO_CANCEL_OPTION,
@@ -201,11 +194,11 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 										"images/walleExit.png", "WALLE"),
 
 								// null, // null para icono por defecto.
-								/* null, null para YES, NO y CANCEL, si no: */new Object[] {
+								 null, null para YES, NO y CANCEL, si no: new Object[] {
 										"YES", "NO" }, "null");
 
 						if (seleccion == -1 || seleccion == 0)
-							System.exit(0);
+							System.exit(0);*/
 					}
 
 				});
@@ -336,8 +329,25 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	
 	@Override
 	public void inventoryChange(List<Item> inventory) {
-		changeInventory(inventory);
+		int rows = tabla.getRowCount();
+		for (int i = 0; i < rows; i++)
+			tabla.removeRow(0);
+		//RobotEngine engine = null;
+		//TODO JUNíSIMOOOOO
+		for (int i = 0; i < inventory.size(); i++)
+			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
 	}
+	public void changeInventory(List<Item> inventory) {
+		int rows = tabla.getRowCount();
+		for (int i = 0; i < rows; i++)
+			tabla.removeRow(0);
+		//RobotEngine engine = null;
+		//TODO JUNíSIMOOOOO
+		for (int i = 0; i < inventory.size(); i++)
+			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
+
+	}
+
 
 	@Override
 	public void inventoryScanned(String inventoryDescription) {
@@ -384,7 +394,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	public void robotUpdate(int fuel, int recycledMaterial) {
 		//robotInfo.setText("Fuel: " + fuel
 		//		+ " Recycled: " + recycledMaterial);
-		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycledMaterial);
+		robotInfo.setText("Fuel: " + fuel + " Recycled: " + recycledMaterial);
 	}
 
 	@Override

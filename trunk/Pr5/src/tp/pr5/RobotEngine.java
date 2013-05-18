@@ -52,13 +52,13 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void addFuel(int fuel) {
 		this.fuel += fuel;
-		/** TODO de momento se quita esto*/ // for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** TODO de momento se quita esto*/ for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		/** TODO de momento se quita esto*/	//for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
+		/** TODO de momento se quita esto*/	for (RobotEngineObserver o : robObservers) o.robotUpdate(fuel, recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 	
@@ -99,16 +99,18 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 	public void commandQuit() {
 		quit = true;
-		requestQuit();
+		for (RobotEngineObserver o : robObservers)
+			o.communicationCompleted();
+		
 	}
 	
 	public void requestQuit() {
 		if (!quit)
 			for (RobotEngineObserver o : robObservers) 
 				o.engineOff(this.place.isSpaceship());
-		else 
-			for (RobotEngineObserver o : robObservers)
-				o.communicationCompleted();
+		//TODO else 
+		//	for (RobotEngineObserver o : robObservers)
+		//		o.communicationCompleted();
 	}
 	
 	public void saySomething(String message){
@@ -148,6 +150,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void addItemContainerObserver(InventoryObserver c){
 		invObservers.add(c);
+		this.items.addItemContainerObserver(c);
 	}
 //OTROS MÉTODOS
 	public Street getHeadingStreet() {

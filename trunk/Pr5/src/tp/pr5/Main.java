@@ -137,6 +137,7 @@ public class Main {
 				MainWindow window = new MainWindow(guiCont);
 				window.setVisible(true);
 				wallE.addEngineObserver(window);
+				guiCont.startController();
 			}
 			
 			//	MainWindow ventana = new MainWindow(wallE, cityLoader.getInitialPlace());

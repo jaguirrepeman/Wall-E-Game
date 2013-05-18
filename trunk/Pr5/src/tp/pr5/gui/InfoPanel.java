@@ -29,19 +29,21 @@ public class InfoPanel extends JPanel implements
 
 	@Override
 	public void itemScanned(String description) {
-		// TODO Auto-generated method stub
+		
+		this.displayMessage.setText(description);
 
 	}
 
 	@Override
 	public void itemEmpty(String itemName) {
-		// TODO Auto-generated method stub
+		
+		this.displayMessage.setText("You have got no more " + itemName + " in your inventory.");
 
 	}
 
 	@Override
 	public void headingChanged(Direction newHeading) {
-		// TODO Auto-generated method stub
+		this.displayMessage.setText("Wall·E is looking at direction " + newHeading.toString());
 
 	}
 
@@ -89,7 +91,7 @@ public class InfoPanel extends JPanel implements
 
 	@Override
 	public void communicationCompleted() {
-		CloseApp.requestQuit("I have communication problems, bye bye!");
+		//CloseApp.requestQuit("I have communication problems, bye bye!");
 	}
 
 	@Override
