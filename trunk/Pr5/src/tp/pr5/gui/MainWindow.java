@@ -97,11 +97,11 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		this.add(infoPanel, BorderLayout.SOUTH);
 		
 		gameController.registerEngineObserver(robotPan);
-		//gameController.registerEngineObserver(infoPanel);
+		gameController.registerEngineObserver(infoPanel);
 		gameController.registerItemContainerObserver(robotPan);
-		//gameController.registerItemContainerObserver(infoPanel);
+		gameController.registerItemContainerObserver(infoPanel);
 		gameController.registerRobotObserver(navPanel);
-		//gameController.registerRobotObserver(infoPanel);
+		gameController.registerRobotObserver(infoPanel);
 		
 	}
 	@Override

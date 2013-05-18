@@ -66,8 +66,7 @@ public class ConsoleController extends tp.pr5.Controller{
 		
 	}
 	private void prompt() {
-		// TODO Auto-generated method stub
-		
+		robot.prompt();
 	}
 
 	//private RobotEngine game;

@@ -174,12 +174,11 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		System.out.println("WALL·E says: " + mensaje);
 	}
 
-	public void prompt(String mensaje) {
-		System.out.println("WALL·E> " + mensaje);
-	}
+	
 
 	public void prompt() {
-		System.out.print("WALL·E> ");
+		for (RobotEngineObserver o: robObservers)
+			o.robotSays("WALL·E> ");
 	}
 
 	public void setGUIWindow(MainWindow mainWindow){
