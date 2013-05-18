@@ -10,7 +10,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import tp.pr5.Direction;
-import tp.pr5.Place;
 import tp.pr5.PlaceInfo;
 @SuppressWarnings("serial")
 public class CityPanel extends JPanel{

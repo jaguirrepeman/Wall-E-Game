@@ -3,7 +3,6 @@ package tp.pr5.console;
 import java.util.List;
 
 import tp.pr5.Direction;
-import tp.pr5.Interpreter;
 import tp.pr5.NavigationObserver;
 import tp.pr5.PlaceInfo;
 import tp.pr5.RobotEngineObserver;

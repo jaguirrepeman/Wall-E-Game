@@ -2,9 +2,8 @@ package tp.pr5.gui;
 
 import java.util.List;
 
-import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import tp.pr5.Direction;
 import tp.pr5.NavigationObserver;
 import tp.pr5.PlaceInfo;
@@ -15,8 +14,11 @@ import tp.pr5.items.Item;
 public class InfoPanel extends JPanel implements
 		RobotEngineObserver, NavigationObserver, InventoryObserver {
 
+	
 	public InfoPanel(){
-		displayMessage = new JFormattedTextField();
+		
+		displayMessage = new JLabel("");
+		this.add(this.displayMessage);
 	}
 	@Override
 	public void inventoryChange(List<Item> inventory) {
@@ -107,11 +109,15 @@ public class InfoPanel extends JPanel implements
 
 	@Override
 	public void robotSays(String message) {
-		this.displayMessage.setText("Wall·E says: " + message);
+		this.displayMessage.setText(message);
 	}
 	
-	private JFormattedTextField displayMessage;
+	private JLabel displayMessage;
 
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 }

@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
 
-import tp.pr5.gui.*;
 import tp.pr5.instructions.*;
 import tp.pr5.instructions.exceptions.*;
 import tp.pr5.items.*;
@@ -181,17 +180,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 			o.robotSays("WALL·E> ");
 	}
 
-	public void setGUIWindow(MainWindow mainWindow){
-
-	}
 	
-	public void setRobotPanel(RobotPanel robotPanel){
-		this.robotPanel = robotPanel;
-	}
-	
-	/*public void setNavigationPanel(NavigationPanel navPanel){
-		navigation.setNavigationPanel(navPanel);
-	}*/
 	public String[] getItemsFromContainer(int n){
 		return items.itemForTable(n);
 	}
@@ -262,7 +251,6 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	private int recycledMaterial;
 	private NavigationModule navigation;
 	private boolean quit;
-	private RobotPanel robotPanel;
 	private Stack<Instruction> instructions;
 	private Vector<RobotEngineObserver> robObservers;
 	private Vector<NavigationObserver> navObservers;
