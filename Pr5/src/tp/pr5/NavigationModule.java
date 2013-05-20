@@ -1,18 +1,14 @@
 package tp.pr5;
 
-import java.util.Vector;
-
-import tp.pr5.gui.NavigationPanel;
 import tp.pr5.instructions.exceptions.InstructionExecutionException;
 import tp.pr5.items.Item;
 
-public class NavigationModule {
+public class NavigationModule extends tp.pr5.Observable<NavigationObserver>{
 
 	public NavigationModule(City aCity, Place initialPlace) {
 
 		this.city = aCity;
 		this.place = initialPlace;
-		this.navObservers = new Vector<NavigationObserver>();
 	}
 
 	public boolean atSpaceship() {
@@ -25,7 +21,7 @@ public class NavigationModule {
 		this.place.addItem(it);
 		
 		//TODO mover a un emit?
-		for (NavigationObserver obs: navObservers)
+		for (NavigationObserver obs: this.observers)
 			obs.placeHasChanged(this.place);
 		
 	}
@@ -62,7 +58,7 @@ public class NavigationModule {
 				this.place = this.city.lookForStreet(this.place, direction)
 						.nextPlace(place);
 				//TODO pasar a un emit?
-				for (NavigationObserver obs: navObservers)
+				for (NavigationObserver obs: this.observers)
 					obs.robotArrivesAtPlace(this.direction, this.place);
 
 			} else {
@@ -81,7 +77,7 @@ public class NavigationModule {
 		
 			this.place = this.city.lookForStreet(this.place, direction.Opposite()).nextPlace(place);
 			//TODO pasar a  un emit? es con direction.Opposite()
-			for (NavigationObserver obs: navObservers)
+			for (NavigationObserver obs: this.observers)
 				obs.robotArrivesAtPlace(this.direction.Opposite(), this.place);
 	}
 	
@@ -90,7 +86,7 @@ public class NavigationModule {
 		Item item = this.place.pickItem(id);
 		
 		//TODO mover a un emit?
-		for (NavigationObserver obs: navObservers)
+		for (NavigationObserver obs: this.observers)
 			obs.placeHasChanged(this.place);
 		
 		return item;
@@ -102,7 +98,7 @@ public class NavigationModule {
 		
 		//TODO mover a un emit?
 		
-		for (NavigationObserver obs: navObservers){
+		for (NavigationObserver obs: this.observers){
 			obs.headingChanged(this.direction);
 		}
 	}
@@ -110,30 +106,27 @@ public class NavigationModule {
 	public void scanCurrentPlace() {
 		
 		//TODO mover a un emit?
-		for (NavigationObserver obs : navObservers)
+		for (NavigationObserver obs : this.observers)
 			obs.placeScanned(place);
 		
 
 	}
 
 	public void addNavigationObserver(NavigationObserver navigationObserver){
-		navObservers.add(navigationObserver);
+		this.addObserver(navigationObserver);
 	}
 	
 	public void initialize() {
-		for (NavigationObserver o : navObservers){ 
+		for (NavigationObserver o : this.observers){ 
 			o.initNavigationModule(this.place, this.direction);
 		}
 	}
 	
 
 
-	//private static final String LINE_SEPARATOR = System
-		//	.getProperty("line.separator");
 	private City city;
 	private Place place;
 	private Direction direction;
-	private Vector<NavigationObserver> navObservers;
 	
 
 	

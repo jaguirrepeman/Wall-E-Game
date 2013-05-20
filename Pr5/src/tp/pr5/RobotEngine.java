@@ -2,14 +2,13 @@ package tp.pr5;
 
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.Vector;
 
 import tp.pr5.instructions.*;
 import tp.pr5.instructions.exceptions.*;
 import tp.pr5.items.*;
 
 
-public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
+public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 {
 
 	public RobotEngine(City cityMap, Place initialPlace, Direction dir) {
@@ -23,9 +22,6 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		this.navigation = new NavigationModule(cityMap, initialPlace);
 		this.navigation.initHeading(dir);
 		this.instructions = new Stack<Instruction>();
-		this.invObservers = new Vector<InventoryObserver>();
-		this.navObservers = new Vector<NavigationObserver>();
-		this.robObservers = new Vector<RobotEngineObserver>();
 		this.quit = false;
 		
 		
@@ -55,16 +51,16 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 		this.fuel += fuel;
 		if (this.fuel <= 0){
 			this.fuel = 0;
-			for (RobotEngineObserver o: robObservers)o.robotUpdate(this.fuel, this.recycledMaterial);
-			for (RobotEngineObserver o: robObservers)o.engineOff(false);
+			for (RobotEngineObserver o: this.observers)o.robotUpdate(this.fuel, this.recycledMaterial);
+			for (RobotEngineObserver o: this.observers)o.engineOff(false);
 		}
-		/** TODO de momento se quita esto*/ else for (RobotEngineObserver o : robObservers) o.robotUpdate(this.fuel, this.recycledMaterial);
+		/** TODO de momento se quita esto*/ else for (RobotEngineObserver o : this.observers) o.robotUpdate(this.fuel, this.recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 
 	public void addRecycledMaterial(int weight) {
 		this.recycledMaterial += weight;
-		/** TODO de momento se quita esto*/	for (RobotEngineObserver o : robObservers) o.robotUpdate(this.fuel, this.recycledMaterial);
+		/** TODO de momento se quita esto*/	for (RobotEngineObserver o : this.observers) o.robotUpdate(this.fuel, this.recycledMaterial);
 		//if (robotPanel != null) robotPanel.setStatus(this.fuel, this.recycledMaterial);
 	}
 	
@@ -79,22 +75,22 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public void requestStart(){
 		//TODO emit partida empezada?
 		this.emitPartidaEmpezada();
-		for (NavigationObserver o : navObservers){ 
+		/*for (NavigationObserver o : navObservers){ 
 			o.initNavigationModule(this.place, this.direction);
-		}
-		for (RobotEngineObserver obs: robObservers){
+		}*/
+		for (RobotEngineObserver obs: this.observers){
 			obs.robotUpdate(this.fuel, this.recycledMaterial);
 		}
 	}
 	
 	public void requestError(String msg){
-		for (RobotEngineObserver obs: robObservers){
+		for (RobotEngineObserver obs: this.observers){
 			obs.raiseError(msg);
 		}
 	}
 	
 	public void requestHelp() {
-		for (RobotEngineObserver o : robObservers) 
+		for (RobotEngineObserver o : this.observers) 
 			o.communicationHelp(Interpreter.interpreterHelp());
 	}
 	
@@ -112,17 +108,16 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void requestQuit() {
 		if (!quit)
-			for (RobotEngineObserver o : robObservers) 
+			for (RobotEngineObserver o : this.observers) 
 				o.engineOff(this.place.isSpaceship());
-		else for (RobotEngineObserver o : robObservers)
+		else
+			for (RobotEngineObserver o : this.observers)
 			o.communicationCompleted();
-		//TODO else 
-		//	for (RobotEngineObserver o : robObservers)
-		//		o.communicationCompleted();
+		
 	}
 	
 	public void saySomething(String message){
-		for (RobotEngineObserver obs: robObservers){
+		for (RobotEngineObserver obs: this.observers){
 			obs.robotSays("WALL·E says: " + message);
 		}
 	}
@@ -141,17 +136,14 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 
 	
 	public void addNavigationObserver(NavigationObserver robotObserver){
-		navObservers.add(robotObserver);
-		//TODO esto se hará así, supongo
 		this.navigation.addNavigationObserver(robotObserver);
 	}
 	
 	public void addEngineObserver(RobotEngineObserver observer){
-		robObservers.add(observer);
+		this.addObserver(observer);
 	}
 	
 	public void addItemContainerObserver(InventoryObserver c){
-		invObservers.add(c);
 		this.items.addItemContainerObserver(c);
 	}
 //OTROS MÉTODOS
@@ -162,7 +154,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	public void moveToPlace(Place headingPlace){
 		this.place = headingPlace;
 		if (this.place.isSpaceship()){
-			for (RobotEngineObserver o: robObservers)
+			for (RobotEngineObserver o: this.observers)
 				o.engineOff(true);
 		}
 	}
@@ -202,8 +194,8 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 			}
 		}
 		comando.close();
-		if (!quit) for (RobotEngineObserver o : robObservers) o.engineOff(this.place.isSpaceship());
-		else for (RobotEngineObserver o : robObservers) o.communicationCompleted();
+		if (!quit) for (RobotEngineObserver o : this.observers) o.engineOff(this.place.isSpaceship());
+		else for (RobotEngineObserver o : this.observers) o.communicationCompleted();
 		/**
 		  Más cosas antiguas
 		
@@ -236,7 +228,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	private void emitPartidaEmpezada() {
 		this.navigation.initialize();
-		for (RobotEngineObserver obs: robObservers){
+		for (RobotEngineObserver obs: this.observers){
 			obs.robotUpdate(this.fuel, this.recycledMaterial);
 		}
 	}
@@ -249,11 +241,6 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	private int recycledMaterial;
 	private NavigationModule navigation;
 	private boolean quit;
-	private Stack<Instruction> instructions;
-	private Vector<RobotEngineObserver> robObservers;
-	private Vector<NavigationObserver> navObservers;
-	private Vector<InventoryObserver> invObservers;
-	
-	
+	private Stack<Instruction> instructions;	
 
 }
