@@ -2,13 +2,10 @@ package tp.pr5;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import java.util.Vector;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -16,10 +13,6 @@ import org.apache.commons.cli.ParseException;
 
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
-import tp.pr5.console.Console;
-import tp.pr5.console.ConsoleController;
-import tp.pr5.gui.GUIController;
-import tp.pr5.gui.MainWindow;
 import tp.pr5.instructions.Instruction;
 import tp.pr5.instructions.MoveInstruction;
 import tp.pr5.instructions.OperateInstruction;
@@ -32,24 +25,22 @@ public class FindExit {
 	Instruction ins;
 	//(-d|-max-depth) n (-m|-map) <mapFilename>
 	void solve(){
-		int coste = 0, costeMejor = -1;
+		int coste = 0, costeMejor = -1, maxDepth = 100;
 		City city = null;
 		Instruction[] solucion = null, solucionMejor = null;
+		Vector<Instruction> v = new Vector<Instruction>();
 		boolean marcas[][] = null;
 		//RobotEngine engine = null;
-		laberinto( city, solucion, solucionMejor, 0, marcas, coste, costeMejor, game);
+		laberinto(city, solucion, solucionMejor, 0, maxDepth, marcas, coste, costeMejor, game);
 			
 	}
 	
-	void main(String args[]){
+	public static void main(String args[]){
 		Options opt = new Options();
-		Option help = new Option("d", "max-depth", false, "The maximum depth of the route");
-		opt.addOption(help);
-		Option interf = new Option("i", "interface", true, "The type of interface: console, swing or both");
-		interf.setArgName("type");
+		Option depth = new Option("d", "max-depth", true, "The maximum depth of the route");
+		opt.addOption(depth);
 		Option map = new Option("m", "map", true, "File with the description of the city");
 		map.setArgName("mapfile");
-		opt.addOption(interf);
 		opt.addOption(map);
 		
 		BasicParser parser = new BasicParser();
@@ -71,14 +62,9 @@ public class FindExit {
 			if (!cmd.hasOption('m')) 
 				throw new MissingOptionException("Map file not specified");
 				
-			if (!cmd.hasOption('i')) {
-				throw new MissingOptionException("Interface not specified");
+			if (!cmd.hasOption('d')) {
+				throw new MissingOptionException("Maximum depth not specified");
 			}
-			else if (!(cmd.getOptionValue('i').equals("console") || cmd
-							.getOptionValue('i').equals("swing") || cmd.getOptionValue('i').equals("both"))){
-				throw new ParseException("Wrong type of interface");
-			}
-			
 			
 			/*
 			 * Si no hay parámetros erróneos se lee el nombre del mapa y se comprueba 
@@ -102,17 +88,23 @@ public class FindExit {
 				/*
 				 * Se crea el controlador de la consola y se añade el observador consola
 				 */
-				ConsoleController consCont = new ConsoleController(game);
-				Console console = new Console();
-				game.addEngineObserver(console);
-				game.addNavigationObserver(console);
-				game.addItemContainerObserver(console);
-				consCont.startEngine();
+			//	ConsoleController consCont = new ConsoleController(game);
+			//	Console console = new Console();
+			//	game.addEngineObserver(console);
+			//	game.addNavigationObserver(console);
+			//	game.addItemContainerObserver(console);
+				//consCont.startEngine();
 				//llamamos a la funcion recursiva
-				Instruction[] solucion = null, solucionMejor = null;
+				//Instruction[] solucion = null, solucionMejor = null;
+				Vector<Instruction> solucion = new Vector<Instruction>();
+				Vector<Instruction> solucionMejor = new Vector<Instruction>();
 				boolean marcas[][] = null;
+				String d = cmd.getOptionValue('d');
+				int maxDepth = Integer.parseInt(d);
+				cmd.getOptionValue('m');
 				int coste = 0, costeMejor = -1;
-				laberinto( city, solucion, solucionMejor, 0, marcas, coste, costeMejor, game);
+				inicializarMarcas(marcas);
+				laberinto(city, solucion, solucionMejor, 0, maxDepth, marcas, coste, costeMejor, game);
 			}
 			
 		}
@@ -153,18 +145,23 @@ public class FindExit {
 			System.exit(2);
 		}
 		
+	}
 
-		
+	private static void inicializarMarcas(boolean[][] marcas) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	void laberinto(City city, Instruction solucion[], Instruction solucionMejor[], int k, boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
+	static void laberinto(City city, Vector<Instruction> solucion, Vector<Instruction> solucionMejor, int k, int maxDepth, boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
 		if (coste < costeMejor || costeMejor == -1) {
 			for (int i = 0; i < instructions.length; i++) {
-				solucion[k] = sigInstruccion(i);
-				game.communicateRobot(solucion[k]);
+				solucion.add(sigInstruccion(i));
+			//	solucion[k] = sigInstruccion(i);
+			//	game.communicateRobot(solucion[k]);
+				game.communicateRobot(solucion.elementAt(k));
+				
 				try { 	//if (esValida(city, solucion[k], marcas)) si no fuera valida pasa al catch
-					solucion[k].execute();
+					solucion.elementAt(k).execute();
 				{
 						if (esSolucion(solucion[k], game)) {
 							if(coste < costeMejor || costeMejor == -1){
@@ -178,7 +175,7 @@ public class FindExit {
 							// marcar
 							marcar();
 							//marcas[solucion[k].fila][solucion[k].columna] = true;
-							laberinto(city, solucion, solucionMejor, k + 1, marcas, coste,
+							laberinto(city, solucion, solucionMejor, maxDepth, k + 1, marcas, coste,
 									costeMejor, engine);
 							// desmarcar
 							desmarcar();
@@ -197,51 +194,43 @@ public class FindExit {
 		}
 	}
 		
-	private boolean esSolucion(Instruction instruction, RobotEngine game) {
+	private static boolean esSolucion(Instruction instruction, RobotEngine game) {
 		// TODO Auto-generated method stub
 		return game.atSpaceship();
 	}
 
-	private void copiarSolucion(Instruction[] solucion,
+	private static void copiarSolucion(Instruction[] solucion,
 			Instruction[] solucionMejor) {
 		solucionMejor = solucion;
 		// TODO esto a lo mejor solo copia los punteros, estaria bien saberlo
 	}
 
-	private void desmarcar() {
+	private static void desmarcar() {
 		// TODO Auto-generated method stub
 		
 		
 	}
-	private void marcar() {
+	private static void marcar() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private boolean esSolucion(Instruction instruction[], City city, RobotEngine game) {
-		// TODO Auto-generated method stub
-		//isSpaceship y esas cosas
-		return false;
-	}
-
-	private boolean esValida(City city, Instruction instruction, boolean[][] marcas, RobotEngine game) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private Instruction sigInstruccion(int i) {
+	
+	private static Instruction sigInstruccion(int i) {
 		i++;
 
 		return instructions[i];
 
 	}
 	private Place place;
-	private String objectToOperate;
-	private String objectToPick;
-	private RobotEngine game;
-	private  Instruction[] instructions = { new MoveInstruction(),
+	private static String objectToOperate;
+	private static String objectToPick;
+	private static RobotEngine game;
+	private static Instruction[] instructions = { new MoveInstruction(),
 			new OperateInstruction(objectToOperate), new PickInstruction(objectToPick), 
 			new TurnInstruction("Right"), new TurnInstruction("Left")
 	};
 
 }
+
+
