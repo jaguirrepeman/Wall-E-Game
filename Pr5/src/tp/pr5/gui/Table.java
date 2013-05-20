@@ -34,9 +34,9 @@ public class Table extends AbstractTableModel {
 		return this.data[rowIndex][columnIndex];
 	}
 	public void removeRow(int row) {
-        data.removeElementAt(row, 0);
-        data.
-        fireTableRowsDeleted(row, row);
+        //data.
+        //data.
+        //fireTableRowsDeleted(row, row);
     
 	}
 	public void changeInventory() {
