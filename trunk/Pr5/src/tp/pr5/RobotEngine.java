@@ -78,6 +78,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 	
 	public void requestStart(){
 		//TODO emit partida empezada?
+		this.emitPartidaEmpezada();
 		for (NavigationObserver o : navObservers){ 
 			o.initNavigationModule(this.place, this.direction);
 		}
@@ -234,9 +235,7 @@ public class RobotEngine /*extends tp.pr5.Observable<RobotEngineObserver>*/
 //END obsoleto
 	
 	private void emitPartidaEmpezada() {
-		for (NavigationObserver o : navObservers){ 
-			o.initNavigationModule(this.place, this.direction);
-		}
+		this.navigation.initialize();
 		for (RobotEngineObserver obs: robObservers){
 			obs.robotUpdate(this.fuel, this.recycledMaterial);
 		}

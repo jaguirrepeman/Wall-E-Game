@@ -116,31 +116,25 @@ public class NavigationModule {
 
 	}
 
-	public void say(String mensaje) {
-		System.out.println("WALL·E says: " + mensaje);
-	}
-
-	public void print(String mensaje) {
-		System.out.println(mensaje);
-	}
-	
 	public void addNavigationObserver(NavigationObserver navigationObserver){
 		navObservers.add(navigationObserver);
 	}
 	
+	public void initialize() {
+		for (NavigationObserver o : navObservers){ 
+			o.initNavigationModule(this.place, this.direction);
+		}
+	}
+	
 
-	//Esto está hecho en el request start del engine
-	/**
-	 * public void setInitialPlace(Place initPlace){
-	 *
-		this.navPanel.setInitialPlace(initPlace);
-	}*/
+
 	//private static final String LINE_SEPARATOR = System
 		//	.getProperty("line.separator");
 	private City city;
 	private Place place;
 	private Direction direction;
 	private Vector<NavigationObserver> navObservers;
+	
 
 	
 }
