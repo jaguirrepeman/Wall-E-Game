@@ -18,10 +18,10 @@ import org.apache.commons.cli.*;
 
 
 /**
- * gluglu Aplicación que utiliza las clases de la práctica sobre el mapa que
+ * gluglu AplicaciÃ³n que utiliza las clases de la prÃ¡ctica sobre el mapa que
  * aparece como ejemplo en el enunciado.
  * 
- * @author Jesús Aguirre Pemán, Jaime Dan Porras Rhee
+ * @author JesÃºs Aguirre PemÃ¡n, Jaime Dan Porras Rhee
  * @y.exclude
  */
 public class Main {
@@ -37,7 +37,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		/*
-		 * Creación de las opciones del main
+		 * CreaciÃ³n de las opciones del main
 		 */
 		Options opt = new Options();
 		Option help = new Option("h", "help", false, "Shows this help message");
@@ -54,7 +54,7 @@ public class Main {
 		String fileName = null;
 		try {
 			/*
-			 * Comprobación de los parámetros para ejecutar la aplicación
+			 * ComprobaciÃ³n de los parÃ¡metros para ejecutar la aplicaciÃ³n
 			 * 
 			 */
 			
@@ -87,8 +87,8 @@ public class Main {
 			
 			
 			/*
-			 * Si no hay parámetros erróneos se lee el nombre del mapa y se comprueba 
-			 * 	si se ha deseado ejecutar la aplicación en swing, en consola o en ambas
+			 * Si no hay parÃ¡metros errÃ³neos se lee el nombre del mapa y se comprueba 
+			 * 	si se ha deseado ejecutar la aplicaciÃ³n en swing, en consola o en ambas
 			 */
 			fileName = cmd.getOptionValue('m');
 			if (cmd.getOptionValue('i').equals("console")) {
@@ -106,20 +106,20 @@ public class Main {
 				both = true;
 			}
 			/*
-			 * Lectura del mapa y creación de la ciudad
+			 * Lectura del mapa y creaciÃ³n de la ciudad
 			 */
 			FileInputStream file = new FileInputStream(fileName);
 			
 			CityLoaderFromTxtFile cityLoader = new CityLoaderFromTxtFile();
 			City city = cityLoader.loadCity(file);
 			/*
-			 * Creación del robotEngine
+			 * CreaciÃ³n del robotEngine
 			 */
 			RobotEngine wallE = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
 			
 			if (!swingOn){
 				/*
-				 * Se crea el controlador de la consola y se añade el observador consola
+				 * Se crea el controlador de la consola y se aÃ±ade el observador consola
 				 */
 				ConsoleController consCont = new ConsoleController(wallE);
 				Console console = new Console();
@@ -139,7 +139,7 @@ public class Main {
 				catch (IllegalAccessException e1) {} 
 				catch (UnsupportedLookAndFeelException e1) {}
 				/*
-				 * Se crea el controlador de GUI y se añaden los observadores
+				 * Se crea el controlador de GUI y se aÃ±aden los observadores
 				 */
 				GUIController guiCont = new GUIController(wallE);
 				MainWindow window = new MainWindow(guiCont);
@@ -164,7 +164,7 @@ public class Main {
 			System.exit(1);
 		}
 		/*
-		 * Parseo erróneo
+		 * Parseo errÃ³neo
 		 */
 		catch (ParseException e) {
 			//e.printStackTrace();
@@ -184,7 +184,7 @@ public class Main {
 			System.exit(2);
 		}
 		/*
-		 * Mapa con formato erróneo
+		 * Mapa con formato errÃ³neo
 		 */
 		catch (WrongCityFormatException e) {
 
