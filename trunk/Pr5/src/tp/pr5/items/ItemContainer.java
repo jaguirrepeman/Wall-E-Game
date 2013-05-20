@@ -1,22 +1,19 @@
 package tp.pr5.items;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 
 
 //import java.util.ArrayList;
 //TODO java.util.Collections addAll;
-public class ItemContainer {
+public class ItemContainer extends tp.pr5.Observable<InventoryObserver>{
 	public ItemContainer() {
+		
 		this.container = new Item[1];
 		counter = 0;
-		invObservers = new Vector<InventoryObserver>();
-
 	}
+	
 	public boolean containsItem(String id){
 		return (searchItem(id) != -1);
 	}
@@ -106,7 +103,7 @@ public class ItemContainer {
 	
 	public void requestScanItem(String id){
 		//
-		for(InventoryObserver o: this.invObservers)
+		for(InventoryObserver o: this.observers)
 			o.itemScanned(getItem(id).toString());
 	}
 
@@ -140,12 +137,12 @@ public class ItemContainer {
 	}
 	
 	public void addItemContainerObserver(InventoryObserver c){
-		invObservers.add(c);
+		this.addObserver(c);
 	}
 	
 	private void emitScanCollection(){
 		
-		for(InventoryObserver obs: invObservers)
+		for(InventoryObserver obs: this.observers)
 			obs.inventoryScanned("I am carrying the following items "
 					+ LINE_SEPARATOR + this.toString());
 	
@@ -153,7 +150,7 @@ public class ItemContainer {
 	
 	private void emitInventoryChange(){
 		
-		for (InventoryObserver obs: invObservers)
+		for (InventoryObserver obs: this.observers)
 			obs.inventoryChange(this.inventoryToList());
 	}
 	
@@ -161,5 +158,5 @@ public class ItemContainer {
 			.getProperty("line.separator");
 	private Item[] container;
 	private int counter;
-	private Vector<InventoryObserver> invObservers;
+	
 }
