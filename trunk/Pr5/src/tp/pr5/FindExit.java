@@ -27,8 +27,8 @@ public class FindExit {
 	void solve(){
 		int coste = 0, costeMejor = -1, maxDepth = 100;
 		City city = null;
-		Instruction[] solucion = null, solucionMejor = null;
-		Vector<Instruction> v = new Vector<Instruction>();
+		Vector<Instruction> solucion = new Vector<Instruction>();
+		Vector<Instruction> solucionMejor = new Vector<Instruction>();
 		boolean marcas[][] = null;
 		//RobotEngine engine = null;
 		laberinto(city, solucion, solucionMejor, 0, maxDepth, marcas, coste, costeMejor, game);
@@ -156,6 +156,12 @@ public class FindExit {
 		if (coste < costeMejor || costeMejor == -1) {
 			for (int i = 0; i < instructions.length; i++) {
 				solucion.add(sigInstruccion(i));
+				if (i == 3 || i == 4){
+					for (int j = 0; j < place.numberOfItems(); j++){
+						objectToPick = place.object[j];
+						game.communicateRobot(instructions[i]);
+					}
+				}
 			//	solucion[k] = sigInstruccion(i);
 			//	game.communicateRobot(solucion[k]);
 				game.communicateRobot(solucion.elementAt(k));
@@ -163,7 +169,7 @@ public class FindExit {
 				try { 	//if (esValida(city, solucion[k], marcas)) si no fuera valida pasa al catch
 					solucion.elementAt(k).execute();
 				{
-						if (esSolucion(solucion[k], game)) {
+						if (esSolucion(solucion.elementAt(k), game)) {
 							if(coste < costeMejor || costeMejor == -1){
 								costeMejor = coste;
 								copiarSolucion(solucion, solucionMejor);
@@ -199,8 +205,8 @@ public class FindExit {
 		return game.atSpaceship();
 	}
 
-	private static void copiarSolucion(Instruction[] solucion,
-			Instruction[] solucionMejor) {
+	private static void copiarSolucion(Vector<Instruction> solucion,
+			Vector<Instruction> solucionMejor) {
 		solucionMejor = solucion;
 		// TODO esto a lo mejor solo copia los punteros, estaria bien saberlo
 	}
@@ -222,13 +228,13 @@ public class FindExit {
 		return instructions[i];
 
 	}
-	private Place place;
+	private static Place place;
 	private static String objectToOperate;
 	private static String objectToPick;
 	private static RobotEngine game;
 	private static Instruction[] instructions = { new MoveInstruction(),
-			new OperateInstruction(objectToOperate), new PickInstruction(objectToPick), 
-			new TurnInstruction("Right"), new TurnInstruction("Left")
+			new TurnInstruction("Right"), new TurnInstruction("Left"), 
+			new OperateInstruction(objectToOperate), new PickInstruction(objectToPick)
 	};
 
 }
