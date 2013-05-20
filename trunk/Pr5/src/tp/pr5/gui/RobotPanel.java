@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 import tp.pr5.RobotEngineObserver;
 import tp.pr5.Rotation;
@@ -58,7 +59,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		tabla = new DefaultTableModel(new String[] { "Id.", "Description" }, 0);
 		final JTable table = new JTable(tabla);
 		table.addMouseListener(new OyenteRaton(){
-
+		
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = table.getSelectedRow();
