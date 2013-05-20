@@ -26,6 +26,10 @@ public class Place implements PlaceInfo{
 
 		return this.isSpaceShip;
 	}
+	public int numberOfItems(){
+		return this.items.numberOfItems();
+		
+	}
 
 	public String getDescription() {
 		if (this.items.numberOfItems() != 0)
