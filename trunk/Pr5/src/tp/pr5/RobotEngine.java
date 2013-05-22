@@ -210,6 +210,9 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		
 	}
 
+	public String[] RobotItems(){
+		return items.listOfItems();
+	}
 	
 	public String[] getItemsFromContainer(int n){
 		return items.itemForTable(n);

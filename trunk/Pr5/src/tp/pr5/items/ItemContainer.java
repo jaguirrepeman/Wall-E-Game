@@ -49,9 +49,18 @@ public class ItemContainer extends tp.pr5.Observable<InventoryObserver>{
 			this.emitInventoryChange();
 			return true;
 		}
+		
 
 	}
-
+	
+	public String[] listOfItems(){
+		String[] string = new String[container.length];
+		for (int i = 0; i < container.length; i++){
+			string[i] = container[i].getId();
+		}
+		return string;
+	}
+	
 	public int searchItem(String id) {
 		int posicion = -1;
 		if (! (this.counter == 0)){
@@ -122,7 +131,7 @@ public class ItemContainer extends tp.pr5.Observable<InventoryObserver>{
 		return object;
 		
 	}
-	
+
 	private List<Item> inventoryToList(){
 		/*List<Item> returnList = new ArrayList<Item>();
 		Collections.addAll(returnList, this.container);

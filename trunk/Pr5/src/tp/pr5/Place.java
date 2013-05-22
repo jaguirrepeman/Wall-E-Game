@@ -52,6 +52,10 @@ public class Place implements PlaceInfo{
 			return this.name + LINE_SEPARATOR + this.getDescription();
 					
 	}
+	
+	public String[] placeItems(){
+		return this.items.listOfItems();
+	}
 
 	public boolean existItem(String id) {
 		return (this.items.searchItem(id) >= 0);
