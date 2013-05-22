@@ -152,56 +152,76 @@ public class FindExit {
 		
 	}
 
-	static void laberinto(City city, Vector<Instruction> solucion, Vector<Instruction> solucionMejor, int k, int maxDepth, boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
+	static void laberinto(City city, Vector<Instruction> solucion,
+			Vector<Instruction> solucionMejor, int k, int maxDepth,
+			boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
 		if (coste < costeMejor || costeMejor == -1) {
 			for (int i = 0; i < instructions.length; i++) {
 				solucion.add(sigInstruccion(i));
-				if (i == 3 || i == 4){
-					for (int j = 0; j < place.numberOfItems(); j++){
-						objectToPick = place.object[j];
+				// los siguientes dos ifs podrian cambiarse por un bucle que
+				// hiciera parse de la instruccion actual, lo cual aumentaria el
+				// coste a cambio de mejorar la legibilidad del programa
+				if (i == 3) { // la instruccion es un operate
+					String[] itemsRobot = game.RobotItems();
+					for (int j = 0; j < place.numberOfItems(); j++) {
+						objectToOperate = itemsRobot[j];
+						game.communicateRobot(instructions[i]);
+					}
+				} else if (i == 4) { // la instruccion es un pick
+					String[] itemsPlace = place.placeItems();
+					for (int j = 0; j < place.numberOfItems(); j++) {
+						objectToPick = itemsPlace[j];
 						game.communicateRobot(instructions[i]);
 					}
 				}
-			//	solucion[k] = sigInstruccion(i);
-			//	game.communicateRobot(solucion[k]);
+				// solucion[k] = sigInstruccion(i);
+				// game.communicateRobot(solucion[k]);
 				game.communicateRobot(solucion.elementAt(k));
-				
-				try { 	//if (esValida(city, solucion[k], marcas)) si no fuera valida pasa al catch
+
+				try { // if (esValida(city, solucion[k], marcas)) si no fuera
+						// valida pasa al catch
 					solucion.elementAt(k).execute();
-				{
+					if (esValida(solucion, k, maxDepth)) {
 						if (esSolucion(solucion.elementAt(k), game)) {
-							if(coste < costeMejor || costeMejor == -1){
+							if (coste < costeMejor || costeMejor == -1) {
 								costeMejor = coste;
 								copiarSolucion(solucion, solucionMejor);
-								//imprimirMejorSolucion(solucionMejor, nodosVisitados, coste);
-								//cout << endl;
+								// imprimirMejorSolucion(solucionMejor,
+								// nodosVisitados, coste);
+								// cout << endl;
 							}
-							//tratarSolucion(solucion, k);
+							// tratarSolucion(solucion, k);
 						} else {
 							// marcar
 							marcar();
-							//marcas[solucion[k].fila][solucion[k].columna] = true;
-							laberinto(city, solucion, solucionMejor, maxDepth, k + 1, marcas, coste,
-									costeMejor, engine);
+							// marcas[solucion[k].fila][solucion[k].columna] =
+							// true;
+							laberinto(city, solucion, solucionMejor, k+1,
+									maxDepth, marcas, coste, costeMejor, engine);
 							// desmarcar
 							desmarcar();
 							// marcas[solucion[k].fila][solucion[k].columna] =
 							// false;
 						}
 					}
-					
+					solucion.elementAt(i).undo();
+					solucion.removeElementAt(i);
+
 				} catch (InstructionExecutionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-
 			}
 		}
 	}
-		
+
+	private static boolean esValida(Vector<Instruction> solucion, int k, int maxDepth) {
+		if (k> maxDepth || game.getFuel() <= 0) return false;
+		else return true;
+	}
+
 	private static boolean esSolucion(Instruction instruction, RobotEngine game) {
-		// TODO Auto-generated method stub
 		return game.atSpaceship();
 	}
 
