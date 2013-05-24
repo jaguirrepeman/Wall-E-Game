@@ -157,7 +157,7 @@ public class FindExit {
 			boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
 		if (coste < costeMejor || costeMejor == -1) {
 			for (int i = 0; i < instructions.length; i++) {
-				solucion.add(sigInstruccion(i));
+				solucion.add(instructions[i]);
 				// los siguientes dos ifs podrian cambiarse por un bucle que
 				// hiciera parse de la instruccion actual, lo cual aumentaria el
 				// coste a cambio de mejorar la legibilidad del programa
@@ -217,7 +217,7 @@ public class FindExit {
 	}
 
 	private static boolean esValida(Vector<Instruction> solucion, int k, int maxDepth) {
-		if (k> maxDepth || game.getFuel() <= 0) return false;
+		if (k > maxDepth || game.getFuel() <= 0) return false;
 		else return true;
 	}
 
