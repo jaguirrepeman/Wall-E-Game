@@ -27,11 +27,12 @@ public class FindExit {
 	void solve(){
 		int coste = 0, costeMejor = -1, maxDepth = 100;
 		City city = null;
-		Vector<Instruction> solucion = new Vector<Instruction>();
-		Vector<Instruction> solucionMejor = new Vector<Instruction>();
+		Instruction[] sol = null, solMejor = null;
+	//	Vector<Instruction> solucion = new Vector<Instruction>();
+	//	Vector<Instruction> solucionMejor = new Vector<Instruction>();
 		boolean marcas[][] = null;
 		//RobotEngine engine = null;
-		laberinto(city, solucion, solucionMejor, 0, maxDepth, marcas, coste, costeMejor, game);
+		laberinto(city, sol, solMejor, 0, maxDepth, marcas, coste, costeMejor, game);
 			
 	}
 	
@@ -95,16 +96,21 @@ public class FindExit {
 			//	game.addItemContainerObserver(console);
 				//consCont.startEngine();
 				//llamamos a la funcion recursiva
-				//Instruction[] solucion = null, solucionMejor = null;
-				Vector<Instruction> solucion = new Vector<Instruction>();
-				Vector<Instruction> solucionMejor = new Vector<Instruction>();
+				
+			//	Vector<Instruction> solucion = new Vector<Instruction>();
+			//	Vector<Instruction> solucionMejor = new Vector<Instruction>();
 				boolean marcas[][] = null;
 				String d = cmd.getOptionValue('d');
 				int maxDepth = Integer.parseInt(d);
 				cmd.getOptionValue('m');
 				int coste = 0, costeMejor = -1;
+				Instruction[] solucion = new Instruction[maxDepth], solucionMejor = new Instruction[maxDepth];
 				inicializarMarcas(marcas);
+		//		inicializarArray(solucion, maxDepth);
+		//		inicializarArray(solucionMejor, maxDepth);
+				//solucion.ensureCapacity(maxDepth); // para poder usar el setElement en el backtracking
 				laberinto(city, solucion, solucionMejor, 0, maxDepth, marcas, coste, costeMejor, game);
+				imprimirSolucion(solucionMejor, maxDepth);
 			}
 			
 		}
@@ -147,17 +153,32 @@ public class FindExit {
 		
 	}
 
+	private static void imprimirSolucion(Instruction[] sol, int maxDepth) {
+		boolean b = true;
+		for (int i = 0; i < maxDepth && b; i++)
+			if (sol[i] != null)	System.out.println(sol.toString());
+			else b = false;
+		
+	}
+
+	private static void inicializarArray(Instruction[] solucion, int maxDepth) {
+		for (int i = 0; i < maxDepth; i++)
+			solucion[i] = null;
+		
+	}
+
 	private static void inicializarMarcas(boolean[][] marcas) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	static void laberinto(City city, Vector<Instruction> solucion,
-			Vector<Instruction> solucionMejor, int k, int maxDepth,
+	static void laberinto(City city, Instruction[] solucion,
+			Instruction[] solucionMejor, int k, int maxDepth,
 			boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
 		if (coste < costeMejor || costeMejor == -1) {
 			for (int i = 0; i < instructions.length; i++) {
-				solucion.add(instructions[i]);
+				//solucion.add(instructions[i]); SUSTITUIDO POR LO DE ABAJO
+				solucion[k] = instructions[i];
 				// los siguientes dos ifs podrian cambiarse por un bucle que
 				// hiciera parse de la instruccion actual, lo cual aumentaria el
 				// coste a cambio de mejorar la legibilidad del programa
@@ -176,13 +197,16 @@ public class FindExit {
 				}
 				// solucion[k] = sigInstruccion(i);
 				// game.communicateRobot(solucion[k]);
-				game.communicateRobot(solucion.elementAt(k));
 
 				try { // if (esValida(city, solucion[k], marcas)) si no fuera
 						// valida pasa al catch
-					solucion.elementAt(k).execute();
+					solucion[k].configureContext(game, navigation, items);
+				/*	solucion[k].execute();*/ /** LO SUSTITUIMOS POR LO DE ABAJO*/
+					/** Jaime, tu que controlas de esa parte, el comunicate robot tiene un metodo requestRobot que avisa a los observadores de que ha petado la instruccion*/
+					/**Deberiamos hacer un observador para el FindExit?*/
+					game.communicateRobot(solucion[k]);
 					if (esValida(solucion, k, maxDepth)) {
-						if (esSolucion(solucion.elementAt(k), game)) {
+						if (esSolucion(solucion[k], game)) {
 							if (coste < costeMejor || costeMejor == -1) {
 								costeMejor = coste;
 								copiarSolucion(solucion, solucionMejor);
@@ -204,19 +228,17 @@ public class FindExit {
 							// false;
 						}
 					}
-					solucion.elementAt(i).undo();
-					solucion.removeElementAt(i);
+					solucion[i].undo();
 
 				} catch (InstructionExecutionException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					// e.printStackTrace();
 				}
-
 			}
 		}
 	}
 
-	private static boolean esValida(Vector<Instruction> solucion, int k, int maxDepth) {
+	private static boolean esValida(Instruction[] solucion, int k, int maxDepth) {
 		if (k > maxDepth || game.getFuel() <= 0) return false;
 		else return true;
 	}
@@ -225,8 +247,8 @@ public class FindExit {
 		return game.atSpaceship();
 	}
 
-	private static void copiarSolucion(Vector<Instruction> solucion,
-			Vector<Instruction> solucionMejor) {
+	private static void copiarSolucion(Instruction[] solucion,
+			Instruction[] solucionMejor) {
 		solucionMejor = solucion;
 		// TODO esto a lo mejor solo copia los punteros, estaria bien saberlo
 	}
