@@ -151,7 +151,7 @@ public class CityLoaderFromTxtFile {
 		}
 		int num = (int) stk.nval;
 		if ((num >= places.size()) || num < 0)
-			throw new WrongCityFormatException();
+			throw new WrongCityFormatException("Error, no hay un place con ese numero");
 		// el numero siguiente debe ser el numero de un place
 		return num; 
 

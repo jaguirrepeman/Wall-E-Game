@@ -122,6 +122,15 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		}
 	}
 	
+	/**
+	 * Función que determina si el engine puede moverse en la dirección actual
+	 * @return boolean: true si puede moverse, false si no puede
+	 */
+	public boolean canMove(){
+		
+		return this.navigation.getHeadingStreet() == null || !this.navigation.getHeadingStreet().isOpen();
+	}
+	
 	
 	
 	
@@ -210,8 +219,12 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		
 	}
 
-	public String[] RobotItems(){
+	public String[] robotItems(){
 		return items.listOfItems();
+	}
+	
+	public String[] placeItems(){
+		return place.placeItems();
 	}
 	
 	public String[] getItemsFromContainer(int n){

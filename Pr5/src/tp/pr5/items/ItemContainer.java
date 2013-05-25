@@ -54,8 +54,8 @@ public class ItemContainer extends tp.pr5.Observable<InventoryObserver>{
 	}
 	
 	public String[] listOfItems(){
-		String[] string = new String[container.length];
-		for (int i = 0; i < container.length; i++){
+		String[] string = new String[this.counter];
+		for (int i = 0; i < this.counter; i++){
 			string[i] = container[i].getId();
 		}
 		return string;

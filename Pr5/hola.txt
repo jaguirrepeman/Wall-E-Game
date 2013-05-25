@@ -1,0 +1,13 @@
+BeginCity
+BeginPlaces
+place 0 Sol You_are_at_the_center_of_Madrid noSpaceShip
+place 1 Callao In_this_square_you_can_find_a_code_card SpaceShip
+
+EndPlaces
+BeginStreets
+street 0 place 0 north place 1 open
+
+EndStreets
+BeginItems
+EndItems
+EndCity
