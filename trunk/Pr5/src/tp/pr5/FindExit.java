@@ -234,7 +234,7 @@ public class FindExit {
 	
 	static void laberinto (int k, int maxDepth, int coste){
 		Instruction instruccion;
-		for (int i = 0; i< instructions.length && k < maxDepth; i++){
+		for (int i = 0; i< instructions.length && k <= maxDepth; i++){
 			
 			coste++;
 			instruccion = instructions[i];
