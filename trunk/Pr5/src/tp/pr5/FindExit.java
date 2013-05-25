@@ -174,7 +174,7 @@ public class FindExit {
 
 	private static void imprimirSolucion(Instruction[] sol, int maxDepth) {
 		boolean b = true;
-		for (int i = 0; i < maxDepth && b; i++)
+		for (int i = 0; i <= maxDepth && b; i++)
 			if (sol[i] != null)	System.out.println(sol[i].toString());
 			else b = false;
 		
@@ -210,25 +210,21 @@ public class FindExit {
 	
 	private static void trataDatos(Instruction instruccion, int coste, int k, int maxDepth){
 		
-		game.communicateRobot(instruccion);
+		solucion[k] = instruccion;
 		
-		if (esValida()){
-			solucion[k] = instruccion;
-			
-			if (esSolucion()){
-				longitudSolucionMejor = k;
-				if (coste < costeMejor || costeMejor == -1){
-					for (int indice = 0; indice <= k; indice++)
-						solucionMejor[indice] = solucion[indice];
-				}
-				
-				System.out.println("Se ha encontrado una solucion");
-				imprimirSolucion(solucionMejor, k);
+		if (esSolucion()){
+			longitudSolucionMejor = k;
+			if (coste < costeMejor || costeMejor == -1){
+				for (int indice = 0; indice <= k; indice++)
+					solucionMejor[indice] = solucion[indice];
 			}
 			
-			else {
-				laberinto(k+1, maxDepth, coste);
-			}
+			System.out.println("Se ha encontrado una solucion");
+			imprimirSolucion(solucionMejor, k);
+		}
+		
+		else {
+			laberinto(k+1, maxDepth, coste);
 		}
 	}
 	
@@ -236,14 +232,17 @@ public class FindExit {
 		Instruction instruccion;
 		for (int i = 0; i< instructions.length && k <= maxDepth; i++){
 			
-			coste++;
+			//coste++;
 			instruccion = instructions[i];
 			
 			if (i==0){//MoveInstruction
 				if (game.canMove()){
 					game.communicateRobot(instruccion);
 					if (esValida()){
+						coste++;
 						trataDatos(instruccion, coste, k, maxDepth);
+						instruccion.undo();
+						coste--;
 					}
 					else{
 						instruccion.undo();
@@ -258,7 +257,10 @@ public class FindExit {
 					instruccion = new OperateInstruction(objects);
 					game.communicateRobot(instruccion);
 					if (esValida()){
+						coste++;
 						trataDatos(instruccion, coste, k, maxDepth);
+						instruccion.undo();
+						coste--;
 					}
 					else{
 						instruccion.undo();
@@ -269,13 +271,30 @@ public class FindExit {
 			}
 			
 			else if (i == 4){//PickInstruction	
-				trataDatos(instruccion, coste, k, maxDepth);
+				for (String objects: game.placeItems()){
+					instruccion = new PickInstruction(objects);
+					game.communicateRobot(instruccion);
+					if (esValida()){
+						coste++;
+						trataDatos(instruccion, coste, k, maxDepth);
+						instruccion.undo();
+						coste--;
+					}
+					else{
+						instruccion.undo();
+						coste--;
+					}
+					
+				}
 			}
 			
 			else {//Else
 				game.communicateRobot(instruccion);
 				if (esValida()){
+					coste++;
 					trataDatos(instruccion, coste, k, maxDepth);
+					instruccion.undo();
+					coste--;
 				}
 				else{
 					instruccion.undo();
