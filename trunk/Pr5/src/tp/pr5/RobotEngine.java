@@ -126,9 +126,10 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 	 * Función que determina si el engine puede moverse en la dirección actual
 	 * @return boolean: true si puede moverse, false si no puede
 	 */
-	public boolean canMove(){
+	public boolean canMove(){			
+				if (this.navigation.getHeadingStreet() == null) return false;
+				else return this.navigation.getHeadingStreet().isOpen();
 		
-		return this.navigation.getHeadingStreet() == null || this.navigation.getHeadingStreet().isOpen();
 	}
 	
 	

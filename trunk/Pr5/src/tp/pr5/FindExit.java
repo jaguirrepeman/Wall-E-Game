@@ -24,6 +24,11 @@ import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
 
 
 public class FindExit {
+	FindExit(){
+	//el constructor para hacer lo que dijo Marco	
+	
+	}
+	
 	Instruction ins;
 	//(-d|-max-depth) n (-m|-map) <mapFilename>
 	void solve(){
@@ -180,31 +185,12 @@ public class FindExit {
 		
 	}
 
-	private static void inicializarArray(Instruction[] solucion, int maxDepth) {
-		for (int i = 0; i < maxDepth; i++)
-			solucion[i] = null;
-		
-	}
-
 	private static void inicializarMarcas(boolean[][] marcas) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	private static boolean esValida(){
-		return game.getFuel() > 0;
-	}
-	
-	private static boolean esValida(Instruction instruccion, int k, int maxDepth, int coste){
-		/*if (game.getFuel() <= 0)return false;
-		else{
-			
-			solucion[k] = instruccion;
-			if (esSolucion()){
-				
-			}
-			return true;
-		}*/
 		return game.getFuel() > 0;
 	}
 	
@@ -230,8 +216,7 @@ public class FindExit {
 	
 	static void laberinto (int k, int maxDepth, int coste){
 		Instruction instruccion;
-		for (int i = 0; i< instructions.length && k <= maxDepth; i++){
-			
+		for (int i = 0; i< instructions.length && k < maxDepth; i++){			
 			//coste++;
 			instruccion = instructions[i];
 			
@@ -251,43 +236,44 @@ public class FindExit {
 				}
 			}
 			
-			else if(i == 3){//OperateInstruction
-				
-				for (String objects: game.robotItems()){
-					instruccion = new OperateInstruction(objects);
-					game.communicateRobot(instruccion);
-					if (esValida()){
-						coste++;
-						trataDatos(instruccion, coste, k, maxDepth);
-						instruccion.undo();
-						coste--;
+			else if (i == 3) {// OperateInstruction
+				if (game.numberOfItems() != 0) {
+					for (String objects : game.robotItems()) {
+						instruccion = new OperateInstruction(objects);
+						game.communicateRobot(instruccion);
+						if (esValida()) {
+							coste++;
+							trataDatos(instruccion, coste, k, maxDepth);
+							instruccion.undo();
+							coste--;
+						} else {
+							instruccion.undo();
+							coste--;
+						}
+
 					}
-					else{
-						instruccion.undo();
-						coste--;
-					}
-					
 				}
 			}
 			
-			else if (i == 4){//PickInstruction	
-				for (String objects: game.placeItems()){
-					instruccion = new PickInstruction(objects);
-					game.communicateRobot(instruccion);
-					if (esValida()){
-						coste++;
-						trataDatos(instruccion, coste, k, maxDepth);
-						instruccion.undo();
-						coste--;
+			else if (i == 4) {// PickInstruction
+				if (game.placeItems() != null) {
+					for (String objects : game.placeItems()) {
+						instruccion = new PickInstruction(objects);
+						game.communicateRobot(instruccion);
+						if (esValida()) {
+							coste++;
+							trataDatos(instruccion, coste, k, maxDepth);
+							instruccion.undo();
+							coste--;
+						} else {
+							instruccion.undo();
+							coste--;
+						}
+
 					}
-					else{
-						instruccion.undo();
-						coste--;
-					}
-					
 				}
 			}
-			
+
 			else {//Else
 				game.communicateRobot(instruccion);
 				if (esValida()){
@@ -544,12 +530,6 @@ public class FindExit {
 	private static boolean esSolucion(){
 		return game.atSpaceship();
 	}
-	private static void copiarSolucion(Instruction[] solucion,
-			Instruction[] solucionMejor) {
-		solucionMejor = solucion;
-		// TODO esto a lo mejor solo copia los punteros, estaria bien saberlo
-	}
-
 	private static void desmarcar() {
 		// TODO Auto-generated method stub
 		
@@ -561,12 +541,6 @@ public class FindExit {
 	}
 
 	
-	private static Instruction sigInstruccion(int i) {
-		i++;
-
-		return instructions[i];
-
-	}
 	private static Place place;
 	private static String objectToOperate;
 	private static String objectToPick;
