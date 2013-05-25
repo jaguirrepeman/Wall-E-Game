@@ -128,7 +128,7 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 	 */
 	public boolean canMove(){
 		
-		return this.navigation.getHeadingStreet() == null || !this.navigation.getHeadingStreet().isOpen();
+		return this.navigation.getHeadingStreet() == null || this.navigation.getHeadingStreet().isOpen();
 	}
 	
 	
