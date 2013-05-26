@@ -37,26 +37,27 @@ public class FindExit {
 		solucion = new Stack<Instruction>();// [maxDepth+1];
 		solucionMejor = new Stack<Instruction>();// [maxDepth+1];
 		maze(0, maxDepth);
-		System.out.println("Que tal");
-		for (int i = 0; i < solucionMejor.size(); i++)
-			System.out.println(solucionMejor.get(i).toString());
+		if (solucionMejor.size() > 0) {
+			for (int i = 0; i < solucionMejor.size(); i++)
+				System.out.println(solucionMejor.get(i).toString());
 
-		MainWindow window = new MainWindow(new GUIController(game));
-//		Console console = new Console();
-		game.addEngineObserver(window);
-//		game.addEngineObserver(console);
-//		game.addItemContainerObserver(console);
-//		game.addNavigationObserver(console);
-		window.disableButtons();
-		window.setVisible(true);
+			MainWindow window = new MainWindow(new GUIController(game));
+			// Console console = new Console();
+			game.addEngineObserver(window);
+			// game.addEngineObserver(console);
+			// game.addItemContainerObserver(console);
+			// game.addNavigationObserver(console);
+			window.disableButtons();
+			window.setVisible(true);
 
-		for (int i = 0; i < solucionMejor.size(); i++) {
-			game.communicateRobot(solucionMejor.get(i));
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();	
+			for (int i = 0; i < solucionMejor.size(); i++) {
+				game.communicateRobot(solucionMejor.get(i));
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
