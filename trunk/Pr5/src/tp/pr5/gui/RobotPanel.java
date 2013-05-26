@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import tp.pr5.RobotEngineObserver;
 import tp.pr5.Rotation;
@@ -231,17 +230,6 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		
 		for (JButton b: buttons)
 			instructionPanel.add(b);
-		/*
-		instructionPanel.add(move);
-		instructionPanel.add(quit);
-		instructionPanel.add(turn);
-		instructionPanel.add(directionToTurn);
-		instructionPanel.add(pick);
-		instructionPanel.add(objectToPick);
-		instructionPanel.add(drop);
-		instructionPanel.add(operate);
-		instructionPanel.add(undo);
-*/
 		
 		return instructionPanel;
 
@@ -333,18 +321,9 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	@SuppressWarnings("rawtypes")
 	private JComboBox directionToTurn;
 	private DefaultTableModel tabla;
-	private AbstractTableModel tablaItems;
 	private JFormattedTextField robotInfo;
-	private GUIController game;
-	
+	private GUIController game;	
 	private JButton[] buttons;
-	private JButton move;
-	private JButton quit;
-	private JButton turn;
-	private JButton pick;
-	private JButton drop;
-	private JButton operate;
-	private JButton undo;
 
 	
 }
