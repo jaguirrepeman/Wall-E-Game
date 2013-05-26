@@ -198,8 +198,6 @@ public class FindExit {
 				//solucionMejor = (Instruction[])solucion.clone();
 			}
 			
-			System.out.println("Se ha encontrado una solucion");
-			//imprimirSolucion(solucionMejor, k);
 			solucion.pop().undo();
 		}
 		
