@@ -16,21 +16,9 @@ public class ConsoleController extends tp.pr5.Controller{
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();
-		/*for (RobotEngineObserver o : robObservers){ 
-			game.o.robotSays(this.place.getDescription());
-			o.robotSays("WALL·E is looking at direction "
-				+ this.direction.toString());
-			o.robotUpdate(fuel, recycledMaterial);
-		}*/
+		
 		robot.requestStart();
-		/**
-		 Cosas antiguas
-		 
-		System.out.println(this.place.toString());
-		System.out.println("WALL·E is looking at direction "
-				+ this.direction.toString());
-		printRobotState();
-*/
+		
 		Scanner comando = new Scanner(System.in);
 
 		while (!robot.isOver()) {
@@ -48,18 +36,7 @@ public class ConsoleController extends tp.pr5.Controller{
 			}
 		}
 		comando.close();
-		//robot.requestQuit();
-		/**
-		  Más cosas antiguas
 		
-		if (this.place.isSpaceship())
-			say("I am at my spaceship. Bye bye");
-		else if (this.fuel == 0)
-			say("I run out of fuel. I cannot move. Shutting down...");
-		else
-			say("I have communication problems. Bye bye");
-			
-		 */
 	}
 
 	private void prompt() {

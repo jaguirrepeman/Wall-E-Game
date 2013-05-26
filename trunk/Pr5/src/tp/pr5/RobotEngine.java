@@ -155,7 +155,7 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		System.out.println("WALL·E says: " + mensaje);
 	}
 
-//OBsoleto	
+//Obsoleto	
 	public void startEngine() {
 		Instruction instruccion = null;
 		String command = new String();

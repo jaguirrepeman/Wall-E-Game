@@ -31,7 +31,7 @@ public class Street {
 				.equals(whichDirection)) || (place.equals(this.target) && this.direction
 				.equals(whichDirection.Opposite())));
 	}
-
+	
 	public Place nextPlace(Place whereAmI) {
 		if (whereAmI.equals(this.source))
 			return this.target;

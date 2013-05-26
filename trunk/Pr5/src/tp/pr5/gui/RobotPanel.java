@@ -34,6 +34,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		this.game = gameController;
 		
 		this.setLayout(new BorderLayout(10, 10));
+		
 		//Creación del panel de instrucciones
 		JPanel instructionPanel = createInstructionPanel();
 		this.add(instructionPanel, BorderLayout.WEST);
@@ -211,6 +212,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 				
 			}
 		};
+		
 		objectToPick = new JTextField();
 		String[] rotationString = { Rotation.LEFT.toString(),
 				Rotation.RIGHT.toString() };
@@ -236,27 +238,11 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			if (i == 2) instructionPanel.add(directionToTurn);
 			else if (i == 3) instructionPanel.add(objectToPick);
 		}
-			
-		
-		
-		
-		/*
-		instructionPanel.add(move);
-		instructionPanel.add(quit);
-		instructionPanel.add(turn);
-		
-		instructionPanel.add(pick);
-
-		instructionPanel.add(drop);
-		instructionPanel.add(operate);
-		instructionPanel.add(undo);
-*/
 		
 		return instructionPanel;
 
 	}
 
-	
 	/*
 	 * (non-Javadoc)
 	 * @see tp.pr5.items.InventoryObserver

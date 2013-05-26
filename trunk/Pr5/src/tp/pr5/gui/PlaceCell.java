@@ -12,8 +12,6 @@ import tp.pr5.PlaceInfo;
 public class PlaceCell extends JButton {
 	
 	public PlaceCell(final JTextArea text){
-		//con JColorChooser parece que se cambia el color, hay que mirarlo
-		
 		actual = true;
 		this.setFocusPainted(actual);
 

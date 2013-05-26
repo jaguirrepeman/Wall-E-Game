@@ -19,8 +19,7 @@ public class NavigationModule extends tp.pr5.Observable<NavigationObserver>{
 
 	public void dropItemAtCurrentPlace(Item it) {
 		this.place.addItem(it);
-		
-		//TODO mover a un emit?
+
 		for (NavigationObserver obs: this.observers)
 			obs.placeHasChanged(this.place);
 		
@@ -50,24 +49,21 @@ public class NavigationModule extends tp.pr5.Observable<NavigationObserver>{
 	}
 
 	public void move() throws InstructionExecutionException {
-		
+
 		if (!(this.city.lookForStreet(this.place, this.direction) == null)) {
 			//
 			if (this.city.lookForStreet(this.place, this.direction).isOpen()) {
 
 				this.place = this.city.lookForStreet(this.place, direction)
 						.nextPlace(place);
-				//TODO pasar a un emit?
-				for (NavigationObserver obs: this.observers)
+				for (NavigationObserver obs : this.observers)
 					obs.robotArrivesAtPlace(this.direction, this.place);
 
 			} else {
-				//if (navPanel != null)navPanel.say("The street is closed");
 				throw new InstructionExecutionException(
 						"Arrggg, there is a street but it is closed!");
 			}
-		} else{
-			//if (navPanel != null)navPanel.say("There is no street in direction "+ this.direction.toString());
+		} else {
 			throw new InstructionExecutionException(
 					"There is no street in direction "
 							+ this.direction.toString());
@@ -76,7 +72,6 @@ public class NavigationModule extends tp.pr5.Observable<NavigationObserver>{
 	public void moveBackwards() {
 		
 			this.place = this.city.lookForStreet(this.place, direction.Opposite()).nextPlace(place);
-			//TODO pasar a  un emit? es con direction.Opposite()
 			for (NavigationObserver obs: this.observers)
 				obs.robotArrivesAtPlace(this.direction.Opposite(), this.place);
 	}
@@ -85,7 +80,6 @@ public class NavigationModule extends tp.pr5.Observable<NavigationObserver>{
 		
 		Item item = this.place.pickItem(id);
 		
-		//TODO mover a un emit?
 		for (NavigationObserver obs: this.observers)
 			obs.placeHasChanged(this.place);
 		
@@ -96,16 +90,12 @@ public class NavigationModule extends tp.pr5.Observable<NavigationObserver>{
 
 		this.direction = direction.nextDirection(rotation);
 		
-		//TODO mover a un emit?
-		
 		for (NavigationObserver obs: this.observers){
 			obs.headingChanged(this.direction);
 		}
 	}
 
 	public void scanCurrentPlace() {
-		
-		//TODO mover a un emit?
 		for (NavigationObserver obs : this.observers)
 			obs.placeScanned(place);
 		
