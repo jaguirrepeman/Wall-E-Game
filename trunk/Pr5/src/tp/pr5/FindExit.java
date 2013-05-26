@@ -15,6 +15,8 @@ import org.apache.commons.cli.ParseException;
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 import tp.pr5.console.Console;
+import tp.pr5.gui.GUIController;
+import tp.pr5.gui.MainWindow;
 import tp.pr5.instructions.Instruction;
 import tp.pr5.instructions.MoveInstruction;
 import tp.pr5.instructions.OperateInstruction;
@@ -134,12 +136,30 @@ public class FindExit {
 				//solucion.ensureCapacity(maxDepth); // para poder usar el setElement en el backtracking
 				//laberinto(city, /*solucion, solucionMejor,*/ 0, maxDepth, marcas, coste, costeMejor, game);
 				laberinto(0, maxDepth, 0);
-				System.out.print("Que tal");
+				System.out.println("Que tal");
 				for (int i=0; i< solucionMejor.size()/*costeMejor*/; i++)
 					System.out.println(solucionMejor.get(i).toString());
 					//System.out.println(solucionMejor[i].toString());
 				//imprimirSolucion(solucionMejor, maxDepth);
+				MainWindow window = new MainWindow(new GUIController(game));
+				Console console = new Console();
+				game.addEngineObserver(window);
+				game.addEngineObserver(console);
+				game.addItemContainerObserver(console);
+				game.addNavigationObserver(console);
+				window.setVisible(true);
+				for (int i=0; i< solucionMejor.size(); i++){
+					game.communicateRobot(solucionMejor.get(i));
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				//game.addNavigationObserver(new MainWindow(null));
 			}
+			
 			
 		}
 		/*
