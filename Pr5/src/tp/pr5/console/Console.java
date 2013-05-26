@@ -12,6 +12,10 @@ import tp.pr5.items.Item;
 public class Console implements NavigationObserver, RobotEngineObserver,
 		InventoryObserver {
 
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.items.InventoryObserver
+	 */
 	@Override
 	public void inventoryChange(List<Item> inventory) {}
 
@@ -31,7 +35,12 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 		say("What a pity! I have no more " + itemName + " in my inventory");
 
 	}
-
+	
+	
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.RobotEngineObserver
+	 */
 	@Override
 	public void raiseError(String msg) {
 		
@@ -73,6 +82,10 @@ public class Console implements NavigationObserver, RobotEngineObserver,
 		System.out.println("WALL·E says: " + message);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.NavigationObserver
+	 */
 	@Override
 	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
 		
