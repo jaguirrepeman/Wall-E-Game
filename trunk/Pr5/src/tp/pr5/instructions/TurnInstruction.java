@@ -34,7 +34,7 @@ public class TurnInstruction extends UndoableInstruction{
 	}
 	
 	public String toString(){
-		return "Turn " + this.rotation.toString().toLowerCase();
+		return "TURN " + this.rotation.toString().toLowerCase();
 	}
 	
 	public void execute() throws InstructionExecutionException {

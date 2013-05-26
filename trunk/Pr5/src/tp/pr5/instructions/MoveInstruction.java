@@ -43,7 +43,7 @@ public class MoveInstruction extends UndoableInstruction{
 		
 	}
 	public String toString(){
-		return "Move";
+		return "MOVE";
 	}
 	
 	public Instruction parse(String cad) throws WrongInstructionFormatException{
