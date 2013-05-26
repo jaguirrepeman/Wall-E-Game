@@ -54,6 +54,10 @@ public class PickInstruction extends UndoableInstruction {
 		return "PICK|COGER <id>";
 
 	}
+	
+	public String toString(){
+		return "Pick " + this.id;
+	}
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 		

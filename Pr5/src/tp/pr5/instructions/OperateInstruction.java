@@ -87,6 +87,10 @@ public class OperateInstruction extends UndoableInstruction{
 		return "OPERATE|OPERAR <ID>";
 	}
 	
+	public String toString(){
+		return "Operate " + id;
+	}
+	
 	public Instruction parse (String cad) throws WrongInstructionFormatException{
 		
 		String[] comando = cad.split(" ");
