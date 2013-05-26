@@ -39,11 +39,7 @@ public class TurnInstruction extends UndoableInstruction{
 	
 	public void execute() throws InstructionExecutionException {
 			this.navigation.rotate(rotation);
-			this.engine.addFuel(-5);
-			//System.out.println("WALL·E is looking at direction "
-			//		+ this.navigation.getCurrentHeading().toString());
-			//this.engine.printRobotState();
-			
+			this.engine.addFuel(-5);			
 	}
 	@Override
 	public void undo() {

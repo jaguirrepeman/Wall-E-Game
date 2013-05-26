@@ -38,7 +38,6 @@ public class DropInstruction extends UndoableInstruction {
 		if (!((item == null) || (navigation.findItemAtCurrentPlace(id)))) {
 			navigation.dropItemAtCurrentPlace(item);
 			engine.saySomething("Great! I have dropped " + id);
-			//TODO quitar, ya está en el navigation implementado navigation.print("Great! I have dropped " + id);
 		}
 
 	}

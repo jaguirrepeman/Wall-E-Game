@@ -20,21 +20,16 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	public NavigationPanel() {
 	
 		this.setLayout(new BorderLayout(10, 10));
-		
-		//setVisible(true);
-		// JScrollPanel
 		TitledBorder titled = new TitledBorder("Log");
 		text = new JTextArea("");
 		text.setEditable(false);
 		//ejemplo de como meter imagenes
 		cityPanel = new CityPanel(text);
-		//mapViewPanel.setIcon(icon); 
 		this.add(cityPanel);
 				
 		scroller = new JScrollPane(text);
         scroller.setPreferredSize(new Dimension(100,100));
         scroller.setBorder(titled);
-		// JScrollPanel text = new JScrollPanel();
 		this.add(scroller, BorderLayout.SOUTH);
 	}
 	
@@ -74,7 +69,6 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 
 	@Override
 	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
-		// TODO (cityPanel != null)
 		this.cityPanel.move(heading, place);
 		text.setText(place.getDescription());
 	}

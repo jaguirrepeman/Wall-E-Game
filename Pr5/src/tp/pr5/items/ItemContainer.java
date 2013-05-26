@@ -3,10 +3,6 @@ package tp.pr5.items;
 import java.util.Arrays;
 import java.util.List;
 
-
-
-//import java.util.ArrayList;
-//TODO java.util.Collections addAll;
 public class ItemContainer extends tp.pr5.Observable<InventoryObserver>{
 	public ItemContainer() {
 		
@@ -133,10 +129,7 @@ public class ItemContainer extends tp.pr5.Observable<InventoryObserver>{
 	}
 
 	private List<Item> inventoryToList(){
-		/*List<Item> returnList = new ArrayList<Item>();
-		Collections.addAll(returnList, this.container);
-		return returnList.subList(0, counter);
-		*/
+
 		return Arrays.asList(this.container).subList(0, counter);
 		
 	}

@@ -34,7 +34,6 @@ public class UndoInstruction implements Instruction {
 
 	@Override
 	public boolean isUndoableInstruction() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

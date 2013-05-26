@@ -9,18 +9,6 @@ public class CloseApp implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*
-		 * JOptionPane opcion = new JOptionPane(
-		 * "¿Está seguro que desea cerrar la aplicación?");
-		 * 
-		 * Object[] options = { "OK", "CANCEL" };
-		 * 
-		 * 
-		 * JOptionPane.showOptionDialog(null, "Click OK to continue",
-		 * "¿Está seguro que desea cerrar la aplicación?",
-		 * JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
-		 * options, options[0]);
-		 */
 
 		int seleccion = JOptionPane.showOptionDialog(null, "Select an option",
 				"Exit WALL·E", JOptionPane.YES_NO_CANCEL_OPTION,
