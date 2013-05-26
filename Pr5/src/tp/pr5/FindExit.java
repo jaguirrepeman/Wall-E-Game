@@ -47,9 +47,6 @@ public class FindExit {
 			try {
 				
 				System.out.println("Found a solution of size: " + bestSolution.size());
-				//for (int i = 0; i < solucionMejor.size(); i++)
-				//	System.out.println(solucionMejor.get(i).toString());
-			
 				/**
 				 * Usado para que salga bien en Mac
 				 */
@@ -58,11 +55,7 @@ public class FindExit {
 				
 				GUIController gameController = new GUIController(game);
 				MainWindow window = new MainWindow(gameController);
-				// Console console = new Console();
 				game.addEngineObserver(window);
-				// game.addEngineObserver(console);
-				// game.addItemContainerObserver(console);
-				// game.addNavigationObserver(console);
 				window.disableButtons();
 				window.setVisible(true);
 				gameController.startController();
