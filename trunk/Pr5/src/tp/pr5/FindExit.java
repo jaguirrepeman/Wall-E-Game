@@ -17,7 +17,6 @@ import org.apache.commons.cli.ParseException;
 
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
-import tp.pr5.console.Console;
 import tp.pr5.gui.GUIController;
 import tp.pr5.gui.MainWindow;
 import tp.pr5.instructions.Instruction;
@@ -37,17 +36,17 @@ public class FindExit {
 	//(-d|-max-depth) n (-m|-map) <mapFilename>
 	public boolean solve(int maxDepth) {
 		boolean solved = false;
-		solucion = new Stack<Instruction>();// [maxDepth+1];
-		solucionMejor = new Stack<Instruction>();// [maxDepth+1];
+		solution = new Stack<Instruction>();// [maxDepth+1];
+		bestSolution = new Stack<Instruction>();// [maxDepth+1];
 		maze(0, maxDepth);
 		
-		if (solucionMejor.size() > 0) solved = true;
+		if (bestSolution.size() > 0) solved = true;
 		
 		if (solved){
 			
 			try {
 				
-				System.out.println("Se encontro una solucion de tamaño: " + solucionMejor.size());
+				System.out.println("Found a solution of size: " + bestSolution.size());
 				//for (int i = 0; i < solucionMejor.size(); i++)
 				//	System.out.println(solucionMejor.get(i).toString());
 			
@@ -68,10 +67,10 @@ public class FindExit {
 				window.setVisible(true);
 				gameController.startController();
 
-				for (int i = 0; i < solucionMejor.size(); i++) {
-					System.out.println(solucionMejor.get(i).toString());
+				for (int i = 0; i < bestSolution.size(); i++) {
+					System.out.println(bestSolution.get(i).toString());
 					Thread.sleep(300);
-					game.communicateRobot(solucionMejor.get(i));
+					game.communicateRobot(bestSolution.get(i));
 
 					Thread.sleep(1000);
 
@@ -88,7 +87,7 @@ public class FindExit {
 				e.printStackTrace();
 			}
 		}
-		else System.out.println("No se pudo encontrar una solucion con la profundidad "+ maxDepth );
+		else System.out.println("Could not find a solution with depth "+ maxDepth );
 		return solved;
 	}
 		
@@ -186,31 +185,31 @@ public class FindExit {
 		
 	}
 
-	private boolean esValida(){
+	private boolean isValid(){
 		return game.getFuel() > 0;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void dataProcess(Instruction instruccion, int k, int maxDepth){
-		
-		//solucion[k] = instruccion;
-		solucion.push(instruccion);
+
+		solution.push(instruccion);
 		
 		if (isSolution()){
-			if (k < costeMejor){
-				costeMejor = k;
+			if (k < betterCost){
+				betterCost = k;
 				//for (int indice = 0; indice <= k; indice++)
 				//	solucionMejor[indice] = solucion[indice];
-				solucionMejor = (Stack<Instruction>)solucion.clone();
+				bestSolution = (Vector<Instruction>) solution.clone();
 				//solucionMejor = (Instruction[])solucion.clone();
 			}
 			
-			solucion.pop().undo();
+			solution.pop().undo();
 		}
 		
 		else {
 			maze(k+1, maxDepth);
 			//solucion[k].undo();
-			solucion.pop().undo();
+			solution.pop().undo();
 			//solucion[k].undo();
 			//game.undoInstruction();
 		}
@@ -221,7 +220,7 @@ public class FindExit {
 		game.configureLittleContext(instruccion);
 		try {
 			instruccion.execute();
-			if (esValida())
+			if (isValid())
 				dataProcess(instruccion, k, maxDepth);
 			
 			else instruccion.undo();
@@ -276,9 +275,9 @@ public class FindExit {
 			new OperateInstruction(objectToOperate), new PickInstruction(objectToPick)
 	};
 	
-	private Vector<Instruction> solucionMejor;
-	private Stack<Instruction> solucion;
-	private int costeMejor = 1000000000;
+	private Vector<Instruction> bestSolution;
+	private Stack<Instruction> solution;
+	private int betterCost = 1000000000;
 
 }
 
