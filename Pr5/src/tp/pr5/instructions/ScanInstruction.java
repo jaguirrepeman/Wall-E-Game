@@ -11,7 +11,6 @@ public class ScanInstruction extends NotUndoableInstruction {
 	
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
-		this.engine = engine;
 		this.robotContainer = robotContainer;
 	}
 
@@ -48,7 +47,6 @@ public class ScanInstruction extends NotUndoableInstruction {
 			throw new WrongInstructionFormatException();
 	}
 
-	private RobotEngine engine;
 	private ItemContainer robotContainer;
 	private String id;
 }
