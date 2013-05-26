@@ -78,11 +78,6 @@ public class CityPanel extends JPanel{
 				
 				cityMap.add(places[i][j]);
 			}
-		for (PlaceCell[] pArray: places){
-			for (PlaceCell p: pArray){
-					p.setEnabled(false);
-			}
-		}
 		return cityMap;
 	}
 	
