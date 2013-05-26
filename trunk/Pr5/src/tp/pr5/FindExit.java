@@ -35,12 +35,15 @@ public class FindExit {
 
 	Instruction ins;
 	//(-d|-max-depth) n (-m|-map) <mapFilename>
-	public void solve(int maxDepth) {
-
+	public boolean solve(int maxDepth) {
+		boolean solved = false;
 		solucion = new Stack<Instruction>();// [maxDepth+1];
 		solucionMejor = new Stack<Instruction>();// [maxDepth+1];
 		maze(0, maxDepth);
-		if (solucionMejor.size() > 0) {
+		
+		if (solucionMejor.size() > 0) solved = true;
+		
+		if (solved){
 			
 			try {
 				
@@ -86,6 +89,7 @@ public class FindExit {
 			}
 		}
 		else System.out.println("No se pudo encontrar una solucion con la profundidad "+ maxDepth );
+		return solved;
 	}
 		
 		
@@ -136,7 +140,9 @@ public class FindExit {
 				int maxDepth = Integer.parseInt(d);
 				cmd.getOptionValue('m');
 				FindExit fe = new FindExit(city, cityLoader.getInitialPlace(), Direction.NORTH);
-				fe.solve(maxDepth);
+				boolean solved = false;
+				for (int i = 1; i <= maxDepth && ! solved; i++)
+					solved = fe.solve(i);
 
 			
 			
