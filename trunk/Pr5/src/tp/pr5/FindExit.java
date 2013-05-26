@@ -38,7 +38,7 @@ public class FindExit {
 		solucionMejor = new Stack<Instruction>();// [maxDepth+1];
 		maze(0, maxDepth);
 		System.out.println("Que tal");
-		for (int i = 0; i < solucionMejor.size()/* costeMejor */; i++)
+		for (int i = 0; i < solucionMejor.size(); i++)
 			System.out.println(solucionMejor.get(i).toString());
 
 		MainWindow window = new MainWindow(new GUIController(game));
@@ -110,9 +110,7 @@ public class FindExit {
 				cmd.getOptionValue('m');
 				FindExit fe = new FindExit(city, cityLoader.getInitialPlace(), Direction.NORTH);
 				fe.solve(maxDepth);
-				
 
-				//game.addNavigationObserver(new MainWindow(null));
 			
 			
 		}
