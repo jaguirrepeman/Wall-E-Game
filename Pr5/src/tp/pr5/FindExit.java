@@ -204,9 +204,6 @@ public class FindExit {
 	}
 	/**
 	 * Funcion del laberinto
-	 * TODO hay algo raro, que es que el place del navigation  y del engine no coinciden, no se por qué
-	 * habría que ver las instrucciones, no se
-	 * he cambiado los arrays de solucion y solucionMejor por pilas, pero no se si sirve para algo
 	 * @param k
 	 * @param maxDepth
 	 * @param coste
