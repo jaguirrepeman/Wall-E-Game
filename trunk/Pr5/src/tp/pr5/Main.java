@@ -18,7 +18,7 @@ import org.apache.commons.cli.*;
 
 
 /**
- * gluglu Aplicación que utiliza las clases de la prática sobre el mapa que
+ * glugluglu Aplicación que utiliza las clases de la prática sobre el mapa que
  * aparece como ejemplo en el enunciado.
  * 
  * But in my own way, I am king
