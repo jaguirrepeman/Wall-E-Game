@@ -34,6 +34,7 @@ public class MoveInstruction extends UndoableInstruction{
 	@Override
 	public void undo() {
 		this.navigation.moveBackwards();
+		this.engine.moveToPlace(this.navigation.getCurrentPlace());
 		this.engine.addFuel(5);
 	}
 	
