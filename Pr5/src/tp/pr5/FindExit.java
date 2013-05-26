@@ -41,10 +41,13 @@ public class FindExit {
 		solucionMejor = new Stack<Instruction>();// [maxDepth+1];
 		maze(0, maxDepth);
 		if (solucionMejor.size() > 0) {
-			System.out.println("Se encontro una solucion de tamaño: " + solucionMejor.size());
-			//for (int i = 0; i < solucionMejor.size(); i++)
-			//	System.out.println(solucionMejor.get(i).toString());
+			
 			try {
+				
+				System.out.println("Se encontro una solucion de tamaño: " + solucionMejor.size());
+				//for (int i = 0; i < solucionMejor.size(); i++)
+				//	System.out.println(solucionMejor.get(i).toString());
+			
 				/**
 				 * Usado para que salga bien en Mac
 				 */
