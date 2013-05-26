@@ -56,7 +56,7 @@ public class PickInstruction extends UndoableInstruction {
 	}
 	
 	public String toString(){
-		return "Pick " + this.id;
+		return "PICK " + this.id;
 	}
 
 	public Instruction parse(String cad) throws WrongInstructionFormatException {

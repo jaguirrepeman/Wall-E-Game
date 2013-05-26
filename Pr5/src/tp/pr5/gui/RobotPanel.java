@@ -20,8 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.JTextComponent;
-
 import tp.pr5.RobotEngineObserver;
 import tp.pr5.Rotation;
 import tp.pr5.instructions.*;
@@ -36,7 +34,6 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		this.game = gameController;
 		
 		this.setLayout(new BorderLayout(10, 10));
-		// TODO 
 		//Creación del panel de instrucciones
 		JPanel instructionPanel = createInstructionPanel();
 		this.add(instructionPanel, BorderLayout.WEST);
@@ -48,7 +45,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		JPanel statusPanel = new JPanel();
 		statusPanel.setLayout(new FlowLayout());
 		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField("");//TODO hay que hacer el robotUpdate, no tonto del culo, se hace en el startController del GUIController
+		robotInfo = new JFormattedTextField("");
 		robotInfo.setBorder(null);
 		robotInfo.setFont(font);
 		robotInfo.setEditable(false);
@@ -86,73 +83,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 		rotacion = directionToTurn.getSelectedItem().toString();
  }
-	/*
-	//OBsoleto
-	public RobotPanel(final RobotEngine engine) {
-		
-		//this.engine = engine;
-		this.setLayout(new BorderLayout(10, 10));
-
-		//Creación del panel de instrucciones
-		JPanel instructionPanel = createInstructionPanel();
-		this.add(instructionPanel, BorderLayout.WEST);
-
-		//Creación del StatusPanel del robot
-		TitledBorder titled = new TitledBorder("Robot Info");
-		JPanel dataPanel = new JPanel();
-		dataPanel.setLayout(new BorderLayout());
-		JPanel statusPanel = new JPanel();
-		statusPanel.setLayout(new FlowLayout());
-		Font font = new Font(null, Font.BOLD, 12);
-		robotInfo = new JFormattedTextField("Fuel: " + engine.getFuel()
-				+ " Recycled: " + engine.getRecycledMaterial());
-		robotInfo.setBorder(null);
-		robotInfo.setFont(font);
-		robotInfo.setEditable(false);
-		statusPanel.add(robotInfo);
-		dataPanel.add(statusPanel, BorderLayout.CENTER);
-
-		//Creación del inventario del robot
-		tabla = new DefaultTableModel(new String[] { "Id.", "Description" }, 0);
-		final JTable table = new JTable(tabla);
-		table.addMouseListener(new OyenteRaton(){
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int i = table.getSelectedRow();
-				
-				if (i>=0)
-					robotsObject = table.getValueAt(i,0).toString();
-				
-			}
-			
-		});
-		
-		
-		
-		table.setOpaque(false); // con esto se consigue que el fondo de la tabla
-								// este en gris
-		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-		table.setFillsViewportHeight(true);
-
-		JScrollPane tableScrollPane = new JScrollPane(table);
-		dataPanel.add(tableScrollPane, BorderLayout.SOUTH);
-		dataPanel.setBorder(titled);
-
-		this.add(dataPanel, BorderLayout.CENTER);
-
-		rotacion = directionToTurn.getSelectedItem().toString();
-	}*/
-
-
 	
-	//TODO no
-	/*public void setStatus(int fuel, int recycled){
-		robotInfo.setValue("Fuel: " + fuel + " Recycled: " + recycled);
-		if (fuel <= 0){
-			CloseApp.requestQuit("You run out of fuel, the game has ended");
-		}
-	}*/
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JPanel createInstructionPanel() {
@@ -160,7 +91,8 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		TitledBorder titled = new TitledBorder("Instructions");
 		instructionPanel.setBorder(titled);
 		instructionPanel.setLayout(new GridLayout(5, 2, 3, 3));
-		JButton move = new JButton("MOVE") {
+		buttons = new JButton[7];
+		buttons[0] = new JButton("MOVE") {
 			{
 				this.addActionListener(new ActionListener() {
 
@@ -176,7 +108,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 		};
 
-		JButton quit = new JButton	("QUIT") {
+		buttons[1] = new JButton	("QUIT") {
 			{
 
 				this.addActionListener(new ActionListener() {
@@ -184,20 +116,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.communicateInstruction(new QuitInstruction());
-						/*int seleccion = JOptionPane.showOptionDialog(null,
-								null,
-								"Exit WALL·E",
-								JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								CityPanel.createImageIcon(
-										"images/walleExit.png", "WALLE"),
 
-								// null, // null para icono por defecto.
-								 null, null para YES, NO y CANCEL, si no: new Object[] {
-										"YES", "NO" }, "null");
-
-						if (seleccion == -1 || seleccion == 0)
-							System.exit(0);*/
 					}
 
 				});
@@ -205,7 +124,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			}
 
 		};
-		JButton turn = new JButton("TURN") {
+		buttons[2] = new JButton("TURN") {
 			{
 				this.addActionListener(new ActionListener() {
 
@@ -220,7 +139,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			}
 
 		};
-		JButton pick = new JButton("PICK") {
+		buttons[3] = new JButton("PICK") {
 			{
 				this.addActionListener(new ActionListener() {
 
@@ -228,7 +147,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					public void actionPerformed(ActionEvent e) {
 						if (!objectToPick.getText().isEmpty()){
 							game.communicateInstruction(new PickInstruction(objectToPick.getText()));
-							//TODO changeInventory(tabla);
+							
 						}
 						
 					}
@@ -238,7 +157,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			}
 
 		};
-		JButton drop = new JButton("DROP") {
+		buttons[4] = new JButton("DROP") {
 			
 			{
 				this.addActionListener(new ActionListener() {
@@ -247,7 +166,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
 							game.communicateInstruction(new DropInstruction(robotsObject));
-							//TODO changeInventory(tabla);
+							
 						}
 					}
 				
@@ -257,7 +176,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			
 
 		};
-		JButton operate = new JButton("OPERATE") {
+		buttons[5] = new JButton("OPERATE") {
 			{
 				this.addActionListener(new ActionListener() {
 
@@ -265,7 +184,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					public void actionPerformed(ActionEvent e) {
 						if (robotsObject != null){
 							game.communicateInstruction(new OperateInstruction(robotsObject));
-							//TODO changeInventory(tabla);
+						
 						}
 					}
 				
@@ -274,7 +193,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			}
 
 		};
-		JButton undo = new JButton("UNDO") {
+		buttons[6] = new JButton("UNDO") {
 			
 			{
 				this.addActionListener(new ActionListener() {
@@ -282,7 +201,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.communicateInstruction(new UndoInstruction());
-						//TODO changeInventory(tabla);
+						
 						
 					}
 				
@@ -309,6 +228,10 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 			}
 		});
+		
+		for (JButton b: buttons)
+			instructionPanel.add(b);
+		/*
 		instructionPanel.add(move);
 		instructionPanel.add(quit);
 		instructionPanel.add(turn);
@@ -318,7 +241,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		instructionPanel.add(drop);
 		instructionPanel.add(operate);
 		instructionPanel.add(undo);
-
+*/
 		
 		return instructionPanel;
 
@@ -331,8 +254,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		int rows = tabla.getRowCount();
 		for (int i = 0; i < rows; i++)
 			tabla.removeRow(0);
-		//RobotEngine engine = null;
-		//TODO JUNíSIMOOOOO
+
 		for (int i = 0; i < inventory.size(); i++){
 			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
 		}
@@ -341,13 +263,15 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 		int rows = tabla.getRowCount();
 		for (int i = 0; i < rows; i++)
 			tabla.removeRow(0);
-		//RobotEngine engine = null;
-		//TODO JUNíSIMOOOOO
+
 		for (int i = 0; i < inventory.size(); i++)
 			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
 
 	}
-
+	public void notEditableButtons(){
+		for (JButton b: buttons)
+			b.setEnabled(false);
+	}
 
 	@Override
 	public void inventoryScanned(String inventoryDescription) {
@@ -392,8 +316,6 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
-		//robotInfo.setText("Fuel: " + fuel
-		//		+ " Recycled: " + recycledMaterial);
 		robotInfo.setText("Fuel: " + fuel + " Recycled: " + recycledMaterial);
 	}
 
@@ -413,9 +335,16 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	private DefaultTableModel tabla;
 	private AbstractTableModel tablaItems;
 	private JFormattedTextField robotInfo;
-	
 	private GUIController game;
-	//private RobotEngine engine;
+	
+	private JButton[] buttons;
+	private JButton move;
+	private JButton quit;
+	private JButton turn;
+	private JButton pick;
+	private JButton drop;
+	private JButton operate;
+	private JButton undo;
 
 	
 }

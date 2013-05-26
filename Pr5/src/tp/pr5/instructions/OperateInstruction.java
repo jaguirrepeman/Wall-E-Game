@@ -88,7 +88,7 @@ public class OperateInstruction extends UndoableInstruction{
 	}
 	
 	public String toString(){
-		return "Operate " + id;
+		return "OPERATE " + id;
 	}
 	
 	public Instruction parse (String cad) throws WrongInstructionFormatException{
