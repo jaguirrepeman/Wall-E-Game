@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -77,7 +78,11 @@ public class CityPanel extends JPanel{
 				
 				cityMap.add(places[i][j]);
 			}
-		
+		for (PlaceCell[] pArray: places){
+			for (PlaceCell p: pArray){
+					p.setEnabled(false);
+			}
+		}
 		return cityMap;
 	}
 	

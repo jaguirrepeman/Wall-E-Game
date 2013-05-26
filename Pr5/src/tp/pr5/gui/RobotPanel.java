@@ -230,9 +230,27 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 			}
 		});
+
+		for (int i = 0; i < buttons.length; i++){
+			instructionPanel.add(buttons[i]);
+			if (i == 2) instructionPanel.add(directionToTurn);
+			else if (i == 3) instructionPanel.add(objectToPick);
+		}
+			
 		
-		for (JButton b: buttons)
-			instructionPanel.add(b);
+		
+		
+		/*
+		instructionPanel.add(move);
+		instructionPanel.add(quit);
+		instructionPanel.add(turn);
+		
+		instructionPanel.add(pick);
+
+		instructionPanel.add(drop);
+		instructionPanel.add(operate);
+		instructionPanel.add(undo);
+*/
 		
 		return instructionPanel;
 
