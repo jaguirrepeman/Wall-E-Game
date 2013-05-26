@@ -53,14 +53,13 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 		gameController.registerRobotObserver(infoPanel);
 		
 	}
+	
 	@Override
-	public void raiseError(String msg){
-		
-	}
+	public void raiseError(String msg){}
+	
 	@Override
-	public void communicationHelp(String help){
-		
-	}
+	public void communicationHelp(String help){}
+	
 	@Override
 	public void engineOff(boolean atShip){
 		if (atShip)
@@ -75,16 +74,10 @@ public class MainWindow extends JFrame implements RobotEngineObserver {
 	}
 
 	@Override
-	public void robotUpdate(int fuel, int recycledMaterial) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void robotUpdate(int fuel, int recycledMaterial) {}
 
 	@Override
-	public void robotSays(String message) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void robotSays(String message) {}
 	
 	public NavigationPanel getNavigationPanel(){
 		return this.navPanel;

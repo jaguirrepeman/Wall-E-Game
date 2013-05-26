@@ -16,7 +16,9 @@ import tp.pr5.PlaceInfo;
 
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel implements NavigationObserver {
+	
 	public NavigationPanel() {
+	
 		this.setLayout(new BorderLayout(10, 10));
 		
 		//setVisible(true);
@@ -41,25 +43,23 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	}
 	
 	public void move(Direction headingDirection, Place place){
-		if (cityPanel != null) cityPanel.move(headingDirection, place);
+		if (cityPanel != null) 
+			cityPanel.move(headingDirection, place);
 		text.setText(place.toString());
-		if (cityPanel.isSpaceShip()) CloseApp.requestQuit("You finally found your spaceship");
+		if (cityPanel.isSpaceShip()) 
+			CloseApp.requestQuit("You finally found your spaceship");
 	}
 	
-	/*public void rotate(Direction direction){
-		cityPanel.turnWalleIcon(direction);
-	}*/
-	// TODO estas no estan repetidas con respecto a placecell¿?
 	public void setInitialPlace(Place initPlace){
 		cityPanel.setInitialPlace(initPlace);
 		text.setText(initPlace.toString());
 	}
 	
-	/*public void setPlace(Place place){
-		
-		text.setText(place.getDescription());
-	}*/
 	
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.NavigationObserver
+	 */
 	@Override
 	public void headingChanged(Direction newHeading) {
 		cityPanel.turnWalleIcon(newHeading);
@@ -81,14 +81,10 @@ public class NavigationPanel extends JPanel implements NavigationObserver {
 	}
 
 	@Override
-	public void placeScanned(PlaceInfo placeDescription) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void placeScanned(PlaceInfo placeDescription) {}
 
 	@Override
 	public void placeHasChanged(PlaceInfo placeDescription) {
-		// TODO Auto-generated method stub
 		text.setText(placeDescription.getDescription());
 	}
 	

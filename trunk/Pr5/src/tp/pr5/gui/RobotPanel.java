@@ -28,6 +28,7 @@ import tp.pr5.items.Item;
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel implements RobotEngineObserver,
 		InventoryObserver{
+	
 	public RobotPanel(GUIController gameController){
 		
 		this.game = gameController;
@@ -86,11 +87,13 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JPanel createInstructionPanel() {
+		
 		JPanel instructionPanel = new JPanel();
 		TitledBorder titled = new TitledBorder("Instructions");
 		instructionPanel.setBorder(titled);
 		instructionPanel.setLayout(new GridLayout(5, 2, 3, 3));
 		buttons = new JButton[7];
+		
 		buttons[0] = new JButton("MOVE") {
 			{
 				this.addActionListener(new ActionListener() {
@@ -236,7 +239,10 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	}
 
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.items.InventoryObserver
+	 */
 	@Override
 	public void inventoryChange(List<Item> inventory) {
 		int rows = tabla.getRowCount();
@@ -247,60 +253,36 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
 		}
 	}
-	public void changeInventory(List<Item> inventory) {
-		int rows = tabla.getRowCount();
-		for (int i = 0; i < rows; i++)
-			tabla.removeRow(0);
-
-		for (int i = 0; i < inventory.size(); i++)
-			tabla.addRow(inventory.get(i).itemForTable()/* objeto del array */);
-
-	}
+	
 	public void notEditableButtons(){
 		for (JButton b: buttons)
 			b.setEnabled(false);
 	}
 
 	@Override
-	public void inventoryScanned(String inventoryDescription) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void inventoryScanned(String inventoryDescription) {}
 
 	@Override
-	public void itemScanned(String description) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void itemScanned(String description) {}
 
 	@Override
-	public void itemEmpty(String itemName) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void itemEmpty(String itemName) {}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.RobotEngineObserver
+	 */
+	@Override
+	public void raiseError(String msg) {}
 
 	@Override
-	public void raiseError(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void communicationHelp(String help) {}
 
 	@Override
-	public void communicationHelp(String help) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void engineOff(boolean atShip) {}
 
 	@Override
-	public void engineOff(boolean atShip) {
-		
-	}
-
-	@Override
-	public void communicationCompleted() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void communicationCompleted() {}
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
@@ -308,10 +290,7 @@ public class RobotPanel extends JPanel implements RobotEngineObserver,
 	}
 
 	@Override
-	public void robotSays(String message) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void robotSays(String message) {}
 	
 	
 	

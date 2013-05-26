@@ -20,17 +20,17 @@ public class InfoPanel extends JPanel implements
 		displayMessage = new JLabel("");
 		this.add(this.displayMessage);
 	}
+	
+	/*
+	 * 
+	 * (non-Javadoc)
+	 * @see tp.pr5.items.InventoryObserver
+	 */
 	@Override
-	public void inventoryChange(List<Item> inventory) {
-		// TODO Auto-generated method stub
-
-	}
+	public void inventoryChange(List<Item> inventory) {}
 
 	@Override
-	public void inventoryScanned(String inventoryDescription) {
-		// TODO Auto-generated method stub
-
-	}
+	public void inventoryScanned(String inventoryDescription) {}
 
 	@Override
 	public void itemScanned(String description) {
@@ -45,6 +45,11 @@ public class InfoPanel extends JPanel implements
 		this.displayMessage.setText("You have got no more " + itemName + " in your inventory.");
 
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.NavigationObserver
+	 */
 
 	@Override
 	public void headingChanged(Direction newHeading) {
@@ -53,51 +58,34 @@ public class InfoPanel extends JPanel implements
 	}
 
 	@Override
-	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {
-		// TODO Auto-generated method stub
-
-	}
+	public void initNavigationModule(PlaceInfo initialPlace, Direction heading) {}
 
 	@Override
-	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {
-		// TODO Auto-generated method stub
-
-	}
+	public void robotArrivesAtPlace(Direction heading, PlaceInfo place) {}
 
 	@Override
-	public void placeScanned(PlaceInfo placeDescription) {
-		// TODO Auto-generated method stub
-
-	}
+	public void placeScanned(PlaceInfo placeDescription) {}
 
 	@Override
-	public void placeHasChanged(PlaceInfo placeDescription) {
-		// TODO Auto-generated method stub
+	public void placeHasChanged(PlaceInfo placeDescription) {}
 
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see tp.pr5.RobotEngineObserver
+	 */
 	@Override
 	public void raiseError(String msg) {
-		// TODO Auto-generated method stub
 		this.displayMessage.setText(msg);
 	}
 
 	@Override
-	public void communicationHelp(String help) {
-		// TODO Auto-generated method stub
-
-	}
+	public void communicationHelp(String help) {}
 
 	@Override
-	public void engineOff(boolean atShip) {
-		// TODO Auto-generated method stub
-
-	}
+	public void engineOff(boolean atShip) {}
 
 	@Override
-	public void communicationCompleted() {
-		//CloseApp.requestQuit("I have communication problems, bye bye!");
-	}
+	public void communicationCompleted() {}
 
 	@Override
 	public void robotUpdate(int fuel, int recycledMaterial) {
