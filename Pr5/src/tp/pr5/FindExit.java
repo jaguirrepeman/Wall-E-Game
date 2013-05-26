@@ -229,7 +229,7 @@ public class FindExit {
 	 * @param maxDepth
 	 * @param coste
 	 */
-	 void maze (int k, int maxDepth){
+	 private void maze (int k, int maxDepth){
 		for (int i = 0; i< instructions.length && k < maxDepth; i++){
 			
 			if (i==0){
