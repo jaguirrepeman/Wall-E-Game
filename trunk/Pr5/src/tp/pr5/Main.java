@@ -22,7 +22,7 @@ import org.apache.commons.cli.*;
  * aparece como ejemplo en el enunciado.
  * 
  * But in our own way, we are king.
- *	Hails to the king, baby.
+ *	Hail to the king, baby.
  * 
  * @author Jesús Aguirre Pemán, Jaime Dan Porras Rhee
  * @y.exclude
