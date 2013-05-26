@@ -56,10 +56,11 @@ public class OperateInstruction extends UndoableInstruction{
 					
 					if (!this.items.getItem(id).canBeUsed()) {
 						//TODO
-						engine.say("What a pity! I have no more "
+						this.usedItem = this.items.pickItem(id);
+						this.engine.saySomething("What a pity! I have no more "
 								+ id + " in my inventory");
 						
-						this.usedItem = this.items.pickItem(id);
+						
 					}
 				}
 			} 
