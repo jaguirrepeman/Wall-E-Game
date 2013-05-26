@@ -35,6 +35,11 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 	public boolean atSpaceship(){
 		return this.place.isSpaceship();
 	}
+	
+	public void configureLittleContext(Instruction c){
+		c.configureContext(this, this.navigation, this.items);
+	}
+	
 	public void communicateRobot(Instruction c) {
 		c.configureContext(this, navigation, items);
 		try {
@@ -78,9 +83,9 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		/*for (NavigationObserver o : navObservers){ 
 			o.initNavigationModule(this.place, this.direction);
 		}*/
-		for (RobotEngineObserver obs: this.observers){
+		/*for (RobotEngineObserver obs: this.observers){
 			obs.robotUpdate(this.fuel, this.recycledMaterial);
-		}
+		}*/
 	}
 	
 	public void requestError(String msg){
@@ -97,7 +102,7 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 	public void undoInstruction(){
 		if (!instructions.isEmpty())
 			instructions.pop().undo();
-		else say("There is no instruction to be undone.");
+		else saySomething("There is no instruction to be undone.");
 	}
 
 	public void commandQuit() {
@@ -127,9 +132,9 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 	 * @return boolean: true si puede moverse, false si no puede
 	 */
 	public boolean canMove(){			
-				if (this.navigation.getHeadingStreet() == null) return false;
-				else return this.navigation.getHeadingStreet().isOpen();
-		
+				
+		return this.navigation.getHeadingStreet() != null && this.navigation.getHeadingStreet().isOpen();
+
 	}
 	
 	
@@ -234,13 +239,7 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 	public int numberOfItems(){
 		return this.items.numberOfItems();
 	}
-	public void printRobotState() {
-		if (this.fuel < 0)
-			this.fuel = 0;
-		System.out.println("      * My power is " + this.fuel);
-		System.out.println("      * My recycled material is "
-				+ this.recycledMaterial);
-	}
+	
 //END obsoleto
 	
 	private void emitPartidaEmpezada() {

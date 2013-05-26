@@ -1,11 +1,21 @@
 BeginCity
 BeginPlaces
 place 0 Sol You_are_at_the_center_of_Madrid noSpaceShip
-place 1 Callao In_this_square_you_can_find_a_code_card SpaceShip
+place 1 Callao In_this_square_you_can_find_a_code_card noSpaceShip
+place 2 dos dos noSpaceShip
+place 3 tres tres noSpaceShip
+place 4 cuatro cuatro noSpaceShip
+place 5 cinco cinco noSpaceShip
+place 6 seis seis SpaceShip
 
 EndPlaces
 BeginStreets
-street 0 place 0 north place 1 open
+street 0 place 0 north place 1 open 
+street 1 place 1 north place 2 open
+street 2 place 2 north place 3 open
+street 3 place 3 east place 4 open
+street 4 place 4 south place 5 open
+street 5 place 5 south place 6 open
 
 EndStreets
 BeginItems

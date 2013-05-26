@@ -35,7 +35,6 @@ public class MoveInstruction extends UndoableInstruction{
 	public void undo() {
 		this.navigation.moveBackwards();
 		this.engine.addFuel(5);
-		this.engine.printRobotState();
 	}
 	
 	public String getHelp(){

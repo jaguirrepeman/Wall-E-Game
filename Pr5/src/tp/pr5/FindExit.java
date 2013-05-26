@@ -2,6 +2,7 @@ package tp.pr5;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Stack;
 import java.util.Vector;
 
 import org.apache.commons.cli.BasicParser;
@@ -28,7 +29,6 @@ public class FindExit {
 	//el constructor para hacer lo que dijo Marco	
 	
 	}
-	
 	Instruction ins;
 	//(-d|-max-depth) n (-m|-map) <mapFilename>
 	void solve(){
@@ -98,7 +98,10 @@ public class FindExit {
 			 * Creación del robotEngine
 			 */
 			game = new RobotEngine(city, cityLoader.getInitialPlace(), Direction.NORTH);
-			//game.addEngineObserver(new Console());
+			//Console console = new Console();
+			//game.addEngineObserver(console);
+			//game.addNavigationObserver(console);
+			
 			{
 				/*
 				 * Se crea el controlador de la consola y se añade el observador consola
@@ -117,10 +120,10 @@ public class FindExit {
 				String d = cmd.getOptionValue('d');
 				int maxDepth = Integer.parseInt(d);
 				cmd.getOptionValue('m');
-				int coste = 0, costeMejor = -1;
+				int coste = 0;//, costeMejor = -1;
 				//Instruction[] solucion = new Instruction[maxDepth], solucionMejor = new Instruction[maxDepth];
-				solucion = new Instruction[maxDepth];
-				solucionMejor = new Instruction[maxDepth];
+				solucion = new Stack<Instruction>();//[maxDepth+1];
+				solucionMejor = new Stack<Instruction>();//[maxDepth+1];
 				//solucion.ensureCapacity(maxDepth);
 				//solucionMejor = new Vector<Instruction>(maxDepth);
 				//solucion = new Vector<Instruction>(maxDepth);
@@ -132,8 +135,9 @@ public class FindExit {
 				//laberinto(city, /*solucion, solucionMejor,*/ 0, maxDepth, marcas, coste, costeMejor, game);
 				laberinto(0, maxDepth, 0);
 				System.out.print("Que tal");
-				for (int i=0; i< longitudSolucionMejor; i++)
-					System.out.println(solucionMejor[i].toString());
+				for (int i=0; i< solucionMejor.size()/*costeMejor*/; i++)
+					System.out.println(solucionMejor.get(i).toString());
+					//System.out.println(solucionMejor[i].toString());
 				//imprimirSolucion(solucionMejor, maxDepth);
 			}
 			
@@ -185,6 +189,12 @@ public class FindExit {
 		
 	}
 
+	private static void inicializarArray(Instruction[] solucion, int maxDepth) {
+		for (int i = 0; i < maxDepth; i++)
+			solucion[i] = null;
+		
+	}
+
 	private static void inicializarMarcas(boolean[][] marcas) {
 		// TODO Auto-generated method stub
 		
@@ -194,99 +204,177 @@ public class FindExit {
 		return game.getFuel() > 0;
 	}
 	
+	private static boolean esValida(Instruction instruccion, int k, int maxDepth, int coste){
+		/*if (game.getFuel() <= 0)return false;
+		else{
+			
+			solucion[k] = instruccion;
+			if (esSolucion()){
+				
+			}
+			return true;
+		}*/
+		return game.getFuel() > 0;
+	}
+	
 	private static void trataDatos(Instruction instruccion, int coste, int k, int maxDepth){
 		
-		solucion[k] = instruccion;
+		//solucion[k] = instruccion;
+		solucion.push(instruccion);
 		
 		if (esSolucion()){
 			longitudSolucionMejor = k;
-			if (coste < costeMejor || costeMejor == -1){
-				for (int indice = 0; indice <= k; indice++)
-					solucionMejor[indice] = solucion[indice];
+			if (k < costeMejor){
+				costeMejor = k;
+				//for (int indice = 0; indice <= k; indice++)
+				//	solucionMejor[indice] = solucion[indice];
+				solucionMejor = (Stack<Instruction>)solucion.clone();
+				//solucionMejor = (Instruction[])solucion.clone();
 			}
 			
 			System.out.println("Se ha encontrado una solucion");
-			imprimirSolucion(solucionMejor, k);
+			//imprimirSolucion(solucionMejor, k);
+			solucion.pop().undo();
 		}
 		
 		else {
 			laberinto(k+1, maxDepth, coste);
+			//solucion[k].undo();
+			solucion.pop().undo();
+			//solucion[k].undo();
+			//game.undoInstruction();
 		}
 	}
 	
+	private static void hazCosas(Instruction instruccion, int coste, int k, int maxDepth){
+		
+		//game.communicateRobot(instruccion);
+		
+		game.configureLittleContext(instruccion);
+		try {
+			instruccion.execute();
+			if (esValida()){
+				//coste++;
+				trataDatos(instruccion, coste, k, maxDepth);
+				//game.undoInstruction();
+				//instruccion.undo();
+				//coste--;
+			}
+			else{
+				//TODO
+				//laberinto(k+1, maxDepth, coste);
+				//game.undoInstruction();
+				instruccion.undo();
+				//coste--;
+			}
+		} catch (InstructionExecutionException e) {
+			//TODO si quieres
+		}
+		
+	}
+	/**
+	 * Funcion del laberinto
+	 * TODO hay algo raro, que es que el place del navigation  y del engine no coinciden, no se por qué
+	 * habría que ver las instrucciones, no se
+	 * he cambiado los arrays de solucion y solucionMejor por pilas, pero no se si sirve para algo
+	 * @param k
+	 * @param maxDepth
+	 * @param coste
+	 */
 	static void laberinto (int k, int maxDepth, int coste){
 		Instruction instruccion;
-		for (int i = 0; i< instructions.length && k < maxDepth; i++){			
+		for (int i = 0; i< instructions.length && k < maxDepth; i++){
+			
 			//coste++;
 			instruccion = instructions[i];
-			
+			if (i==0){
+				if (game.canMove()){
+					hazCosas(new MoveInstruction(), coste, k, maxDepth);
+				}
+			}
+			else if (i== 1){
+				hazCosas(new TurnInstruction("Right"), coste, k, maxDepth);
+			}
+			else if (i==2){
+				hazCosas(new TurnInstruction("Left"), coste, k, maxDepth);
+			}
+			else if (i==3){
+				for (String objects: game.robotItems()){
+					hazCosas(new OperateInstruction(objects), coste, k, maxDepth);
+				}
+			}
+			else if (i==4){
+				for (String objects: game.placeItems()){
+					hazCosas(new PickInstruction(objects), coste, k, maxDepth);
+				}
+			}
+			/**
 			if (i==0){//MoveInstruction
 				if (game.canMove()){
 					game.communicateRobot(instruccion);
 					if (esValida()){
-						coste++;
+						//coste++;
 						trataDatos(instruccion, coste, k, maxDepth);
 						instruccion.undo();
-						coste--;
+						//coste--;
 					}
 					else{
 						instruccion.undo();
-						coste--;
+						//coste--;
 					}
 				}
 			}
 			
-			else if (i == 3) {// OperateInstruction
-				if (game.numberOfItems() != 0) {
-					for (String objects : game.robotItems()) {
-						instruccion = new OperateInstruction(objects);
-						game.communicateRobot(instruccion);
-						if (esValida()) {
-							coste++;
-							trataDatos(instruccion, coste, k, maxDepth);
-							instruccion.undo();
-							coste--;
-						} else {
-							instruccion.undo();
-							coste--;
-						}
-
+			else if(i == 3){//OperateInstruction
+				
+				for (String objects: game.robotItems()){
+					instruccion = new OperateInstruction(objects);
+					game.communicateRobot(instruccion);
+					if (esValida()){
+						//coste++;
+						trataDatos(instruccion, coste, k, maxDepth);
+						instruccion.undo();
+						//coste--;
 					}
+					else{
+						instruccion.undo();
+						//coste--;
+					}
+					
 				}
 			}
 			
-			else if (i == 4) {// PickInstruction
-				if (game.placeItems() != null) {
-					for (String objects : game.placeItems()) {
-						instruccion = new PickInstruction(objects);
-						game.communicateRobot(instruccion);
-						if (esValida()) {
-							coste++;
-							trataDatos(instruccion, coste, k, maxDepth);
-							instruccion.undo();
-							coste--;
-						} else {
-							instruccion.undo();
-							coste--;
-						}
-
+			else if (i == 4){//PickInstruction	
+				for (String objects: game.placeItems()){
+					instruccion = new PickInstruction(objects);
+					game.communicateRobot(instruccion);
+					if (esValida()){
+						//coste++;
+						trataDatos(instruccion, coste, k, maxDepth);
+						instruccion.undo();
+						//coste--;
 					}
+					else{
+						instruccion.undo();
+						//coste--;
+					}
+					
 				}
 			}
-
+			
 			else {//Else
 				game.communicateRobot(instruccion);
 				if (esValida()){
-					coste++;
+					//coste++;
 					trataDatos(instruccion, coste, k, maxDepth);
 					instruccion.undo();
-					coste--;
+					//coste--;
 				}
 				else{
 					instruccion.undo();
-					coste--;
+					//coste--;
 				}
-			}
+			}*/
 		}
 		
 	}
@@ -424,14 +512,14 @@ public class FindExit {
 		
 	}
 	*/
-	static void laberinto(City city, /*Instruction[] solucion,
-			Instruction[] solucionMejor,*/ int k, int maxDepth,
+	/*static void laberinto(City city, /*Instruction[] solucion,
+			Instruction[] solucionMejor,*/ /*int k, int maxDepth,
 			boolean marcas[][], int coste, int costeMejor, RobotEngine engine) {
 		if (coste < costeMejor || costeMejor == -1) {
 			for (int i = 0; i < instructions.length; i++) {
 				//solucion.add(instructions[i]); SUSTITUIDO POR LO DE ABAJO
 				if (k<maxDepth){
-				solucion[k] = instructions[i];
+				//TODO solucion[k] = instructions[i];
 				// los siguientes dos ifs podrian cambiarse por un bucle que
 				// hiciera parse de la instruccion actual, lo cual aumentaria el
 				// coste a cambio de mejorar la legibilidad del programa
@@ -455,7 +543,7 @@ public class FindExit {
 					for (int j = 0; j < itemsPlace.length; j++) {
 						objectToPick = itemsPlace[j];
 						try {
-							solucion[k].parse("pick " + objectToPick);
+							//TODO solucion[k].parse("pick " + objectToPick);
 						} catch (WrongInstructionFormatException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -476,8 +564,8 @@ public class FindExit {
 					 * de que ha petado la instruccion
 					 */
 					/** Deberiamos hacer un observador para el FindExit? */
-				else game.communicateRobot(solucion[k]);
-					if (esValida(solucion, k, maxDepth)) {
+				//TTODO else game.communicateRobot(solucion[k]);
+					/*if (esValida(solucion, k, maxDepth)) {
 						if (esSolucion(solucion[k], game)) {
 							
 							if (coste < costeMejor || costeMejor == -1) {
@@ -497,7 +585,7 @@ public class FindExit {
 							marcar();
 							// marcas[solucion[k].fila][solucion[k].columna] =
 							// true;
-							laberinto(city, /*solucion, solucionMejor,*/ k+1,
+							laberinto(city, /*solucion, solucionMejor,*/ /*k+1,
 									maxDepth, marcas, coste, costeMejor, engine);
 							// desmarcar
 							desmarcar();
@@ -516,7 +604,7 @@ public class FindExit {
 				//}
 			}
 		}
-	}
+	}*/
 
 	private static boolean esValida(Instruction[] solucion, int k, int maxDepth) {
 		return ! (k > maxDepth || game.getFuel() <= 0) ;//return false;
@@ -541,6 +629,12 @@ public class FindExit {
 	}
 
 	
+	private static Instruction sigInstruccion(int i) {
+		i++;
+
+		return instructions[i];
+
+	}
 	private static Place place;
 	private static String objectToOperate;
 	private static String objectToPick;
@@ -549,12 +643,12 @@ public class FindExit {
 			new TurnInstruction("Right"), new TurnInstruction("Left"), 
 			new OperateInstruction(objectToOperate), new PickInstruction(objectToPick)
 	};
-	private static Instruction[] solucion;
-	private static Instruction[]solucionMejor;
-	//private static Vector<Instruction> solucionMejor;
-	//private static Vector<Instruction> solucion;
-	private static int costeMejor = -1;
-	private static int longitudSolucionMejor = 0;
+	//private static Instruction[] solucion;
+	//private static Instruction[]solucionMejor;
+	private static Vector<Instruction> solucionMejor;
+	private static Stack<Instruction> solucion;
+	private static int costeMejor = 1000000000;
+	private static int longitudSolucionMejor = 100000000;
 
 }
 
