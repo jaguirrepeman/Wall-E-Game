@@ -185,6 +185,8 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		
 	}
 
+	//END obsoleto
+
 	public String[] robotItems(){
 		return items.listOfItems();
 	}
@@ -200,7 +202,6 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		return this.items.numberOfItems();
 	}
 	
-//END obsoleto
 	
 	private void emitPartidaEmpezada() {
 		this.navigation.initialize();
