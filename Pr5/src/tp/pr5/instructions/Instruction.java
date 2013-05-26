@@ -19,6 +19,8 @@ public interface Instruction {
 	
 	public void undo();
 	
+	public String toString();
+	
 	static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
 	
