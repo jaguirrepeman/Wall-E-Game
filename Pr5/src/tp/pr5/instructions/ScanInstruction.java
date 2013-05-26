@@ -8,6 +8,7 @@ import tp.pr5.items.Item;
 import tp.pr5.items.ItemContainer;
 
 public class ScanInstruction extends NotUndoableInstruction {
+	
 	public void configureContext(RobotEngine engine,
 			NavigationModule navigation, ItemContainer robotContainer) {
 		this.engine = engine;
