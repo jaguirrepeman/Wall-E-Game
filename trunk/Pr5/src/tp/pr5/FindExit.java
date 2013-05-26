@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.Stack;
 import java.util.Vector;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.MissingOptionException;
@@ -38,28 +41,48 @@ public class FindExit {
 		solucionMejor = new Stack<Instruction>();// [maxDepth+1];
 		maze(0, maxDepth);
 		if (solucionMejor.size() > 0) {
-			for (int i = 0; i < solucionMejor.size(); i++)
-				System.out.println(solucionMejor.get(i).toString());
+			System.out.println("Se encontro una solucion de tamaño: " + solucionMejor.size());
+			//for (int i = 0; i < solucionMejor.size(); i++)
+			//	System.out.println(solucionMejor.get(i).toString());
+			try {
+				/**
+				 * Usado para que salga bien en Mac
+				 */
+				UIManager.setLookAndFeel(
+				        UIManager.getCrossPlatformLookAndFeelClassName());
+				
+				GUIController gameController = new GUIController(game);
+				MainWindow window = new MainWindow(gameController);
+				// Console console = new Console();
+				game.addEngineObserver(window);
+				// game.addEngineObserver(console);
+				// game.addItemContainerObserver(console);
+				// game.addNavigationObserver(console);
+				window.disableButtons();
+				window.setVisible(true);
+				gameController.startController();
 
-			MainWindow window = new MainWindow(new GUIController(game));
-			// Console console = new Console();
-			game.addEngineObserver(window);
-			// game.addEngineObserver(console);
-			// game.addItemContainerObserver(console);
-			// game.addNavigationObserver(console);
-			window.disableButtons();
-			window.setVisible(true);
+				for (int i = 0; i < solucionMejor.size(); i++) {
+					System.out.println(solucionMejor.get(i).toString());
+					Thread.sleep(300);
+					game.communicateRobot(solucionMejor.get(i));
 
-			for (int i = 0; i < solucionMejor.size(); i++) {
-				game.communicateRobot(solucionMejor.get(i));
-				try {
 					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
 				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (UnsupportedLookAndFeelException e) {
+				e.printStackTrace();
 			}
 		}
+		else System.out.println("No se pudo encontrar una solucion con la profundidad "+ maxDepth );
 	}
 		
 		
