@@ -18,10 +18,13 @@ import org.apache.commons.cli.*;
 
 
 /**
- * gluglu AplicaciÃ³n que utiliza las clases de la prÃ¡ctica sobre el mapa que
+ * gluglu Aplicación que utiliza las clases de la prática sobre el mapa que
  * aparece como ejemplo en el enunciado.
  * 
- * @author JesÃºs Aguirre PemÃ¡n, Jaime Dan Porras Rhee
+ * But in our own way, we are king.
+ *	Hails to the king, baby.
+ * 
+ * @author Jesús Aguirre Pemán, Jaime Dan Porras Rhee
  * @y.exclude
  */
 public class Main {
