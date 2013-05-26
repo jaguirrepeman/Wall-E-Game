@@ -42,6 +42,10 @@ public class MoveInstruction extends UndoableInstruction{
 		return "MOVE|MOVER";
 		
 	}
+	public String toString(){
+		return "Move";
+	}
+	
 	public Instruction parse(String cad) throws WrongInstructionFormatException{
 		String[] comando = cad.split(" ");
 		if((comando[0].equalsIgnoreCase("MOVE") ||(cad.equalsIgnoreCase("MOVER")))  && comando.length == 1) {

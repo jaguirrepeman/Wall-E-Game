@@ -33,6 +33,10 @@ public class TurnInstruction extends UndoableInstruction{
 
 	}
 	
+	public String toString(){
+		return "Turn " + this.rotation.toString().toLowerCase();
+	}
+	
 	public void execute() throws InstructionExecutionException {
 			this.navigation.rotate(rotation);
 			this.engine.addFuel(-5);
