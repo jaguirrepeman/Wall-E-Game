@@ -192,22 +192,13 @@ public class FindExit {
 		game.configureLittleContext(instruccion);
 		try {
 			instruccion.execute();
-			if (esValida()){
-				//coste++;
+			if (esValida())
 				dataProcess(instruccion, k, maxDepth);
-				//game.undoInstruction();
-				//instruccion.undo();
-				//coste--;
-			}
-			else{
-				//TODO
-				//laberinto(k+1, maxDepth, coste);
-				//game.undoInstruction();
-				instruccion.undo();
-				//coste--;
-			}
+			
+			else instruccion.undo();
+			
 		} catch (InstructionExecutionException e) {
-			//TODO si quieres
+			
 		}
 		
 	}
