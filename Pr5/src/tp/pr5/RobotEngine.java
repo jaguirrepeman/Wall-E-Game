@@ -127,29 +127,6 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		}
 	}
 	
-	/**
-	 * Función que determina si el engine puede moverse en la dirección actual
-	 * @return boolean: true si puede moverse, false si no puede
-	 */
-	public boolean canMove(){			
-				
-		return this.navigation.getHeadingStreet() != null && this.navigation.getHeadingStreet().isOpen();
-
-	}
-	
-	
-	
-	
-
-
-
-
-
-
-	
-
-
-	
 	public void addNavigationObserver(NavigationObserver robotObserver){
 		this.navigation.addNavigationObserver(robotObserver);
 	}
@@ -183,14 +160,7 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		Instruction instruccion = null;
 		String command = new String();
 		emitPartidaEmpezada();
-		/**
-		 Cosas antiguas
-		 
-		System.out.println(this.place.toString());
-		System.out.println("WALL·E is looking at direction "
-				+ this.direction.toString());
-		printRobotState();
-*/
+
 		Scanner comando = new Scanner(System.in);
 
 		while (!(quit || this.place.isSpaceship() || this.fuel == 0)) {
@@ -211,17 +181,7 @@ public class RobotEngine extends tp.pr5.Observable<RobotEngineObserver>
 		comando.close();
 		if (!quit) for (RobotEngineObserver o : this.observers) o.engineOff(this.place.isSpaceship());
 		else for (RobotEngineObserver o : this.observers) o.communicationCompleted();
-		/**
-		  Más cosas antiguas
-		
-		if (this.place.isSpaceship())
-			say("I am at my spaceship. Bye bye");
-		else if (this.fuel == 0)
-			say("I run out of fuel. I cannot move. Shutting down...");
-		else
-			say("I have communication problems. Bye bye");
-			
-		 */
+
 		
 	}
 

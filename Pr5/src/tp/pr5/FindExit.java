@@ -187,8 +187,6 @@ public class FindExit {
 	
 	private void executor(Instruction instruccion, int k, int maxDepth){
 		
-		//game.communicateRobot(instruccion);
-		
 		game.configureLittleContext(instruccion);
 		try {
 			instruccion.execute();
@@ -212,9 +210,9 @@ public class FindExit {
 		for (int i = 0; i< instructions.length && k < maxDepth; i++){
 			
 			if (i==0){
-				if (game.canMove()){
+			//	if (game.canMove()){
 					executor(new MoveInstruction(), k, maxDepth);
-				}
+				//}
 			}
 			else if (i== 1){
 				executor(new TurnInstruction("Right"), k, maxDepth);
