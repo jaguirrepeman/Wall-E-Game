@@ -23,7 +23,7 @@ public class ConsoleController extends tp.pr5.Controller{
 
 		while (!robot.isOver()) {
 
-			if (!robot.isOver()) {
+			//if (!robot.isOver()) {
 
 				prompt();
 				command = comando.nextLine();
@@ -33,7 +33,7 @@ public class ConsoleController extends tp.pr5.Controller{
 				} catch (WrongInstructionFormatException exc) {
 					robot.requestError(exc.getMessage());
 				}
-			}
+			//}
 		}
 		comando.close();
 		
